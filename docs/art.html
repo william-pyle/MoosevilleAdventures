@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visual Style Guide — Mooseville Adventures</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .color-swatch { display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px }
+  .shader-card { background:var(--white);border:1px solid var(--brown-pale);border-radius:var(--radius);padding:1rem;margin-bottom:.75rem }
+  .shader-name { font-family:'Playfair Display',Georgia,serif;font-size:.95rem;font-weight:700;color:var(--emerald-dark);margin-bottom:.5rem }
+  .param-table { width:100%;font-size:.8rem;border-collapse:collapse }
+  .param-table th { background:var(--emerald-dark);color:white;padding:.35rem .65rem;text-align:left }
+  .param-table td { padding:.35rem .65rem;border-bottom:1px solid var(--brown-pale);vertical-align:top }
+  .param-table tr:nth-child(even) td { background:var(--cream) }
+  .forbidden-row td { background:rgba(180,30,30,.05) }
+  .outline-width { font-family:monospace;font-weight:700;color:var(--emerald-dark) }
+  .pillar-card { background:var(--white);border:1px solid var(--brown-pale);border-top:3px solid var(--emerald);border-radius:var(--radius);padding:1rem;margin-bottom:.75rem }
+</style>
 </head>
 <body>
 
@@ -17,20 +29,20 @@
   <div class="nav-group">
     <div class="nav-group-label">Story</div>
     <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
-    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters & NPCs</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters &amp; NPCs</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">World</div>
-    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes & Maps</a>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes &amp; Maps</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Art Direction</div>
-    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="art.html" class="nav-link active"><span class="nav-icon">🎨</span> Visual Style Guide</a>
     <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Game Design</div>
-    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems & Economy</a>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems &amp; Economy</a>
     <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
   </div>
   <div class="nav-group">
@@ -39,7 +51,7 @@
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Production</div>
-    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">🗓️</span> Milestone Tracker</a>
     <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
   </div>
   <div class="nav-group">
@@ -49,373 +61,676 @@
 </nav>
 
 <main class="main">
-
   <div class="page-hero hero-art">
     <div class="hero-label">Art Direction</div>
     <h1>Visual Style Guide</h1>
-    <p class="hero-desc">
-      Master color palette, shader settings, lighting profiles, material guidelines,
-      and the visual principles that unify the Mooseville look — a Barbie Horse Trails
-      pastel aesthetic meets warm, nature-grounded Moosian charm.
-    </p>
+    <p class="hero-desc">Complete Mooseville Rendering Bible — color system, shaders, cel shading, outlines, LOD specs, material language, lighting, VFX, and all visual standards.</p>
   </div>
-
   <div class="content">
 
-    <!-- Visual philosophy -->
-    <div class="section-header">
-      <span class="section-icon">🎯</span>
-      <h2>Visual Philosophy</h2>
-    </div>
+    <!-- S1: VISUAL PILLARS -->
+    <h2>1. Visual Pillars</h2>
+    <div class="pillar-card"><strong>Emerald Alive</strong> — The green world of Mooseville is never static, never flat, never cold. Foliage shifts in the breeze, moss catches dappled light, and the deep emerald palette breathes with warm undertones of gold and amber. Every environment asset must contribute to the sense of a living, photosynthesizing world.</div>
+    <div class="pillar-card"><strong>Golden Hour Always</strong> — Mooseville's lighting defaults to the warmth and directionality of the golden hour regardless of in-world time of day. Even noon scenes carry a slight warm cast; even night scenes use amber torch-glow as the primary light source. The sun of Mooseville is always generous and inviting.</div>
+    <div class="pillar-card"><strong>Storybook Legibility</strong> — Every character, prop, and landmark must be immediately readable in silhouette and color at all expected gameplay distances. Cel-shading bands, outlines, and saturated palette choices are all in service of clarity. Mooseville never sacrifices readability for photorealism.</div>
+    <div class="pillar-card"><strong>Tactile Warmth</strong> — Surfaces in Mooseville feel hand-made. Wood looks carved, stone looks stacked by careful hands, fabric looks woven. The material language must communicate craft, care, and age — the sense that someone built this world with love.</div>
+    <div class="pillar-card"><strong>Joyful Contrast</strong> — Mooseville uses bold, saturated color contrast not for shock but for joy. Deep emerald forest with warm gold accents, rich bark browns with cream highlights, sky blue with soft lavender — these combinations must feel delightful, balanced, and intentional.</div>
 
-    <div class="card">
-      <div class="card-body">
-        <div class="grid-2">
-          <div>
-            <h4 class="subsection-header">Core Principles</h4>
-            <ul class="styled-list">
-              <li><strong>Soft, not sharp:</strong> no harsh edges, no gritty detail</li>
-              <li><strong>Pastel, not neon:</strong> colors are bright but slightly milky</li>
-              <li><strong>Simple, not noisy:</strong> one idea per asset; avoid micro-detail</li>
-              <li><strong>Readable silhouettes:</strong> shapes clear at a glance</li>
-              <li><strong>Consistent outlines:</strong> same thickness rules everywhere</li>
-            </ul>
-            <h4 class="subsection-header" style="margin-top:1rem">Do</h4>
-            <ul class="styled-list">
-              <li>Use large, clean color blocks</li>
-              <li>Exaggerate curves and round corners</li>
-              <li>Keep texture resolution modest but crisp (512–1024 for most props)</li>
-              <li>Use color/value contrast more than texture detail</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="subsection-header">Visual References</h4>
-            <div class="pull-quote">
-              Barbie Horse Trails aesthetic: soft GI, pastel lighting, smooth surfaces,
-              gentle bloom, minimal roughness variation, friendly cartoon shapes.
-              Combined with Mooseville's identity: emerald green, gold, thick outlines,
-              warm browns.
-            </div>
-            <h4 class="subsection-header" style="margin-top:1rem">Don't</h4>
-            <ul class="styled-list">
-              <li>Use photo textures or scanned materials</li>
-              <li>Use high-frequency noise in normals or albedo</li>
-              <li>Push specular/metallic into realistic territory</li>
-              <li>Let shadows go near-black</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- S2: STYLE POSITION & REFERENCES -->
+    <h2>2. Style Position &amp; References</h2>
+    <p><strong>Primary Reference:</strong> Barbie Horse Adventures series — painterly shadow bands, soft warm rim lighting on characters, vibrant natural greens, warm ambient fill, and storybook environment composition.</p>
+    <p><strong>Style target:</strong> ~70% Stylized / ~60% Volumetric. Strong cel influence, non-photorealistic palette, readable silhouettes, with 3D form reading clearly via shadows and rims. Pure cel-shaded games sit at ~100% Stylized / 10–20% Volumetric; AAA photorealistic games at ~10% Stylized / 90% Volumetric.</p>
+    <table class="param-table">
+      <thead><tr><th>Visual Quality from Reference</th><th>Mooseville Adaptation</th><th>Mooseville Distinction</th></tr></thead>
+      <tbody>
+        <tr><td>Painterly shadow bands — soft 2–3 step cel shading</td><td>MV_Character uses 3-band cel shading with warm shadow tints</td><td>Shadow tint biased toward deep forest amber (#6B3A1F)</td></tr>
+        <tr><td>Soft rim lighting — consistent warm halo on characters</td><td>Amber rim light (#FFB347), width 0.08–0.12 screen-space</td><td>Always warm amber; no cool rims on hero characters ever</td></tr>
+        <tr><td>Vibrant natural greens — beyond photographic saturation</td><td>Emerald palette pushed 15–25% beyond photographic saturation</td><td>Greens always carry warm golden undertones; never cyan-shifted</td></tr>
+        <tr><td>Warm ambient fill — unlit areas retain warm color</td><td>Scene ambient always warm (minimum 3200K equivalent)</td><td>Night scenes: deep blue-green ambient but characters retain warm fill</td></tr>
+        <tr><td>Storybook environment composition</td><td>Every scene framed as a "painting" — rule of thirds enforced</td><td>Moose-scale architecture (oversized doors, high ceilings) unique to the IP</td></tr>
+      </tbody>
+    </table>
 
-    <!-- Master Color Palette -->
-    <div class="section-header">
-      <span class="section-icon">🎨</span>
-      <h2>Master Color Palette</h2>
-    </div>
+    <!-- S3: MASTER COLOR PALETTE -->
+    <h2>3. Master Color Palette</h2>
+    <table class="param-table">
+      <thead><tr><th>#</th><th>Name</th><th>Hex</th><th>Swatch</th><th>Usage Context</th><th>Do Not Use With</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Emerald Deep</td><td><code>#1B5E20</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#1B5E20;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>UI primary, deep foliage shadow, section headers</td><td>Pure cyan, neon orange, cold magenta</td></tr>
+        <tr><td>2</td><td>Emerald Mid</td><td><code>#388E3C</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#388E3C;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Leaf albedo, mossy stone, meadow base</td><td>Pure cool grey (#808080), cold blue-white</td></tr>
+        <tr><td>3</td><td>Emerald Light</td><td><code>#81C784</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#81C784;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Sunlit leaf highlight, translucency tint, foliage tip</td><td>Neon red, saturated cyan</td></tr>
+        <tr><td>4</td><td>Gold Hero</td><td><code>#FFD700</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#FFD700;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Interactive highlights, UI accents, magic VFX, hero props</td><td>Pure white background, bright cyan</td></tr>
+        <tr><td>5</td><td>Gold Warm</td><td><code>#FFC107</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#FFC107;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Rim light tint, lantern glow, warm highlight cel band</td><td>Cool blue (#2196F3) directly adjacent, silver</td></tr>
+        <tr><td>6</td><td>Amber Rim</td><td><code>#FFB347</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#FFB347;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Character rim light only — never used as surface color</td><td>Any cool-tinted surface as the only rim source</td></tr>
+        <tr><td>7</td><td>Warm Cream</td><td><code>#FFF8E7</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#FFF8E7;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>UI text primary, character highlight, architectural stone light</td><td>Pure white (#FFFFFF) — cream replaces white throughout</td></tr>
+        <tr><td>8</td><td>Deep Bark</td><td><code>#3E2723</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#3E2723;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Outline darkest tone, wood shadow, UI near-black</td><td>Pure black (#000000) — warm near-black only</td></tr>
+        <tr><td>9</td><td>Bark Mid</td><td><code>#5D3A1A</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#5D3A1A;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Bark albedo, wooden props, secondary UI text</td><td>Cool grey, blue-tinted backgrounds</td></tr>
+        <tr><td>10</td><td>Sky Blue</td><td><code>#81D4FA</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#81D4FA;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Sky dome daytime, shallow water, atmosphere haze</td><td>Saturated green directly adjacent, neon yellow</td></tr>
+        <tr><td>11</td><td>Outline Warm Black</td><td><code>#1A0F00</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#1A0F00;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Character outline — darkest outline allowed</td><td>Never use pure #000000 as outline</td></tr>
+        <tr><td>12</td><td>Forest Outline Black</td><td><code>#0D2B0A</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#0D2B0A;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Environment foreground outline — alternate darkest option</td><td>Never use on UI or character outlines</td></tr>
+        <tr><td>13</td><td>Soft Lavender</td><td><code>#CE93D8</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#CE93D8;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Dusk haze, floral props, distance atmosphere tint</td><td>Saturated orange, heavy reds</td></tr>
+        <tr><td>14</td><td>Mushroom Red</td><td><code>#C62828</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#C62828;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Warning UI, mushroom caps, danger props</td><td>Emerald green at same luminance (camouflages)</td></tr>
+        <tr><td>15</td><td>Berry Purple</td><td><code>#7B1FA2</code></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#7B1FA2;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px"></span></td><td>Magic crystals, rare events, special VFX</td><td>Bright gold directly adjacent, pure black background</td></tr>
+      </tbody>
+    </table>
 
-    <h3 class="subsection-header">🌿 Core Identity Colors</h3>
-    <div class="palette-grid">
-      <div class="swatch"><div class="swatch-color" style="background:#0F7A4C"></div><div class="swatch-info"><span class="swatch-name">Emerald (Primary)</span><span class="swatch-hex">#0F7A4C</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#1FBF7A"></div><div class="swatch-info"><span class="swatch-name">Emerald Highlight</span><span class="swatch-hex">#1FBF7A</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#E4B646"></div><div class="swatch-info"><span class="swatch-name">Gold (Primary)</span><span class="swatch-hex">#E4B646</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#F7D98A"></div><div class="swatch-info"><span class="swatch-name">Gold Highlight</span><span class="swatch-hex">#F7D98A</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#8A5A3B"></div><div class="swatch-info"><span class="swatch-name">Moose Brown (Primary)</span><span class="swatch-hex">#8A5A3B</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#C79A72"></div><div class="swatch-info"><span class="swatch-name">Moose Brown Light</span><span class="swatch-hex">#C79A72</span></div></div>
-    </div>
+    <!-- S4: COLOR RULES -->
+    <h2>4. Color Rules</h2>
+    <p><strong>Emerald Depth Rule:</strong> All green colors must carry warm undertones — hue must stay between <strong>95° and 130°</strong> (yellow-leaning green range) in HSL. Greens drifting above 130° toward cyan are prohibited in all surface albedo, lighting, and UI contexts. When in doubt, add +5° to +10° hue shift toward yellow and increase saturation slightly to restore the signature Mooseville emerald quality.</p>
+    <p><strong>Gold Accent Discipline:</strong> Gold (#FFD700 family) is never used as a base fill for large surfaces. It is exclusively reserved for: (1) specular highlights and rim light tints on characters and props, (2) interactable object outlines and UI accents, (3) hero prop surface inlays and decorative embossing, (4) magic VFX endpoint color, (5) text headers in formal documentation. Any surface larger than ~0.25m² that appears predominantly gold must be revised to a warm cream or bark-brown base with gold highlights overlaid.</p>
+    <p><strong>Golden Hour Default:</strong> Scene ambient always warm (minimum 3200K equivalent). Never neutral grey or cold blue in ambient. Night scenes use deep blue-green ambient but characters retain their warm fill light rig.</p>
 
-    <h3 class="subsection-header">🌲 Environment Colors — Greens</h3>
-    <div class="palette-grid">
-      <div class="swatch"><div class="swatch-color" style="background:#A8D88F"></div><div class="swatch-info"><span class="swatch-name">Pastel Leaf Green</span><span class="swatch-hex">#A8D88F</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#7CCB6B"></div><div class="swatch-info"><span class="swatch-name">Meadow Green</span><span class="swatch-hex">#7CCB6B</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#3E7A3F"></div><div class="swatch-info"><span class="swatch-name">Deep Forest Green</span><span class="swatch-hex">#3E7A3F</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#C7E3B2"></div><div class="swatch-info"><span class="swatch-name">Soft Moss</span><span class="swatch-hex">#C7E3B2</span></div></div>
-    </div>
+    <!-- S5: FORBIDDEN COLOR COMBINATIONS -->
+    <h2>5. Forbidden Color Combinations</h2>
+    <table class="param-table">
+      <thead><tr><th>#</th><th>Combination</th><th>Reason Prohibited</th></tr></thead>
+      <tbody>
+        <tr class="forbidden-row"><td>1</td><td>Pure Cyan <code>#00FFFF</code> on Pure Magenta <code>#FF00FF</code></td><td>Maximally clashing, vibrates, causes visual fatigue — prohibited in all contexts</td></tr>
+        <tr class="forbidden-row"><td>2</td><td>Desaturated Grey <code>#808080</code> on White <code>#FFFFFF</code></td><td>Insufficient contrast, reads as disabled/broken; use warm cream background instead</td></tr>
+        <tr class="forbidden-row"><td>3</td><td>Neon Yellow-Green <code>#CCFF00</code> on Emerald Deep <code>#1B5E20</code></td><td>Appears clinical and toxic; undermines the organic warmth of the palette</td></tr>
+        <tr class="forbidden-row"><td>4</td><td>Pure Black <code>#000000</code> on Bark Brown <code>#5D3A1A</code></td><td>Insufficient contrast; reads as texture artifact, not intentional color use</td></tr>
+        <tr class="forbidden-row"><td>5</td><td>Cold Blue <code>#2196F3</code> on Warm Gold <code>#FFD700</code></td><td>Temperature clash destroys warm-world identity; any blue near gold must be softened to sky-blue or lavender</td></tr>
+        <tr class="forbidden-row"><td>6</td><td>Saturated Red <code>#FF0000</code> on Saturated Green <code>#00FF00</code></td><td>Color-blindness failure case; unusable for gameplay-critical information</td></tr>
+        <tr class="forbidden-row"><td>7</td><td>White <code>#FFFFFF</code> as any surface or background color</td><td>Pure white does not exist in Mooseville; always substitute Warm Cream (#FFF8E7) or a tinted near-white</td></tr>
+        <tr class="forbidden-row"><td>8</td><td>Pure Black <code>#000000</code> as any outline or line color</td><td>All outlines must use warm near-black (#1A0F00) or forest black-green (#0D2B0A)</td></tr>
+      </tbody>
+    </table>
 
-    <h3 class="subsection-header">🪵 Environment Colors — Browns & Trail</h3>
-    <div class="palette-grid">
-      <div class="swatch"><div class="swatch-color" style="background:#C49A6C"></div><div class="swatch-info"><span class="swatch-name">Soft Trail Brown</span><span class="swatch-hex">#C49A6C</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#9A6B45"></div><div class="swatch-info"><span class="swatch-name">Warm Bark Brown</span><span class="swatch-hex">#9A6B45</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#E8C9A1"></div><div class="swatch-info"><span class="swatch-name">Light Sand Brown</span><span class="swatch-hex">#E8C9A1</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#A89A8A"></div><div class="swatch-info"><span class="swatch-name">Rock Gray-Brown</span><span class="swatch-hex">#A89A8A</span></div></div>
-    </div>
+    <!-- S6: MASTER SHADER TABLE (first 5) -->
+    <h2>6. Master Shader Table — First 5 Shaders</h2>
 
-    <h3 class="subsection-header">🌊 Sky & Water</h3>
-    <div class="palette-grid">
-      <div class="swatch"><div class="swatch-color" style="background:#AEE3FF"></div><div class="swatch-info"><span class="swatch-name">Pastel Sky Blue</span><span class="swatch-hex">#AEE3FF</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#6BC7F2"></div><div class="swatch-info"><span class="swatch-name">Clear Water Blue</span><span class="swatch-hex">#6BC7F2</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#3A8FBF"></div><div class="swatch-info"><span class="swatch-name">Deep Lake Blue</span><span class="swatch-hex">#3A8FBF</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#F7F9FB"></div><div class="swatch-info"><span class="swatch-name">Soft Cloud White</span><span class="swatch-hex">#F7F9FB</span></div></div>
-    </div>
-
-    <h3 class="subsection-header">🌸 Accents — Flowers, UI, Collectibles</h3>
-    <div class="palette-grid">
-      <div class="swatch"><div class="swatch-color" style="background:#F7A9C4"></div><div class="swatch-info"><span class="swatch-name">Pastel Pink</span><span class="swatch-hex">#F7A9C4</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#C9B7F7"></div><div class="swatch-info"><span class="swatch-name">Pastel Lavender</span><span class="swatch-hex">#C9B7F7</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#F7E46A"></div><div class="swatch-info"><span class="swatch-name">Sunshine Yellow</span><span class="swatch-hex">#F7E46A</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#F7A27A"></div><div class="swatch-info"><span class="swatch-name">Soft Coral</span><span class="swatch-hex">#F7A27A</span></div></div>
-    </div>
-
-    <h3 class="subsection-header">🏡 Building Colors</h3>
-    <div class="palette-grid">
-      <div class="swatch"><div class="swatch-color" style="background:#E46A6A"></div><div class="swatch-info"><span class="swatch-name">Barn Red (Pastel)</span><span class="swatch-hex">#E46A6A</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#B47A52"></div><div class="swatch-info"><span class="swatch-name">Cabin Wood</span><span class="swatch-hex">#B47A52</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#7ED1C4"></div><div class="swatch-info"><span class="swatch-name">Pastel Teal Trim</span><span class="swatch-hex">#7ED1C4</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#C7C7C7"></div><div class="swatch-info"><span class="swatch-name">Soft Roof Gray</span><span class="swatch-hex">#C7C7C7</span></div></div>
-    </div>
-
-    <h3 class="subsection-header">✨ VFX Colors</h3>
-    <div class="palette-grid">
-      <div class="swatch"><div class="swatch-color" style="background:#FFD3F7"></div><div class="swatch-info"><span class="swatch-name">Sparkle Pink</span><span class="swatch-hex">#FFD3F7</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#FFE8A3"></div><div class="swatch-info"><span class="swatch-name">Magic Gold Glow</span><span class="swatch-hex">#FFE8A3</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#D8C2A1"></div><div class="swatch-info"><span class="swatch-name">Soft Dust Brown</span><span class="swatch-hex">#D8C2A1</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#CFF3FF"></div><div class="swatch-info"><span class="swatch-name">Water Ripple</span><span class="swatch-hex">#CFF3FF</span></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#1A1A1A"></div><div class="swatch-info"><span class="swatch-name">Outline Black</span><span class="swatch-hex">#1A1A1A</span></div></div>
-    </div>
-
-    <!-- Material Library -->
-    <div class="section-header">
-      <span class="section-icon">🧱</span>
-      <h2>Material Library</h2>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Asset Type</th>
-            <th>Roughness</th>
-            <th>Metallic</th>
-            <th>Normal Strength</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
+    <div class="shader-card">
+      <div class="shader-name">MV_Character</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
         <tbody>
-          <tr><td><strong>Moose / Characters</strong></td><td>0.65–0.85</td><td>0.0</td><td>0.05–0.1</td><td>Soft skin/fur, no pores</td></tr>
-          <tr><td><strong>Eyes</strong></td><td>0.1–0.2</td><td>0.0</td><td>0.0</td><td>Fake spec highlight, very glossy</td></tr>
-          <tr><td><strong>Hair / Mane</strong></td><td>0.45–0.6</td><td>0.0</td><td>0.05</td><td>Broad stylized highlight band</td></tr>
-          <tr><td><strong>Clothing</strong></td><td>0.6–0.8</td><td>0.0</td><td>0.05–0.1</td><td>Simple fabric tint, no weave detail</td></tr>
-          <tr><td><strong>Wood Props</strong></td><td>0.65–0.8</td><td>0.0</td><td>0.1–0.15</td><td>Faint plank lines only</td></tr>
-          <tr><td><strong>Rocks</strong></td><td>0.75–0.9</td><td>0.0</td><td>0.1</td><td>Rounded, soft shading</td></tr>
-          <tr><td><strong>Ground</strong></td><td>0.7–0.85</td><td>0.0</td><td>0.05</td><td>Painterly color zones, no noise</td></tr>
-          <tr><td><strong>Water</strong></td><td>0.05–0.15</td><td>0.0</td><td>0.0–0.05</td><td>Fresnel, subtle distortion</td></tr>
-          <tr><td><strong>Gold Accents</strong></td><td>0.25–0.4</td><td>0.15–0.25</td><td>0.05</td><td>Soft "toy" metal, not realistic</td></tr>
-          <tr><td><strong>UI Planes</strong></td><td>0.8–1.0</td><td>0.0</td><td>0.0</td><td>Pure flat color, no shading</td></tr>
+          <tr><td>Surface Type</td><td>Character skin, fur, fabric — all organic hero surfaces</td></tr>
+          <tr><td>Cel Bands</td><td>3 (shadow / midtone / highlight)</td></tr>
+          <tr><td>Rim Light</td><td>Yes — Amber #FFB347, width 0.08–0.12 screen-space</td></tr>
+          <tr><td>Specular</td><td>Single-dot Blinn-Phong, gold tint, power 32–64</td></tr>
+          <tr><td>Emissive</td><td>Eyes / accessories via emissive mask</td></tr>
+          <tr><td>Notes</td><td>Primary characters only; lightweight version (MV_Character_NPC) for non-hero characters</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Outline shader -->
-    <div class="section-header">
-      <span class="section-icon">✏️</span>
-      <h2>Outline Shader (Critical for Mooseville Identity)</h2>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <div class="grid-2">
-          <div>
-            <h4 class="subsection-header">Thickness by Asset Type</h4>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>Asset</th><th>Thickness</th></tr></thead>
-                <tbody>
-                  <tr><td>Characters</td><td>2–3 px</td></tr>
-                  <tr><td>Props</td><td>1.5–2 px</td></tr>
-                  <tr><td>Buildings</td><td>1–1.5 px</td></tr>
-                  <tr><td>Terrain</td><td>0–1 px (optional)</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div>
-            <h4 class="subsection-header">Style Rules</h4>
-            <ul class="styled-list">
-              <li><strong>Color:</strong> always <code>#1A1A1A</code> — never pure black</li>
-              <li>Consistent thickness — no jitter</li>
-              <li>No sketchy or hand-drawn lines</li>
-              <li>Same rules apply regardless of distance (scale with LOD)</li>
-            </ul>
-            <div class="info-box" style="margin-top:.75rem">
-              The consistent outline system is what makes Mooseville feel cohesive and
-              readable — it must be uniform across all asset types.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Lighting Profile -->
-    <div class="section-header">
-      <span class="section-icon">🌤️</span>
-      <h2>Lighting Profile</h2>
-    </div>
-
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-header"><span>☀️</span><h3>Light Sources</h3></div>
-        <div class="card-body">
-          <div class="biome-section-title">Key Light (Sun)</div>
-          <ul class="styled-list">
-            <li>Color: warm — <code>#FFE8C9</code></li>
-            <li>Intensity: medium-high</li>
-            <li>Shadows: soft, slightly blurred</li>
-          </ul>
-          <div class="biome-section-title">Fill Light (Sky)</div>
-          <ul class="styled-list">
-            <li>Color: cool pastel blue — <code>#CFEAFF</code></li>
-            <li>Intensity: low</li>
-            <li>No shadows</li>
-          </ul>
-          <div class="biome-section-title">Rim Light (Optional)</div>
-          <ul class="styled-list">
-            <li>Color: slightly warm or neutral</li>
-            <li>Intensity: low — only to help silhouettes pop</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span>🎬</span><h3>Post-Processing</h3></div>
-        <div class="card-body">
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Effect</th><th>Value</th></tr></thead>
-              <tbody>
-                <tr><td>Bloom strength</td><td>0.1–0.25</td></tr>
-                <tr><td>Contrast</td><td>Slightly reduced</td></tr>
-                <tr><td>Saturation</td><td>+5–10%</td></tr>
-                <tr><td>Vignette</td><td>Off or extremely subtle</td></tr>
-                <tr><td>Color grading</td><td>Gentle pastel lift in midtones</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="info-box" style="margin-top:.75rem">
-            <strong>Global:</strong> Bright, low-contrast, pastel outdoor adventure.
-            Shadows never pitch-black. Bloom subtle but present.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Environment-specific shaders -->
-    <div class="section-header">
-      <span class="section-icon">🌲</span>
-      <h2>Environment Shader Settings</h2>
-    </div>
-
-    <div class="grid-3">
-      <div class="card">
-        <div class="card-header"><span>🌲</span><h3>Trees</h3></div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li>Leaf clusters: flat color + soft gradient</li>
-            <li>No leaf textures</li>
-            <li>Trunks: smooth, rounded, minimal detail</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span>🪨</span><h3>Rocks</h3></div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li>Rounded shapes</li>
-            <li>Very soft normals</li>
-            <li>Roughness: 0.75–0.9</li>
-            <li>Pastel gray-brown palette</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span>🌿</span><h3>Grass & Ground</h3></div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li>Flat color cards, slight color variation (±5–8%)</li>
-            <li>No wind noise textures — simple sine-based sway</li>
-            <li>Ground: painterly, soft, low-contrast</li>
-            <li>Use color zones instead of texture detail</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span>🏠</span><h3>Buildings — Wood</h3></div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li>Smooth, stylized — very faint plank lines</li>
-            <li>Roughness: 0.65–0.8</li>
-            <li>Roofs: flat color with subtle shading</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span>💧</span><h3>Water</h3></div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li>Soft Fresnel effect</li>
-            <li>Roughness: 0.05–0.15</li>
-            <li>Gentle distortion, no harsh refraction</li>
-            <li>Subtle color-coded for meteor zones (green tint)</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span>✨</span><h3>VFX</h3></div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li>Sparkles: additive blending, soft pastel colors, bloom-friendly</li>
-            <li>Dust trails: alpha-blended, soft falloff, pastel browns</li>
-            <li>Magic glow: additive + bloom, pastel gold/pink/blue</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Style summary table -->
-    <div class="section-header">
-      <span class="section-icon">📋</span>
-      <h2>Quick Reference Summary</h2>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Category</th><th>Key Settings</th></tr>
-        </thead>
+    <div class="shader-card">
+      <div class="shader-name">MV_Character_NPC</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
         <tbody>
-          <tr><td><strong>Materials</strong></td><td>Smooth, pastel, minimal surface detail</td></tr>
-          <tr><td><strong>Roughness</strong></td><td>0.55–0.85 for most (high/soft)</td></tr>
-          <tr><td><strong>Metallic</strong></td><td>0.0 for almost everything (except gold accents: 0.15–0.25)</td></tr>
-          <tr><td><strong>Normal Maps</strong></td><td>Very subtle: 0.05–0.15 strength only</td></tr>
-          <tr><td><strong>Outlines</strong></td><td>Thick, clean, always #1A1A1A</td></tr>
-          <tr><td><strong>Key Light</strong></td><td>Warm #FFE8C9, soft shadows</td></tr>
-          <tr><td><strong>Fill Light</strong></td><td>Cool pastel blue #CFEAFF, no shadows</td></tr>
-          <tr><td><strong>Bloom</strong></td><td>Subtle: 0.1–0.25</td></tr>
-          <tr><td><strong>VFX</strong></td><td>Additive blend, pastel colors, soft gradients</td></tr>
-          <tr><td><strong>Terrain</strong></td><td>Painterly, low-contrast, rounded shapes, color zones</td></tr>
-          <tr><td><strong>Ambient Occlusion</strong></td><td>Very soft, 0.2–0.35 intensity, small radius</td></tr>
+          <tr><td>Surface Type</td><td>Non-hero character surfaces</td></tr>
+          <tr><td>Cel Bands</td><td>2 (shadow / highlight)</td></tr>
+          <tr><td>Rim Light</td><td>Yes — reduced intensity 0.5×</td></tr>
+          <tr><td>Specular</td><td>None</td></tr>
+          <tr><td>Emissive</td><td>No</td></tr>
+          <tr><td>Notes</td><td>Used for background villagers, animals. No SSS approximation.</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Color philosophy -->
+    <div class="shader-card">
+      <div class="shader-name">MV_Environment_Foliage</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Surface Type</td><td>Leaves, grass, ferns — all foliage</td></tr>
+          <tr><td>Cel Bands</td><td>2 (shadow / sunlit)</td></tr>
+          <tr><td>Rim Light</td><td>No</td></tr>
+          <tr><td>Specular</td><td>None</td></tr>
+          <tr><td>Emissive</td><td>No (translucency channel instead — backlit glow value 0.25–0.45)</td></tr>
+          <tr><td>Notes</td><td>Requires vertex-color wind animation; translucency enabled; alpha clip at 0.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="shader-card">
+      <div class="shader-name">MV_Environment_Terrain</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Surface Type</td><td>Ground, rock, dirt, sand — terrain splatmap surfaces</td></tr>
+          <tr><td>Cel Bands</td><td>2 (shadow / lit)</td></tr>
+          <tr><td>Rim Light</td><td>No</td></tr>
+          <tr><td>Specular</td><td>None</td></tr>
+          <tr><td>Emissive</td><td>No</td></tr>
+          <tr><td>Notes</td><td>Splatmap 4-layer max; macro tint overlay enabled; shadow threshold tied to scene light direction</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="shader-card">
+      <div class="shader-name">MV_Water</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Surface Type</td><td>Rivers, lakes, puddles — all water surfaces</td></tr>
+          <tr><td>Cel Bands</td><td>1 (no cel stepping — smooth diffuse)</td></tr>
+          <tr><td>Rim Light</td><td>No</td></tr>
+          <tr><td>Specular</td><td>PBR specular with cubemap reflection; roughness 0.05–0.35</td></tr>
+          <tr><td>Emissive</td><td>Foam mask emissive (subtle warm white #FFFDE7)</td></tr>
+          <tr><td>Notes</td><td>Dual-layer normal scroll; vertex displacement max 0.3m; depth color blend shallow #6DBFA0 to deep #0D4F3C</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- S7: CEL SHADING RULES -->
+    <h2>7. Cel Shading Rules</h2>
+    <table class="param-table">
+      <thead><tr><th>Surface Category</th><th>Bands</th><th>Band 1 Shadow</th><th>Band 2 Midtone</th><th>Band 3 Highlight</th><th>Transition Sharpness</th></tr></thead>
+      <tbody>
+        <tr><td>Characters (hero)</td><td>3</td><td>Albedo × 0.45, tint #6B3A1F</td><td>Albedo × 1.0 (base)</td><td>Albedo × 1.25, tint warm cream</td><td>Sharp — 0.02 smoothstep width</td></tr>
+        <tr><td>Characters (NPC)</td><td>2</td><td>Albedo × 0.5, neutral tint</td><td>Albedo × 1.0 (base)</td><td>N/A</td><td>Sharp — 0.02 smoothstep width</td></tr>
+        <tr><td>Environment (general)</td><td>2</td><td>Albedo × 0.55, warm shadow tint</td><td>Albedo × 1.0 (base)</td><td>N/A</td><td>Slightly soft — 0.05 smoothstep width</td></tr>
+        <tr><td>VFX particles</td><td>1 (no banding)</td><td>N/A</td><td>Particle color full</td><td>N/A</td><td>No stepping — additive glow only</td></tr>
+      </tbody>
+    </table>
+
+    <!-- S8: RIM LIGHT SPECIFICATION -->
+    <h2>8. Rim Light Specification</h2>
+    <table class="param-table">
+      <thead><tr><th>Parameter</th><th>Specification</th></tr></thead>
+      <tbody>
+        <tr><td>Color</td><td>Warm amber <code>#FFB347</code> — never cold-colored, never pure white, never blue or cyan</td></tr>
+        <tr><td>Width</td><td>0.08–0.12 screen-space (at 1080p = ~8–13px at closest gameplay distance)</td></tr>
+        <tr><td>Intensity</td><td>0.6–0.8 normalized; rim complements, does not overpower, diffuse shading. Max rim brightness 0.8.</td></tr>
+        <tr><td>Direction</td><td>Opposite to primary key light, slightly elevated 10°–20° above horizon</td></tr>
+        <tr><td>Applied to</td><td>All hero characters (Moose family, named NPCs). Reduced 50% on generic NPCs. Disabled on props and environment.</td></tr>
+        <tr><td>Never use</td><td>Cold rim colors: #4FC3F7 blue, #80DEEA cyan, #B39DDB lavender on any hero character</td></tr>
+      </tbody>
+    </table>
+
+    <!-- S9: AMBIENT OCCLUSION -->
+    <h2>9. Ambient Occlusion</h2>
+    <table class="param-table">
+      <thead><tr><th>Parameter</th><th>Specification</th></tr></thead>
+      <tbody>
+        <tr><td>Method</td><td>SSAO — enabled on all platforms except Mobile (baked AO only on Mobile)</td></tr>
+        <tr><td>Strength</td><td>0.35–0.55. Below 0.35 reads as absent; above 0.55 creates a "dirty" look</td></tr>
+        <tr><td>Radius</td><td>0.4m–0.8m world-space. Larger radius for open environments; tighten to 0.4m in dense interiors</td></tr>
+        <tr><td>AO Color</td><td>Never pure black. Tint must be warm dark green <code>#0D1A0A</code> to preserve emerald identity in shadowed crevices</td></tr>
+        <tr><td>Character AO</td><td>Baked AO texture only (packed in texture channel). SSAO disabled on character layer to prevent "dirty" noise on moving surfaces.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- S10: OUTLINE SYSTEM -->
+    <h2>10. Outline System</h2>
+    <p><strong>Method:</strong> Post-process edge detection — depth buffer + normal buffer differentials. Depth threshold: 0.015 (NDC); Normal threshold: 0.25 (dot product difference); Luminance threshold: 0.18. Outline color: <code>#1A0F00</code> warm near-black is the darkest allowed — pure <code>#000000</code> is prohibited in all contexts. TAA smoothing: 4-frame accumulation at 0.25 blend weight per frame (exponential moving average) to eliminate animation flicker.</p>
+    <table class="param-table">
+      <thead><tr><th>Element Type</th><th>Width @1080p</th><th>Color</th><th>Opacity</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Hero Characters (Moose family)</td><td><span class="outline-width">1.8px</span></td><td>#1A0F00</td><td>100%</td><td>Full outline at all faces; never disabled during gameplay</td></tr>
+        <tr><td>NPC Characters</td><td><span class="outline-width">1.4px</span></td><td>#1A0F00</td><td>85%</td><td>Slightly reduced to subordinate NPCs visually to hero characters</td></tr>
+        <tr><td>Interactive Props (idle / highlighted)</td><td><span class="outline-width">1.5px</span></td><td>#1A0F00 idle / #B8860B highlighted</td><td>100%</td><td>Gold tint activates on hover/proximity interaction trigger</td></tr>
+        <tr><td>Environment Props (&lt;5m foreground)</td><td><span class="outline-width">1.2px</span></td><td>#0D2B0A</td><td>80%</td><td>Foreground only; mid-ground reduces per distance falloff</td></tr>
+        <tr><td>Environment (5–15m mid-ground)</td><td><span class="outline-width">0.8px</span></td><td>#0D2B0A</td><td>50%</td><td>Subtle; exists only to separate overlapping geometry planes</td></tr>
+        <tr><td>Environment (&gt;25m background)</td><td><span class="outline-width">0.0px</span></td><td>N/A</td><td>0%</td><td>No outlines at distance; silhouette via color contrast only</td></tr>
+        <tr><td>VFX Particles</td><td><span class="outline-width">0.0px</span></td><td>N/A</td><td>0%</td><td>VFX excluded from outline pass entirely via render layer</td></tr>
+        <tr><td>UI Elements (interactive)</td><td><span class="outline-width">2.5px</span></td><td>#FFD700 warm gold</td><td>100%</td><td>Gold outline on all interactive UI; renders on UI layer, no depth test; pulses 0.5Hz when focused</td></tr>
+        <tr><td>UI Elements (decorative/panels)</td><td><span class="outline-width">0.0px</span></td><td>N/A</td><td>0%</td><td>Decorative panels defined by fill color and background contrast</td></tr>
+        <tr><td>Water Surfaces</td><td><span class="outline-width">0.0px</span></td><td>N/A</td><td>0%</td><td>Water silhouette from vertex displacement and foam mask only</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Distance Falloff:</strong> &lt;2m: 100% / 1.2× width &nbsp;|&nbsp; 2–5m: 100% / 1.0× &nbsp;|&nbsp; 5–15m: lerp 100%→60% / 0.8×→0.6× &nbsp;|&nbsp; 15–25m: lerp 60%→0% / 0.6×→0.0× &nbsp;|&nbsp; &gt;25m: disabled.</p>
+    <p><strong>Outlines disabled for:</strong> Hero face/head during extreme close-up cutscene shots (&lt;1m camera distance); all water geometry; skybox and cloud geometry; MV_VFX_Additive and MV_VFX_Soft render layers; foliage beyond LOD1 (&gt;20m).</p>
+
+
+    <!-- ═══════════════════════════════════════════════ SECTION 11 -->
+    <div class="section-header">
+      <span class="section-icon">🎭</span>
+      <h2>11. Character Rendering</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Hero vs NPC Cel Band Rules</div>
+      <div class="card-body">
+        <table class="param-table">
+          <thead><tr><th>Character Type</th><th>Shader</th><th>Cel Bands</th><th>Shadow Tint</th><th>Rim Light</th><th>Specular</th></tr></thead>
+          <tbody>
+            <tr><td>Hero (Moose family)</td><td>MV_Character</td><td>3 — shadow / midtone / highlight</td><td>Albedo × 0.45, tint <code>#6B3A1F</code></td><td>Amber <code>#FFB347</code>, 0.08–0.12 width, intensity 0.6–0.8</td><td>Single-dot Blinn-Phong, gold-tinted, power 32–64</td></tr>
+            <tr><td>NPC (generic/background)</td><td>MV_Character_NPC</td><td>2 — shadow / highlight</td><td>Albedo × 0.5, neutral warm</td><td>Reduced 50% intensity</td><td>None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Skin &amp; Fur Shader Params</div>
+      <div class="card-body">
+        <p>Hero characters use a <strong>shadow-tint SSS approximation</strong> — no separate SSS pass. Shadow band tinted warm amber <code>#6B3A1F</code> gives the appearance of light glowing through ears and muzzle. Fur normal maps follow hair-flow direction; normal strength <strong>0.35–0.50 only</strong> (above 0.50 reads as bumpy, not storybook-soft).</p>
+        <p>NPC characters: no SSS, shadow tint neutral warm <code>#5A4030</code>, standard 2-band.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Eye Shader Rules — MV_Eye</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Scale:</strong> Eyes are 15–20% larger than anatomical reference — deliberate design; must be preserved at all LOD levels including LOD1.</li>
+          <li><strong>Catchlight:</strong> Static warm-white (<code>#FFFDE7</code>) texture element baked into emissive at the <strong>10 o'clock position</strong> (upper-left iris quadrant). Never derived from real-time lighting; never size-reduced at LOD1.</li>
+          <li><strong>Iris:</strong> 3-band cel — dark ring / mid iris / bright center. Smoothstep width 0.01.</li>
+          <li><strong>Pupil:</strong> Soft-edged ellipse, 5% warm dark border <code>#1A0F00</code>. No hard edge.</li>
+          <li><strong>Wet rim:</strong> Lower eyelid Blinn-Phong, specular power 128, intensity 0.3.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 12 -->
+    <div class="section-header">
+      <span class="section-icon">📊</span>
+      <h2>12. Character LOD Table</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="table-wrap">
+          <table class="param-table">
+            <thead><tr><th>LOD</th><th>Poly Range</th><th>Distance</th><th>Shader</th><th>Outline</th><th>Shadow</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><strong>LOD0</strong></td><td>8,000–15,000 tris</td><td>0–8m</td><td>MV_Character — 3-band, rim, specular, emissive</td><td>1.8px full</td><td>Contact blob</td><td>Hero quality; cutscenes &amp; close gameplay</td></tr>
+              <tr><td><strong>LOD1</strong></td><td>4,000–6,000 tris</td><td>8–20m</td><td>MV_Character — 3-band, rim, no specular</td><td>1.8px full</td><td>Contact blob</td><td>Primary gameplay distance; eyes NOT reduced</td></tr>
+              <tr><td><strong>LOD2</strong></td><td>1,500–2,500 tris</td><td>20–45m</td><td>MV_Character_NPC — 2-band, no rim</td><td>1.0px, 70%</td><td>None</td><td>Background NPCs; 12 blend shapes max</td></tr>
+              <tr><td><strong>LOD3</strong></td><td>400–800 tris</td><td>45–80m</td><td>Flat cel — 1-band only</td><td>0.5px, 40%</td><td>None</td><td>Crowd fill; silhouette readability check at 45m</td></tr>
+              <tr><td><strong>Impostor</strong></td><td>2 quads (billboard)</td><td>&gt;80m</td><td>MV_UI_Flat (unlit baked texture)</td><td>None</td><td>None</td><td>8-angle pre-rendered at LOD0 setup; crowd only</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 13 -->
+    <div class="section-header">
+      <span class="section-icon">🌿</span>
+      <h2>13. Environment Rendering</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Foliage Shader — MV_Environment_Foliage</div>
+      <div class="card-body">
+        <table class="param-table">
+          <thead><tr><th>Parameter</th><th>Value / Range</th></tr></thead>
+          <tbody>
+            <tr><td>Cel bands</td><td>2 (shadow / sunlit)</td></tr>
+            <tr><td>Rim light</td><td>None</td></tr>
+            <tr><td>Translucency (backlit glow)</td><td>0.25–0.45; warm golden-green</td></tr>
+            <tr><td>Alpha clip threshold</td><td>0.5 — no semi-transparent leaves</td></tr>
+            <tr><td>Wind animation</td><td>Vertex-color red channel = wind weight; amplitude 0.02–0.08 world units; per-instance phase offset from world position</td></tr>
+            <tr><td>LOD transition</td><td>Billboard impostor beyond 30m; no real-time shadow past LOD1 (~8m)</td></tr>
+            <tr><td>Outlines</td><td>Disabled at LOD1 and beyond; no outline on alpha-clipped edges</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Terrain Blend — MV_Environment_Terrain</div>
+      <div class="card-body">
+        <table class="param-table">
+          <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Splatmap layers</td><td>4 max per chunk; linear blend, height-bias in crevices</td></tr>
+            <tr><td>Normal map resolution</td><td>4096×4096 per terrain chunk</td></tr>
+            <tr><td>Macro variation</td><td>Low-frequency tint overlay, 1 cycle per 50m world-space</td></tr>
+            <tr><td>Cel bands</td><td>2 (shadow / lit); threshold tied to scene light direction</td></tr>
+            <tr><td>Terrain holes</td><td>Dithered alpha mask; 0.5m blend to cave interior</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Water Shader — MV_Water</div>
+      <div class="card-body">
+        <table class="param-table">
+          <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Normal scroll Layer 1</td><td>0.02 UV/s, flow-direction aligned, scale 4.0</td></tr>
+            <tr><td>Normal scroll Layer 2</td><td>0.013 UV/s, 35° off Layer 1 (counter-scroll), scale 7.0</td></tr>
+            <tr><td>Vertex displacement</td><td>Max 0.3m amplitude; masked within 0.5m of shore</td></tr>
+            <tr><td>Foam</td><td>Depth-based shoreline, 0.4m wide, warm white <code>#FFFDE7</code></td></tr>
+            <tr><td>Depth color blend</td><td>Shallow <code>#6DBFA0</code> → deep <code>#0D4F3C</code>; fully blended at 2.0m</td></tr>
+            <tr><td>Moose Water glow</td><td>Subtle emerald-green emissive tint on foam mask; soft ambient glow within 1.0m of magical water sources; HDR max 1.2, color <code>#4CAF50</code> warm-shifted</td></tr>
+            <tr><td>Reflection</td><td>Planar reflection on hero water bodies; cubemap on puddles/secondary; no SSAO on water surface</td></tr>
+            <tr><td>Cel bands</td><td>1 (no stepping — smooth diffuse only)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Rock / Stone &amp; Sky Dome</div>
+      <div class="card-body">
+        <p><strong>Rock/Stone:</strong> MV_Mat_StoneGranite — roughness 0.82–0.92, warm sandstone tone <code>#8D8070</code>→<code>#B0A090</code>, normal strength 0.75–0.90, 2-band cel; never cool grey. Moss overlay blended via AO channel on MV_Mat_StoneMoss.</p>
+        <p><strong>Sky dome:</strong> Procedural gradient — no static cubemaps. Minimum 5500K at midday; no pure white sky. Sun disc 2.5° angular, soft Gaussian bloom halo, minimum warm cream <code>#FFF8E7</code>. Stars activate below 20% sun elevation, opacity ≤50%, warm-white <code>#FFF8E7</code>.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 14 -->
+    <div class="section-header">
+      <span class="section-icon">🔧</span>
+      <h2>14. Remaining Shader Specs</h2>
+    </div>
+
+    <div class="shader-card">
+      <div class="shader-name">MV_Metal_Accent</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Cel bands</td><td>1 (smooth — PBR dominant)</td></tr>
+          <tr><td>Metallic</td><td>0.85–1.0</td></tr>
+          <tr><td>Roughness</td><td>0.10–0.35</td></tr>
+          <tr><td>Specular</td><td>PBR metallic/roughness + cubemap reflection, warm gold tint</td></tr>
+          <tr><td>Emissive</td><td>Optional subtle emissive on polished inlay; HDR max 1.5</td></tr>
+          <tr><td>Normal</td><td>Embossed pattern required (herringbone/floral/geometric), strength 0.60–0.80</td></tr>
+          <tr><td>Rule</td><td>Used sparingly per Gold Accent Rule — no surface &gt;0.25m² predominately gold</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="shader-card">
+      <div class="shader-name">MV_Glass_Crystal</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Cel bands</td><td>1 (smooth)</td></tr>
+          <tr><td>Specular</td><td>PBR specular + refraction approximation (no screen-space refraction)</td></tr>
+          <tr><td>Transparency</td><td>Alpha dither — no sorted transparency</td></tr>
+          <tr><td>Emissive</td><td>Yes — inner glow, color-tinted per gem type; warm tints only on hero crystals</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="shader-card">
+      <div class="shader-name">MV_VFX_Additive</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Blend mode</td><td>Additive only — never alpha-blend for sparkle/glow</td></tr>
+          <tr><td>Depth test</td><td>Depth read; no depth write</td></tr>
+          <tr><td>Emissive</td><td>Full self-illuminated; overbright allowed up to 3.0 HDR</td></tr>
+          <tr><td>Outlines</td><td>Never — excluded from outline pass via render layer</td></tr>
+          <tr><td>Normal maps</td><td>Prohibited on particles</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="shader-card">
+      <div class="shader-name">MV_VFX_Soft</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Blend mode</td><td>Alpha blend (premultiplied)</td></tr>
+          <tr><td>Soft particle depth fade</td><td>0.5m depth fade to prevent hard geometry intersection</td></tr>
+          <tr><td>Color range</td><td>Desaturated warm; saturation 0.05–0.25; no cel bands</td></tr>
+          <tr><td>Emissive</td><td>None</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="shader-card">
+      <div class="shader-name">MV_UI_Flat</div>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Lighting</td><td>Unlit — no scene light evaluation</td></tr>
+          <tr><td>Depth test</td><td>Disabled — always renders on top</td></tr>
+          <tr><td>Cel bands</td><td>None</td></tr>
+          <tr><td>Emissive</td><td>UI glow effects only; HDR max 1.5</td></tr>
+          <tr><td>9-slice</td><td>Required for all bordered panels</td></tr>
+          <tr><td>Post-processing</td><td>None — UI composited after all scene post-FX</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 15 -->
     <div class="section-header">
       <span class="section-icon">💡</span>
-      <h2>Color Philosophy</h2>
+      <h2>15. Lighting System</h2>
     </div>
 
-    <div class="card" style="background:var(--emerald-darkest);color:white">
-      <div class="card-body" style="line-height:1.9">
-        <div style="color:var(--gold-light);font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;margin-bottom:1rem;font-weight:700">To keep Mooseville consistent:</div>
-        <ul style="list-style:none;padding:0">
-          <li>🟢 Use <strong style="color:var(--emerald-light)">emerald + gold</strong> as your signature brand colors</li>
-          <li>🌿 Use <strong style="color:#A8D88F">pastel greens + browns</strong> for terrain and props</li>
-          <li>🔵 Use <strong style="color:#6BC7F2">soft blues</strong> for water and sky</li>
-          <li>🌸 Use <strong style="color:#F7A9C4">pinks + yellows</strong> for accents and collectibles</li>
-          <li>⬛ Use <strong style="color:#CCC">thick outlines (#1A1A1A)</strong> for UI and characters</li>
-        </ul>
-        <div style="margin-top:1.25rem;color:var(--gold-light);font-style:italic">
-          This gives you a world that feels: warm · friendly · magical · consistent ·
-          and visually compatible with Barbie Horse Trails.
+    <div class="card">
+      <div class="card-header">Time-of-Day Key Light Color Table</div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table class="param-table">
+            <thead><tr><th>Time State</th><th>Key Temp</th><th>Key Hex (approx)</th><th>Fill Temp</th><th>Ambient Hex</th><th>Intensity</th></tr></thead>
+            <tbody>
+              <tr><td>Morning (6–10am)</td><td>4500–5000K</td><td><code>#FFE0A0</code></td><td>5500K (cooler)</td><td><code>#B3D9FF</code></td><td>0.65</td></tr>
+              <tr><td>Daytime (10am–4pm)</td><td>5500–6000K</td><td><code>#FFF5DC</code></td><td>4200–4500K</td><td><code>#FFEFD5</code></td><td>1.0 (ref)</td></tr>
+              <tr><td>Late Afternoon (4–6pm)</td><td>4000–4500K</td><td><code>#FFD080</code></td><td>4000K</td><td><code>#FFD080</code></td><td>0.85</td></tr>
+              <tr><td>Dusk (6–8pm)</td><td>3200–3800K</td><td><code>#FF9A3C</code></td><td>5000K (sky remnant)</td><td><code>#FFB87A</code></td><td>0.55</td></tr>
+              <tr><td>Night</td><td>2800K (lantern/torch)</td><td><code>#FF8C1A</code></td><td>8000K+ deep blue ambient</td><td><code>#0A1F2E</code></td><td>0.3 (lantern only)</td></tr>
+            </tbody>
+          </table>
         </div>
+        <div class="info-box">Night rule: Sky ambient is cool (<code>#0A1F2E</code>) but characters retain their warm fill light rig — minimum 4000K equivalent fill always active on character layer.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Lumen GI, Sky Light &amp; Shadow Settings</div>
+      <div class="card-body">
+        <table class="param-table">
+          <thead><tr><th>System</th><th>Setting</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Lumen GI</td><td>Global Illumination</td><td>Enabled; indirect lighting color graded to golden-hour default; no raw HDRI as sole source</td></tr>
+            <tr><td>Sky Light</td><td>Capture mode</td><td>Real-time sky capture; color temperature locked to scene ambient minimum 3200K equivalent; never neutral grey</td></tr>
+            <tr><td>CSM Cascades</td><td>PC High / PC Med / Console</td><td>3 / 2 / 1 cascade; far cascade blends into baked lightmap</td></tr>
+            <tr><td>Shadow color</td><td>Environment</td><td>Tinted deep teal-green <code>#0A2010</code> — never pure black</td></tr>
+            <tr><td>Shadow color</td><td>Character contact</td><td>Warm bark brown <code>#3E2723</code></td></tr>
+            <tr><td>PCF kernel</td><td>All platforms min / PC High</td><td>4-sample / 16-sample</td></tr>
+            <tr><td>Emissive rule</td><td>Architecture (lanterns, fungi)</td><td>Masked emissive only; HDR max 2.0; no unbounded emission</td></tr>
+            <tr><td>SSAO</td><td>Strength / radius / tint</td><td>0.35–0.55 / 0.4–0.8m / warm dark green <code>#0D1A0A</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 16 -->
+    <div class="section-header">
+      <span class="section-icon">🍂</span>
+      <h2>16. Seasonal Color Variation</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="table-wrap">
+          <table class="param-table">
+            <thead><tr><th>Material / Element</th><th>Spring</th><th>Summer</th><th>Autumn</th><th>Winter</th></tr></thead>
+            <tbody>
+              <tr><td>Foliage (leaf albedo base)</td><td><code>#5CB85C</code> — bright fresh green</td><td><code>#388E3C</code> — full emerald mid</td><td><code>#BF6000</code>→<code>#C62828</code> — amber to red</td><td>Removed or sparse brown <code>#5D3A1A</code></td></tr>
+              <tr><td>Terrain ground</td><td>Soft moss green <code>#6B8B50</code></td><td>Deep forest ground <code>#4A6340</code></td><td>Warm ochre <code>#A0722A</code> with leaf litter</td><td>Snow white-cream <code>#E8E0D0</code> overlay</td></tr>
+              <tr><td>Water</td><td>Bright aqua <code>#7ECBC4</code></td><td>Standard teal <code>#6DBFA0</code></td><td>Warm olive-teal <code>#5A8C78</code></td><td>Muted teal-grey <code>#4A7A7A</code>; ice shelf on edges</td></tr>
+              <tr><td>Sky base</td><td>Soft blue <code>#9FD4F0</code> with warm tinge</td><td>Full sky blue <code>#81D4FA</code></td><td>Warm amber-sky <code>#D4A860</code> at dusk; deeper blue at noon</td><td>Pale grey-blue <code>#B8D0E0</code>; softer sun</td></tr>
+              <tr><td>Ambient color</td><td>Pale warm green <code>#A8C890</code></td><td>Forest green <code>#3D5E2A</code></td><td>Warm amber-gold <code>#A07030</code></td><td>Cool blue-white <code>#8090A8</code>; character fill still warm</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 17 -->
+    <div class="section-header">
+      <span class="section-icon">✨</span>
+      <h2>17. VFX Guidelines</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Additive vs Soft Blend Rules</div>
+      <div class="card-body">
+        <table class="param-table">
+          <thead><tr><th>Use Additive (MV_VFX_Additive)</th><th>Use Soft Blend (MV_VFX_Soft)</th></tr></thead>
+          <tbody>
+            <tr><td>Magic sparkles, glows, firefly light, energy effects</td><td>Smoke, breath steam, pollen, mist, dust, rain</td></tr>
+            <tr><td>Any effect that needs to brighten its background</td><td>Any effect that obscures its background softly</td></tr>
+            <tr><td>HDR emissive up to 3.0; bloom will amplify</td><td>Premultiplied alpha; soft particle depth fade 0.5m</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Particle Budget (per scene type)</div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table class="param-table">
+            <thead><tr><th>Category</th><th>Max Particles</th><th>Max Emitters</th><th>Priority</th></tr></thead>
+            <tbody>
+              <tr><td>Ambient atmosphere (pollen, dust, leaves)</td><td>300 total</td><td>4</td><td>Low — first culled; beyond 30m</td></tr>
+              <tr><td>Character action (footsteps, jumps, ability)</td><td>80 per event</td><td>2</td><td>High</td></tr>
+              <tr><td>Environment reaction (splash, leaf rustle)</td><td>120 per event</td><td>6</td><td>Medium</td></tr>
+              <tr><td>UI feedback (reward, level up)</td><td>200 total</td><td>1 at a time</td><td>High — screen space</td></tr>
+              <tr><td>Gameplay critical (trail, target indicator)</td><td>50 per indicator</td><td>3 max</td><td>Critical — never culled</td></tr>
+              <tr><td>Cinematic (cutscene only)</td><td>800 total</td><td>16</td><td>Cinematic — reverts on gameplay resume</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">VFX Scale Rules &amp; Prohibited Practices</div>
+      <div class="card-body">
+        <ul>
+          <li>Magic sparkle size: 0.02m–0.15m; always camera-facing billboard.</li>
+          <li>Non-magic VFX color saturation: 0.05–0.25 maximum — warm hue, desaturated.</li>
+          <li>No VFX effect may exceed <strong>0.4ms GPU time</strong> per frame on minimum-spec hardware.</li>
+          <li>No outlines on any VFX particles (excluded from outline pass via render layer).</li>
+          <li>No shadow casting or receiving from particle VFX in any context.</li>
+          <li>No cool colors (blue, cyan, purple) as primary magic VFX color — emerald-to-gold range only.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 18 -->
+    <div class="section-header">
+      <span class="section-icon">🖥️</span>
+      <h2>18. UI Rendering</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">MV_UI_Flat Shader Rules</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>No depth test</strong> — UI always renders on top of scene geometry, after all post-processing.</li>
+          <li><strong>No scene lighting</strong> — UI is unlit and self-contained; no bloom, tone mapping, color grading, or vignette applied to UI layer.</li>
+          <li>Bordered panels must use <strong>9-slice scaling</strong> — non-9-sliced borders on panels are prohibited.</li>
+          <li>UI composited <strong>last</strong> in post-processing stack (step 8).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Font Rendering Specs</div>
+      <div class="card-body">
+        <table class="param-table">
+          <thead><tr><th>Type</th><th>Font</th><th>AA Mode</th><th>Min Size (1080p)</th></tr></thead>
+          <tbody>
+            <tr><td>Body text / labels</td><td>Calibri</td><td>Subpixel (ClearType)</td><td>14px</td></tr>
+            <tr><td>Headers / dialog speaker names</td><td>Candara</td><td>Smooth grey-scale AA</td><td>20px</td></tr>
+            <tr><td>Absolute minimum any element</td><td>Either</td><td>Max-contrast background, no outline</td><td>10px</td></tr>
+          </tbody>
+        </table>
+        <p>Line height: 1.4× body, 1.2× headers. No element below 1.2× line height.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Icon Contrast &amp; HUD Element Specs</div>
+      <div class="card-body">
+        <ul>
+          <li>All icons authored at <strong>2× display resolution</strong> — 64×64 display = 128×128 art.</li>
+          <li>Drop shadow baked into icon texture: 2px offset 45°, blur 2px, 35% opacity, <code>#1A0F00</code>.</li>
+          <li>No pure black (<code>#000000</code>) or pure white (<code>#FFFFFF</code>) in icon art.</li>
+          <li>All icons have 1.5px warm near-black internal outline baked into art.</li>
+          <li>Interactive UI elements: 2.5px gold outline <code>#FFD700</code>, pulses 0.5Hz on focus/hover.</li>
+          <li>All UI text: minimum <strong>4.5:1 contrast</strong> (WCAG AA) against immediate background at all times.</li>
+          <li>Minimum touch target: 44×44px regardless of visible element size.</li>
+          <li>Critical gameplay info (health, timer) must never rely on color alone — always paired with icon/shape.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 19 -->
+    <div class="section-header">
+      <span class="section-icon">⚡</span>
+      <h2>19. Performance &amp; Optimization</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Draw Call Budget by Platform</div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table class="param-table">
+            <thead><tr><th>Category</th><th>PC High</th><th>PC Medium</th><th>Console / Mobile</th></tr></thead>
+            <tbody>
+              <tr><td>Terrain</td><td>80</td><td>60</td><td>30</td></tr>
+              <tr><td>Foliage (GPU instanced)</td><td>400</td><td>280</td><td>100</td></tr>
+              <tr><td>Characters (up to 8 NPCs)</td><td>320</td><td>240</td><td>120</td></tr>
+              <tr><td>Environment props</td><td>900</td><td>700</td><td>400</td></tr>
+              <tr><td>VFX (particles + decals)</td><td>300</td><td>200</td><td>100</td></tr>
+              <tr><td>UI</td><td>150</td><td>120</td><td>80</td></tr>
+              <tr><td>Shadow passes</td><td>350</td><td>200</td><td>70</td></tr>
+              <tr><td><strong>Total budget</strong></td><td><strong>2,500</strong></td><td><strong>1,800</strong></td><td><strong>900</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Texture Memory Limits by Category</div>
+      <div class="card-body">
+        <table class="param-table">
+          <thead><tr><th>Category</th><th>Max Resolution</th><th>Streaming Budget (PC High)</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Characters (hero)</td><td>1024×1024</td><td>Resident (no stream)</td><td>Kaiser mip filter; 1024 texels/m at LOD0</td></tr>
+            <tr><td>Environment surfaces</td><td>2048×2048</td><td>512MB per zone</td><td>Streamed; +1 mip bias on PC Med, +2 on Console</td></tr>
+            <tr><td>UI sprites</td><td>2048×2048 atlas</td><td>Resident</td><td>No mips; 2× art resolution; 4px atlas padding</td></tr>
+            <tr><td>Terrain splatmap</td><td>4096×4096 per chunk</td><td>Streamed per zone</td><td>Channels must sum to 1.0</td></tr>
+            <tr><td>Total texture memory</td><td>—</td><td>4096MB / 2048MB / 1024MB</td><td>PC High / PC Med / Console</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Shader Complexity &amp; Streaming Distance Rules</div>
+      <div class="card-body">
+        <ul>
+          <li><strong>Shader keyword permutations:</strong> Max 4 per shader; all variants pre-compiled — no runtime shader compilation.</li>
+          <li><strong>Shader variant stripping:</strong> Unused variants stripped at build time; shader warm-up list maintained by tech art and reviewed before each platform submission.</li>
+          <li><strong>Zone streaming:</strong> Zones stream in 30m ahead of player; stream-out begins 50m past boundary. No pop artifacts visible at 30m.</li>
+          <li><strong>Mip bias:</strong> PC High 0 / PC Med +1 / Console +2.</li>
+          <li><strong>LOD bias:</strong> Console/Mobile applies −1 LOD bias (shorter transition distances). PC High applies +0.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ SECTION 20 -->
+    <div class="section-header">
+      <span class="section-icon">🚫</span>
+      <h2>20. Prohibited Shader Practices</h2>
+    </div>
+
+    <div class="warn-box" style="border-left-color:#C62828;background:rgba(198,40,40,.06)">
+      <strong style="color:#C62828;font-size:1.05rem">PROHIBITED SHADER PRACTICES — Zero Tolerance</strong>
+      <p style="margin:.5rem 0 .25rem">All nine items below are hard violations. Any occurrence must be fixed before the asset can be integrated or shipped. Deviations require written approval from the Rendering Director.</p>
+    </div>
+
+    <div class="card" style="border-left:4px solid #C62828">
+      <div class="card-body">
+        <ol style="padding-left:1.25rem;line-height:2">
+          <li><strong>No screen-space reflections (SSR) on foliage</strong> — SSR on alpha-clipped geometry produces severe artifact bands. Foliage has zero reflections.</li>
+          <li><strong>No subsurface scattering (SSS) on non-organic surfaces</strong> — SSS reserved for primary character skin approximation only. Never on wood, stone, water, or fabric.</li>
+          <li><strong>No physically-based sky (IBL from raw HDRI) as sole ambient source</strong> — IBL must always be color-graded to the golden-hour default. Raw HDRI capture from reference photos is never used directly.</li>
+          <li><strong>No runtime shader compilation</strong> — All variants must be pre-compiled and stripped at build time. No dynamic shader keyword toggling at runtime in any shipped build.</li>
+          <li><strong>No normal maps on VFX particles</strong> — VFX particles use flat color + emissive only. Normal maps on particles waste memory and create visual noise.</li>
+          <li><strong>No anisotropic specular on character skin</strong> — Skin uses single-dot Blinn-Phong only. Anisotropic specular is reserved for hair/mane (MV_Hair_Anisotropic shader exclusively).</li>
+          <li><strong>No unbounded emissive on environment architecture</strong> — Lanterns, glowing fungi, and architectural emissives must use a masked emissive with HDR max 2.0. Unbounded emission causes bloom overload.</li>
+          <li><strong>No shadow casting or receiving from particle VFX</strong> — All VFX particles are excluded from shadow casting and receiving in every rendering context on every platform.</li>
+          <li><strong>No pure black (<code>#000000</code>) or pure white (<code>#FFFFFF</code>) in any shader output</strong> — Albedo floors at 15/255; ceilings at 240/255. Outline darkest value is <code>#1A0F00</code>. All shadow tints must be warm-colored, never neutral black.</li>
+        </ol>
       </div>
     </div>
 

@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Systems & Economy — Mooseville Adventures</title>
+<title>Systems &amp; Economy — Mooseville Adventures</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .knack-tree { background:var(--white);border:1px solid var(--brown-pale);border-top:3px solid var(--emerald);border-radius:var(--radius);padding:1rem;margin-bottom:.75rem }
+  .knack-tree-name { font-family:'Playfair Display',Georgia,serif;font-size:1rem;font-weight:700;color:var(--emerald-dark);margin-bottom:.75rem }
+  .knack-tier { margin-bottom:.6rem }
+  .knack-tier-label { font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.25rem }
+  .knack-ability { display:inline-block;background:var(--cream-dark);border-radius:10px;padding:.15rem .55rem;font-size:.75rem;margin:.1rem .15rem .1rem 0 }
+  .phase-card { background:var(--white);border:1px solid var(--brown-pale);border-left:4px solid var(--gold);border-radius:var(--radius);padding:1rem;margin-bottom:.75rem }
+  .phase-name { font-family:'Playfair Display',Georgia,serif;font-size:.95rem;font-weight:700;color:var(--gold-dark) }
+  .phase-duration { font-size:.75rem;color:var(--text-muted);margin-bottom:.5rem }
+  .crop-table th { background:var(--emerald-darkest);color:white;padding:.45rem .7rem;text-align:left }
+  .crop-table td { padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale);font-size:.82rem }
+  .crop-table tr:nth-child(even) td { background:var(--cream) }
+</style>
 </head>
 <body>
 
@@ -17,11 +30,11 @@
   <div class="nav-group">
     <div class="nav-group-label">Story</div>
     <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
-    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters & NPCs</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters &amp; NPCs</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">World</div>
-    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes & Maps</a>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes &amp; Maps</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Art Direction</div>
@@ -30,7 +43,7 @@
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Game Design</div>
-    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems & Economy</a>
+    <a href="design.html" class="nav-link active"><span class="nav-icon">⚙️</span> Systems &amp; Economy</a>
     <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
   </div>
   <div class="nav-group">
@@ -49,376 +62,226 @@
 </nav>
 
 <main class="main">
-
   <div class="page-hero hero-design">
     <div class="hero-label">Game Design</div>
-    <h1>Systems & Economy</h1>
-    <p class="hero-desc">
-      Core gameplay loop, the Mucks economy, resource production chains, construction
-      systems, quest campaigns, progression framework, and the business district design.
-    </p>
+    <h1>Systems &amp; Economy</h1>
+    <p class="hero-desc">Complete Game Design Document — design pillars, all gameplay systems, economy, knack trees, quest framework, UI/UX, roadmap, and glossary.</p>
   </div>
-
   <div class="content">
 
-    <!-- Core gameplay loop -->
-    <div class="section-header">
-      <span class="section-icon">🔄</span>
-      <h2>Core Gameplay Loop</h2>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;padding:1rem 0;font-weight:700;font-size:.9rem;font-family:'Playfair Display',Georgia,serif">
-          <div style="background:var(--emerald-dark);color:white;padding:.6rem 1.1rem;border-radius:8px">🧭 Explore</div>
-          <div style="color:var(--text-muted);font-size:1.2rem">→</div>
-          <div style="background:var(--emerald-dark);color:white;padding:.6rem 1.1rem;border-radius:8px">⛏️ Gather Resources</div>
-          <div style="color:var(--text-muted);font-size:1.2rem">→</div>
-          <div style="background:var(--emerald-dark);color:white;padding:.6rem 1.1rem;border-radius:8px">🌱 Farm & Craft</div>
-          <div style="color:var(--text-muted);font-size:1.2rem">→</div>
-          <div style="background:var(--emerald-dark);color:white;padding:.6rem 1.1rem;border-radius:8px">🏗️ Build & Upgrade</div>
-          <div style="color:var(--text-muted);font-size:1.2rem">→</div>
-          <div style="background:var(--gold);color:var(--brown-darkest);padding:.6rem 1.1rem;border-radius:8px">📈 Town Grows</div>
-          <div style="color:var(--text-muted);font-size:1.2rem">↺</div>
-        </div>
-        <div class="info-box">
-          <strong>Design intent:</strong> Explorer, farmer, and city-builder are not separate modes — they are
-          one interconnected loop. Solo effort can keep the town alive, but community
-          infrastructure is required to grow it efficiently.
-        </div>
-      </div>
-    </div>
-
-    <!-- Economy -->
-    <div class="section-header">
-      <span class="section-icon">🪙</span>
-      <h2>The Mucks Economy</h2>
-    </div>
-
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-header"><span>💰</span><h3>Currency: Mucks</h3></div>
-        <div class="card-body">
-          <p>Carved wooden coins with antler stamps and seasonal markings. The concept was learned
-          from the Sacred Documents and redesigned in Moosian form.</p>
-          <div class="biome-section-title">Earn Sources</div>
-          <ul class="styled-list">
-            <li>City work orders and contracts</li>
-            <li>Main and side quest rewards</li>
-            <li>Festival event prizes</li>
-            <li>Selling crafted specialty goods</li>
-            <li>Exploration deliveries and mapped route reports</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span>🛒</span><h3>Spend Sources</h3></div>
-        <div class="card-body">
-          <div class="biome-section-title">Purchasable (Non-Essential)</div>
-          <ul class="styled-list">
-            <li>Clothing and style sets</li>
-            <li>Home upgrades and décor</li>
-            <li>Cosmetic station services</li>
-            <li>Optional efficiency tools</li>
-            <li>Specialty crafted foods and celebration goods</li>
-          </ul>
-          <div class="warn-box" style="margin-top:.75rem">
-            <strong>Free Forever:</strong> Moose Water · Basic food staples<br>
-            No citizen loses identity or health due to poverty.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Resource chains -->
-    <div class="section-header">
-      <span class="section-icon">⛓️</span>
-      <h2>Resource Production Chains</h2>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Family</th>
-            <th>Raw Resource</th>
-            <th>Refined Resource</th>
-            <th>Advanced Resource</th>
-            <th>Primary Use</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>Timber</strong></td><td>Trees</td><td>Logs</td><td>Boards, Beams</td><td>Homes, storefronts, bridges</td></tr>
-          <tr><td><strong>Masonry</strong></td><td>Rock</td><td>Stone Blocks</td><td>Cut Stone, Pavers</td><td>Foundations, roads, walls</td></tr>
-          <tr><td><strong>Ceramics</strong></td><td>Clay</td><td>Bricks</td><td>Glazed Brick, Drain Pipe</td><td>Kilns, chimneys, sanitation</td></tr>
-          <tr><td><strong>Metal</strong></td><td>Iron Ore</td><td>Iron Bars</td><td>Nails, Hinges, Tools</td><td>Structural fasteners, tools</td></tr>
-          <tr><td><strong>Fuel</strong></td><td>Deadwood, Peat</td><td>Charcoal</td><td>Coke Blend</td><td>Smelting, high-heat crafting</td></tr>
-          <tr><td><strong>Fiber</strong></td><td>Flax, Reeds</td><td>Thread, Rope</td><td>Heavy Cloth, Sailcloth</td><td>Clothing, nets, utility wraps</td></tr>
-          <tr><td><strong>Resin</strong></td><td>Pine Sap</td><td>Pitch</td><td>Sealant, Waterproof Coating</td><td>Roofs, water casks, bridges</td></tr>
-          <tr><td><strong>Glass</strong></td><td>Silica Sand</td><td>Glass Panes</td><td>Vials, Lenses</td><td>Moose Water handling, optics</td></tr>
-          <tr><td><strong>Lime</strong></td><td>Limestone</td><td>Quicklime</td><td>Mortar, Plaster</td><td>Masonry bonding, interiors</td></tr>
-          <tr><td><strong>Food Craft</strong></td><td>Grain, Fruit, Dairy</td><td>Flour, Jam, Curd</td><td>Pies, Cakes, Festival Trays</td><td>Trade goods and event rewards</td></tr>
-        </tbody>
+    <!-- SECTION 1: GAME OVERVIEW -->
+    <h2 class="section-title">1. Game Overview &amp; Vision</h2>
+    <div class="info-card">
+      <p><strong>Elevator Pitch:</strong> Mooseville Adventures is a hybrid cozy-adventure game set 22 years after a magical meteor strike awakened a valley of moose into a fully realized civilization. Playing as a grown child of the town's legendary founders — Melvin and Martha — you tend your home, forge bonds with your community, and venture into an ancient and changing wilderness to unravel the mysteries the Starfall left behind. A game about belonging, discovery, and carrying your family's legacy forward.</p>
+      <table class="data-table" style="margin-top:.75rem">
+        <tr><th>Genre</th><td>Hybrid Cozy Life Sim + Open-World Adventure</td></tr>
+        <tr><th>Core Fantasy</th><td>"I am a founding family's child — I know this town, I love this town, and I'm about to discover what lies beyond it."</td></tr>
+        <tr><th>Platform</th><td>PC (Windows) — Initial; macOS, Switch, PS5 TBD</td></tr>
+        <tr><th>Engine</th><td>Unreal Engine 5</td></tr>
+        <tr><th>Rating</th><td>E10+ (Everyone 10+) — Family / All Ages</td></tr>
+        <tr><th>Comparables</th><td>Stardew Valley, A Short Hike, Spiritfarer, Tchia, Cozy Grove</td></tr>
       </table>
     </div>
 
-    <h3 class="subsection-header">Baseline Conversion Recipes</h3>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-body">
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Input</th><th>Output</th><th>Method</th></tr></thead>
-              <tbody>
-                <tr><td>1 Tree</td><td>4 Logs</td><td>Cutting</td></tr>
-                <tr><td>1 Log</td><td>2 Boards</td><td>Hand chopping (slow)</td></tr>
-                <tr><td>1 Log</td><td>4 Boards</td><td>Sawmill Line I (fast)</td></tr>
-                <tr><td>3 Rock</td><td>2 Stone Blocks</td><td>Shaping bench</td></tr>
-                <tr><td>3 Clay</td><td>2 Bricks</td><td>Kiln firing</td></tr>
-                <tr><td>4 Iron Ore + 1 Charcoal</td><td>2 Iron Bars</td><td>Smelter</td></tr>
-                <tr><td>1 Iron Bar</td><td>8 Nails</td><td>Forge</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Input</th><th>Output</th><th>Method</th></tr></thead>
-              <tbody>
-                <tr><td>3 Flax</td><td>2 Thread</td><td>Fiber processing</td></tr>
-                <tr><td>2 Thread</td><td>1 Cloth Bolt</td><td>Loom</td></tr>
-                <tr><td>2 Pine Sap</td><td>1 Pitch</td><td>Resin press</td></tr>
-                <tr><td>2 Sand + 1 Charcoal</td><td>1 Glass Pane</td><td>Glass bench</td></tr>
-                <tr><td>1 Glass Pane</td><td>2 Vials</td><td>Vial bench</td></tr>
-                <tr><td>2 Limestone</td><td>1 Quicklime</td><td>Lime kiln</td></tr>
-                <tr><td>1 Quicklime + 1 Sand + 1 Water</td><td>2 Mortar</td><td>Mortar mixing</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+    <!-- SECTION 2: DESIGN PILLARS -->
+    <h2 class="section-title">2. Five Design Pillars</h2>
+    <div class="callout" style="margin-bottom:1rem"><strong>The Mooseville Promise:</strong> Every hour should feel like a warm autumn afternoon — productive, peaceful, and full of small moments worth remembering. Challenge comes from curiosity, not combat. Progress comes from relationships, not grinding.</div>
+    <div class="pillar-card"><h3>Pillar 1 — Roots and Routes</h3><p>The player has deep roots in Mooseville (family legacy, known neighbors, inherited home) AND open routes into a wilderness that has never been fully mapped. Both matter equally. Every play session must offer both a grounding village activity and an invitation to explore.</p></div>
+    <div class="pillar-card"><h3>Pillar 2 — Every Moosian Has a Story</h3><p>NPCs are not quest dispensers. Every named Moosian has a life that continues whether or not the player interacts with them. Relationships deepen through repeated presence, small gifts, shared meals, and remembered conversations — not dialogue trees.</p></div>
+    <div class="pillar-card"><h3>Pillar 3 — The Valley Is Still Changing</h3><p>The Starfall happened 22 years ago, but the valley is not finished. New awakened moose still arrive. The sealed eastern pass still groans. The Green Spring still glows in ways Mooseville science cannot explain. The player lives on a frontier of understanding.</p></div>
+    <div class="pillar-card"><h3>Pillar 4 — Cozy Has Consequence</h3><p>Village activities — farming, crafting, cooking, gifting — have real mechanical weight. What the player grows feeds real NPC needs. What they craft unlocks real expedition capabilities. The cozy loop and the adventure loop feed each other; neither is a side dish.</p></div>
+    <div class="pillar-card"><h3>Pillar 5 — Inherited Wonder</h3><p>Melvin and Martha built something extraordinary. Playing as their child means inheriting that wonder — but also questioning it and ultimately adding to it. The player's own name goes into Mooseville's history by the end. The ending is not a triumph over a villain but a contribution to a legacy.</p></div>
+
+    <!-- SECTION 3: THREE-ACT STORY -->
+    <h2 class="section-title">3. Three-Act Story Structure</h2>
+    <div class="phase-card">
+      <div class="phase-name">Act 1 — "Learning the Town"</div>
+      <div class="phase-duration">Hours 1–8 approx.</div>
+      <p>The player re-integrates into Mooseville life. Mystery threads are introduced as curiosities stumbled across naturally, not as missions. <strong>Key beats:</strong> Restore the homestead; meet the current NPC generation; find the private journal page tucked inside the homestead wall; discover the Enhancement Works are weakening. <strong>Climax:</strong> A tremor reopens a crack toward the sealed eastern pass. Melvin says nothing — but the player catches him looking northeast for a very long time.</p>
+    </div>
+    <div class="phase-card">
+      <div class="phase-name">Act 2 — "The Valley Opens"</div>
+      <div class="phase-duration">Hours 8–25 approx.</div>
+      <p>The widest act. Player systematically explores all wilderness biomes, deepens relationships, and pieces together the three mystery threads. <strong>Key beats:</strong> Restore the Enhancement Works via a new High Shelf sky-stone deposit; uncover human remnant artifacts suggesting the valley was intentionally surveyed; meet new-arrival moose who report a second sealed pass glowing on the far side. <strong>Climax:</strong> The sealed eastern pass cracks open enough to enter for the first time — the game's most visually iconic moment.</p>
+    </div>
+    <div class="phase-card">
+      <div class="phase-name">Act 3 — "What The Star Left"</div>
+      <div class="phase-duration">Hours 25–40+ approx.</div>
+      <p>The player crosses the eastern pass and confronts the full truth of Mooseville's origin. All three mystery threads resolve. <strong>Key beats:</strong> Discover the full sky-stone origin network and evidence of intentional (not natural) origin; face the central question — does it matter where the awakening came from, if what grew from it was real? <strong>Final Choice (all warm, all valid):</strong> Keep the pass open and invite connection; share the Starfall origin with all Moosians; or protect the valley's isolation. <strong>Final scene:</strong> The player character's name is inscribed in the Archive Hall alongside the First Circle.</p>
     </div>
 
-    <!-- Production throughput -->
-    <div class="section-header">
-      <span class="section-icon">🏭</span>
-      <h2>Production Throughput Model</h2>
-    </div>
-
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-header"><span>🤲</span><h3>Manual Production</h3></div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li>Always available — no unlock required</li>
-            <li>Low throughput, stamina-heavy</li>
-            <li>Solo effort can keep the town alive</li>
-          </ul>
-          <div class="info-box" style="margin-top:.75rem">Design intent: survival through effort</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span>⚙️</span><h3>Industrial Production</h3></div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li>Requires business unlock + staffed role</li>
-            <li>High throughput, maintenance cost in mucks and fuel</li>
-            <li>Community infrastructure needed to grow efficiently</li>
-          </ul>
-          <div class="info-box" style="margin-top:.75rem">Design intent: expansion through infrastructure</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Town progression -->
-    <div class="section-header">
-      <span class="section-icon">📈</span>
-      <h2>Town Progression & Unlock Schedule</h2>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Town Level</th>
-            <th>Unlock</th>
-            <th>Prerequisite Quest</th>
-            <th>First Build Cost</th>
-            <th>First Upgrade Effect</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>Green Vial Commons</td><td>Campaign II complete</td><td>20 Logs, 10 Boards, 8 Stone, 4 Iron, 16 Nails</td><td>Water distribution radius +25%</td></tr>
-          <tr><td>1</td><td>Antler Almanac Co-op</td><td>Tutorial complete</td><td>24 Logs, 12 Boards, 10 Stone, 6 Clay, 12 Nails</td><td>Crop forecast accuracy +10%</td></tr>
-          <tr><td>2</td><td>Rack and Rafter Works</td><td>Splitbend Builder's Fair intro</td><td>35 Logs, 24 Boards, 16 Stone, 10 Iron, 30 Nails</td><td>Unlock Sawmill Line I (Boards in bulk)</td></tr>
-          <tr><td>2</td><td>Muck and Measure Market Hall</td><td>First trade contract</td><td>28 Logs, 16 Boards, 14 Stone, 8 Brick, 20 Nails</td><td>Vendor slot +1</td></tr>
-          <tr><td>3</td><td>Carved Coin Lodge</td><td>Earn 500 total mucks</td><td>22 Logs, 14 Boards, 18 Stone, 12 Iron, 28 Nails</td><td>Work-order payout +8%</td></tr>
-          <tr><td>3</td><td>Tine and Twine Outfitters</td><td>Complete 3 exploration deliveries</td><td>26 Logs, 18 Boards, 14 Stone, 8 Iron, 24 Nails</td><td>Tool durability +10%</td></tr>
-          <tr><td>4</td><td>Hide and Hem Clothhouse</td><td>Integrate 1 new citizen</td><td>20 Logs, 14 Boards, 12 Stone, 10 Clay, 18 Nails</td><td>Role outfit recipes +4</td></tr>
-          <tr><td>4</td><td>Pinecone Press Archive</td><td>Archive Night Vigil complete</td><td>18 Logs, 12 Boards, 16 Stone, 12 Brick, 16 Nails</td><td>Map reveal radius +12%</td></tr>
-          <tr><td>5</td><td>Velvet Tine Bakehouse</td><td>Build Communal Oven</td><td>24 Logs, 14 Boards, 10 Stone, 14 Brick, 18 Nails</td><td>Specialty food sell value +12%</td></tr>
-          <tr><td>5</td><td>Hoof n Buff Shine Stand</td><td>Mane and Antler Week complete</td><td>14 Logs, 10 Boards, 8 Stone, 4 Iron, 12 Nails</td><td>Social confidence buff duration +15%</td></tr>
-          <tr><td>6</td><td>Tine and Trim Mane House</td><td>Reach Town Trust Rank 2</td><td>18 Logs, 12 Boards, 10 Stone, 6 Iron, 14 Nails</td><td>Reputation gain from style events +15%</td></tr>
-          <tr><td>6</td><td>Lick and Leaf Remedies</td><td>Restore 6 regressed Moosians</td><td>16 Logs, 10 Boards, 10 Stone, 10 Clay, 12 Nails</td><td>Recovery item potency +10%</td></tr>
-        </tbody>
+    <!-- SECTION 4: PLAYER CHARACTER -->
+    <h2 class="section-title">4. Player Character</h2>
+    <div class="info-card">
+      <p>The player character is canonically a child of Melvin and Martha, approximately 22 years old at game start. Returning after a short period in a far-valley settlement, they inherit the original homestead near the Green Spring — a fixer-upper full of memories and meaning.</p>
+      <table class="data-table" style="margin-top:.75rem">
+        <tr><th>Name</th><td>Free text entry — confirmed by Martha saying it aloud in the opening sequence</td></tr>
+        <tr><th>Fur Color</th><td>5 options: dark brown, warm auburn, sandy blonde, grey-black, classic brown</td></tr>
+        <tr><th>Antler Style</th><td>3 options per gender expression (broad palmated, narrow branched, asymmetric)</td></tr>
+        <tr><th>Starter Clothing</th><td>3 options including Melvin's signature overalls style; all replaceable through crafting</td></tr>
+        <tr><th>Gender Expression</th><td>Open — no mechanical difference; NPCs use chosen name only, no pronoun selection required</td></tr>
       </table>
+      <p style="margin-top:.6rem"><em>Opening line (fully voiced, spoken once by Melvin):</em> "Everything we built, we built because we didn't look away. Don't look away either."</p>
     </div>
 
-    <!-- Housing unlocks -->
-    <div class="section-header">
-      <span class="section-icon">🏠</span>
-      <h2>Home & District Unlocks</h2>
+    <!-- SECTION 5: CORE GAMEPLAY LOOP -->
+    <h2 class="section-title">5. Core Gameplay Loop</h2>
+    <h3 class="subsection-title">Daily Loop (Cozy Spine)</h3>
+    <table class="data-table">
+      <tr><th>Beat</th><th>Activities</th><th>Approx. Time</th></tr>
+      <tr><td>Morning Routine</td><td>Water crops, check community board, feed animals, collect Moose Water portion</td><td>2–5 min</td></tr>
+      <tr><td>Main Activity</td><td>1–2 primary activities: farm, craft, explore, socialize, quest</td><td>8–15 min</td></tr>
+      <tr><td>Social Time</td><td>Visit NPCs, share a meal, attend an event, deliver a gift</td><td>3–8 min</td></tr>
+      <tr><td>Evening Wind-Down</td><td>Optional fishing, tend homestead, review personal journal</td><td>2–5 min</td></tr>
+      <tr><td>Night Option</td><td>Visit Green Spring, stargazing constellation quests (entirely optional)</td><td>0–8 min</td></tr>
+    </table>
+    <h3 class="subsection-title" style="margin-top:.75rem">Weekly Loop (Adventure Spine)</h3>
+    <ul class="feature-list">
+      <li>1–2 Community Events (festivals, seasonal harvests, public town votes)</li>
+      <li>1 Main Quest Beat advancing one or more of the three mystery threads</li>
+      <li>2–4 NPC Side Quests available and rotating (most patient, some time-sensitive)</li>
+      <li>1 Wilderness Discovery (new area, surfacing artifact, or new arrival moose encounter)</li>
+    </ul>
+    <div class="callout" style="margin-top:.5rem"><strong>No Fail State:</strong> The player cannot die, go broke (basic food and water always free), or permanently miss content. Quests wait patiently. NPCs forgive absence. Time-limited events offer alternative completion paths.</div>
+
+    <!-- SECTION 6: FARMING SYSTEM -->
+    <h2 class="section-title">6. Farming System</h2>
+    <p>Farm plot starts at 8 crop slots; expands to 32 across 4 expansions. Applying Moose Water (1 portion per slot) accelerates growth 20% and produces Enhanced Variants — the most powerful gifting items in the game. Optional weeding (neglected plots -30% yield), fertilizer (+50% yield per cycle).</p>
+    <table class="data-table crop-table" style="margin-top:.5rem;width:100%">
+      <thead><tr><th>Crop</th><th>Season</th><th>Days</th><th>Moose Water Variant</th><th>Primary Uses</th></tr></thead>
+      <tbody>
+        <tr><td>Fernroot</td><td>Spring</td><td>4</td><td>Glowing Fernroot</td><td>Cooking, gifting, NPC quests</td></tr>
+        <tr><td>Goldenwheat</td><td>Summer</td><td>6</td><td>Starwheat</td><td>Baking, muck income, community food supply</td></tr>
+        <tr><td>Mossberry</td><td>Autumn</td><td>3</td><td>Deepberry</td><td>Jam recipes, NPC quests, gifting</td></tr>
+        <tr><td>Snowbloom</td><td>Winter</td><td>8</td><td>Crystalbloom</td><td>Rare gifts, lore items, Act 3 recipe</td></tr>
+        <tr><td>Brackfern</td><td>Spring / Summer</td><td>5</td><td>None</td><td>Crafting materials, weaving</td></tr>
+        <tr><td>Cedarpine Nut</td><td>Autumn</td><td>10</td><td>None</td><td>Cooking, oil pressing, Chester Lang quests</td></tr>
+        <tr><td>Marshgrass</td><td>Spring</td><td>3</td><td>Shimmergrass</td><td>Animal feed, basket crafting</td></tr>
+        <tr><td>Redcap Mushroom</td><td>Autumn / Winter</td><td>4</td><td>Glowcap</td><td>Cooking, medicine items, lore use</td></tr>
+        <tr><td>Willowseed</td><td>Spring</td><td>7</td><td>Emberseed</td><td>Rare recipes, Muckmarket Row premium sale</td></tr>
+        <tr><td>Ironbark Root</td><td>Autumn</td><td>9</td><td>None</td><td>Crafting (tool reinforcement, construction)</td></tr>
+        <tr><td>Sweetcord</td><td>Summer</td><td>4</td><td>Goldencord</td><td>Cooking, Community Event ingredients</td></tr>
+        <tr><td>Coldroot (Fern Vale's Project)</td><td>Any (if unlocked)</td><td>6</td><td>Frostroot</td><td>Winter food security; unlocked via Fern Vale's story arc</td></tr>
+      </tbody>
+    </table>
+
+    <!-- SECTION 7: FISHING SYSTEM -->
+    <h2 class="section-title">7. Fishing System</h2>
+    <p>Four distinct zones with unique fish populations and musical ambience. Rhythm-based minigame: timing bar, tap to set the hook, hold within a comfort zone to reel. Rare fish require tighter timing. Assisted mode (wider windows, slower indicator) available in settings at any time.</p>
+    <table class="data-table" style="margin-top:.5rem">
+      <tr><th>Zone</th><th>Location</th><th>Species</th><th>Rare Species</th><th>Access</th></tr>
+      <tr><td>Town Creek</td><td>Heartfire District</td><td>8</td><td>Golden Darter (dawn only)</td><td>Open from start</td></tr>
+      <tr><td>Crystal Lakeshore</td><td>Northwest biome</td><td>8</td><td>Shimmertrout (night); Skyfish (Moose Water zone)</td><td>Trail Knack Tier 1</td></tr>
+      <tr><td>Marsh Shallows</td><td>Southern wetland</td><td>5</td><td>Mudwhisker (autumn); Fern Eel (rainy days)</td><td>Open from start</td></tr>
+      <tr><td>High Shelf Melt Pool</td><td>Mountain plateau</td><td>3</td><td>Star Perch (Spring Knack Tier 1 to detect)</td><td>Trail Knack Tier 2</td></tr>
+    </table>
+    <p style="margin-top:.5rem">Fish uses: cooking recipes (stamina/Knack bonuses), gifting (especially Winslow lineage), two main quests (Act 1 community food crisis; Act 2 Crystal Lakeshore shard discovery). Winter fishing at Town Creek requires a crafted ice-hole tool from Chester Lang's Workshop.</p>
+
+    <!-- SECTION 8: CRAFTING SYSTEM -->
+    <h2 class="section-title">8. Crafting System</h2>
+    <p>Data-table driven; recipe unlocks tracked via save flags; Knack tier checks gate advanced recipes. <strong>Home Crafting Station</strong> (Tier 1–3 upgradeable) covers tools through basic construction. <strong>Chester Lang's Repair Yard</strong> (Closeness Level 3+ required) unlocks master tools, expedition gear, and lore item reconstruction.</p>
+    <table class="data-table" style="margin-top:.5rem">
+      <tr><th>Category</th><th>Examples</th><th>Primary Use</th></tr>
+      <tr><td>Tools</td><td>Watering can upgrades, fishing rod tiers, ice-hole drill, foraging basket</td><td>Improve farming efficiency, unlock fishing zones</td></tr>
+      <tr><td>Expedition Gear</td><td>Exploration backpack, stamina wrap, climbing grip pads</td><td>Trail Knack unlocks; biome access; stamina management</td></tr>
+      <tr><td>Home Decor</td><td>Carved lanterns, woven rugs, antler shelving, fireside bench</td><td>Homestead personalization; NPC visit reactions</td></tr>
+      <tr><td>Gifts</td><td>Carved token, pressed flower frame, crafted cookbook, sky-stone pendant</td><td>Closeness Level increases; relationship milestones</td></tr>
+      <tr><td>Food / Cooked Meals</td><td>Fernroot stew, Starwheat bread, Deepberry jam, cedar nut oil cake</td><td>Stamina restoration; Knack bonuses; most powerful gifts</td></tr>
+      <tr><td>Construction Materials</td><td>Timber planks, stone block, river clay brick, ironbark beam</td><td>Home expansion; district projects; Reed Harlow quests</td></tr>
+      <tr><td>Lore Items</td><td>Reconstructed Sacred Document pages, translated survey markers, sky-stone display cases</td><td>Archive Hall progress; Clara Finch quests; Act 3 unlocks</td></tr>
+    </table>
+
+    <!-- SECTION 9: COOKING SYSTEM -->
+    <h2 class="section-title">9. Cooking System</h2>
+    <p>The most socially powerful system in the game. A well-made cooked meal is the strongest possible gift — more effective at deepening NPC Closeness than any purchased item. Cooked meals also provide the best in-game stamina and Knack bonuses.</p>
+    <ul class="feature-list">
+      <li>Personal cooking station at the homestead (upgradeable alongside the craft station)</li>
+      <li>Public cooking at Marjorie Bell lineage community events (mini-challenges)</li>
+      <li>40+ recipes unlockable through exploration, NPC gifts, Sacred Document translations, seasonal discovery</li>
+      <li>Seasonal recipes unlock festival participation — some festivals require a specific dish to participate fully</li>
+      <li><strong>Meal benefits:</strong> best stamina restoration in game; temporary Knack bonuses (1 in-game day duration); Closeness boost when gifted to NPCs</li>
+    </ul>
+
+    <!-- SECTION 10: HOMESTEAD SYSTEM -->
+    <h2 class="section-title">10. Homestead System</h2>
+    <p>The inherited homestead begins in warm disrepair and transforms into the player's own space over the course of the game. NPCs visit and react to decor — each named NPC has 3–5 unique decor reactions relevant to their character. Place and rotate furniture on a grid; outdoor space includes the personal garden, a small patio, and access to the Green Spring path.</p>
+    <table class="data-table" style="margin-top:.5rem">
+      <tr><th>Expansion</th><th>Unlocks</th><th>Requirements</th></tr>
+      <tr><td>Bedroom Wing</td><td>Additional rest options, guest bed (NPC sleepover events), wardrobe expansion</td><td>Timber planks x20, river clay brick x10, Reed Harlow Closeness Level 2</td></tr>
+      <tr><td>Personal Workshop</td><td>Craft Station Tier 3, dedicated crafting room, tool wall display</td><td>Ironbark beam x8, stone block x15, Chester Lang quest completion</td></tr>
+      <tr><td>Greenhouse</td><td>Any-season crop slots (4 slots), Moose Water irrigation tank, advanced seed storage</td><td>Timber planks x30, river clay brick x20, Fern Vale Closeness Level 3</td></tr>
+    </table>
+
+    <!-- SECTION 11: SOCIAL & RELATIONSHIP SYSTEM -->
+    <h2 class="section-title">11. Social &amp; Relationship System</h2>
+    <p>Relationships develop through accumulated presence and remembered interactions — never through a dialogue menu or gift-spam loop. Closeness Level is never displayed numerically; it manifests in how NPCs speak to the player, what they share, and where they are willing to go.</p>
+    <table class="data-table" style="margin-top:.5rem">
+      <tr><th>Level</th><th>Player Experience</th><th>Gameplay Unlock</th></tr>
+      <tr><td>1 — Familiar</td><td>NPC knows player's name and parentage; warm but general dialogue</td><td>Basic quests available; NPC location NOT shown on map</td></tr>
+      <tr><td>2 — Acquaintance</td><td>NPC remembers one past interaction; greets with specificity</td><td>NPC location shown on map; first personal detail shared</td></tr>
+      <tr><td>3 — Friend</td><td>NPC initiates conversation; mentions player in dialogue with others</td><td>Deeper quests; Chester Lang's advanced crafting unlocked</td></tr>
+      <tr><td>4 — Close Friend</td><td>NPC visits homestead; shares personal history; more candid in dialogue</td><td>Home expansion collaborations; NPC shares exclusive lore</td></tr>
+      <tr><td>5 — Trusted</td><td>NPC will accompany player on wilderness visits; offers most personal story arc</td><td>NPC companion during exploration (passive, flavor-only); deepest quests</td></tr>
+      <tr><td>6 — Legacy Bond</td><td>Unique "Legacy Moment" story beat triggered — one-time, permanent, emotionally significant</td><td>Legacy Moment recorded in Archive Hall; unique cosmetic or lore unlock</td></tr>
+    </table>
+    <p style="margin-top:.6rem"><strong>Remembered Conversations:</strong> Up to 5 conversation tags logged per NPC. NPCs reference these tags in future dialogue naturally and unpromptedly — a fishing trip, a crop failure, a discovery in the woods. More remembered conversations produce noticeably warmer, more specific NPC speech.</p>
+    <p><strong>Closeness Growth:</strong> Gifting (cooked meals highest value), consistent presence at NPC locations, quest completion, event attendance, engaging with topics the NPC cares about. Missing events is never penalized — NPCs mention absence warmly with no Closeness reduction.</p>
+
+    <!-- SECTION 12: KNACK SYSTEM -->
+    <h2 class="section-title">12. Knack System</h2>
+    <p>Five Knack Trees, each tied to a design pillar. Progression is entirely emergent — driven by what the player actually does, not by spending XP. Each tree has 5 tiers with 3 abilities each (75 total across all trees). Players are not expected to fill all trees in one playthrough. Post-launch New Game+ allows continued development beyond the main story.</p>
+
+    <div class="knack-tree">
+      <div class="knack-tree-name">Harvest Knack — Pillar: Cozy Has Consequence</div>
+      <p style="font-size:.8rem;margin-bottom:.6rem">Focus: Farming, foraging, fishing</p>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 1</div><span class="knack-ability">+1 Crop Per Harvest</span><span class="knack-ability">Foraging Basket Slot</span><span class="knack-ability">Fishing Timing Assist</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 2</div><span class="knack-ability">Weed Resistance</span><span class="knack-ability">Rare Fish Sense (passive)</span><span class="knack-ability">Fertilizer Yield +25%</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 3</div><span class="knack-ability">Rare Fish Sense (active)</span><span class="knack-ability">Double Forage Chance</span><span class="knack-ability">Crop Quality Upgrade</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 4</div><span class="knack-ability">Enhanced Variant Chance +30%</span><span class="knack-ability">Fish Sell Value +20%</span><span class="knack-ability">Plot Expansion Discount</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 5</div><span class="knack-ability">Season Extension</span><span class="knack-ability">Master Harvest (2x yield)</span><span class="knack-ability">Full Foraging Map Reveal</span></div>
     </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Town Level</th><th>Home Type</th><th>Build Cost (per unit)</th><th>Unlock Effect</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>Starter Burrow Home</td><td>12 Logs, 8 Boards, 6 Stone, 10 Nails</td><td>+1 housing slot</td></tr>
-          <tr><td>2</td><td>Shared Loft Home</td><td>14 Logs, 10 Boards, 8 Stone, 12 Nails</td><td>+2 housing slots</td></tr>
-          <tr><td>3</td><td>Workshop Cottage</td><td>16 Logs, 12 Boards, 10 Stone, 6 Iron, 14 Nails</td><td>Enables role bonus at home</td></tr>
-          <tr><td>4</td><td>Family Hearth House</td><td>18 Logs, 14 Boards, 12 Stone, 8 Brick, 16 Nails</td><td>+3 housing slots, morale +3</td></tr>
-          <tr><td>5</td><td>District Plot Alpha</td><td>30 Logs, 20 Boards, 18 Stone, 12 Brick, 10 Iron, 30 Nails</td><td>Unlocks second neighborhood lane</td></tr>
-          <tr><td>6</td><td>District Plot Beta</td><td>34 Logs, 24 Boards, 20 Stone, 16 Brick, 12 Iron, 36 Nails</td><td>Unlocks civic expansion permits</td></tr>
-        </tbody>
-      </table>
+    <div class="knack-tree">
+      <div class="knack-tree-name">Craft Knack — Pillar: Cozy Has Consequence</div>
+      <p style="font-size:.8rem;margin-bottom:.6rem">Focus: Building, repairing, tool-making</p>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 1</div><span class="knack-ability">10% Faster Crafting</span><span class="knack-ability">Tool Durability +50%</span><span class="knack-ability">Basic Recipe Unlock</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 2</div><span class="knack-ability">Material Cost -10%</span><span class="knack-ability">Repair Without Loss</span><span class="knack-ability">Gift Craft Quality Bonus</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 3</div><span class="knack-ability">Tool Durability Doubled</span><span class="knack-ability">Moose Water Vessel Upgrade</span><span class="knack-ability">Expedition Gear Slot +1</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 4</div><span class="knack-ability">Advanced Lore Item Crafting</span><span class="knack-ability">Decor Reaction Bonus</span><span class="knack-ability">Construction Material Efficiency</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 5</div><span class="knack-ability">Unlock Master-Tier Recipes</span><span class="knack-ability">Craft Queue x2</span><span class="knack-ability">Chester Lang Masterwork Collaboration</span></div>
     </div>
 
-    <!-- Campaign systems mapping -->
-    <div class="section-header">
-      <span class="section-icon">📜</span>
-      <h2>Quest Campaigns → Systems Unlocks</h2>
+    <div class="knack-tree">
+      <div class="knack-tree-name">Heart Knack — Pillar: Every Moosian Has a Story</div>
+      <p style="font-size:.8rem;margin-bottom:.6rem">Focus: Relationships, social life, community</p>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 1</div><span class="knack-ability">NPC Locations Shown Earlier</span><span class="knack-ability">Gift Memory +1 Tag</span><span class="knack-ability">Event Notice +1 Day Ahead</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 2</div><span class="knack-ability">Remembered Conversation Slot +1</span><span class="knack-ability">Closeness Growth +10%</span><span class="knack-ability">Community Board Bonus Info</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 3</div><span class="knack-ability">Community Events Triggered Earlier</span><span class="knack-ability">NPC Favor Requests</span><span class="knack-ability">Gift Value +15%</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 4</div><span class="knack-ability">Remembered Conversation Slot +1</span><span class="knack-ability">NPC Homestead Visit Frequency +</span><span class="knack-ability">Shared Meal Bonus</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 5</div><span class="knack-ability">Gift Memory (+1 Retained Conversation)</span><span class="knack-ability">Legacy Moment Earliest Access</span><span class="knack-ability">All NPC Schedules Visible</span></div>
     </div>
 
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-header" style="background:linear-gradient(to right,#FFE8E8,#FFEEEE)">
-          <span>🌫️</span><h3 style="color:#800">Campaign I: The Fading Glow Crisis</h3>
-        </div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li><strong>System unlock:</strong> Water diagnostics board</li>
-            <li><strong>Risk mechanic:</strong> Regression meter for impacted citizens</li>
-            <li><strong>Win condition:</strong> Identify spring diversion source</li>
-            <li><strong>Timeline:</strong> Year 4–5 post-founding</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header" style="background:linear-gradient(to right,#E8FFE8,#EEFFEE)">
-          <span>💚</span><h3 style="color:#1A6020">Campaign II: The Green Water Expedition</h3>
-        </div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li><strong>System unlock:</strong> Enrichment Station</li>
-            <li><strong>Resource unlock:</strong> Moose Water supply management</li>
-            <li><strong>Win condition:</strong> Restore affected Moosians and stabilize water</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header" style="background:linear-gradient(to right,#E8EEFF,#EEEEFF)">
-          <span>🤝</span><h3 style="color:#2A3880">Campaign III: Strangers from the Far Side</h3>
-        </div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li><strong>System unlock:</strong> Integration district and diplomacy tracks</li>
-            <li><strong>Reward unlock:</strong> New styles, dyes, craft variants</li>
-            <li><strong>Win condition:</strong> Successful aid and optional citizenship integration</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header" style="background:linear-gradient(to right,#FFF5E8,#FFEEDC)">
-          <span>🌄</span><h3 style="color:#804020">Campaign IV: The Wide Valley Choice</h3>
-        </div>
-        <div class="card-body">
-          <ul class="styled-list">
-            <li><strong>System unlock:</strong> Repeatable recruitment expeditions</li>
-            <li><strong>Ethical lock:</strong> Voluntary join-or-return choice required</li>
-            <li><strong>Win condition:</strong> Recruit by consent and maintain town trust</li>
-          </ul>
-        </div>
-      </div>
+    <div class="knack-tree">
+      <div class="knack-tree-name">Trail Knack — Pillar: Roots and Routes</div>
+      <p style="font-size:.8rem;margin-bottom:.6rem">Focus: Exploration, wilderness navigation, stamina</p>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 1</div><span class="knack-ability">Stamina Bar +20%</span><span class="knack-ability">Crystal Lakeshore Access</span><span class="knack-ability">Slow Fall on Descent</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 2</div><span class="knack-ability">Faster Movement Speed</span><span class="knack-ability">High Shelf Access</span><span class="knack-ability">Reduced Stamina Drain Rate</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 3</div><span class="knack-ability">Reduced Drain Rate (active)</span><span class="knack-ability">Swim Obstacle Traversal</span><span class="knack-ability">Landmark Discovery Bonus</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 4</div><span class="knack-ability">Climbing Grip Pads Unlock</span><span class="knack-ability">Sprint Efficiency +25%</span><span class="knack-ability">Biome Journal Auto-Detail</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 5</div><span class="knack-ability">Swimming Costs No Stamina</span><span class="knack-ability">Full Climbing &amp; Swimming Traversal</span><span class="knack-ability">Atlas Reed Full Map Collaboration</span></div>
     </div>
 
-    <!-- Milestone quest unlock framework -->
-    <div class="section-header">
-      <span class="section-icon">🎯</span>
-      <h2>Milestone Quest Unlock Framework</h2>
+    <div class="knack-tree">
+      <div class="knack-tree-name">Spring Knack — Pillar: The Valley Is Still Changing</div>
+      <p style="font-size:.8rem;margin-bottom:.6rem">Focus: Moose Water and sky-stone interaction</p>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 1</div><span class="knack-ability">Sky-Stone Nearby Pulse Sense</span><span class="knack-ability">Dormant Deposit Interaction</span><span class="knack-ability">Moose Water Daily +1 Portion</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 2</div><span class="knack-ability">Sky-Stone Lore Fragment Access</span><span class="knack-ability">Moose Water Daily +1 Portion</span><span class="knack-ability">Enhanced Water Effect Extends</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 3</div><span class="knack-ability">Enhanced Water Duration +50%</span><span class="knack-ability">Moose Water Daily +1 Portion</span><span class="knack-ability">Spring Glow Vision</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 4</div><span class="knack-ability">Deposit Relocation Assist</span><span class="knack-ability">Moose Water Daily +1 Portion</span><span class="knack-ability">Shard Resonance (audio cue radius +)</span></div>
+      <div class="knack-tier"><div class="knack-tier-label">Tier 5</div><span class="knack-ability">Dormant Shard Reading (lore fragments)</span><span class="knack-ability">Moose Water Daily +1 Portion (total +5, max 10/day)</span><span class="knack-ability">Far Valley Shard Attunement</span></div>
     </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Milestone</th><th>Trigger</th><th>Unlock Questline</th><th>Primary Reward</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="badge badge-tier-b">M1</span> Town Level 2</td><td>Level up</td><td>Millwright Beginnings</td><td>Sawmill Line I and board bulk processing</td></tr>
-          <tr><td><span class="badge badge-tier-b">M2</span> Level 3 + 20 citizens</td><td>Level + pop</td><td>Stone and Story</td><td>Masonry bench upgrades and road paving</td></tr>
-          <tr><td><span class="badge badge-tier-b">M3</span> Level 4 + Campaign I</td><td>Campaign</td><td>Glowwatch Protocol</td><td>Water diagnostics board and purity alerts</td></tr>
-          <tr><td><span class="badge badge-tier-c">M4</span> Level 5 + 2 districts</td><td>Level + expansion</td><td>Kiln of the Commons</td><td>Brickworks upgrades and sanitation pipes</td></tr>
-          <tr><td><span class="badge badge-tier-c">M5</span> Level 6 + Campaign II</td><td>Campaign</td><td>Forge of Antlers</td><td>Nail and hinge mass crafting</td></tr>
-          <tr><td><span class="badge badge-tier-c">M6</span> Level 7 + 3 Specialists</td><td>Staffing</td><td>Threads of Identity</td><td>Advanced role outfits and cloth bonuses</td></tr>
-          <tr><td><span class="badge badge-tier-d">M7</span> Level 8 + Campaign III</td><td>Campaign</td><td>New Hooves, New Homes</td><td>Integration housing tier and hybrid crafts</td></tr>
-          <tr><td><span class="badge badge-tier-d">M8</span> Level 9 + 6 Mentors</td><td>Staffing</td><td>The Teaching Charter</td><td>NPC-to-NPC training network</td></tr>
-          <tr><td><span class="badge badge-tier-d">M9</span> Level 10 + Campaign IV</td><td>Campaign</td><td>Valley Steward Accord</td><td>Multi-route expeditions and grand civic projects</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Reward design rules -->
-    <div class="section-header">
-      <span class="section-icon">🎁</span>
-      <h2>Reward Design Rules</h2>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <ul class="styled-list">
-          <li>Clothing and upgrades can be purchased with mucks <em>or</em> granted as quest rewards</li>
-          <li>Main campaigns should always award one <strong>permanent town system unlock</strong></li>
-          <li>Festival rewards should rotate between cosmetics, recipes, and civic buffs</li>
-          <li>Teaching milestones should reward player rank advancements and NPC certification tools</li>
-        </ul>
-        <div class="info-box" style="margin-top:1rem">
-          <strong>Two-axis progression model:</strong> personal mastery + community mastery.
-          Player levels through exploration and quests; community levels through production
-          infrastructure and NPC proficiency.
-        </div>
-      </div>
-    </div>
-
-    <!-- Implementation backlog -->
-    <div class="section-header">
-      <span class="section-icon">📝</span>
-      <h2>Implementation Backlog (Design Seeds)</h2>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <ul class="styled-list two-col-list">
-          <li>Town Growth Point formulas by citizen type</li>
-          <li>Business upgrade tiers II–IV for all 12 businesses</li>
-          <li>Role-switch questline with costs and cooldown</li>
-          <li>Citizen satisfaction model (role fit + housing quality)</li>
-          <li>Market simulation for specialty item demand by season</li>
-          <li>Balancing pass: manual vs. industrial throughput ratios</li>
-          <li>XP curves for player rank and NPC proficiency tiers</li>
-          <li>Instinct vs. Intelligence mechanic implementation</li>
-          <li>Predator territory and pressure system (wolf AI)</li>
-          <li>Regression meter UI and feedback loop</li>
-          <li>Festival event mini-games and contract systems</li>
-          <li>Sacred Documents discovery and decode system</li>
-        </ul>
-      </div>
-    </div>
-
+    <!-- PART2_INSERT_HERE -->
   </div><!-- /.content -->
 </main>
 
