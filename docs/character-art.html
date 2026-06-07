@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Art Sheets — Mooseville Adventures</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ── Page-local styles ─────────────────────────────────────── */
+
+  /* Anatomy diagram table */
+  .anatomy-table thead th:first-child { width: 200px; }
+  .anatomy-table thead th:nth-child(2) { width: 130px; }
+
+  /* Antler catalog cards */
+  .antler-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.1rem;
+    margin: .75rem 0 1.5rem;
+  }
+
+  .antler-card {
+    background: var(--white);
+    border: 1px solid var(--brown-pale);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+
+  .antler-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+
+  .antler-card-header {
+    padding: .65rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+
+  .antler-card-header.brown-antler {
+    background: linear-gradient(to right, #4A2A1A, #6B3A2A);
+  }
+
+  .antler-card-header.pink-antler {
+    background: linear-gradient(to right, #b03858, #E8617A);
+  }
+
+  .antler-id {
+    font-size: .65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.55);
+    flex-shrink: 0;
+    font-family: 'Courier New', monospace;
+  }
+
+  .antler-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: #fff;
+    flex: 1;
+  }
+
+  .antler-card-body {
+    padding: .9rem 1rem;
+  }
+
+  .antler-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .3rem .75rem;
+    font-size: .75rem;
+    margin-bottom: .65rem;
+  }
+
+  .antler-meta-item .label {
+    font-size: .62rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--text-muted);
+    font-weight: 700;
+    display: block;
+  }
+
+  .antler-meta-item .value {
+    color: var(--text-body);
+    font-weight: 600;
+  }
+
+  .antler-desc {
+    font-size: .8rem;
+    color: var(--text-medium);
+    line-height: 1.55;
+    margin-bottom: .5rem;
+  }
+
+  .antler-personality {
+    font-size: .75rem;
+    font-style: italic;
+    color: var(--text-light);
+    border-top: 1px solid var(--cream-dark);
+    padding-top: .5rem;
+    margin-top: .5rem;
+  }
+
+  /* Layer stack visual */
+  .layer-stack {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: .75rem 0 1.25rem;
+  }
+
+  .layer-row {
+    display: grid;
+    grid-template-columns: 56px 1fr 200px;
+    gap: 0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--brown-pale);
+    box-shadow: var(--shadow-sm);
+    align-items: stretch;
+  }
+
+  .layer-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    min-height: 56px;
+    flex-shrink: 0;
+  }
+
+  .layer-body {
+    padding: .65rem 1rem;
+    background: var(--white);
+    flex: 1;
+  }
+
+  .layer-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--emerald-dark);
+    margin-bottom: .15rem;
+  }
+
+  .layer-examples {
+    font-size: .78rem;
+    color: var(--text-medium);
+    line-height: 1.5;
+  }
+
+  .layer-notable {
+    font-size: .74rem;
+    font-style: italic;
+    color: var(--gold-dark);
+    margin-top: .2rem;
+  }
+
+  .layer-visibility {
+    padding: .65rem .9rem;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    font-size: .74rem;
+    color: var(--text-light);
+    border-left: 1px solid var(--cream-dark);
+    line-height: 1.45;
+  }
+
+  /* Layer color stops */
+  .l1-color { background: linear-gradient(180deg, #7A6060, #5A4040); }
+  .l2-color { background: linear-gradient(180deg, #5A6A80, #3A4A60); }
+  .l3-color { background: linear-gradient(180deg, #2E8A5C, #1A6040); }
+  .l4-color { background: linear-gradient(180deg, #C49A2A, #A07800); }
+  .l5-color { background: linear-gradient(180deg, #5A709A, #3A5080); }
+  .l6-color { background: linear-gradient(180deg, #3A7A5A, #1A5A3A); }
+  .l7-color { background: linear-gradient(180deg, #8A3A3A, #6A1A1A); }
+
+  /* NPC character sheets */
+  .npc-sheet {
+    background: var(--white);
+    border: 1px solid var(--brown-pale);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .npc-sheet-header {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid var(--emerald);
+    background: linear-gradient(to right, var(--cream-dark), var(--cream-light));
+  }
+
+  .npc-badge {
+    font-size: .65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background: var(--emerald-dark);
+    color: var(--gold-light);
+    padding: .25rem .6rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    flex-shrink: 0;
+  }
+
+  .npc-sheet-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--emerald-dark);
+    flex: 1;
+  }
+
+  .npc-sheet-role {
+    font-size: .72rem;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+  }
+
+  .npc-sheet-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .npc-col {
+    padding: 1.1rem 1.5rem;
+  }
+
+  .npc-col + .npc-col {
+    border-left: 1px solid var(--cream-dark);
+  }
+
+  .npc-detail-label {
+    font-size: .62rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-top: .75rem;
+    margin-bottom: .25rem;
+    display: block;
+  }
+
+  .npc-detail-label:first-child { margin-top: 0; }
+
+  .npc-detail-value {
+    font-size: .84rem;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .npc-story-detail {
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold);
+    padding: .7rem 1rem;
+    font-size: .82rem;
+    color: var(--brown-dark);
+    line-height: 1.6;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-top: .5rem;
+  }
+
+  .npc-voice {
+    font-size: .8rem;
+    font-style: italic;
+    color: var(--text-medium);
+    border-top: 1px solid var(--cream-dark);
+    padding-top: .5rem;
+    margin-top: .5rem;
+  }
+
+  /* Layer pill list for NPC clothing */
+  .layer-pill-list {
+    list-style: none;
+    padding: 0;
+    margin: .35rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+  }
+
+  .layer-pill-list li {
+    display: flex;
+    align-items: baseline;
+    gap: .45rem;
+    font-size: .82rem;
+    line-height: 1.5;
+    color: var(--text-body);
+  }
+
+  .lpill {
+    font-size: .62rem;
+    font-weight: 800;
+    color: #fff;
+    padding: .1rem .4rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    font-family: 'Courier New', monospace;
+    letter-spacing: .04em;
+  }
+
+  .lpill-1 { background: #7A6060; }
+  .lpill-3 { background: #2E8A5C; }
+  .lpill-4 { background: #C49A2A; }
+  .lpill-6 { background: #3A7A5A; }
+  .lpill-7 { background: #8A3A3A; }
+
+  /* Second gen NPC abbreviated cards */
+  .gen2-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.1rem;
+    margin: .75rem 0 1.5rem;
+  }
+
+  .gen2-card {
+    background: var(--white);
+    border: 1px solid var(--brown-pale);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--transition);
+  }
+
+  .gen2-card:hover { box-shadow: var(--shadow); }
+
+  .gen2-header {
+    padding: .65rem 1.1rem;
+    background: linear-gradient(to right, var(--brown-dark), var(--brown));
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+  }
+
+  .gen2-id {
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.5);
+    font-family: 'Courier New', monospace;
+    flex-shrink: 0;
+  }
+
+  .gen2-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    flex: 1;
+  }
+
+  .gen2-age {
+    font-size: .7rem;
+    color: rgba(247,217,138,.6);
+  }
+
+  .gen2-body {
+    padding: .9rem 1.1rem;
+    font-size: .82rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+  }
+
+  .gen2-identifier {
+    margin-top: .6rem;
+    padding: .5rem .8rem;
+    background: var(--emerald-bg);
+    border-left: 3px solid var(--emerald);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: .78rem;
+    color: var(--emerald-dark);
+    font-weight: 600;
+  }
+
+  /* Expression grid */
+  .expression-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: .75rem 0 1.5rem;
+  }
+
+  .expression-card {
+    background: var(--white);
+    border: 1px solid var(--brown-pale);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .expression-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .6rem;
+    background: var(--emerald-dark);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+
+  .expression-body {
+    padding: .75rem;
+  }
+
+  .expression-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: .92rem;
+    font-weight: 700;
+    color: var(--emerald-dark);
+    margin-bottom: .25rem;
+  }
+
+  .expression-desc {
+    font-size: .78rem;
+    color: var(--text-medium);
+    line-height: 1.5;
+  }
+
+  .expression-usage {
+    font-size: .72rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: .3rem;
+  }
+
+  /* Turnaround angle pills */
+  .angle-row {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+    margin: .5rem 0;
+  }
+
+  .angle-pill {
+    background: var(--emerald-dark);
+    color: var(--gold-light);
+    border-radius: 20px;
+    padding: .3rem .85rem;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+  }
+
+  .angle-pill.primary {
+    background: var(--gold);
+    color: var(--brown-darkest);
+  }
+
+  /* Color swatch inline */
+  .inline-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,.15);
+    vertical-align: middle;
+    margin-right: 3px;
+    position: relative;
+    top: -1px;
+  }
+
+  /* Fur option cards */
+  .fur-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: .9rem;
+    margin: .75rem 0 1.25rem;
+  }
+
+  .fur-card {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--brown-pale);
+    box-shadow: var(--shadow-sm);
+    background: var(--white);
+  }
+
+  .fur-swatch {
+    height: 64px;
+  }
+
+  .fur-info {
+    padding: .55rem .75rem;
+  }
+
+  .fur-name {
+    display: block;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: .15rem;
+  }
+
+  .fur-hex {
+    display: block;
+    font-size: .65rem;
+    color: var(--text-light);
+    font-family: 'Courier New', monospace;
+    line-height: 1.4;
+  }
+
+  /* Dos/Donts two column */
+  .do-dont-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin: .75rem 0 1.5rem;
+  }
+
+  .do-card {
+    background: #E6FFF0;
+    border: 1px solid #99EEC4;
+    border-left: 4px solid #1A7A3A;
+    border-radius: var(--radius-sm);
+    padding: 1.1rem 1.25rem;
+  }
+
+  .do-card h4 {
+    color: #1A5A2A;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .65rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+
+  .dont-card {
+    background: #FFF0EE;
+    border: 1px solid #FFB8B0;
+    border-left: 4px solid #C03020;
+    border-radius: var(--radius-sm);
+    padding: 1.1rem 1.25rem;
+  }
+
+  .dont-card h4 {
+    color: #8A1A10;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .65rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+
+  .do-card ul, .dont-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: .84rem;
+    line-height: 1.7;
+  }
+
+  .do-card ul li::before {
+    content: '✓ ';
+    color: #1A7A3A;
+    font-weight: 700;
+  }
+
+  .dont-card ul li::before {
+    content: '✕ ';
+    color: #C03020;
+    font-weight: 700;
+  }
+
+  .do-card ul li, .dont-card ul li {
+    color: var(--text-body);
+  }
+
+  /* Section TOC quick nav */
+  .toc-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: .75rem 0 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--cream-dark);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--brown-pale);
+  }
+
+  .toc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    text-decoration: none;
+    background: var(--white);
+    color: var(--emerald-dark);
+    border: 1px solid var(--emerald-pale);
+    border-radius: 20px;
+    padding: .3rem .85rem;
+    font-size: .78rem;
+    font-weight: 700;
+    transition: background var(--transition), border-color var(--transition);
+  }
+
+  .toc-link:hover {
+    background: var(--emerald-bg);
+    border-color: var(--emerald);
+  }
+
+  /* Wildlife simple cards */
+  .wildlife-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.1rem;
+    margin: .75rem 0;
+  }
+
+  .wildlife-card {
+    background: var(--white);
+    border: 1px solid var(--brown-pale);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .wildlife-header {
+    padding: .7rem 1.1rem;
+    background: linear-gradient(to right, #2A1F10, #4A3520);
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+  }
+
+  .wildlife-icon { font-size: 1.4rem; }
+
+  .wildlife-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+
+  .wildlife-body {
+    padding: .9rem 1.1rem;
+    font-size: .82rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+  }
+
+  /* Prop ratio visual helper */
+  .ratio-visual {
+    display: flex;
+    align-items: flex-end;
+    gap: .4rem;
+    margin: .5rem 0 .75rem;
+  }
+
+  .ratio-block {
+    border-radius: 3px 3px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .65rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.8);
+    letter-spacing: .04em;
+    font-family: 'Courier New', monospace;
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters &amp; NPCs</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes &amp; Maps</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link active"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems &amp; Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+  <div class="nav-group">
+    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+  </div>
+  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
+</nav>
+
+<main class="main">
+
+  <div class="page-hero" style="background: linear-gradient(135deg, #5C3520 0%, #8A5A3B 100%);">
+    <div class="hero-label">Art Direction · Characters</div>
+    <h1>Character Art Sheets</h1>
+    <p class="hero-desc">Living production bible for character art — anatomy standards, the 7-layer clothing rig, grayscale mask tinting system, antler types, NPC character sheets, and visual do's &amp; don'ts.</p>
+  </div>
+
+  <div class="content">
+
+    <!-- Quick nav TOC -->
+    <div class="toc-row">
+      <a href="#philosophy" class="toc-link">🎯 Philosophy</a>
+      <a href="#anatomy" class="toc-link">📐 Anatomy Reference</a>
+      <a href="#antlers" class="toc-link">🦌 Antler Types</a>
+      <a href="#layers" class="toc-link">🧥 7-Layer Rig</a>
+      <a href="#tinting" class="toc-link">🎨 Tinting System</a>
+      <a href="#player" class="toc-link">🎮 Player Customization</a>
+      <a href="#npcs-founding" class="toc-link">👑 Founding NPCs</a>
+      <a href="#npcs-gen2" class="toc-link">🌱 Second Generation</a>
+      <a href="#expressions" class="toc-link">😊 Expressions</a>
+      <a href="#turnaround" class="toc-link">🔄 Turnarounds</a>
+      <a href="#wildlife" class="toc-link">🐻 Wildlife</a>
+      <a href="#dos-donts" class="toc-link">✅ Do's &amp; Don'ts</a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 1 — PHILOSOPHY
+    ══════════════════════════════════════════════════════════ -->
+    <div id="philosophy" class="section-header">
+      <span class="section-icon">🎯</span>
+      <h2>Character Art Philosophy</h2>
+    </div>
+
+    <div class="warn-box">
+      <strong>Critical Framing — Reference Art is Directional Only:</strong> All shared reference art throughout this document is <strong>FIRST-DRAFT DIRECTIONAL ONLY</strong> — not canonical. Artists must treat every piece of reference as a starting point, not a finish line. Colors, clothing, hairstyles, accessories, proportions, and silhouettes must all be massively expanded beyond what the drafts show. Do not replicate the drafts literally — use them to understand the emotional direction, then push further. <strong>The goal is to feel like Mooseville, not to photocopy it.</strong>
+    </div>
+
+    <!-- Design Pillars -->
+    <h3 class="subsection-header">1A — Design Pillars</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Pillar</th>
+            <th>Description</th>
+            <th>Testing / Enforcement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td><strong>Readability at Any Distance</strong></td>
+            <td>Every character must be identifiable at thumbnail size (32×32 px). The primary silhouette shaped by antlers, build, and clothing outline carries all recognition work.</td>
+            <td>Test every new character as a flat black silhouette at 64 px width. If you cannot name the character from silhouette alone, redesign the outline.</td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td>
+            <td><strong>Silhouette Uniqueness</strong></td>
+            <td>No two named characters share the same silhouette. Antler shape, body width, clothing bulk, and accessory profiles must all contribute to a unique readable outline per character.</td>
+            <td>Maintain a silhouette comparison chart (one row per character, flat black fills). No duplicates allowed.</td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td>
+            <td><strong>Emotional Expressiveness</strong></td>
+            <td>Moosians communicate emotion through large eyes, antler angle, ear position, and body lean — not just facial muscles. The entire character is an emotional antenna.</td>
+            <td>Animators must rig ears and antlers independently. Ear and antler micro-animation is required in all cutscene shots — never static during dialogue.</td>
+          </tr>
+          <tr>
+            <td><strong>4</strong></td>
+            <td><strong>Warm Color Harmony</strong></td>
+            <td>Earth tones, emerald greens, and gold accents define the palette. All character colors must harmonize against the four primary environment tones: emerald grass, golden wheat, sky blue, dark forest floor.</td>
+            <td>Check every new character against the Environment Contrast Test (Section 11). No character should visually "disappear" into any of the four environments.</td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td><strong>Family-Friendly Without Being Infantile</strong></td>
+            <td>Mooseville is appropriate for all ages, but adults must feel respected. NPCs have lives, histories, and emotional complexity.</td>
+            <td>Every NPC has at least one visual detail that hints at their backstory (worn leather, ink-stained hooves, notched antlers). These "story details" are mandatory, not optional.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tonal Reference -->
+    <h3 class="subsection-header">1B — Tonal Reference</h3>
+    <div class="pull-quote">
+      "Animal Crossing meets Stardew Valley with a touch of Pixar warmth." Characters must be instantly lovable. They should feel as though they stepped out of an illustrated children's book — but one that adults would keep on their shelf too. Think: the emotional weight of Toy Story characters with the cozy accessibility of Animal Crossing villagers, rendered in the warm-toned palette of a Ghibli countryside.
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header"><span>🍃</span><h3>Animal Crossing Influence</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Approachable scale, non-threatening features</li>
+            <li>Consistent world logic throughout</li>
+            <li>Characters with distinct daily routines and personalities</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🌾</span><h3>Stardew Valley Influence</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Pixel-adjacent warmth in color and form</li>
+            <li>Seasonal color shifts reflected in character palettes</li>
+            <li>Characters who feel like they were there before the player arrived</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🎬</span><h3>Pixar Influence</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Emotionally readable eyes at every distance</li>
+            <li>Storytelling through physical design (a worn apron says more than dialogue)</li>
+            <li>Visual contrast between generations of characters</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anatomy Philosophy -->
+    <h3 class="subsection-header">1C — Moose Anatomy Philosophy</h3>
+    <div class="warn-box">
+      <strong>CRITICAL — Not Realistic Moose Anatomy:</strong> Mooseville characters are stylized to cartoonish extremes. Real moose anatomy is a reference point only, not a blueprint.
+    </div>
+    <div class="card">
+      <div class="card-header"><span>📏</span><h3>Key Anatomy Departures — All Intentional, All Non-Negotiable</h3></div>
+      <div class="card-body">
+        <div class="grid-2">
+          <ul class="styled-list">
+            <li><strong>Head size:</strong> Enormous relative to body — 1:2.2 head-to-body ratio for adults</li>
+            <li><strong>Snout/nose:</strong> Very round, bulbous, takes up the lower 40% of the face. Not elongated like real moose — more like a round rubber ball attached to the face</li>
+            <li><strong>Antlers:</strong> Disproportionately huge — should extend well beyond body width. Primary visual personality expression tool, always compositionally dominant</li>
+            <li><strong>Limbs:</strong> Short, thick, rounded — stubby proportions that convey groundedness and warmth. Barely any visible ankle</li>
+          </ul>
+          <ul class="styled-list">
+            <li><strong>Neck:</strong> Essentially absent — shoulders blend directly into head silhouette. No visible neck column</li>
+            <li><strong>Hooves:</strong> Small, dark, rounded — a detail, not a feature</li>
+            <li><strong>Eyes:</strong> Large, wide-set, expressive — the emotional center of every face</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 2 — BASE ANATOMY REFERENCE
+    ══════════════════════════════════════════════════════════ -->
+    <div id="anatomy" class="section-header">
+      <span class="section-icon">📐</span>
+      <h2>Base Moose Anatomy Reference</h2>
+    </div>
+
+    <div class="info-box">
+      All measurements use <strong>Head Units (H)</strong> — the height of the character's head from chin to top of skull, <em>not including antlers</em>.
+    </div>
+
+    <!-- Adult Proportions -->
+    <h3 class="subsection-header">2A — Adult Proportions</h3>
+    <div class="table-wrap">
+      <table class="anatomy-table">
+        <thead>
+          <tr>
+            <th>Body Region</th>
+            <th>Measurement</th>
+            <th>Design Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Total body height (no antlers)</strong></td>
+            <td><code>3.2 H</code></td>
+            <td>Head accounts for ~1H of total height. Compact, grounded, not tall and lanky.</td>
+          </tr>
+          <tr>
+            <td><strong>Head width</strong></td>
+            <td><code>1.1 H</code> (slightly wider than tall)</td>
+            <td>Round and wide. Never tall and narrow.</td>
+          </tr>
+          <tr>
+            <td><strong>Snout protrusion from face</strong></td>
+            <td><code>0.3 H</code> forward</td>
+            <td>Very round, bulbous, occupies lower 40% of face height. Dark warm brown (<code>#3D1C02</code> range).</td>
+          </tr>
+          <tr>
+            <td><strong>Antler height above skull</strong></td>
+            <td><code>0.8–1.2 H</code> (varies by style)</td>
+            <td>Antlers should always extend beyond shoulder width. They are a visual <strong>CROWN</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>Antler span (widest point)</strong></td>
+            <td><code>1.6–2.4 H</code> wide (varies by style)</td>
+            <td>The wider the antlers, the more space/authority the character occupies.</td>
+          </tr>
+          <tr>
+            <td><strong>Torso height</strong></td>
+            <td><code>1.2 H</code></td>
+            <td>Round barrel shape. No visible neck — shoulders blur into base of skull. No waist definition.</td>
+          </tr>
+          <tr>
+            <td><strong>Torso width</strong></td>
+            <td><code>1.0–1.3 H</code> (varies by character bulk)</td>
+            <td>Raymond Harlow 1.3H wide. Evelyn Price 0.95H wide. Width = visual weight.</td>
+          </tr>
+          <tr>
+            <td><strong>Arm length</strong></td>
+            <td><code>0.9 H</code> from shoulder to hoof tip</td>
+            <td>Short and thick. Slightly curved downward. Hooves small and rounded at tips.</td>
+          </tr>
+          <tr>
+            <td><strong>Arm width</strong></td>
+            <td><code>0.25 H</code> at widest</td>
+            <td>Thick, no defined elbow protrusion. Gentle taper from shoulder to hoof.</td>
+          </tr>
+          <tr>
+            <td><strong>Leg length</strong></td>
+            <td><code>0.8 H</code> from hip to hoof</td>
+            <td>Very short. Characters should look slightly "planted" — close to the ground by design.</td>
+          </tr>
+          <tr>
+            <td><strong>Leg width</strong></td>
+            <td><code>0.22 H</code> at thigh, <code>0.18 H</code> at ankle</td>
+            <td>Slight widening at ankle/hoof junction. Subtle grey-taupe hoof coloration on lower ankle.</td>
+          </tr>
+          <tr>
+            <td><strong>Hoof size</strong></td>
+            <td><code>0.12 H</code> tall, <code>0.15 H</code> wide</td>
+            <td>Small, rounded, dark charcoal (<code>#2A2A2A</code>). Subtle gloss highlight spot on top surface.</td>
+          </tr>
+          <tr>
+            <td><strong>Eye diameter</strong></td>
+            <td><code>0.22 H</code></td>
+            <td>Large white sclera, single dark iris with white highlight dot. Eyes placed wide apart on face.</td>
+          </tr>
+          <tr>
+            <td><strong>Eye placement (horizontal)</strong></td>
+            <td><code>0.55 H</code> apart (center to center)</td>
+            <td>Wide-set. Eyes sit in upper-middle face zone, above snout centerline.</td>
+          </tr>
+          <tr>
+            <td><strong>Ear width / height</strong></td>
+            <td><code>0.3 H</code> wide, <code>0.2 H</code> tall</td>
+            <td>Wide, flat, slightly droopy in resting position. Salmon/peach inner color. Key emotion indicator.</td>
+          </tr>
+          <tr>
+            <td><strong>Ear placement</strong></td>
+            <td>Side of head at midline, below antler bases</td>
+            <td>Ears and antlers occupy the same "crown zone."</td>
+          </tr>
+          <tr>
+            <td><strong>Neck tuft/mane</strong></td>
+            <td><code>0.25 H</code> tall, <code>0.4 H</code> wide</td>
+            <td>Fluffy golden-yellow fur at chin/neck junction. Present on most characters. Warmth anchor.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Child Proportions -->
+    <h3 class="subsection-header">2B — Child/Youth Proportions</h3>
+    <div class="info-box">
+      Youth Moosians appear as background ambient children in town areas and as child versions of NPCs in memory/flashback sequences.
+    </div>
+    <div class="warn-box">
+      <strong>The "Must Read Younger" Rule:</strong> Child characters must immediately read as children at any camera distance. If there is any ambiguity, make the head bigger, the limbs shorter, and the antler nubbins smaller. There is no such thing as "too chibi" for Mooseville children.
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Body Region</th>
+            <th>Adult</th>
+            <th>Child</th>
+            <th>Change / Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Total body height (no antlers)</strong></td>
+            <td><code>3.2 H</code></td>
+            <td><code>2.5 H</code></td>
+            <td>~60% of adult height in world units.</td>
+          </tr>
+          <tr>
+            <td><strong>Head-to-body ratio</strong></td>
+            <td>1:2.2</td>
+            <td>1:1.6</td>
+            <td>Head is much larger relative to body. Most recognizable chibi indicator.</td>
+          </tr>
+          <tr>
+            <td><strong>Head % of total height</strong></td>
+            <td>~30%</td>
+            <td>~40%</td>
+            <td>Critical for readability as "young."</td>
+          </tr>
+          <tr>
+            <td><strong>Torso shape</strong></td>
+            <td>Rounded barrel</td>
+            <td>Egg-shaped, even rounder</td>
+            <td>Barely differentiated from the head visually.</td>
+          </tr>
+          <tr>
+            <td><strong>Leg length</strong></td>
+            <td><code>0.8 H</code></td>
+            <td><code>0.4 H</code></td>
+            <td>Very short — barely visible below torso hem.</td>
+          </tr>
+          <tr>
+            <td><strong>Arm length</strong></td>
+            <td><code>0.9 H</code></td>
+            <td><code>0.5 H</code></td>
+            <td>Tiny, rounded nubs. Gesture range is limited and endearing.</td>
+          </tr>
+          <tr>
+            <td><strong>Eye diameter relative to face</strong></td>
+            <td>0.22 H (20% of face width)</td>
+            <td>0.28 H (25% of face width)</td>
+            <td>Proportionally even larger eyes.</td>
+          </tr>
+          <tr>
+            <td><strong>Antler nubbins height</strong></td>
+            <td>0.8–1.2 H (full rack)</td>
+            <td>0.08–0.12 H (tiny nubbins)</td>
+            <td>10–15% of adult size. Soft, rounded tips. Do NOT give children sharp tines.</td>
+          </tr>
+          <tr>
+            <td><strong>Mane/neck tuft</strong></td>
+            <td>0.25 H</td>
+            <td>0.35 H (proportionally larger)</td>
+            <td>Oversized tuft on small frame — one of the most endearing visual qualities.</td>
+          </tr>
+          <tr>
+            <td><strong>Clothing layers</strong></td>
+            <td>Up to 7</td>
+            <td>Maximum 3 (Layers 1, 3, 5 only)</td>
+            <td>Simplified layering. Children's silhouettes should read clean and uncomplicated.</td>
+          </tr>
+          <tr>
+            <td><strong>Expression complexity</strong></td>
+            <td>8 nuanced expressions</td>
+            <td>6 binary expressions</td>
+            <td>Big Happy, Big Sad, Surprised, Confused, Scared, Determined. Less emotional subtlety by design.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 2C — ANTLER TYPES
+    ══════════════════════════════════════════════════════════ -->
+    <div id="antlers" class="section-header">
+      <span class="section-icon">🦌</span>
+      <h2>Antler Types Reference Catalog</h2>
+    </div>
+
+    <div class="warn-box">
+      <strong>CRITICAL — Antler Color as Gender Expression:</strong> Antler color is the <strong>PRIMARY gender expression visual differentiator</strong> in Mooseville. <span class="inline-swatch" style="background:linear-gradient(135deg,#6B3A2A,#C4956A)"></span> <strong>Brown antlers</strong> (<code>#6B3A2A</code> outer, <code>#C4956A</code> inner cream highlight) are typically used for <strong>male-presenting</strong> characters. <span class="inline-swatch" style="background:linear-gradient(135deg,#E8617A,#F4A0B0)"></span> <strong>Pink/salmon antlers</strong> (<code>#E8617A</code> outer, <code>#F4A0B0</code> inner cream highlight) are typically used for <strong>female-presenting</strong> characters. Body shape does NOT change between gender expressions — only antler color, hair style, accessories, and clothing distinguish gender presentation. This is a core design principle and must never be violated.
+    </div>
+
+    <div class="antler-grid">
+
+      <!-- Style 01 -->
+      <div class="antler-card">
+        <div class="antler-card-header brown-antler">
+          <span class="antler-id">Style 01</span>
+          <span class="antler-name">Classic Wide Rack</span>
+        </div>
+        <div class="antler-card-body">
+          <div class="antler-meta">
+            <div class="antler-meta-item"><span class="label">Tines</span><span class="value">3 per side (6 total)</span></div>
+            <div class="antler-meta-item"><span class="label">Span</span><span class="value">2.0 H</span></div>
+            <div class="antler-meta-item"><span class="label">Associated</span><span class="value">Melvin, Martha</span></div>
+          </div>
+          <p class="antler-desc">Broad, symmetrical spread. Slightly curved outward from base. 3 tines per side, even spacing, gentle upward curve at tips.</p>
+          <p class="antler-personality">Personality: Dependable, familiar, warm authority. The "default hero" antler.</p>
+        </div>
+      </div>
+
+      <!-- Style 02 -->
+      <div class="antler-card">
+        <div class="antler-card-header pink-antler">
+          <span class="antler-id">Style 02</span>
+          <span class="antler-name">Tall Crown</span>
+        </div>
+        <div class="antler-card-body">
+          <div class="antler-meta">
+            <div class="antler-meta-item"><span class="label">Tines</span><span class="value">3 per side (6 total)</span></div>
+            <div class="antler-meta-item"><span class="label">Span</span><span class="value">1.4 H</span></div>
+            <div class="antler-meta-item"><span class="label">Associated</span><span class="value">Gloria Finch, Renna Finch</span></div>
+          </div>
+          <p class="antler-desc">Upright, close-set, elegant. Tines reach straight up with minimal lateral spread. Refined and dignified.</p>
+          <p class="antler-personality">Personality: Intelligence, precision, refinement. Characters who think before they speak.</p>
+        </div>
+      </div>
+
+      <!-- Style 03 -->
+      <div class="antler-card">
+        <div class="antler-card-header brown-antler">
+          <span class="antler-id">Style 03</span>
+          <span class="antler-name">Asymmetric Wild</span>
+        </div>
+        <div class="antler-card-body">
+          <div class="antler-meta">
+            <div class="antler-meta-item"><span class="label">Tines</span><span class="value">3 + 2 (mismatched)</span></div>
+            <div class="antler-meta-item"><span class="label">Span</span><span class="value">1.9 H</span></div>
+            <div class="antler-meta-item"><span class="label">Associated</span><span class="value">Bram Vale</span></div>
+          </div>
+          <p class="antler-desc">One tine slightly shorter or at a different angle. Looks natural and lived-in. Not damaged — just naturally offset.</p>
+          <p class="antler-personality">Personality: Individuality, naturalness, slightly unpredictable energy.</p>
+        </div>
+      </div>
+
+      <!-- Style 04 -->
+      <div class="antler-card">
+        <div class="antler-card-header brown-antler">
+          <span class="antler-id">Style 04</span>
+          <span class="antler-name">Compact Stubby</span>
+        </div>
+        <div class="antler-card-body">
+          <div class="antler-meta">
+            <div class="antler-meta-item"><span class="label">Tines</span><span class="value">2 per side (4 total)</span></div>
+            <div class="antler-meta-item"><span class="label">Span</span><span class="value">1.3 H</span></div>
+            <div class="antler-meta-item"><span class="label">Associated</span><span class="value">Moss Lang, younger NPCs</span></div>
+          </div>
+          <p class="antler-desc">Shorter overall height, broader base, fewer tines, rounded tips. Younger-looking even on adults.</p>
+          <p class="antler-personality">Personality: Youth, approachability, harmlessness. Characters still "coming into their own."</p>
+        </div>
+      </div>
+
+      <!-- Style 05 -->
+      <div class="antler-card">
+        <div class="antler-card-header brown-antler">
+          <span class="antler-id">Style 05</span>
+          <span class="antler-name">Grand Palmated</span>
+        </div>
+        <div class="antler-card-body">
+          <div class="antler-meta">
+            <div class="antler-meta-item"><span class="label">Tines</span><span class="value">4+ emergent from palm</span></div>
+            <div class="antler-meta-item"><span class="label">Span</span><span class="value">2.4 H</span></div>
+            <div class="antler-meta-item"><span class="label">Associated</span><span class="value">Raymond Harlow</span></div>
+          </div>
+          <p class="antler-desc">Wide, flat palm-like spreading at the tips. Majestic and unusual. Looks prehistoric and impressive at distance.</p>
+          <p class="antler-personality">Personality: Majesty, scale, dominance, deeply earned authority.</p>
+        </div>
+      </div>
+
+      <!-- Style 06 -->
+      <div class="antler-card">
+        <div class="antler-card-header brown-antler">
+          <span class="antler-id">Style 06</span>
+          <span class="antler-name">Twisted Spiral</span>
+        </div>
+        <div class="antler-card-body">
+          <div class="antler-meta">
+            <div class="antler-meta-item"><span class="label">Tines</span><span class="value">3 per side (6 total)</span></div>
+            <div class="antler-meta-item"><span class="label">Span</span><span class="value">1.8 H</span></div>
+            <div class="antler-meta-item"><span class="label">Associated</span><span class="value">New Arrivals / Wilderness</span></div>
+          </div>
+          <p class="antler-desc">Tines have a natural spiral or torsion twist along their length. Creates a distinctive silhouette.</p>
+          <p class="antler-personality">Personality: Mysticism, otherness, having come from somewhere unexpected.</p>
+        </div>
+      </div>
+
+      <!-- Style 07 -->
+      <div class="antler-card">
+        <div class="antler-card-header brown-antler">
+          <span class="antler-id">Style 07</span>
+          <span class="antler-name">Forked Split</span>
+        </div>
+        <div class="antler-card-body">
+          <div class="antler-meta">
+            <div class="antler-meta-item"><span class="label">Tines</span><span class="value">1 fork per side (4 total tips)</span></div>
+            <div class="antler-meta-item"><span class="label">Span</span><span class="value">1.6 H</span></div>
+            <div class="antler-meta-item"><span class="label">Associated</span><span class="value">Harold Winslow</span></div>
+          </div>
+          <p class="antler-desc">Simple Y-fork shape. Minimal and clean. Two main branches, no secondary tines. Extremely readable.</p>
+          <p class="antler-personality">Personality: Practicality, directness, economy.</p>
+        </div>
+      </div>
+
+      <!-- Style 08 -->
+      <div class="antler-card">
+        <div class="antler-card-header brown-antler">
+          <span class="antler-id">Style 08</span>
+          <span class="antler-name">Multi-Crown</span>
+        </div>
+        <div class="antler-card-body">
+          <div class="antler-meta">
+            <div class="antler-meta-item"><span class="label">Tines</span><span class="value">4–5 per side (8–10 total)</span></div>
+            <div class="antler-meta-item"><span class="label">Span</span><span class="value">2.4+ H</span></div>
+            <div class="antler-meta-item"><span class="label">Associated</span><span class="value">Elder authority figures</span></div>
+          </div>
+          <p class="antler-desc">4+ tines per side. Maximum impressiveness and visual complexity. Demands attention.</p>
+          <p class="antler-personality">Personality: Maximum power, community leadership, long-earned status.</p>
+        </div>
+      </div>
+
+    </div><!-- /.antler-grid -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 3 — 7-LAYER CLOTHING RIG
+    ══════════════════════════════════════════════════════════ -->
+    <div id="layers" class="section-header">
+      <span class="section-icon">🧥</span>
+      <h2>The 7-Layer Clothing Rig System</h2>
+    </div>
+
+    <div class="info-box">
+      <strong>Why 7 Layers:</strong> The 7-layer clothing rig system enables real-time outfit swapping in Unreal Engine 5 without re-rigging the base skeleton. Each layer is a separate skeletal mesh component parented to the base character skeleton. Layer visibility and mesh swap operations are handled by the <strong>Mooseville Wardrobe Manager system</strong> (Blueprint-driven). Artists must deliver each clothing item as a separate mesh per layer — combined meshes are not supported.
+    </div>
+
+    <!-- Layer Stack -->
+    <div class="layer-stack">
+
+      <div class="layer-row">
+        <div class="layer-num l1-color">L1</div>
+        <div class="layer-body">
+          <div class="layer-title">Braces / Collar — Innermost Undergarment</div>
+          <div class="layer-examples">Everything that peeks out from under the main shirt. Undershirt collars, brace straps, camisoles, turtlenecks, bandanas.</div>
+          <div class="layer-notable">Notable: Martha's yellow undershirt collar</div>
+        </div>
+        <div class="layer-visibility">Partial — collar/strap tips only visible at neckline</div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-num l2-color">L2</div>
+        <div class="layer-body">
+          <div class="layer-title">Arm_1 (Back Arm) — Rendered Behind Torso</div>
+          <div class="layer-examples">The "back" arm — typically the left arm in ¾ view. Any arm sleeve belonging to the back arm: shirt sleeve, jacket sleeve, bare fur arm, arm band.</div>
+          <div class="layer-notable">Notable: Melvin's flannel sleeve (back arm)</div>
+        </div>
+        <div class="layer-visibility">Partially occluded by torso in ¾ view</div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-num l3-color">L3</div>
+        <div class="layer-body">
+          <div class="layer-title">Dress Top / Shirt Body — Primary Clothing Silhouette</div>
+          <div class="layer-examples">Main upper body garment. Defines the character's visual identity most. Polo shirts, blouses, dresses (upper portion), jacket bodies, overalls bib panel, tunics, hoodies.</div>
+          <div class="layer-notable">Notable: Melvin's teal overalls bib panel · Martha's red floral dress body</div>
+        </div>
+        <div class="layer-visibility">Always fully visible</div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-num l4-color">L4</div>
+        <div class="layer-body">
+          <div class="layer-title">Bust / Torso Overlay — Front Chest Accessories</div>
+          <div class="layer-examples">Front chest accessories ON TOP of the main shirt body. Often contains the character's most recognizable visual signature. Suspender clips, chest pockets, badges, bow ties, apron bib front, embroidered patches, medals.</div>
+          <div class="layer-notable">Notable: Melvin's gold wheat sheaf emblem (unique identifier) · Chester's leather apron front</div>
+        </div>
+        <div class="layer-visibility">Fully visible. Critical for character identification at distance</div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-num l5-color">L5</div>
+        <div class="layer-body">
+          <div class="layer-title">Leg_1 (Back Leg) — Rendered Behind Front Leg</div>
+          <div class="layer-examples">Back leg, rendered behind the front leg. Trouser back leg, skirt back panel, shorts back, overall leg (back).</div>
+          <div class="layer-notable">Notable: Melvin's teal overall leg (back)</div>
+        </div>
+        <div class="layer-visibility">Partially occluded by front leg in ¾ view</div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-num l6-color">L6</div>
+        <div class="layer-body">
+          <div class="layer-title">Leg_2 (Front Leg + Footwear) — Most Screen Time</div>
+          <div class="layer-examples">Front leg — the visible leg in ¾ view. Also includes footwear at hoof level. Gets the most "screen time" during walking animations. Trouser front leg, skirt front panel, shorts front, footwear.</div>
+          <div class="layer-notable">Notable: Player's red sneakers · Vincent's muddy expedition boots · Chester's prosthetic wooden hoof tips</div>
+        </div>
+        <div class="layer-visibility">Fully visible</div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-num l7-color">L7</div>
+        <div class="layer-body">
+          <div class="layer-title">Arm_2 (Front Arm) — Primary Gesture &amp; Action Arm</div>
+          <div class="layer-examples">The "front" arm — typically the right arm in ¾ view. Rendered in front of ALL other layers. Primary gesturing, tool-holding, and emoting arm. Front arm sleeve, held items (basket, tool, book, map), wrist accessories.</div>
+          <div class="layer-notable">Notable: Pell Harlow's measuring cord bracelet · Lotte Bell's market tray · Vincent's compass tool</div>
+        </div>
+        <div class="layer-visibility">Always fully visible. The "action arm."</div>
+      </div>
+
+    </div><!-- /.layer-stack -->
+
+    <div class="card">
+      <div class="card-header"><span>⚙️</span><h3>UE5 Implementation Notes</h3></div>
+      <div class="card-body">
+        <div class="grid-2">
+          <ul class="styled-list">
+            <li>Each layer is a separate <code>USkeletalMeshComponent</code> on <code>ABP_MoosianCharacter</code> Blueprint</li>
+            <li>Layer components named <code>SKM_L1</code> through <code>SKM_L7</code></li>
+            <li>Mesh swapping handled via <code>SetSkeletalMesh()</code> calls from <code>WardrobeManager</code> subsystem</li>
+            <li>Color tinting via Material Dynamic Instances — each layer shares <code>M_MoosianClothing</code> master material</li>
+          </ul>
+          <ul class="styled-list">
+            <li>Runtime-set scalar and vector parameters handle tinting</li>
+            <li>LOD: Each layer mesh must deliver <strong>LOD0, LOD1, and LOD2</strong></li>
+            <li>All meshes must be skinned to <code>SK_MoosianAdult</code> or <code>SK_MoosianChild</code></li>
+            <li>No separate skeletons per layer — share the base skeleton</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 4 — GRAYSCALE MASK TINTING SYSTEM
+    ══════════════════════════════════════════════════════════ -->
+    <div id="tinting" class="section-header">
+      <span class="section-icon">🎨</span>
+      <h2>Grayscale Mask Tinting System</h2>
+    </div>
+
+    <p>The Grayscale Mask Tinting System is the core technical art system powering all color customization. It enables infinite color variations from a single asset without duplicating meshes, textures, or materials.</p>
+
+    <h3 class="subsection-header">4A — Hair Tinting System Pipeline</h3>
+    <div class="card">
+      <div class="card-body">
+        <ol class="styled-list" style="list-style:decimal">
+          <li><strong>Create full-color hair texture</strong> with all shading, highlights, and curl detail baked in (Substance Painter / Photoshop). Work in full color — shading must be rich and correct.</li>
+          <li><strong>Desaturate to greyscale</strong> — preserving all value relationships (light/shadow/highlight). Photoshop: Image → Adjustments → Desaturate. Result should be luminosity-correct greyscale. Verify highlights are near-white (<code>#F8F8F8</code>) and shadow areas are dark grey (<code>#2A2A2A</code> range).</li>
+          <li><strong>Paint red channel mask</strong> — solid <code>#FF0000</code> red over all areas that should be tintable. (Photoshop — Red channel mask layer)</li>
+          <li><strong>Store greyscale as RGB channel + red mask in Alpha.</strong> The shader reads: <em>Greyscale luminosity × TintColor → final tinted hair.</em> This multiplies the tint color against the greyscale value, preserving all shading relationships with any chosen color.</li>
+        </ol>
+        <div class="pull-quote" style="margin-top:1rem">
+          The greyscale file is your lighting bake. Once correct in greyscale, it will be correct in ANY tint color. A poorly shaded greyscale cannot be fixed by tint color selection — fix the greyscale first.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-header">4B — Glasses Dual-Channel System</h3>
+    <div class="card">
+      <div class="card-body">
+        <p>Glasses use a two-region tint mask:</p>
+        <div class="grid-2">
+          <div>
+            <div class="info-box">
+              <strong>Region A — Frame:</strong> Red channel mask (<code>#FF0000</code>). Tinted by <code>FrameTintColor</code> parameter.<br><br>
+              Example: Gloria Finch's frames — warm tortoiseshell range (<code>#8B4513 → #C4762A</code>). Renna Finch's frames — same design, cooler modern tortoiseshell.
+            </div>
+          </div>
+          <div>
+            <div class="warn-box">
+              <strong>Region B — Lenses:</strong> Green channel mask (<code>#00FF00</code>). Tinted by <code>LensTintColor</code> parameter.<br><br>
+              Lens tint should default to near-transparent (<code>#E8F0FF</code>, very low opacity). <strong>Never fully opaque lenses.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-header">4C — Other Maskable Accessories</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Accessory Type</th><th>Mask Channel</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Scarves / Bandanas</strong></td>
+            <td>Red channel = full fabric region</td>
+            <td>Full fabric area is tintable</td>
+          </tr>
+          <tr>
+            <td><strong>Belts / Straps</strong></td>
+            <td>Red channel = leather areas</td>
+            <td>Leather areas only in red channel</td>
+          </tr>
+          <tr>
+            <td><strong>Gold Accents</strong> (buckles, antler rings)</td>
+            <td>Dedicated material — not greyscale</td>
+            <td>Use <code>MV_Mat_GoldAccent</code> PBR gold directly. See Rendering Bible Section 4. Not greyscale-tinted.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 5 — PLAYER CUSTOMIZATION
+    ══════════════════════════════════════════════════════════ -->
+    <div id="player" class="section-header">
+      <span class="section-icon">🎮</span>
+      <h2>Player Character Customization Specification</h2>
+    </div>
+
+    <h3 class="subsection-header">5A — Fur Colors (5 Options)</h3>
+    <div class="warn-box">
+      <strong>NOTE — Discrete Options Only:</strong> Fur color cannot be a color picker — it must be a set of 5 discrete options matching the greyscale mask tinting system. Each option is a full tint vector set (body, shadow, highlight) pre-authored and validated against all environment backgrounds. Custom colors break the Environment Contrast Test requirements.
+    </div>
+
+    <div class="fur-grid">
+      <div class="fur-card">
+        <div class="fur-swatch" style="background: linear-gradient(135deg, #2A1F1A, #3A2C25)"></div>
+        <div class="fur-info">
+          <span class="fur-name">Deep Charcoal</span>
+          <span class="fur-hex">#2A1F1A</span>
+          <span class="fur-hex" style="color:var(--text-muted);margin-top:.2rem;display:block">Dark, dramatic. Subtle cooler grey undertones.</span>
+        </div>
+      </div>
+      <div class="fur-card">
+        <div class="fur-swatch" style="background: linear-gradient(135deg, #8B4513, #C4762A)"></div>
+        <div class="fur-info">
+          <span class="fur-name">Warm Auburn</span>
+          <span class="fur-hex">#8B4513 → #C4762A</span>
+          <span class="fur-hex" style="color:var(--text-muted);margin-top:.2rem;display:block">Classic "moose brown." Most visually recognizable.</span>
+        </div>
+      </div>
+      <div class="fur-card">
+        <div class="fur-swatch" style="background: linear-gradient(135deg, #C4A882, #E8D5B0)"></div>
+        <div class="fur-info">
+          <span class="fur-name">Sandy Blonde</span>
+          <span class="fur-hex">#C4A882 → #E8D5B0</span>
+          <span class="fur-hex" style="color:var(--text-muted);margin-top:.2rem;display:block">Lighter, softer. The palest option.</span>
+        </div>
+      </div>
+      <div class="fur-card">
+        <div class="fur-swatch" style="background: linear-gradient(135deg, #5C3520, #8A5A3B)"></div>
+        <div class="fur-info">
+          <span class="fur-name">Classic Brown</span>
+          <span class="fur-hex">#5C3520 → #8A5A3B</span>
+          <span class="fur-hex" style="color:var(--text-muted);margin-top:.2rem;display:block">Mid-range warm brown. Familiar and safe.</span>
+        </div>
+      </div>
+      <div class="fur-card">
+        <div class="fur-swatch" style="background: linear-gradient(135deg, #6B7280, #9CA3AF)"></div>
+        <div class="fur-info">
+          <span class="fur-name">Grey-Silver</span>
+          <span class="fur-hex">#6B7280 → #9CA3AF</span>
+          <span class="fur-hex" style="color:var(--text-muted);margin-top:.2rem;display:block">Older-feeling, distinguished. Harold Winslow's family trait.</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-header">5B — Antler Options (3 per gender expression = 6 total)</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#4A2A1A,#6B3A2A)">
+          <span style="color:rgba(255,255,255,.6);font-size:.8rem">🦌</span>
+          <h3 style="color:var(--gold-light)">Male-Presenting Antlers</h3>
+          <span class="card-tag" style="color:rgba(247,217,138,.5)">Brown #6B3A2A · #C4956A cream</span>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li><strong>Classic Wide Rack (Style 01)</strong> — recommended default</li>
+            <li><strong>Grand Palmated (Style 05)</strong> — max authority presence</li>
+            <li><strong>Asymmetric Wild (Style 03)</strong> — naturalistic personality</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#b03858,#E8617A)">
+          <span style="color:rgba(255,255,255,.6);font-size:.8rem">🦌</span>
+          <h3 style="color:#fff">Female-Presenting Antlers</h3>
+          <span class="card-tag" style="color:rgba(255,255,255,.5)">Pink/salmon #E8617A · #F4A0B0 cream</span>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li><strong>Tall Crown (Style 02)</strong> — elegant, refined</li>
+            <li><strong>Classic Wide Rack (Style 01)</strong> — balanced, familiar</li>
+            <li><strong>Forked Split (Style 07)</strong> — practical, no-nonsense</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-header">5C — Starter Clothing Sets (3 options, all replaceable through crafting/purchase)</h3>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header"><span>🏠</span><h3>Set A — "Homey"</h3></div>
+        <div class="card-body">
+          <p>Melvin's teal overalls style. Teal overalls bib, red plaid underlayer, sturdy work boots.</p>
+          <p class="text-muted text-sm">Homage to legacy — "I grew up watching this."</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>✨</span><h3>Set B — "Fresh Start"</h3></div>
+        <div class="card-body">
+          <p>Red polo shirt, dark trousers, bright red sneakers. The most youthful option.</p>
+          <p class="text-muted text-sm">Clean, cheerful, modern-adjacent.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🗺️</span><h3>Set C — "Ready to Explore"</h3></div>
+        <div class="card-body">
+          <p>Linen half-jacket, earth-tone trousers, expedition boots.</p>
+          <p class="text-muted text-sm">Practical and adventure-oriented from day one.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 6 — NPC CHARACTER SHEETS: FOUNDING GENERATION
+    ══════════════════════════════════════════════════════════ -->
+    <div id="npcs-founding" class="section-header">
+      <span class="section-icon">👑</span>
+      <h2>NPC Character Sheets — Founding Generation</h2>
+    </div>
+
+    <p>NPC-001 through NPC-010 are the First Circle founders. Full 7-layer clothing specs and story continuity requirements apply to all.</p>
+
+    <!-- NPC-001 MELVIN -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-001</span>
+        <div>
+          <div class="npc-sheet-name">Melvin</div>
+          <div class="npc-sheet-role">Founder · Town Elder</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag tag-brown">Antler Style 01</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Large dark brown moose, grey at muzzle</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Classic Wide Rack (Style 01), warm palmated curve, large and commanding</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Warm amber</div>
+          <span class="npc-detail-label">Voice Direction</span>
+          <div class="npc-voice">Deep, unhurried, warm. A voice that has said important things before and isn't afraid to say them again slowly.</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing — 7 Layers</span>
+          <ul class="layer-pill-list">
+            <li><span class="lpill lpill-1">L1</span> Red plaid flannel collar visible at neck</li>
+            <li><span class="lpill lpill-3">L3</span> Signature teal overalls bib panel</li>
+            <li><span class="lpill lpill-4">L4</span> Gold wheat sheaf emblem on left chest pocket</li>
+            <li><span class="lpill lpill-6">L6</span> Teal overall leg front, sturdy brown working boots</li>
+            <li><span class="lpill lpill-7">L7</span> Teal overall sleeve (front arm)</li>
+          </ul>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> Grey at muzzle communicates age and experience without making him seem frail. The wheat sheaf emblem is the single most recognizable element in Mooseville — any crowd shot with Melvin present should lead with it. <strong>The gold wheat sheaf emblem must be present at ALL times in ALL costumes.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-002 MARTHA -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-002</span>
+        <div>
+          <div class="npc-sheet-name">Martha</div>
+          <div class="npc-sheet-role">Co-Founder · Town Elder</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag" style="background:#FFE0EC;color:#8A1040">Antler Style 01 (Pink)</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Auburn fur, slightly reddish undertone, lighter at face</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Classic Wide Rack (Style 01), pink/salmon tinted (female-presenting), triple-fork variation on left antler — her unique silhouette identifier</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Deep green</div>
+          <span class="npc-detail-label">Voice Direction</span>
+          <div class="npc-voice">Clear, precise, with warmth underneath the precision. A voice that plans ahead and still finds time to laugh.</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing — 7 Layers</span>
+          <ul class="layer-pill-list">
+            <li><span class="lpill lpill-1">L1</span> Pale yellow undershirt visible at collar</li>
+            <li><span class="lpill lpill-3">L3</span> Earth-tone linen dress body (warm cream-beige <code>#D4B896</code>)</li>
+            <li><span class="lpill lpill-4">L4</span> Leather satchel strap across chest — always present; she is always carrying records</li>
+            <li><span class="lpill lpill-6">L6</span> Layered skirt front panel with subtle floral embroidery at hem</li>
+            <li><span class="lpill lpill-7">L7</span> Front sleeve, visible ink stain on right hoof tip</li>
+          </ul>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> The ink stain on her right hoof is always present, at all costume variations. She writes constantly. <strong>This is non-negotiable continuity.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-003 DORIS VALE -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-003</span>
+        <div>
+          <div class="npc-sheet-name">Doris Vale</div>
+          <div class="npc-sheet-role">Agricultural Founder · Elder</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag tag-brown">Antler Style 03 (variant)</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Sandy brown gone silver-white at tips. Compact, wiry build.</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Modest, slightly asymmetric (Style 03 variant, smaller scale). Almost always has soil under her hooves — persistent dirt overlay on hoof materials.</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Warm earth brown</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing</span>
+          <div class="npc-detail-value">Practical wrap-around aprons over sturdy linen. Moves with unexpected quickness for her age.</div>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> She has never taken a day off in 22 years. Her apron should look genuinely worn — not stylized-worn. <strong>Weathering Tier 3 on apron material.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-004 RAYMOND HARLOW -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-004</span>
+        <div>
+          <div class="npc-sheet-name">Raymond Harlow</div>
+          <div class="npc-sheet-role">Builder Founder · Elder</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag tag-brown">Antler Style 05/08</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Enormous frame, dark charcoal fur</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Grand Palmated (Style 05/08), wide flat palm — the most visually imposing in Mooseville. <strong>Missing the tip of one ear from a building accident in Year 3.</strong></div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Deep brown</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing</span>
+          <div class="npc-detail-value">Always wears a thick work belt with hand-carved wooden tools hanging from it. Tools are part of his silhouette — their jingle is his audio signature.</div>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> The missing ear tip is a permanent feature and must <strong>never be "corrected."</strong> It tells his story.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-005 GLORIA FINCH -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-005</span>
+        <div>
+          <div class="npc-sheet-name">Gloria Finch</div>
+          <div class="npc-sheet-role">Archivist Elder · Records Keeper</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag" style="background:#FFE0EC;color:#8A1040">Antler Style 02 (Pink)</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Slim moose, warm honey-brown fur</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Tall Crown (Style 02), neat and relatively small. <strong>Reading glasses perched permanently on nose</strong> (crafted from human remnant lens material and carved wood).</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Warm amber-brown</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing</span>
+          <div class="npc-detail-value">Layered garments with many pockets — each pocket suggests something she needed to remember. Ink-stained cuff overlay (L4).</div>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> The glasses are her single most important visual identifier. They are <strong>visible in silhouette.</strong> Frames: warm tortoiseshell (<code>#8B4513 → #C4762A</code>).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-006 HAROLD WINSLOW -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-006</span>
+        <div>
+          <div class="npc-sheet-name">Harold Winslow</div>
+          <div class="npc-sheet-role">Water / Weather Elder</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag tag-brown">Antler Style 07 (notched)</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Medium-build moose with distinctive <strong>blue-grey fur</strong>. He attributes it to heavy early exposure to Moose Water — unprovable but charming.</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Forked Split (Style 07) with carved notches — one for each major weather event he has documented. He has <strong>22 notches</strong> (one per year).</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Light blue-grey</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing</span>
+          <div class="npc-detail-value">Always carries a carved wooden instrument case. Practical weather-appropriate clothing.</div>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> The 22 notches on his antlers are a technical challenge but are required on all LOD0 shots. <strong>LOD1 simplification: 5 representative notches on visible tines.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-007 MARJORIE BELL -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-007</span>
+        <div>
+          <div class="npc-sheet-name">Marjorie Bell</div>
+          <div class="npc-sheet-role">Community Nourishment Founder</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag" style="background:#FFE0EC;color:#8A1040">Antler Style 01 (Pink)</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Round, soft-looking moose (deliberately the most physically approachable character). Warm cinnamon-brown fur.</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Classic Wide Rack (Style 01), pink/salmon (female-presenting), <strong>antlers wrapped in dried herbs and small flowers</strong> — decorative and functional.</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Kind dark brown</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing</span>
+          <div class="npc-detail-value">Apron that has been stained by every meal she has ever cooked — she considers the stains a record. Weathering Tier 2–3 on apron ONLY; under-clothing is clean and well-maintained.</div>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> The herb-wrapped antlers are her most distinctive feature — they are visible in silhouette and make her immediately identifiable from a distance.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-008 CHESTER LANG -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-008</span>
+        <div>
+          <div class="npc-sheet-name">Chester Lang</div>
+          <div class="npc-sheet-role">Craft / Repair Elder</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag tag-brown">Working Antlers</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Compact and muscular moose, dark fur worn to near-black from decades of workshop smoke and grease.</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value"><strong>Working antlers with tool loops and small hooks attached</strong> — he uses his antlers as an actual tool rack.</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Sharp and evaluating</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing</span>
+          <div class="npc-detail-value">Dark work clothes; <strong>prosthetic carved wooden hoof tips</strong> on two hooves — they click softly when he walks (his audio signature).</div>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> The tool-rack antlers are one of the most creative character designs in the game. They must be consistent across all LOD levels. Tool items on antlers are L4 layer extras — low-poly at LOD1+.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-009 EVELYN PRICE -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-009</span>
+        <div>
+          <div class="npc-sheet-name">Evelyn Price</div>
+          <div class="npc-sheet-role">Mediator Elder · Retired</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag" style="background:#F0F0F8;color:#4A4A80">Antler Style 02 (Silver)</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">The most elegant moose in Mooseville. Tall, slim, silver-white fur, high narrow antlers.</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Tall Crown (Style 02), silver-white tinted — <em>no strong gender color bias; she is above such distinctions</em> — very high and narrow.</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Clear, calm silver-blue</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing</span>
+          <div class="npc-detail-value">Always dressed in deep forest green with subtle <strong>gold-thread embroidery</strong> — the only Moosian who consistently wears gold embellishments. Clothing is Tier 1 (Pristine) material — impeccable.</div>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> The gold-thread embroidery is her unique visual identifier. It suggests wealth of a certain kind: the wealth of being right, frequently, and gracefully.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC-010 VINCENT REED -->
+    <div class="npc-sheet">
+      <div class="npc-sheet-header">
+        <span class="npc-badge">NPC-010</span>
+        <div>
+          <div class="npc-sheet-name">Vincent Reed</div>
+          <div class="npc-sheet-role">Cartographer Founder</div>
+        </div>
+        <div class="tag-list" style="margin-left:auto">
+          <span class="tag tag-emerald">First Circle</span>
+          <span class="tag tag-brown">Antler Style 07 (carved)</span>
+        </div>
+      </div>
+      <div class="npc-sheet-body">
+        <div class="npc-col">
+          <span class="npc-detail-label">Fur</span>
+          <div class="npc-detail-value">Wiry, travel-worn moose with rust-brown fur faded at the flanks from years of outdoor exposure</div>
+          <span class="npc-detail-label">Antlers</span>
+          <div class="npc-detail-value">Forked Split (Style 07) with a distinctive <strong>carved groove running down the center tine</strong> — his personal marking. Moderate size.</div>
+          <span class="npc-detail-label">Eyes</span>
+          <div class="npc-detail-value">Alert, slightly restless dark brown</div>
+        </div>
+        <div class="npc-col">
+          <span class="npc-detail-label">Clothing</span>
+          <div class="npc-detail-value">Always carries a rolled map case. <strong>Boots are always muddy</strong> (persistent mud overlay on lower leg material). Travel-worn Tier 3 weathering throughout.</div>
+          <div class="npc-story-detail">
+            <strong>Story Detail:</strong> He is the only member of the First Circle who has never fully settled. His clothing should look like he might leave at any moment.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 6B — SECOND GENERATION NPCs
+    ══════════════════════════════════════════════════════════ -->
+    <div id="npcs-gen2" class="section-header">
+      <span class="section-icon">🌱</span>
+      <h2>NPC Character Sheets — Second Generation</h2>
+    </div>
+
+    <div class="info-box">
+      Abbreviated character sheets. Full 7-layer rig and story continuity apply — key visual identifiers and non-negotiable features are listed for each.
+    </div>
+
+    <div class="gen2-grid">
+
+      <div class="gen2-card">
+        <div class="gen2-header">
+          <span class="gen2-id">NPC-011</span>
+          <span class="gen2-name">Bram Vale</span>
+          <span class="gen2-age">Late 20s</span>
+        </div>
+        <div class="gen2-body">
+          Doris's grandson. Compact build, deep brown fur. Asymmetric antlers (Style 03). Always dirty. Always happy about it.
+          <div class="gen2-identifier">Non-negotiable: Distinctive golden-amber streak at left shoulder (spring-touch mark).</div>
+        </div>
+      </div>
+
+      <div class="gen2-card">
+        <div class="gen2-header">
+          <span class="gen2-id">NPC-012</span>
+          <span class="gen2-name">Pell Harlow</span>
+          <span class="gen2-age">Mid-20s</span>
+        </div>
+        <div class="gen2-body">
+          Raymond's grandchild. Slight build, medium brown fur. Always sketching — a small journal is their persistent held item (L7).
+          <div class="gen2-identifier">Non-negotiable: White facial blaze (forehead-to-nose marking). Measuring cord bracelet around left wrist.</div>
+        </div>
+      </div>
+
+      <div class="gen2-card">
+        <div class="gen2-header">
+          <span class="gen2-id">NPC-013</span>
+          <span class="gen2-name">Renna Finch</span>
+          <span class="gen2-age">Early 20s</span>
+        </div>
+        <div class="gen2-body">
+          Gloria's granddaughter. Tall and angular, pale honey-gold fur. Almost always reading. Writes in margins — ink on hooves (lighter staining than Martha, as she's younger and less experienced).
+          <div class="gen2-identifier">Non-negotiable: Gloria's same glasses design (newer pair, cooler tortoiseshell). Visible in silhouette.</div>
+        </div>
+      </div>
+
+      <div class="gen2-card">
+        <div class="gen2-header">
+          <span class="gen2-id">NPC-014</span>
+          <span class="gen2-name">Finn Winslow</span>
+          <span class="gen2-age">Early 30s</span>
+        </div>
+        <div class="gen2-body">
+          Harold's son. Blue-grey fur (family trait). Perpetually damp look on lower body materials — subtle wet specular layer.
+          <div class="gen2-identifier">Non-negotiable: Tall rubber wading boots + waterproof overshirt as permanent silhouette elements.</div>
+        </div>
+      </div>
+
+      <div class="gen2-card">
+        <div class="gen2-header">
+          <span class="gen2-id">NPC-015</span>
+          <span class="gen2-name">Lotte Bell</span>
+          <span class="gen2-age">Mid-30s</span>
+        </div>
+        <div class="gen2-body">
+          Marjorie's daughter. Cinnamon fur (inherits mother's warmth), quicker energy than Marjorie. Runs the most popular stall.
+          <div class="gen2-identifier">Non-negotiable: Market tray is her persistent L7 held item — always present.</div>
+        </div>
+      </div>
+
+      <div class="gen2-card">
+        <div class="gen2-header">
+          <span class="gen2-id">NPC-016</span>
+          <span class="gen2-name">Moss Lang</span>
+          <span class="gen2-age">Late teens</span>
+        </div>
+        <div class="gen2-body">
+          Chester's apprentice. Small for their age, dark fur like Chester, bright curious eyes. Antler nubbins (Style 04 — tiny, just developing).
+          <div class="gen2-identifier">Non-negotiable: Two small nubbins they are intensely proud of. Do not scale up.</div>
+        </div>
+      </div>
+
+      <div class="gen2-card">
+        <div class="gen2-header">
+          <span class="gen2-id">NPC-017</span>
+          <span class="gen2-name">Wren Price</span>
+          <span class="gen2-age">Late 20s</span>
+        </div>
+        <div class="gen2-body">
+          Evelyn's granddaughter. Tall like Evelyn, silver-tipped fur but warmer undertone than grandmother.
+          <div class="gen2-identifier">Non-negotiable: Event planning tools in pockets — small calendar, chalk, colored cords for layout markers.</div>
+        </div>
+      </div>
+
+      <div class="gen2-card">
+        <div class="gen2-header">
+          <span class="gen2-id">NPC-018</span>
+          <span class="gen2-name">Caro Reed</span>
+          <span class="gen2-age">Mid-30s</span>
+        </div>
+        <div class="gen2-body">
+          Vincent's daughter. Rust-brown fur from her father, taller and broader. Best boots in Mooseville.
+          <div class="gen2-identifier">Non-negotiable: Scar across left shoulder from a trail accident — always present, never omitted.</div>
+        </div>
+      </div>
+
+    </div><!-- /.gen2-grid -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 7 — EXPRESSION SHEET STANDARDS
+    ══════════════════════════════════════════════════════════ -->
+    <div id="expressions" class="section-header">
+      <span class="section-icon">😊</span>
+      <h2>Expression Sheet Standards</h2>
+    </div>
+
+    <div class="info-box">
+      All named NPCs require all 8 expressions at <strong>LOD0</strong>. These are minimum required deliverables — additional nuanced expressions are encouraged but not required.
+    </div>
+
+    <h3 class="subsection-header">8A — Required 8 Expressions</h3>
+    <div class="expression-grid">
+
+      <div class="expression-card">
+        <div class="expression-number">1</div>
+        <div class="expression-body">
+          <div class="expression-name">Neutral / Resting</div>
+          <div class="expression-desc">Ears at half-droop. Antlers slightly forward. Eyes at rest. Soft closed mouth.</div>
+          <div class="expression-usage">The "schedule walking" expression.</div>
+        </div>
+      </div>
+
+      <div class="expression-card">
+        <div class="expression-number">2</div>
+        <div class="expression-body">
+          <div class="expression-name">Warm Greeting</div>
+          <div class="expression-desc">Eyes slightly wider, soft smile, ears perked upward at 15°, antlers slightly elevated (happy resting tension).</div>
+          <div class="expression-usage">Closeness Level 1–2 expression when player approaches.</div>
+        </div>
+      </div>
+
+      <div class="expression-card">
+        <div class="expression-number">3</div>
+        <div class="expression-body">
+          <div class="expression-name">Engaged / Interested</div>
+          <div class="expression-desc">Head tilted 10–15°, one ear forward, eyes wider, brow (skin above eye) slightly raised.</div>
+          <div class="expression-usage">"Tell me more" expression.</div>
+        </div>
+      </div>
+
+      <div class="expression-card">
+        <div class="expression-number">4</div>
+        <div class="expression-body">
+          <div class="expression-name">Thoughtful / Considering</div>
+          <div class="expression-desc">Eyes down and slightly closed, one ear back, slight head nod downward.</div>
+          <div class="expression-usage">Thinking pose — decision moments.</div>
+        </div>
+      </div>
+
+      <div class="expression-card">
+        <div class="expression-number">5</div>
+        <div class="expression-body">
+          <div class="expression-name">Concerned / Worried</div>
+          <div class="expression-desc">Brow drawn down, ears back and lower, eyes slightly wider.</div>
+          <div class="expression-usage">Quest reveal moments and story tension beats.</div>
+        </div>
+      </div>
+
+      <div class="expression-card">
+        <div class="expression-number">6</div>
+        <div class="expression-body">
+          <div class="expression-name">Warm Laugh / Joy</div>
+          <div class="expression-desc">Eyes closed in laugh shape (crescents), ears fully perked, antlers at maximum elevation, open smile. Full-body — slight forward lean.</div>
+          <div class="expression-usage">Celebratory moments.</div>
+        </div>
+      </div>
+
+      <div class="expression-card">
+        <div class="expression-number">7</div>
+        <div class="expression-body">
+          <div class="expression-name">Sad / Tender</div>
+          <div class="expression-desc">Eyes slightly glistened (wet rim spec), ears fully drooped outward, antlers low, head tilted down.</div>
+          <div class="expression-usage">Reserved for Legacy Moments only.</div>
+        </div>
+      </div>
+
+      <div class="expression-card">
+        <div class="expression-number">8</div>
+        <div class="expression-body">
+          <div class="expression-name">Determined / Resolved</div>
+          <div class="expression-desc">Eyes forward and narrow, ears flat back (aerodynamic), antlers angled forward.</div>
+          <div class="expression-usage">Quest acceptance, challenge moment.</div>
+        </div>
+      </div>
+
+    </div><!-- /.expression-grid -->
+
+    <!-- Antler & Ear Body Language -->
+    <h3 class="subsection-header">8B — Antler &amp; Ear Body Language Reference</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>🦌</span><h3>Antler Position → Mood</h3></div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Position</th><th>Communicates</th></tr></thead>
+              <tbody>
+                <tr><td>Elevated / forward</td><td>Excitement, engagement, joy</td></tr>
+                <tr><td>Neutral / centered</td><td>Calm, professional, relaxed</td></tr>
+                <tr><td>Lowered / back</td><td>Sadness, defeat, submission, grief</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>👂</span><h3>Ear Position → Attention</h3></div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Position</th><th>Communicates</th></tr></thead>
+              <tbody>
+                <tr><td>Both forward</td><td>Focused attention, curiosity</td></tr>
+                <tr><td>One forward / one back</td><td>Uncertainty, listening for something</td></tr>
+                <tr><td>Both back and down</td><td>Sadness, fear, guilt</td></tr>
+                <tr><td>Both up and forward</td><td>Maximum excitement, greeting</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <strong>Rigging Requirement:</strong> Ears and antlers MUST be independently rigged. Animators who merge these controls are creating an animation debt that will compromise every emotional scene in the game.
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 8 — ROTATION/TURNAROUND STANDARDS
+    ══════════════════════════════════════════════════════════ -->
+    <div id="turnaround" class="section-header">
+      <span class="section-icon">🔄</span>
+      <h2>Rotation / Turnaround Standards</h2>
+    </div>
+
+    <h3 class="subsection-header">9A — Required Camera Angles (All Named NPCs)</h3>
+    <div class="angle-row">
+      <span class="angle-pill">0° Front</span>
+      <span class="angle-pill primary">45° ¾ Front Left — PRIMARY GAMEPLAY ANGLE</span>
+      <span class="angle-pill">90° Side Left</span>
+      <span class="angle-pill">135° ¾ Back Left</span>
+      <span class="angle-pill">180° Back</span>
+    </div>
+    <div class="info-box" style="margin-top:.75rem">
+      The <strong>45° ¾ Front Left</strong> angle is the primary gameplay camera angle and must be the most polished view. All other angles are required but receive secondary polish priority.
+    </div>
+
+    <h3 class="subsection-header">9B — Per-Angle Documentation Requirements</h3>
+    <div class="card">
+      <div class="card-body">
+        <p>Each camera angle must show all three of the following render passes:</p>
+        <div class="grid-3">
+          <div>
+            <div class="biome-section-title">Pass 1 — Base Character</div>
+            <ul class="styled-list">
+              <li>No clothing — fur only</li>
+              <li>Confirms anatomical correctness</li>
+              <li>LOD0 only</li>
+            </ul>
+          </div>
+          <div>
+            <div class="biome-section-title">Pass 2 — Signature Outfit</div>
+            <ul class="styled-list">
+              <li>All 7 layers active</li>
+              <li>Confirms layering correctness</li>
+              <li>LOD0 only</li>
+            </ul>
+          </div>
+          <div>
+            <div class="biome-section-title">Pass 3 — Maximum Accessories</div>
+            <ul class="styled-list">
+              <li>All optional accessories active</li>
+              <li>Confirms no clipping</li>
+              <li>LOD0 only</li>
+            </ul>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:.75rem">
+          LOD1 and LOD2 are separate delivery items — document with separate turnaround sheets. LOD simplification notes (e.g., Harold Winslow's notches) must be documented alongside LOD1 renders.
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 9 — WILDLIFE CHARACTER SHEETS
+    ══════════════════════════════════════════════════════════ -->
+    <div id="wildlife" class="section-header">
+      <span class="section-icon">🐻</span>
+      <h2>Wildlife Character Sheets</h2>
+    </div>
+
+    <div class="warn-box">
+      <strong>Simplified Pipeline:</strong> Wildlife characters use the simplified rendering pipeline — no 7-layer clothing rig, no greyscale tint system. Fixed appearance only. Do NOT adapt the Moosian skeleton for wildlife — they use entirely separate rigs.
+    </div>
+
+    <div class="wildlife-grid">
+
+      <div class="wildlife-card">
+        <div class="wildlife-header">
+          <span class="wildlife-icon">🐻</span>
+          <span class="wildlife-name">Bear Family — Thorn, Ember, &amp; Cubs</span>
+        </div>
+        <div class="wildlife-body">
+          <div class="biome-section-title">Thorn</div>
+          Large brown bear, male. Dark brown-black fur. More massive than any moose character. Non-threatening face — heavy brow but soft eyes.
+          <div class="biome-section-title" style="margin-top:.5rem">Ember</div>
+          Slightly smaller female bear. Medium warm brown, lighter at muzzle.
+          <div class="biome-section-title" style="margin-top:.5rem">Cubs</div>
+          1–2 cubs, season-dependent (spring–autumn only). Tiny, round, enormous heads, tiny ears, stumbling movement.
+          <div class="gen2-identifier" style="margin-top:.65rem">Animation: Bears move on all fours. Locomotion system is entirely separate from moose character animation. Do not attempt to adapt moose skeleton.</div>
+        </div>
+      </div>
+
+      <div class="wildlife-card">
+        <div class="wildlife-header">
+          <span class="wildlife-icon">🦅</span>
+          <span class="wildlife-name">Eagle Pair (Named by Player)</span>
+        </div>
+        <div class="wildlife-body">
+          Two bald eagles. Standard bald eagle reference (white head, dark body, yellow beak/feet). No stylization required — eagles read as "natural world visitors" rather than Moosian characters.
+          <div class="gen2-identifier" style="margin-top:.65rem">Key behavior: High-familiarity eagle circles above player in wilderness areas and calls attention to hidden items. This is the only wildlife guidance mechanic — must be visually distinctive in flight against all biome sky conditions.</div>
+        </div>
+      </div>
+
+      <div class="wildlife-card">
+        <div class="wildlife-header">
+          <span class="wildlife-icon">🦫</span>
+          <span class="wildlife-name">Beaver Colony</span>
+        </div>
+        <div class="wildlife-body">
+          Multiple beavers, not individually characterized. Standard beaver proportions. Brown fur, flat tail, prominent incisors.
+          <div class="gen2-identifier" style="margin-top:.65rem">Maintain realistic beaver proportions — they are NOT stylized like Moosians. This contrast with Moosian characters is intentional.</div>
+        </div>
+      </div>
+
+    </div><!-- /.wildlife-grid -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 10 — DO'S AND DON'TS
+    ══════════════════════════════════════════════════════════ -->
+    <div id="dos-donts" class="section-header">
+      <span class="section-icon">✅</span>
+      <h2>Visual Do's &amp; Don'ts</h2>
+    </div>
+
+    <div class="do-dont-grid">
+
+      <div class="do-card">
+        <h4>✓ Do</h4>
+        <ul>
+          <li>Push antlers to be disproportionately large — they are the emotional crown, not just anatomy</li>
+          <li>Maintain soil/mud/ink stains as persistent character texture overlays where specified</li>
+          <li>Make every NPC immediately readable from their back silhouette alone</li>
+          <li>Make clothing "lived in" — Weathering Tier 2 is the default for all NPC owned garments</li>
+          <li>Ensure eyes are always the brightest, most readable element on the face</li>
+          <li>Vary torso width across characters — visual weight variation creates social hierarchy at a glance</li>
+          <li>Test every character against the Environment Contrast Test (Section 11)</li>
+          <li>Maintain gold wheat sheaf emblem on Melvin at ALL times in ALL costumes</li>
+        </ul>
+      </div>
+
+      <div class="dont-card">
+        <h4>✕ Don't</h4>
+        <ul>
+          <li>Give any two named NPCs the same silhouette — check the silhouette chart</li>
+          <li>Use cool grey tones in character shadows — all cel shadows must use warm tints</li>
+          <li>Use pure black (<code>#000000</code>) in any character texture — use warm near-black (<code>#1A0F00</code>) range</li>
+          <li>Add visible neck columns — the neck is absent by design; shoulders merge into head</li>
+          <li>Make any character's eyes look anxious or fearful as a default state — Mooseville is warm</li>
+          <li>Use the same antler style for two named NPCs of the same generation</li>
+          <li>Stylize wildlife characters with Moosian proportions — they remain naturalistic</li>
+          <li>Use fantasy or non-moose fur colors for player character or named NPCs</li>
+        </ul>
+      </div>
+
+    </div><!-- /.do-dont-grid -->
+
+    <div class="pull-quote">
+      Every character in Mooseville should look like they have been here for years — wearing their story on their fur, their clothing, their antlers. If a character looks "fresh off the assembly line," go back and add the details that time would have left behind.
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>

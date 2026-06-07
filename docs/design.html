@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems & Economy — Mooseville Adventures</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters & NPCs</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes & Maps</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems & Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+  <div class="nav-group">
+    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+  </div>
+  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
+</nav>
+
+<main class="main">
+
+  <div class="page-hero hero-design">
+    <div class="hero-label">Game Design</div>
+    <h1>Systems & Economy</h1>
+    <p class="hero-desc">
+      Core gameplay loop, the Mucks economy, resource production chains, construction
+      systems, quest campaigns, progression framework, and the business district design.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- Core gameplay loop -->
+    <div class="section-header">
+      <span class="section-icon">🔄</span>
+      <h2>Core Gameplay Loop</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;padding:1rem 0;font-weight:700;font-size:.9rem;font-family:'Playfair Display',Georgia,serif">
+          <div style="background:var(--emerald-dark);color:white;padding:.6rem 1.1rem;border-radius:8px">🧭 Explore</div>
+          <div style="color:var(--text-muted);font-size:1.2rem">→</div>
+          <div style="background:var(--emerald-dark);color:white;padding:.6rem 1.1rem;border-radius:8px">⛏️ Gather Resources</div>
+          <div style="color:var(--text-muted);font-size:1.2rem">→</div>
+          <div style="background:var(--emerald-dark);color:white;padding:.6rem 1.1rem;border-radius:8px">🌱 Farm & Craft</div>
+          <div style="color:var(--text-muted);font-size:1.2rem">→</div>
+          <div style="background:var(--emerald-dark);color:white;padding:.6rem 1.1rem;border-radius:8px">🏗️ Build & Upgrade</div>
+          <div style="color:var(--text-muted);font-size:1.2rem">→</div>
+          <div style="background:var(--gold);color:var(--brown-darkest);padding:.6rem 1.1rem;border-radius:8px">📈 Town Grows</div>
+          <div style="color:var(--text-muted);font-size:1.2rem">↺</div>
+        </div>
+        <div class="info-box">
+          <strong>Design intent:</strong> Explorer, farmer, and city-builder are not separate modes — they are
+          one interconnected loop. Solo effort can keep the town alive, but community
+          infrastructure is required to grow it efficiently.
+        </div>
+      </div>
+    </div>
+
+    <!-- Economy -->
+    <div class="section-header">
+      <span class="section-icon">🪙</span>
+      <h2>The Mucks Economy</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>💰</span><h3>Currency: Mucks</h3></div>
+        <div class="card-body">
+          <p>Carved wooden coins with antler stamps and seasonal markings. The concept was learned
+          from the Sacred Documents and redesigned in Moosian form.</p>
+          <div class="biome-section-title">Earn Sources</div>
+          <ul class="styled-list">
+            <li>City work orders and contracts</li>
+            <li>Main and side quest rewards</li>
+            <li>Festival event prizes</li>
+            <li>Selling crafted specialty goods</li>
+            <li>Exploration deliveries and mapped route reports</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🛒</span><h3>Spend Sources</h3></div>
+        <div class="card-body">
+          <div class="biome-section-title">Purchasable (Non-Essential)</div>
+          <ul class="styled-list">
+            <li>Clothing and style sets</li>
+            <li>Home upgrades and décor</li>
+            <li>Cosmetic station services</li>
+            <li>Optional efficiency tools</li>
+            <li>Specialty crafted foods and celebration goods</li>
+          </ul>
+          <div class="warn-box" style="margin-top:.75rem">
+            <strong>Free Forever:</strong> Moose Water · Basic food staples<br>
+            No citizen loses identity or health due to poverty.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resource chains -->
+    <div class="section-header">
+      <span class="section-icon">⛓️</span>
+      <h2>Resource Production Chains</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Family</th>
+            <th>Raw Resource</th>
+            <th>Refined Resource</th>
+            <th>Advanced Resource</th>
+            <th>Primary Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Timber</strong></td><td>Trees</td><td>Logs</td><td>Boards, Beams</td><td>Homes, storefronts, bridges</td></tr>
+          <tr><td><strong>Masonry</strong></td><td>Rock</td><td>Stone Blocks</td><td>Cut Stone, Pavers</td><td>Foundations, roads, walls</td></tr>
+          <tr><td><strong>Ceramics</strong></td><td>Clay</td><td>Bricks</td><td>Glazed Brick, Drain Pipe</td><td>Kilns, chimneys, sanitation</td></tr>
+          <tr><td><strong>Metal</strong></td><td>Iron Ore</td><td>Iron Bars</td><td>Nails, Hinges, Tools</td><td>Structural fasteners, tools</td></tr>
+          <tr><td><strong>Fuel</strong></td><td>Deadwood, Peat</td><td>Charcoal</td><td>Coke Blend</td><td>Smelting, high-heat crafting</td></tr>
+          <tr><td><strong>Fiber</strong></td><td>Flax, Reeds</td><td>Thread, Rope</td><td>Heavy Cloth, Sailcloth</td><td>Clothing, nets, utility wraps</td></tr>
+          <tr><td><strong>Resin</strong></td><td>Pine Sap</td><td>Pitch</td><td>Sealant, Waterproof Coating</td><td>Roofs, water casks, bridges</td></tr>
+          <tr><td><strong>Glass</strong></td><td>Silica Sand</td><td>Glass Panes</td><td>Vials, Lenses</td><td>Moose Water handling, optics</td></tr>
+          <tr><td><strong>Lime</strong></td><td>Limestone</td><td>Quicklime</td><td>Mortar, Plaster</td><td>Masonry bonding, interiors</td></tr>
+          <tr><td><strong>Food Craft</strong></td><td>Grain, Fruit, Dairy</td><td>Flour, Jam, Curd</td><td>Pies, Cakes, Festival Trays</td><td>Trade goods and event rewards</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-header">Baseline Conversion Recipes</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Input</th><th>Output</th><th>Method</th></tr></thead>
+              <tbody>
+                <tr><td>1 Tree</td><td>4 Logs</td><td>Cutting</td></tr>
+                <tr><td>1 Log</td><td>2 Boards</td><td>Hand chopping (slow)</td></tr>
+                <tr><td>1 Log</td><td>4 Boards</td><td>Sawmill Line I (fast)</td></tr>
+                <tr><td>3 Rock</td><td>2 Stone Blocks</td><td>Shaping bench</td></tr>
+                <tr><td>3 Clay</td><td>2 Bricks</td><td>Kiln firing</td></tr>
+                <tr><td>4 Iron Ore + 1 Charcoal</td><td>2 Iron Bars</td><td>Smelter</td></tr>
+                <tr><td>1 Iron Bar</td><td>8 Nails</td><td>Forge</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Input</th><th>Output</th><th>Method</th></tr></thead>
+              <tbody>
+                <tr><td>3 Flax</td><td>2 Thread</td><td>Fiber processing</td></tr>
+                <tr><td>2 Thread</td><td>1 Cloth Bolt</td><td>Loom</td></tr>
+                <tr><td>2 Pine Sap</td><td>1 Pitch</td><td>Resin press</td></tr>
+                <tr><td>2 Sand + 1 Charcoal</td><td>1 Glass Pane</td><td>Glass bench</td></tr>
+                <tr><td>1 Glass Pane</td><td>2 Vials</td><td>Vial bench</td></tr>
+                <tr><td>2 Limestone</td><td>1 Quicklime</td><td>Lime kiln</td></tr>
+                <tr><td>1 Quicklime + 1 Sand + 1 Water</td><td>2 Mortar</td><td>Mortar mixing</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Production throughput -->
+    <div class="section-header">
+      <span class="section-icon">🏭</span>
+      <h2>Production Throughput Model</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>🤲</span><h3>Manual Production</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Always available — no unlock required</li>
+            <li>Low throughput, stamina-heavy</li>
+            <li>Solo effort can keep the town alive</li>
+          </ul>
+          <div class="info-box" style="margin-top:.75rem">Design intent: survival through effort</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>⚙️</span><h3>Industrial Production</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Requires business unlock + staffed role</li>
+            <li>High throughput, maintenance cost in mucks and fuel</li>
+            <li>Community infrastructure needed to grow efficiently</li>
+          </ul>
+          <div class="info-box" style="margin-top:.75rem">Design intent: expansion through infrastructure</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Town progression -->
+    <div class="section-header">
+      <span class="section-icon">📈</span>
+      <h2>Town Progression & Unlock Schedule</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Town Level</th>
+            <th>Unlock</th>
+            <th>Prerequisite Quest</th>
+            <th>First Build Cost</th>
+            <th>First Upgrade Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Green Vial Commons</td><td>Campaign II complete</td><td>20 Logs, 10 Boards, 8 Stone, 4 Iron, 16 Nails</td><td>Water distribution radius +25%</td></tr>
+          <tr><td>1</td><td>Antler Almanac Co-op</td><td>Tutorial complete</td><td>24 Logs, 12 Boards, 10 Stone, 6 Clay, 12 Nails</td><td>Crop forecast accuracy +10%</td></tr>
+          <tr><td>2</td><td>Rack and Rafter Works</td><td>Splitbend Builder's Fair intro</td><td>35 Logs, 24 Boards, 16 Stone, 10 Iron, 30 Nails</td><td>Unlock Sawmill Line I (Boards in bulk)</td></tr>
+          <tr><td>2</td><td>Muck and Measure Market Hall</td><td>First trade contract</td><td>28 Logs, 16 Boards, 14 Stone, 8 Brick, 20 Nails</td><td>Vendor slot +1</td></tr>
+          <tr><td>3</td><td>Carved Coin Lodge</td><td>Earn 500 total mucks</td><td>22 Logs, 14 Boards, 18 Stone, 12 Iron, 28 Nails</td><td>Work-order payout +8%</td></tr>
+          <tr><td>3</td><td>Tine and Twine Outfitters</td><td>Complete 3 exploration deliveries</td><td>26 Logs, 18 Boards, 14 Stone, 8 Iron, 24 Nails</td><td>Tool durability +10%</td></tr>
+          <tr><td>4</td><td>Hide and Hem Clothhouse</td><td>Integrate 1 new citizen</td><td>20 Logs, 14 Boards, 12 Stone, 10 Clay, 18 Nails</td><td>Role outfit recipes +4</td></tr>
+          <tr><td>4</td><td>Pinecone Press Archive</td><td>Archive Night Vigil complete</td><td>18 Logs, 12 Boards, 16 Stone, 12 Brick, 16 Nails</td><td>Map reveal radius +12%</td></tr>
+          <tr><td>5</td><td>Velvet Tine Bakehouse</td><td>Build Communal Oven</td><td>24 Logs, 14 Boards, 10 Stone, 14 Brick, 18 Nails</td><td>Specialty food sell value +12%</td></tr>
+          <tr><td>5</td><td>Hoof n Buff Shine Stand</td><td>Mane and Antler Week complete</td><td>14 Logs, 10 Boards, 8 Stone, 4 Iron, 12 Nails</td><td>Social confidence buff duration +15%</td></tr>
+          <tr><td>6</td><td>Tine and Trim Mane House</td><td>Reach Town Trust Rank 2</td><td>18 Logs, 12 Boards, 10 Stone, 6 Iron, 14 Nails</td><td>Reputation gain from style events +15%</td></tr>
+          <tr><td>6</td><td>Lick and Leaf Remedies</td><td>Restore 6 regressed Moosians</td><td>16 Logs, 10 Boards, 10 Stone, 10 Clay, 12 Nails</td><td>Recovery item potency +10%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Housing unlocks -->
+    <div class="section-header">
+      <span class="section-icon">🏠</span>
+      <h2>Home & District Unlocks</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Town Level</th><th>Home Type</th><th>Build Cost (per unit)</th><th>Unlock Effect</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Starter Burrow Home</td><td>12 Logs, 8 Boards, 6 Stone, 10 Nails</td><td>+1 housing slot</td></tr>
+          <tr><td>2</td><td>Shared Loft Home</td><td>14 Logs, 10 Boards, 8 Stone, 12 Nails</td><td>+2 housing slots</td></tr>
+          <tr><td>3</td><td>Workshop Cottage</td><td>16 Logs, 12 Boards, 10 Stone, 6 Iron, 14 Nails</td><td>Enables role bonus at home</td></tr>
+          <tr><td>4</td><td>Family Hearth House</td><td>18 Logs, 14 Boards, 12 Stone, 8 Brick, 16 Nails</td><td>+3 housing slots, morale +3</td></tr>
+          <tr><td>5</td><td>District Plot Alpha</td><td>30 Logs, 20 Boards, 18 Stone, 12 Brick, 10 Iron, 30 Nails</td><td>Unlocks second neighborhood lane</td></tr>
+          <tr><td>6</td><td>District Plot Beta</td><td>34 Logs, 24 Boards, 20 Stone, 16 Brick, 12 Iron, 36 Nails</td><td>Unlocks civic expansion permits</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Campaign systems mapping -->
+    <div class="section-header">
+      <span class="section-icon">📜</span>
+      <h2>Quest Campaigns → Systems Unlocks</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#FFE8E8,#FFEEEE)">
+          <span>🌫️</span><h3 style="color:#800">Campaign I: The Fading Glow Crisis</h3>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li><strong>System unlock:</strong> Water diagnostics board</li>
+            <li><strong>Risk mechanic:</strong> Regression meter for impacted citizens</li>
+            <li><strong>Win condition:</strong> Identify spring diversion source</li>
+            <li><strong>Timeline:</strong> Year 4–5 post-founding</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#E8FFE8,#EEFFEE)">
+          <span>💚</span><h3 style="color:#1A6020">Campaign II: The Green Water Expedition</h3>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li><strong>System unlock:</strong> Enrichment Station</li>
+            <li><strong>Resource unlock:</strong> Moose Water supply management</li>
+            <li><strong>Win condition:</strong> Restore affected Moosians and stabilize water</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#E8EEFF,#EEEEFF)">
+          <span>🤝</span><h3 style="color:#2A3880">Campaign III: Strangers from the Far Side</h3>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li><strong>System unlock:</strong> Integration district and diplomacy tracks</li>
+            <li><strong>Reward unlock:</strong> New styles, dyes, craft variants</li>
+            <li><strong>Win condition:</strong> Successful aid and optional citizenship integration</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#FFF5E8,#FFEEDC)">
+          <span>🌄</span><h3 style="color:#804020">Campaign IV: The Wide Valley Choice</h3>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li><strong>System unlock:</strong> Repeatable recruitment expeditions</li>
+            <li><strong>Ethical lock:</strong> Voluntary join-or-return choice required</li>
+            <li><strong>Win condition:</strong> Recruit by consent and maintain town trust</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Milestone quest unlock framework -->
+    <div class="section-header">
+      <span class="section-icon">🎯</span>
+      <h2>Milestone Quest Unlock Framework</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Milestone</th><th>Trigger</th><th>Unlock Questline</th><th>Primary Reward</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="badge badge-tier-b">M1</span> Town Level 2</td><td>Level up</td><td>Millwright Beginnings</td><td>Sawmill Line I and board bulk processing</td></tr>
+          <tr><td><span class="badge badge-tier-b">M2</span> Level 3 + 20 citizens</td><td>Level + pop</td><td>Stone and Story</td><td>Masonry bench upgrades and road paving</td></tr>
+          <tr><td><span class="badge badge-tier-b">M3</span> Level 4 + Campaign I</td><td>Campaign</td><td>Glowwatch Protocol</td><td>Water diagnostics board and purity alerts</td></tr>
+          <tr><td><span class="badge badge-tier-c">M4</span> Level 5 + 2 districts</td><td>Level + expansion</td><td>Kiln of the Commons</td><td>Brickworks upgrades and sanitation pipes</td></tr>
+          <tr><td><span class="badge badge-tier-c">M5</span> Level 6 + Campaign II</td><td>Campaign</td><td>Forge of Antlers</td><td>Nail and hinge mass crafting</td></tr>
+          <tr><td><span class="badge badge-tier-c">M6</span> Level 7 + 3 Specialists</td><td>Staffing</td><td>Threads of Identity</td><td>Advanced role outfits and cloth bonuses</td></tr>
+          <tr><td><span class="badge badge-tier-d">M7</span> Level 8 + Campaign III</td><td>Campaign</td><td>New Hooves, New Homes</td><td>Integration housing tier and hybrid crafts</td></tr>
+          <tr><td><span class="badge badge-tier-d">M8</span> Level 9 + 6 Mentors</td><td>Staffing</td><td>The Teaching Charter</td><td>NPC-to-NPC training network</td></tr>
+          <tr><td><span class="badge badge-tier-d">M9</span> Level 10 + Campaign IV</td><td>Campaign</td><td>Valley Steward Accord</td><td>Multi-route expeditions and grand civic projects</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Reward design rules -->
+    <div class="section-header">
+      <span class="section-icon">🎁</span>
+      <h2>Reward Design Rules</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <ul class="styled-list">
+          <li>Clothing and upgrades can be purchased with mucks <em>or</em> granted as quest rewards</li>
+          <li>Main campaigns should always award one <strong>permanent town system unlock</strong></li>
+          <li>Festival rewards should rotate between cosmetics, recipes, and civic buffs</li>
+          <li>Teaching milestones should reward player rank advancements and NPC certification tools</li>
+        </ul>
+        <div class="info-box" style="margin-top:1rem">
+          <strong>Two-axis progression model:</strong> personal mastery + community mastery.
+          Player levels through exploration and quests; community levels through production
+          infrastructure and NPC proficiency.
+        </div>
+      </div>
+    </div>
+
+    <!-- Implementation backlog -->
+    <div class="section-header">
+      <span class="section-icon">📝</span>
+      <h2>Implementation Backlog (Design Seeds)</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <ul class="styled-list two-col-list">
+          <li>Town Growth Point formulas by citizen type</li>
+          <li>Business upgrade tiers II–IV for all 12 businesses</li>
+          <li>Role-switch questline with costs and cooldown</li>
+          <li>Citizen satisfaction model (role fit + housing quality)</li>
+          <li>Market simulation for specialty item demand by season</li>
+          <li>Balancing pass: manual vs. industrial throughput ratios</li>
+          <li>XP curves for player rank and NPC proficiency tiers</li>
+          <li>Instinct vs. Intelligence mechanic implementation</li>
+          <li>Predator territory and pressure system (wolf AI)</li>
+          <li>Regression meter UI and feedback loop</li>
+          <li>Festival event mini-games and contract systems</li>
+          <li>Sacred Documents discovery and decode system</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Reference — Mooseville Adventures</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters & NPCs</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes & Maps</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems & Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+  <div class="nav-group">
+    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+  </div>
+  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
+</nav>
+
+<main class="main">
+
+  <div class="page-hero hero-tech">
+    <div class="hero-label">Technical · Unreal Engine 5</div>
+    <h1>Technical Reference</h1>
+    <p class="hero-desc">
+      Unreal Engine 5 system architecture, recommended plugins and middleware,
+      asset naming conventions, LOD strategy, and texture size guidelines for
+      the Mooseville Adventures build pipeline.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- Core gameplay loop technical -->
+    <div class="section-header">
+      <span class="section-icon">⚙️</span>
+      <h2>Gameplay System Flow (Technical)</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <h4 class="subsection-header">Startup Sequence</h4>
+            <ol class="styled-list">
+              <li>Load profile and save data (GameInstance + SaveGame)</li>
+              <li>Stream world cells (World Partition)</li>
+              <li>Start simulation systems (subsystems)</li>
+              <li>Handle player actions via gameplay events</li>
+              <li>Run periodic simulation ticks (crops, economy, NPC jobs)</li>
+              <li>Trigger UI updates and feedback</li>
+              <li>Autosave + checkpoint + continue</li>
+            </ol>
+          </div>
+          <div>
+            <h4 class="subsection-header">Recommended Architecture Pattern</h4>
+            <pre>GameInstance
+  → Global state (save data, systems)
+GameMode
+  → Rules of simulation
+Subsystems:
+  - TimeSubsystem
+  - ResourceSubsystem
+  - FarmingSubsystem
+  - AISubsystem
+  - EconomySubsystem
+Actors:
+  - Buildings
+  - Crops
+  - NPCs
+Data:
+  - DataAssets / DataTables</pre>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:1rem">
+          <strong>Key principle:</strong> Use Unreal Subsystems heavily — they decouple systems cleanly.
+          Use data-driven design early: Data Assets/Tables for crops, buildings, items, NPC jobs.
+          Use Gameplay Tags for status and classification.
+        </div>
+      </div>
+    </div>
+
+    <!-- Core systems breakdown -->
+    <div class="section-header">
+      <span class="section-icon">🧱</span>
+      <h2>Core Systems Breakdown</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>🧭</span><h3>1. World Exploration System</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Handcrafted open world (not procedural)</li>
+            <li>Fog of war / map discovery</li>
+            <li>Biome system (6 biomes)</li>
+            <li>Character controller (3rd person)</li>
+            <li>AI Navigation via NavMesh</li>
+          </ul>
+          <div class="biome-section-title">Key UE Components</div>
+          <ul class="styled-list">
+            <li><strong>World Partition</strong> (mandatory for 20 sq mi world)</li>
+            <li>Level Streaming</li>
+            <li>Landscape + Foliage Tool</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🌱</span><h3>2. Resource & Farming System</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Resource Nodes (trees, rocks, clay pits)</li>
+            <li>Farming cycle: Plant → Grow → Harvest</li>
+            <li>Time-based or tick-based growth</li>
+            <li>Inventory-based yield system</li>
+          </ul>
+          <div class="biome-section-title">Implementation Notes</div>
+          <ul class="styled-list">
+            <li>Data Tables for: crop types, growth times, yields</li>
+            <li>Central TimeSubsystem drives all growth</li>
+            <li>Real-time or accelerated game clock</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🏗️</span><h3>3. Building / Placement System</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Free placement (not grid-based)</li>
+            <li>Snapping where appropriate</li>
+            <li>Validation: collision + terrain check</li>
+          </ul>
+          <div class="biome-section-title">Flow</div>
+          <pre style="font-size:.75rem">Select → Preview ghost → Validate
+→ Place → Deduct resources</pre>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🏙️</span><h3>4. City Simulation System</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Population / citizens (AI agents)</li>
+            <li>Production chains (Wheat → Flour → Bread)</li>
+            <li>Resource storage and distribution</li>
+            <li>Economy / upkeep calculations</li>
+          </ul>
+          <div class="biome-section-title">Key Rule</div>
+          <div class="info-box" style="font-size:.8rem">Understaffed roles slow construction queues. Staffing = throughput.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🤖</span><h3>5. AI System (NPCs / Workers)</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Task-based AI (Behavior Trees + StateTree)</li>
+            <li>Jobs: Farmer, Builder, Gatherer, Groomer, etc.</li>
+            <li>Job proficiency affects output speed and quality</li>
+          </ul>
+          <div class="biome-section-title">Flow</div>
+          <pre style="font-size:.75rem">Assign job → Find task
+→ Execute → Return result</pre>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>⏰</span><h3>6. Time & Simulation Manager</h3></div>
+        <div class="card-body">
+          <div class="warn-box" style="font-size:.8rem;margin-bottom:.75rem">
+            <strong>Critical system:</strong> Everything depends on a central time subsystem.
+            Not centralizing time causes systems to desync.
+          </div>
+          <ul class="styled-list">
+            <li>Day/night cycle</li>
+            <li>Crop growth ticks</li>
+            <li>AI scheduling and routines</li>
+            <li>Weather and season transitions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>💾</span><h3>7. Save / Load System</h3></div>
+        <div class="card-body">
+          <div class="warn-box" style="font-size:.8rem;margin-bottom:.75rem">
+            <strong>Don't ignore this until late.</strong> Build early — retrofitting is painful.
+          </div>
+          <div class="biome-section-title">Must Persist</div>
+          <ul class="styled-list">
+            <li>World state (building placement, district layout)</li>
+            <li>Crop states (planted, growing, harvestable)</li>
+            <li>Player inventory and progression</li>
+            <li>NPC job assignments and proficiency tiers</li>
+            <li>Milestone status and quest progress</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>📦</span><h3>8. Inventory System</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Item definitions as Data Assets (preferred)</li>
+            <li>Stack logic for resources</li>
+            <li>Equipment vs. consumables separation</li>
+            <li>UI bindings via MVVM plugin</li>
+            <li>Container system for chests and storage buildings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plugins -->
+    <div class="section-header">
+      <span class="section-icon">🔌</span>
+      <h2>Recommended Plugins & Middleware</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>🎵</span><h3>Audio</h3></div>
+        <div class="card-body">
+          <div class="biome-section-title">Recommendation: FMOD Studio</div>
+          <ul class="styled-list">
+            <li>Exploration ambience reacts to biome/time/weather</li>
+            <li>Farming and building actions: parameter-driven one-shots</li>
+            <li>City growth drives adaptive music intensity by district/population</li>
+            <li>Lighter weight than Wwise for small-to-medium teams</li>
+          </ul>
+          <div class="biome-section-title">Also Consider</div>
+          <ul class="styled-list">
+            <li><strong>MetaSounds:</strong> native procedural audio, pairs well with FMOD</li>
+            <li><strong>Wwise:</strong> industry standard, more powerful mixing — choose one</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🌍</span><h3>World & Environment</h3></div>
+        <div class="card-body">
+          <div class="biome-section-title">Built-In (Required)</div>
+          <ul class="styled-list">
+            <li><strong>World Partition</strong> — mandatory for large maps, auto-streaming</li>
+            <li><strong>PCG Framework</strong> — scatter foliage, rocks, resource nodes</li>
+            <li><strong>Landmass + Water plugins</strong> — terrain and water bodies</li>
+          </ul>
+          <div class="biome-section-title">Marketplace (Highly Recommended)</div>
+          <ul class="styled-list">
+            <li><strong>Ultra Dynamic Sky</strong> — fast day/night + weather system</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🤖</span><h3>AI Systems</h3></div>
+        <div class="card-body">
+          <div class="biome-section-title">Built-In</div>
+          <ul class="styled-list">
+            <li><strong>Behavior Trees + EQS</strong> — sufficient for most NPC AI</li>
+            <li><strong>StateTree</strong> — role/task logic for villagers</li>
+            <li><strong>Smart Objects + ZoneGraph</strong> — structured interactions in settlements</li>
+            <li><strong>Mass Entity</strong> — for many NPC workers at scale (later phase)</li>
+          </ul>
+          <div class="info-box" style="font-size:.8rem;margin-top:.5rem">
+            Add Mass/StateTree only after you have a stable core loop.
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🎮</span><h3>Gameplay Framework</h3></div>
+        <div class="card-body">
+          <div class="biome-section-title">Built-In</div>
+          <ul class="styled-list">
+            <li><strong>GAS (Gameplay Ability System)</strong> — tools, stamina, buffs, status effects</li>
+            <li><strong>CommonUI</strong> — scalable UI architecture</li>
+            <li><strong>MVVM Plugin</strong> — cleaner UI data binding</li>
+          </ul>
+          <div class="biome-section-title">Marketplace (Optional)</div>
+          <ul class="styled-list">
+            <li>Grid/placement building toolkit</li>
+            <li>Inventory framework starter</li>
+            <li>Advanced Locomotion System (ALS) for player movement</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🎬</span><h3>Animation</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li><strong>Control Rig</strong> — procedural animations (farming interactions, hoof placement)</li>
+            <li><strong>ALS (Advanced Locomotion System)</strong> — good base for character movement</li>
+            <li>Custom bipedal moose rig required (unique character proportions)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🔧</span><h3>Performance & Debug</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li><strong>DLSS / FSR / XeSS</strong> — upscaling for performance</li>
+            <li><strong>Simplygon plugin</strong> — LOD generation for city assets</li>
+            <li><strong>Unreal Insights</strong> — profile simulation spikes</li>
+            <li><strong>Visual Logger (built-in)</strong> — AI debugging</li>
+            <li><strong>Gameplay Debugger (built-in)</strong> — runtime state inspection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Asset pipeline -->
+    <div class="section-header">
+      <span class="section-icon">📏</span>
+      <h2>Asset Pipeline Guidelines</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>🔤</span><h3>Naming Conventions</h3></div>
+        <div class="card-body">
+          <div class="biome-section-title">Meshes</div>
+          <pre style="font-size:.75rem">SM_Mooseville_[Category]_[Name]_v01
+SM_Mooseville_Prop_HayBale_v01</pre>
+          <div class="biome-section-title">Materials</div>
+          <pre style="font-size:.75rem">M_Mooseville_[Category]_[Name]
+M_Mooseville_Char_MooseBody</pre>
+          <div class="biome-section-title">Material Instances</div>
+          <pre style="font-size:.75rem">MI_Mooseville_[Category]_[Name]</pre>
+          <div class="biome-section-title">Textures</div>
+          <pre style="font-size:.75rem">T_Mooseville_[Name]_D   (albedo)
+T_Mooseville_[Name]_N   (normal)
+T_Mooseville_[Name]_RMA (rough/metal/AO)</pre>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>📐</span><h3>Texture Size Guidelines</h3></div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Asset Type</th><th>Resolution</th></tr></thead>
+              <tbody>
+                <tr><td>Hero characters</td><td>2× 2048 (body + head)</td></tr>
+                <tr><td>Standard characters</td><td>1024–2048</td></tr>
+                <tr><td>Hero props / landmarks</td><td>1024–2048</td></tr>
+                <tr><td>Regular props</td><td>512–1024</td></tr>
+                <tr><td>Small props / clutter</td><td>256–512</td></tr>
+                <tr><td>UI icons</td><td>512–1024 per set (vector preferred)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOD strategy -->
+    <div class="section-header">
+      <span class="section-icon">📊</span>
+      <h2>LOD Strategy</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Asset Type</th><th>LOD Levels</th><th>LOD1</th><th>LOD2</th><th>LOD3</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Characters</strong></td><td>LOD0–LOD3</td><td>−30% tris</td><td>−60% tris</td><td>Silhouette only</td></tr>
+          <tr><td><strong>Props</strong></td><td>LOD0–LOD2</td><td>−40% tris</td><td>−70% tris</td><td>—</td></tr>
+          <tr><td><strong>Buildings</strong></td><td>LOD0–LOD3</td><td>Remove small trim</td><td>Remove interior detail</td><td>Shell only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- UV and collision -->
+    <div class="section-header">
+      <span class="section-icon">🗂️</span>
+      <h2>UV, Pivot & Collision Rules</h2>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header"><span>🗺️</span><h3>UV Authoring</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Avoid tiny islands — prioritize big, clean shells</li>
+            <li>Minimize seams on visible faces</li>
+            <li>Pack UV1 (lightmap) separately from UV0 (albedo)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>⭕</span><h3>Pivot Placement</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Props: logical interaction point or base center</li>
+            <li>Doors / gates: hinge point</li>
+            <li>Characters: feet at world origin (0, 0, 0)</li>
+            <li>Modular building pieces: corner or snap point</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🔲</span><h3>Collision</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Use simple primitives — no complex per-poly collision</li>
+            <li>Keep gameplay collision slightly more generous than visuals</li>
+            <li>Hoof-friendly: no thin edge collision on ramps</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common pitfalls -->
+    <div class="section-header">
+      <span class="section-icon">⚠️</span>
+      <h2>Common Pitfalls to Avoid</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <div class="biome-section-title" style="color:#900">Architecture Pitfalls</div>
+            <ul class="styled-list">
+              <li>❌ Not centralizing time → systems desync</li>
+              <li>❌ Hardcoding items instead of data-driven design</li>
+              <li>❌ Overcomplicated AI too early (add Mass/StateTree last)</li>
+              <li>❌ Ignoring save system until late in development</li>
+              <li>❌ Coupling subsystems directly instead of using events</li>
+            </ul>
+          </div>
+          <div>
+            <div class="biome-section-title" style="color:#900">Asset Pitfalls</div>
+            <ul class="styled-list">
+              <li>❌ Photo textures — always hand-paint or stylize</li>
+              <li>❌ High-frequency normals — keep them subtle</li>
+              <li>❌ Metallic above 0.25 on non-gold assets</li>
+              <li>❌ Shadow darkness below 0.3 (world goes too dark)</li>
+              <li>❌ Inconsistent outline thickness between asset types</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minimum viable stack -->
+    <div class="section-header">
+      <span class="section-icon">🚀</span>
+      <h2>Minimum Viable Stack (Start Here)</h2>
+    </div>
+
+    <div class="card" style="background:var(--emerald-darkest);color:white;border:none">
+      <div class="card-body">
+        <div style="color:var(--gold-light);font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:700;margin-bottom:1rem">
+          Build in this order — don't over-engineer early:
+        </div>
+        <div class="grid-2">
+          <div>
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(247,217,138,.5);margin-bottom:.5rem">Phase 1 — Core Foundation</div>
+            <ol style="list-style:decimal;padding-left:1.2rem;font-size:.85rem;line-height:1.9;color:rgba(255,255,255,.85)">
+              <li>World Partition + Landscape</li>
+              <li>Character movement (bipedal moose)</li>
+              <li>Resource gathering</li>
+              <li>Inventory system</li>
+              <li>Time subsystem</li>
+            </ol>
+          </div>
+          <div>
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(247,217,138,.5);margin-bottom:.5rem">Phase 2 — Simulation Layer</div>
+            <ol start="6" style="list-style:decimal;padding-left:1.2rem;font-size:.85rem;line-height:1.9;color:rgba(255,255,255,.85)">
+              <li>Farming loop (plant, grow, harvest)</li>
+              <li>Simple building placement</li>
+              <li>PCG foliage and biome distribution</li>
+              <li>FMOD + MetaSounds audio</li>
+              <li>Save/Load system</li>
+            </ol>
+          </div>
+        </div>
+        <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(228,182,70,.15);font-size:.8rem;color:rgba(255,255,255,.6)">
+          Add AI workers, economy simulation, and NPC progression only after the core farming and
+          building loop is stable and fun in isolation.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>

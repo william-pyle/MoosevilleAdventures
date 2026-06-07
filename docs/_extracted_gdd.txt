@@ -1,0 +1,1828 @@
+﻿CONFIDENTIAL — INTERNAL DEVELOPMENT USE ONLY
+
+Mooseville Adventures
+Game Design Document
+A Hybrid Cozy Life Sim + Open-World Adventure
+
+
+Document Version
+v1.0
+Date
+June 2026
+Engine
+Unreal Engine 5
+Platform
+PC (Windows) — Initial Release
+Classification
+Family / All Ages
+Target Rating
+E10+ (Everyone 10+)
+Genre
+Hybrid Cozy Life Sim + Open-World Adventure
+Document Status
+Production-Grade — For Developer Use
+
+"Everything we built, we built because we didn't look away. Don't look away either."
+— Melvin, Founder of Mooseville
+
+This document is intended for the eyes of game designers, programmers, artists, and producers working directly on Mooseville Adventures. Do not distribute externally without authorization.
+# Table of Contents
+
+1. Executive Summary & Elevator Pitch
+
+1.1 Elevator Pitch
+1.2 Genre, Comparables & Core Fantasy
+1.3 Platform, Engine & Rating
+2. Game Vision & Design Pillars
+
+2.1 The Mooseville Promise
+2.2 Five Named Design Pillars
+3. Lore & World History
+
+3.1 The Valley Before Names
+3.2 The Starfall
+3.3 The Green Spring and the Awakening
+3.4 The First Gathering and the Rise of Melvin & Martha
+3.5 The Sacred Documents
+3.6 The Founding of Mooseville
+3.7 Culture of Adaptation
+3.8 The Fading Years (Year 4–5 Post-Starfall)
+3.9 The Green Water Recovery
+3.10 The Far Side Arrivals and the Age of Invitation
+3.11 The Unanswered Questions — Active Mystery Threads
+4. Setting — The Valley & Mooseville
+
+4.1 World Overview
+4.2 Mooseville Town (Hub Area)
+4.3 The Wilderness Biomes
+4.4 Time & Season System
+5. Story & Narrative
+
+5.1 The Player's Position
+5.2 Opening Sequence
+5.3 Three-Act Story Structure
+5.4 Narrative Tone
+6. Player Character
+
+6.1 Character Identity
+6.2 The Knack System — Ability Progression
+7. Core Gameplay Loop
+
+7.1 The Daily Loop (Cozy Spine)
+7.2 The Weekly Loop (Adventure Spine)
+7.3 Loop Relationship Diagram
+7.4 No Fail State
+8. Village Life Systems
+
+8.1 Farming System
+8.2 Fishing System
+8.3 Crafting System
+8.4 Cooking System
+8.5 Homestead Building & Decoration
+9. Social & Relationship System
+
+9.1 Philosophy
+9.2 Relationship Mechanics
+9.3 NPC Schedule System
+9.4 Community Events
+10. Exploration & Quest Systems
+
+10.1 Exploration Philosophy
+10.2 Stamina System
+10.3 Quest Types
+10.4 Quest Journal
+10.5 Wilderness Discovery System
+10.6 New Arrival Moose Encounters
+11. The Green Spring & Moose Water System
+
+11.1 Moose Water as Gameplay
+11.2 Sky-Stone Deposits
+11.3 The Green Spring at Night
+12. Economy & Currency
+
+12.1 Mucks
+12.2 The Two Laws in Gameplay
+12.3 Muck Economy Balance
+13. NPC Roster
+
+13.1 Tier System
+13.2 Key NPC Profiles
+14. World Map & Biome Guide
+
+14.1 Map Overview
+14.2 Biome Visual and Gameplay Summary
+15. UI/UX Design
+
+15.1 UI Philosophy
+15.2 HUD Elements
+15.3 Menu System
+15.4 Notification System
+15.5 Accessibility Options
+16. Audio Direction
+
+16.1 Music Philosophy
+16.2 Instrumentation by Zone
+16.3 Dynamic Music System
+16.4 Voice Acting
+16.5 Sound Design
+17. Unreal Engine 5 Technical Specifications
+
+17.1 Engine Version & Core Systems
+17.2 Core Technical Architecture
+17.3 Performance Targets
+17.4 Unreal-Specific Art Pipeline
+18. Development Roadmap
+
+18.1 Phase Overview
+18.2 Key Milestones
+18.3 Team Requirements
+19. Risk Assessment
+
+20. Appendices
+
+Appendix A: Mooseville Glossary
+Appendix B: Design Intention Summary
+# Section 1 — Executive Summary & Elevator Pitch
+
+
+This section provides the top-level creative brief for Mooseville Adventures — the single authoritative statement of what this game is, who it is for, and why it deserves to exist. Every team member should be able to recite this section from memory.
+
+## 1.1 Elevator Pitch
+
+
+The Mooseville Adventures Pitch
+Mooseville Adventures is a hybrid cozy-adventure game set 22 years after a magical meteor strike awakened a valley of moose into a fully realized civilization. Playing as a grown child of the town's legendary founders — Melvin and Martha — you tend your home, forge bonds with your community, and venture into an ancient and changing wilderness to unravel the mysteries the Starfall left behind. It is a game about belonging, discovery, and what it means to carry your family's legacy forward.
+
+## 1.2 Genre, Comparable Titles & Core Fantasy
+
+
+Attribute
+Detail
+Genre Classification
+Hybrid Cozy Life Sim + Open-World Adventure
+Core Fantasy
+"I am a founding family's child — I know this town, I love this town, and I'm about to discover what lies beyond it."
+Comparable — Village Life Rhythm
+Stardew Valley
+Comparable — Exploration Joy
+A Short Hike
+Comparable — Emotional NPC Bonds
+Spiritfarer
+Comparable — Open-World Wonder
+Tchia
+Comparable — Community + Mystery
+Cozy Grove
+
+Mooseville Adventures occupies a unique space in the cozy genre: it takes the rhythmic comfort of village sim games and pairs it with a genuine mystery-driven open-world narrative, all without introducing combat, fail states, or anxiety-inducing systems. The result is a game that feels both safe and meaningful — a rare combination that broadens appeal across age groups and play styles.
+## 1.3 Platform, Engine & Rating
+
+
+Attribute
+Specification
+Initial Platform
+PC (Windows)
+Post-Launch Targets
+macOS, Nintendo Switch (TBD), PlayStation 5 (TBD)
+Engine
+Unreal Engine 5 (latest stable at time of development)
+Target Rating
+E10+ (Everyone 10+)
+Audience Classification
+Family / All Ages
+Distribution
+Steam (primary); Epic Games Store (TBD)
+
+# Section 2 — Game Vision & Design Pillars
+
+
+This section defines the creative north star of Mooseville Adventures. Every design decision — from crop timers to quest pacing to UI font choices — must be measured against these pillars. If a feature does not serve at least one pillar, it does not belong in the game.
+
+## 2.1 The Mooseville Promise
+
+
+The Mooseville Promise
+Every hour in Mooseville Adventures should feel like a warm autumn afternoon — productive, peaceful, and full of small moments worth remembering. Whether the player is mending a neighbor's fence, fishing at the crystal lake at golden hour, or pushing through a dark pine forest toward a glowing stone no one has named yet, the game should never feel hostile or punishing. Challenge comes from curiosity, not combat. Progress comes from relationships, not grinding. And every mystery, once solved, should feel earned — because the player found it by caring about the world around them.
+
+## 2.2 Five Named Design Pillars
+
+These five pillars are the binding agreement between all disciplines. They are listed here in full canonical form. When in doubt — return here.
+
+Pillar 1 — "Roots and Routes"
+The player has deep roots in Mooseville (family legacy, known neighbors, inherited home) AND open routes into a wilderness that has never been fully mapped. Both matter equally. No session should feel like it only did one or the other. Designers must ensure that every play session offers both a grounding village activity and an invitation to explore — even if the player chooses only one.
+
+
+Pillar 2 — "Every Moosian Has a Story"
+NPCs are not quest dispensers. Every named Moosian in town has a life that continues whether or not the player interacts with them. Relationships deepen through repeated presence, small gifts, shared meals, and remembered conversations — not through dialogue trees. No NPC should ever feel like a vending machine for quests or rewards.
+
+
+Pillar 3 — "The Valley Is Still Changing"
+The Starfall happened 22 years ago, but the valley is not finished. New awakened moose still arrive. The sealed eastern pass still groans with old stone. The Green Spring still glows in ways that science in Mooseville can't fully explain. The player lives on a frontier of understanding — and that frontier expands as they explore. The world must feel alive and in motion, not static and solved.
+
+
+Pillar 4 — "Cozy Has Consequence"
+Village life activities — farming, crafting, cooking, gifting — have real mechanical weight. What the player grows feeds real NPC needs. What they craft unlocks real expedition capabilities. The cozy loop and the adventure loop feed each other; neither is a side dish. Designers must resist treating any village system as decorative. Every system must connect to at least one other system with meaningful consequence.
+
+
+Pillar 5 — "Inherited Wonder"
+Melvin and Martha built something extraordinary. Playing as their child means inheriting that wonder — but also the pressure of living up to it, questioning it, and ultimately adding to it. The player's own name goes into Mooseville's history by the end of the game. The narrative arc must honor this emotional weight; the ending is not a triumph over a villain but a contribution to a legacy.
+
+# Section 3 — Lore & World History
+
+
+This section is the canonical in-game history of Mooseville. All story content, NPC dialogue, quest text, and world design must be consistent with the lore established here. Contradictions found in later design documents or implementation should be flagged to the Narrative Designer and resolved against this section as the authority.
+
+
+Canonical Status Notice
+This lore is final for v1.0. Any changes to canonical history require written approval from the Game Director and Narrative Designer, with version notes appended to this section. Do not implement lore-altering content without documented authorization.
+
+## 3.1 The Valley Before Names
+
+Long before any Moosian ever spoke, the valley was a closed world of forest, river, marsh, cliff, and meadow. Snowmelt fed clear water through deep ravines. Cedar groves and fern hollows sheltered wildlife through harsh winters. Bears came down in late summer. Deer crossed the lower ridges with the season. Beavers cut channels in the southern wetland. Eagles watched from the stone heights.
+Moose moved through all of it as steady giants, shaping marsh paths with their weight and opening glades with their feeding. They did not rule the valley, but they held its rhythms together.
+The valley carried signs of a much older visitor. Rusted wire, broken survey stakes, and weather-eaten trail markers remained at the edges. On a rise above one creek bend, an abandoned campsite slept beneath leaves and moss — but no living creature in the valley knew what those remnants meant. These human traces become one of the game's three primary mystery threads.
+## 3.2 The Starfall
+
+During a spring thaw, a burning rock crossed the morning sky. It broke over the eastern peaks and struck a high shelf of mountain stone. The impact shattered old rock and sent a landslide roaring down through the migration pass — sealing the most reliable way in and out of the basin under ice, granite, and buried soil.
+The same fall scattered sky-stone shards into a small spring below. The fragments settled into the springbed and slowly bled a strange influence into the water, night after night. The stream began to carry a faint green glow after dusk. At first, the animals only knew the water tasted different.
+## 3.3 The Green Spring and the Awakening
+
+The change came in stages, across months of gradual transformation:
+- Stage 1 — Physical Shifts: Stronger hind legs, more dexterous forelimbs, hooves that could grip tools and cloth.
+- Stage 2 — Mental Expansion: Sharper memory, deeper curiosity, distinct personality emerging in each individual animal.
+- Stage 3 — Speech: Rough at first, but unmistakable. Individual sounds becoming consistent, then shared, then structural.
+- Stage 4 — Culture: Symbols, rules, rituals, and shared purpose. The valley had birthed a people.
+The moose nearest the spring changed earliest and most deeply. Some said the sky-stone carried a mind from beyond the clouds. Others believed the valley already held a sleeping force that the Starfall merely opened. Whatever the truth, this philosophical tension persists in Mooseville culture to the present day — and the player will encounter both perspectives in NPC dialogue.
+## 3.4 The First Gathering and the Rise of Melvin & Martha
+
+The first awakened moose gathered at dusk near the glowing spring, testing sounds, pointing at water, tracks, trees, and stars — building the first shared language. Among those who held the center were Melvin and Martha, a mated wild pair long before awakening.
+They were not followed because they claimed authority. They were followed because, even before language, they were the ones who watched over others, lingered beside the weak, and took less than they needed. When thought and speech came, those instincts became leadership. This is the origin of Melvin and Martha's moral authority in Mooseville — and the emotional weight the player inherits.
+## 3.5 The Sacred Documents
+
+Seeking answers, the new people found the old campsite above the stream. Inside a half-buried metal trunk were books, magazines, field guides, and printed manuals. The words were unreadable at first, but the pictures were clear: buildings, kitchens, tools, gardens, roads, clothing, workshops, and families gathered in common space.
+The awakened moose called these the Sacred Documents — they preserved memory, offered instruction, and proved that meaningful community could be learned and built. The Sacred Documents are a game object the player interacts with directly through Archive Quests. Reconstructing document pages is a primary late-game activity tied to the human remnant mystery thread.
+## 3.6 The Founding of Mooseville
+
+The early settlement began as practical shelter near the green stream: drying racks, storage pits, shared fire circles. Over time, a name emerged — "Mooseville" — spoken first by Melvin and Martha over a village image in the Sacred Documents, then repeated and ratified by all.
+First public structures: a gathering hall, a protected growing circle for seedlings, an archive shelter for the Sacred Documents, water steps for irrigation, and a high lookout for weather and danger.
+Core customs established at founding:
+- Food shared before stored
+- Young named in public
+- Clean water never wasted
+- One central fire kept burning each night
+Around Melvin and Martha formed the First Circle — eight specialists who gave the town its complete shape:
+
+Name
+Specialty
+Domain
+Doris Vale
+Grower
+Agriculture, seed keeping
+Raymond Harlow
+Builder
+Construction, structural repair
+Gloria Finch
+Organizer of Records
+Archive, law, census
+Harold Winslow
+Water & Weather Watcher
+Hydrology, forecasting
+Marjorie Bell
+Keeper of Shared Meals
+Public food, community nourishment
+Chester Lang
+Repairer
+Tools, mechanisms, salvage
+Evelyn Price
+Mediator
+Conflict resolution, diplomacy
+Vincent Reed
+Mapper
+Cartography, exploration routes
+
+## 3.7 Culture of Adaptation
+
+Mooseville learned from the Sacred Documents but never tried to become human. Farming methods were adapted to hoof-friendly rows. Clothing was redesigned for broad shoulders, dense neck fur, and antler spread. Antler and mane houses emerged as a distinct architectural form. Carved wooden coins called mucks became local currency for non-essential trade.
+Two laws remained inviolable from the first season of founding, and have never been repealed:
+
+The Two Inviolable Laws of Mooseville
+I. Moose Water is free.
+II. Basic food is free.
+These two laws are mechanically enforced in gameplay. The player cannot starve. The player cannot be denied Moose Water. These are not design limitations — they are a deliberate expression of Mooseville's founding values embedded in the game's systems. See Section 12.2 for gameplay implementation details.
+
+## 3.8 The Fading Years (Year 4–5 Post-Starfall)
+
+Roughly four to five years after founding, crisis struck: some citizens began to regress — losing speech clarity, collapsing toward four-hoof movement, losing higher memory. Simultaneously, the spring's glow grew faint. Investigation by Harold Winslow's early water studies revealed the cause: a second rockslide had diverted the green stream away from Mooseville channels. The enriched water now ran to the far side of the valley, away from the population it had awakened.
+The Fading Years are Mooseville's most psychologically significant historical trauma. They are referenced in NPC dialogue, Archive records, and the player's own personal family history. Melvin's response to this crisis defines his character — and shapes the player character's legacy.
+## 3.9 The Green Water Recovery
+
+Melvin led a recovery team through debris, unstable slopes, and dense timber to the diverted source. They returned with casks of green water, confirmed that controlled dosing restored affected citizens, then mounted a larger effort. The result was Mooseville's local Enhancement Works: a civic station where clean water passes through secured shard chambers and takes on the same beneficial trace as the old spring.
+From that era forward, Moose Water (enhanced) and regular water are separate, both protected as public trust. The Enhancement Works remains a central hub in the modern town, and its maintenance becomes a gameplay-critical concern in Act 1.
+## 3.10 The Far Side Arrivals and the Age of Invitation
+
+Months after the recovery works stabilized, unknown awakened moose arrived from the opposite side of the valley — changed briefly by diverted green water, now regressing, exhausted, and desperate. Mooseville housed and dosed them. That moment transformed Mooseville forever: it was no longer just the town that survived the Starfall. It became the town that shared survival.
+In subsequent years, valley search teams were organized — not for conquest, but for contact, aid, and consent. Teams sought wild moose beyond known routes, offered Moose Water, and gave each recovered individual a clear choice: join or return to the wild. No one was forced. No one was owned. Mooseville grew district by district. This history directly shapes the New Arrival Moose mechanic in gameplay (see Section 10.6).
+## 3.11 The Unanswered Questions — Active Mystery Threads
+
+
+The Three Mystery Threads (Active at Game Start)
+These three threads form the backbone of the game's main narrative arc. All three must be present, trackable, and emotionally satisfying to resolve by the end of Act 3. No mystery thread may be resolved by combat or confrontation — each must be solved through discovery, relationship, and earned understanding.
+Thread 1 — The Starfall Source: What exactly fell from the sky? Was the sky-stone natural? Intentional? Is there more of it beyond the valley's known geography?
+Thread 2 — The Sealed Eastern Pass: The meteor's landslide sealed the migration route 22 years ago. No one has ever crossed to the other side. What is over there? Who might be?
+Thread 3 — The Human Remnants: The abandoned campsite, the Sacred Documents, the rusted survey stakes — who were these beings? Did they know what the valley was? Were they here intentionally?
+
+# Section 4 — Setting: The Valley & Mooseville
+
+
+This section establishes the physical world of Mooseville Adventures in enough detail that Environment Artists, Level Designers, and World Builders can begin blocking out the valley with accurate proportions, biome relationships, and thematic intent.
+
+## 4.1 World Overview
+
+The valley is a mountain-ringed basin roughly 12km × 8km in playable area. It contains multiple distinct biomes, connected by trails, river fords, and natural landmarks. The world is hand-crafted (not procedural) — every landmark, path, and discovery point is intentionally placed. Time of day and seasons cycle in real time. The world should feel curated and purposeful, not algorithmically assembled.
+The valley's geography creates natural progression pacing: the town center is immediately accessible, near biomes open early, and far biomes require either Trail Knack upgrades, story progression gates, or seasonal access — ensuring that discovery always feels earned rather than arbitrary.
+## 4.2 Mooseville Town — Hub Area
+
+The central hub. Population approximately 80–120 Moosians by game start. The town has grown organically from the original settlement near the Green Spring, spreading outward in rings of increasing specialization. Each district has a distinct visual identity while sharing the core Mooseville aesthetic: warm wood construction, hanging lanterns, antler-shaped architectural details, and emerald garden plots along every path.
+
+District
+Function
+Key Landmark
+The Heartfire District
+Town center, civic life, gathering
+The Central Fire, Gathering Hall, Community Board
+Muckmarket Row
+Commerce, crafts, specialty food stalls
+The Muck Exchange, vendor stalls, Chester's storefront
+The Growing Circle
+Agriculture, greenhouses, seed management
+Doris Vale's Farm, Fern Vale's Test Beds, Seed Archive
+The Archive Quarter
+Records, education, Sacred Documents
+Gloria Finch's Archive Hall, Clara Finch's study
+The Docks & Drying Racks
+Fishing, water management, supply
+Harold Winslow's Water Station, fishing docks on Town Creek
+The Repair Yard
+Crafting, building, salvage, advanced tools
+Chester Lang's Workshop, Reed Harlow's planning shed
+The Player's Homestead
+Player base, personal garden, crafting, rest
+Inherited from Melvin & Martha; located near the Green Spring
+The Enhancement Works
+Moose Water distribution, sky-stone maintenance
+The Civic Shard Station, public water steps
+The New Arrivals District
+Housing for new moose joining Mooseville
+June Price's welcome hall, communal gathering circle
+
+## 4.3 The Wilderness Biomes
+
+
+Biome
+Description
+Distance from Town
+Access Gate
+Key Features
+Emerald Forest
+Dense old-growth pine and cedar, deep shade, filtered gold light
+Near (0–500m)
+Open from start
+Foraging, ambient wildlife, bear encounters, first sky-stone deposit
+Golden Meadow
+Open grassland with wildflowers, warm light, open-sky feel
+Near-Mid (300m–1km)
+Open from start
+Gathering, seasonal flowers, picnic quests, Atlas Reed's first map share
+Crystal Lakeshore
+Clear mountain lake with glowing shallow edges and white rock shores
+Mid (1–2km)
+Trail Knack Tier 1
+Fishing, water quests, sky-stone traces, Storm Winslow's discovery
+Ancient Ruins
+Stone formations overgrown with moss, vine-wrapped, rusted human remnants
+Far (2–3km)
+Act 1 complete
+Mystery quests, Sacred Document fragments, human survey notes
+The High Shelf
+Rocky mountain plateau where the meteor struck; sparse trees, sky-stone veins in rock
+Far (3–4km)
+Trail Knack Tier 2 + Act 2
+Sky-stone deposits, Starfall investigation, Act 2 climax location
+The Sealed Eastern Pass
+Landslide-blocked ancient migration route; dark stone, cracked ice, faint green light
+Far (4km+)
+Act 2 climax trigger
+Main quest gate, first crossing moment, late Act 2 story beat
+The Far Valley
+Untouched wilderness beyond the pass; moose traces, star-stone crater, unknown territory
+End-game only
+Act 3 unlock
+New awakened moose, full Starfall truth, final narrative choices
+
+## 4.4 Time & Season System
+
+
+Parameter
+Default Value
+Notes
+Day Cycle Length
+20 real minutes = 1 in-game day
+Adjustable in settings (range: 10–40 real minutes)
+Season Cycle Length
+7 in-game days = 1 season
+4 seasons: Spring, Summer, Autumn, Winter
+Day Phases
+Dawn → Morning → Afternoon → Golden Hour → Dusk → Night
+Golden Hour is the longest phase by design — the game's emotional peak moment each day
+Seasonal Effects
+Crop availability, fish types, wildlife behavior, festival events, snowfall in winter
+All seasonal flags broadcast via Game-wide Time Manager singleton
+Night Gameplay
+Moose Water glows brightest; certain NPCs only available at night; constellation events
+Night is optional gameplay — never required for main quest progression
+
+# Section 5 — Story & Narrative
+
+
+This section defines the player's narrative position, the emotional arc of the full game, and the tone that must be maintained across all written content including quest text, journal entries, NPC dialogue, and UI copy. The Narrative Designer is the authority on all content in this section.
+
+## 5.1 The Player's Position
+
+The player character is a grown child of Melvin and Martha, approximately 22 years old at game start — one year for each year since the Starfall. They have grown up in the most storied household in Mooseville: watching their parents build a civilization from nothing, living with the weight of a legendary legacy, and wondering what it means to contribute something of their own.
+Melvin and Martha are now respected elders in their early-to-mid life (moose aging slower after awakening). They are not absent — they are present, loving, and proud. But they are ready to step back. The player character's coming-of-age — not their parents' heroism — is the emotional spine of the game.
+## 5.2 Opening Sequence
+
+The game begins with the player character returning to Mooseville after a short period living in a far-valley settlement. This framing device establishes that they have briefly left, giving the player a narrative reason to re-learn the town alongside the game's tutorial. Melvin and Martha have gifted them the family's original homestead near the Green Spring — a fixer-upper, full of memories and meaning. The player must make it their own.
+
+Opening Beat — Scripted Sequence
+The player arrives in Mooseville at golden hour. Martha hands them the key to the old homestead. Melvin — standing in the doorway of the home they built together — looks at his child and says:
+"Everything we built, we built because we didn't look away. Don't look away either."
+This line is fully voiced. It plays once. It is not repeated anywhere in the game. It sets the emotional register for everything that follows.
+
+## 5.3 Three-Act Story Structure
+
+### Act 1 — "Learning the Town" (Hours 1–8 approx.)
+The player re-integrates into Mooseville life. The act is structured as a warm re-introduction to every district, every key NPC, and the core gameplay loops. The mystery threads are introduced subtly — not as missions, but as curiosities the player stumbles across naturally.
+- Player restores the homestead, meets the current NPC generation (children and grandchildren of First Circle members, plus recent new arrivals)
+- Encounters the first mystery clue: a journal page from the old trunk that Melvin kept private — found tucked inside the homestead wall during renovation
+- Discovers the Enhancement Works are weakening slightly — the sky-stone shards are degrading after 22 years of continuous use
+- Act 1 Climax: A small but unmistakable tremor reopens a crack in the direction of the sealed eastern pass. The ground shakes. The town gathers at the Central Fire. Melvin says nothing — but the player catches him looking northeast for a very long time.
+### Act 2 — "The Valley Opens" (Hours 8–25 approx.)
+The widest act. The player systematically explores all wilderness biomes, deepens relationships with Tier 2 NPCs, and begins to piece together the three mystery threads through artifact discovery and NPC story quests.
+- Player restores the weakening Enhancement Works by locating a new sky-stone deposit on the High Shelf — a direct consequence of Act 1's instability reveal
+- Uncovers human remnant artifacts in the Ancient Ruins that suggest the valley was intentionally surveyed — not accidentally discovered — decades before the Starfall
+- Meets new-arrival moose from beyond the valley who carry a disturbing account: the far side has a second sealed pass, and something is glowing on the other side of it
+- Act 2 Climax: The sealed eastern pass cracks open enough to enter for the first time. The player stands at the threshold. This is the game's most visually iconic moment.
+### Act 3 — "What The Star Left" (Hours 25–40+ approx.)
+The player crosses the eastern pass into unknown territory and confronts the full truth of Mooseville's origin. The act resolves all three mystery threads and delivers the game's central emotional question.
+- Discovers the full origin of the sky-stone: a larger fragment network, evidence of intentional origin (not a natural meteor), and human survey notes dating decades before Mooseville existed
+- Faces the game's central emotional question: Does it matter where the awakening came from, if what grew from it was real?
+- Final Act Narrative Choice: The player makes a decision that determines Mooseville's next chapter — keep the pass open and invite connection with other valley communities, share the knowledge of the Starfall's origin with all Moosians, or protect the valley's isolation and let the mystery remain a mystery. All three endings are warm and hopeful. None is the "wrong" choice.
+- Melvin and Martha appear for the final scene together. The player character's name is inscribed in the Archive Hall alongside the First Circle — the final reward, permanent and emotional.
+## 5.4 Narrative Tone
+
+
+Tone Attribute
+Direction
+Overall Register
+Warm, hopeful, and emotionally grounded
+Conflict Source
+Mystery, resource tension, community disagreement, emotional complexity — never villainy or combat
+Reading Level
+Middle-grade reading level with adult emotional depth; family-friendly without being simplistic
+Death / Violence
+None. Characters age, retire, rest — they do not die on-screen during the game's timeline
+Language / Dialect
+Moosian expressions adapted from human phrases: "antler-deep in trouble," "as steady as the spring," "run it by the fire," "clear as snowmelt"
+Pacing Rule
+No mystery reveal should feel rushed. If a player has not spent time in the relevant relationship or biome, the clue should wait.
+
+# Section 6 — Player Character
+
+
+This section defines who the player is in Mooseville Adventures, how they are expressed visually and mechanically, and how their abilities grow through gameplay. The player character is not a blank slate — they have a family, a history, and a town that knows them. That specificity is intentional and must be preserved in all character design decisions.
+
+## 6.1 Character Identity
+
+The player character is canonically a child of Melvin and Martha. Their name is chosen freely by the player at game start and used throughout the game by all NPCs. Character creation is warm and unhurried — framed as getting dressed for the homecoming, not filling out a form.
+
+Customization Option
+Choices Available
+Notes
+Name
+Free text entry, displayed throughout
+Confirmed by Martha saying it aloud in the opening sequence — a warm validation moment
+Fur Color
+5 options: dark brown, warm auburn, sandy blonde, grey-black, classic brown
+All options are realistic moose colorings — no fantasy colors
+Antler Style
+3 options per gender expression (broad palmated, narrow branched, asymmetric)
+Antlers are a key visual identity element — named Moosians comment on them warmly
+Clothing Starter Set
+3 options including Melvin's signature overalls style as one choice
+All starter sets can be replaced through crafting and purchase
+Gender Expression
+Open — no mechanical difference; full clothing and cosmetic freedom
+No pronoun selection required; NPCs use the player character's chosen name only
+
+## 6.2 The Knack System — Ability Progression
+
+The player character gains abilities through the Knack System — five Knack Trees, each tied to a design pillar. Knack progression is entirely emergent: it is driven by what the player actually does, not by spending XP points or choosing a class. A player who spends 10 hours farming naturally earns Harvest Knack tiers. A player who explores constantly builds Trail Knack. The system rewards authentic play — not optimization.
+
+Knack System — Design Intent
+Knack Trees must never feel like a grind gate. Each tier should unlock something the player wants — not something they need to access content. The game is fully completable without maximizing any Knack Tree. Knacks are rewards for playing the way you love, not requirements to play at all.
+
+
+Knack Tree
+Design Pillar Tie
+Focus
+Example Abilities (Tier 1 / 3 / 5)
+Harvest Knack
+Cozy Has Consequence
+Farming, foraging, fishing
++1 crop per harvest / Rare fish sense / Season extension (crops survive one extra season)
+Craft Knack
+Cozy Has Consequence
+Building, repairing, tool-making
+10% faster crafting / Tool durability doubled / Unlock master-tier recipes
+Heart Knack
+Every Moosian Has a Story
+Relationships, social, community
+NPC locations shown earlier / Community events triggered / Gift memory (+1 retained conversation)
+Trail Knack
+Roots and Routes
+Exploration, wilderness, stamina
+Stamina bar +20% / Faster movement speed / Climbing and swimming obstacle traversal
+Spring Knack
+The Valley Is Still Changing
+Moose Water and sky-stone interaction
+Sky-stone nearby pulse sense / Enhanced water duration +50% / Dormant shard reading (lore fragments)
+
+Each Knack Tree has 5 tiers with 3 abilities each (15 abilities per tree, 75 total across all trees). Players are not expected to fill all trees in a single playthrough. Post-launch New Game+ will allow continued Knack development beyond the main story.
+# Section 7 — Core Gameplay Loop
+
+
+This section defines the rhythmic structure of play in Mooseville Adventures — the beats that repeat across every session and every week. The loop is designed to feel natural and self-motivating: players should always end a session knowing exactly what they want to do next, without any artificial pressure to do it now.
+
+## 7.1 The Daily Loop — Cozy Spine
+
+Each in-game day the player engages in some combination of the following beats. No beat is mandatory on any given day. The loop is a menu of options, not a task list.
+
+Beat
+Activities
+Approx. Real Time
+1 — Morning Routine
+Water crops, check community board for requests, feed kept animals, collect overnight Moose Water portion
+2–5 minutes
+2 — Main Activity
+One or two primary activities chosen by player: farm, craft, explore, socialize, quest
+8–15 minutes
+3 — Social Time
+Visit NPCs at their scheduled locations, share a meal, attend an event, deliver a gift
+3–8 minutes
+4 — Evening Wind-Down
+Optional fishing, tend the homestead, review the day in the personal journal
+2–5 minutes
+5 — Night Option
+Visit the Green Spring at night (lore reveals, sky-stone events), stargazing constellation quests
+0–8 minutes (entirely optional)
+
+## 7.2 The Weekly Loop — Adventure Spine
+
+Each in-game week (7 days) contains a predictable set of higher-level beats that provide narrative and social momentum across the cozy daily rhythm.
+- 1–2 Community Events (festivals, seasonal harvests, public votes on town decisions)
+- 1 Main Quest Beat advancing one or more of the three mystery threads
+- 2–4 NPC Side Quests available and rotating (some time-sensitive, most patient)
+- 1 Wilderness Discovery (a new area becoming accessible, an artifact surfacing, or a new arrival moose encounter)
+## 7.3 Loop Relationship Diagram
+
+
+VILLAGE ACTIVITIES
+▶
+produce RESOURCES
+▶
+enable CRAFTING
+▶
+create GEAR
+&
+GIFTS
+▼
+▲
+unlock new VILLAGE ACTIVITIES
+&
+areas
+◀
+deepen NPC RELATIONSHIPS
+◀
+unlock QUESTS
+◀
+yield DISCOVERIES
+◀
+enable EXPLORATION
+
+The loop is fully bidirectional: village activities drive exploration, and exploration drives village activities. No section of the loop is a dead end. Every system connects to every other system through at least one pathway. This interconnection is the mechanical expression of Design Pillar 4 — Cozy Has Consequence.
+## 7.4 No Fail State
+
+
+The No Fail State Commitment
+Mooseville Adventures has no fail state. The player cannot die. They cannot go broke (basic food and water are always free — see Section 12.2). They cannot permanently miss content. Quests wait patiently. NPCs forgive absence. Time-limited events offer alternative completion paths if missed.
+This is not a difficulty oversight — it is a deliberate design choice rooted in the Mooseville Promise. Anxiety-free play is core to this game's identity and audience. Programmers and designers must never implement a game-over condition, a permanent quest lock, or a resource floor of zero without explicit Game Director approval.
+
+# Section 8 — Village Life Systems
+
+
+This section defines all systems that constitute the "cozy spine" of Mooseville Adventures. These systems must be designed to feel satisfying in isolation AND meaningfully connected to every other system. No village system is decorative — each has consequence for exploration, relationships, and narrative progression.
+
+## 8.1 Farming System
+
+The player owns a personal farm plot adjacent to the homestead. The plot starts small (8 crop slots) and expands through crafted infrastructure (up to 32 slots across 4 expansions). Farm plots are grid-based; each slot holds one crop type at a time.
+### Core Farming Actions
+- Watering (daily): Standard water from the Town Creek or the homestead well. Required for crop growth. Moose Water optional for enhanced variants.
+- Weeding (weekly): Neglected plots reduce yield by 30%. Not mandatory but rewarding.
+- Fertilizing (optional): Crafted fertilizer increases yield by 50% for one growth cycle.
+- Seasonal Rotation: Crops cannot be planted out of season (with one exception: greenhouse slots function in any season).
+### Moose Water Irrigation
+Applying Moose Water to a crop slot (costs 1 portion per slot) accelerates growth by 20% and produces the Enhanced Variant of that crop on harvest. Enhanced Variants are the most powerful gifting items in the game and unlock advanced recipes.
+### Crop Table
+
+Crop
+Season
+Days to Grow
+Moose Water Variant
+Primary Uses
+Fernroot
+Spring
+4
+Glowing Fernroot
+Cooking, gifting, NPC quests
+Goldenwheat
+Summer
+6
+Starwheat
+Baking, muck income, community food supply
+Mossberry
+Autumn
+3
+Deepberry
+Jam recipes, NPC quests, gifting
+Snowbloom
+Winter
+8
+Crystalbloom
+Rare gifts, lore items, Act 3 recipe
+Brackfern
+Spring / Summer
+5
+None
+Crafting materials, weaving
+Cedarpine Nut
+Autumn
+10
+None
+Cooking, oil pressing, Chester Lang quests
+Marshgrass
+Spring
+3
+Shimmergrass
+Animal feed, basket crafting
+Redcap Mushroom
+Autumn / Winter
+4
+Glowcap
+Cooking, medicine items, lore use
+Willowseed
+Spring
+7
+Emberseed
+Rare recipes, Muckmarket Row premium sale
+Ironbark Root
+Autumn
+9
+None
+Crafting (tool reinforcement, construction)
+Sweetcord
+Summer
+4
+Goldencord
+Cooking, Community Event ingredients
+Coldroot (Fern Vale's Project)
+Any (if Coldroot Project complete)
+6
+Frostroot
+Winter food security; unlocked through Fern Vale's story arc
+
+### Surplus Donation
+Surplus crops can be donated to the shared food supply at Marjorie Bell's public meal station (relationship boost with Bell lineage NPCs) or sold at Muckmarket Row for mucks. The community food supply level is tracked globally — a well-stocked supply unlocks community dialogue flavors and protects certain NPC routines from disruption.
+## 8.2 Fishing System
+
+Fishing is available at four distinct zones, each with unique fish populations, visual identity, and musical ambience. Fishing is intentionally gentle — it is one of the most meditative activities in the game.
+
+Fishing Zone
+Location
+Species Count
+Rare Species
+Access Requirement
+Town Creek
+Heartfire District waterway
+8 species
+1 (Golden Darter, dawn only)
+Open from start
+Crystal Lakeshore
+Northwest biome
+8 species
+2 (Shimmertrout night-only; Skyfish Moose Water zone)
+Trail Knack Tier 1
+Marsh Shallows
+Southern wetland area
+5 species
+2 (Mudwhisker autumn-only; Fern Eel rainy days)
+Open from start
+High Shelf Melt Pool
+Mountain plateau
+3 species
+1 (Star Perch — glows faintly; Spring Knack Tier 1 to see it)
+Trail Knack Tier 2
+
+### Fishing Mechanic
+A simple rhythm-based minigame: a timing bar with a moving indicator; player taps at the right moment to set the hook, then holds within a comfort zone to reel. Difficulty scales with fish rarity — common fish are forgiving; rare fish require tighter timing. An "Assisted" mode (see Section 15.5) provides a slower, wider timing window for accessibility.
+### Fish Uses
+Fish are used in: cooking recipes (stamina restoration, Knack bonuses), gifting (especially to Harold/Storm Winslow lineage NPCs), two main quests (Act 1 community food crisis; Act 2 Crystal Lakeshore shard discovery). Winter fishing at Town Creek requires a crafted ice-hole tool from Chester Lang's Workshop.
+## 8.3 Crafting System
+
+Crafting is the connective tissue between village systems and exploration. Every piece of expedition gear, meaningful gift, and homestead upgrade passes through the crafting system. The system is data-table driven — recipe unlocks are tracked via flags in the save system, and Knack tier checks gate advanced recipes.
+### Crafting Stations
+- Home Crafting Station (Tier 1–3 upgradeable): Covers tools, basic gear, cooking, gifts, home decor, basic construction
+- Chester Lang's Repair Yard (requires Closeness Level 3+): Advanced crafting: master tools, expedition gear, construction materials, lore item reconstruction
+### Crafting Categories
+
+Category
+Examples
+Primary Use
+Tools
+Watering can upgrades, fishing rod tiers, ice-hole drill, foraging basket
+Improve farming efficiency, unlock fishing zones, gather more
+Expedition Gear
+Exploration backpack (more carry capacity), stamina wrap, climbing grip pads
+Trail Knack unlocks; biome access; stamina management
+Home Decor
+Carved lanterns, woven rugs, antler shelving, fireside bench
+Homestead personalization; NPC visit reactions
+Gifts
+Carved token, pressed flower frame, crafted cookbook, sky-stone pendant
+Closeness Level increases; relationship milestone unlocks
+Food / Cooked Meals
+Fernroot stew, Starwheat bread, Deepberry jam, cedar nut oil cake
+Stamina restoration; Knack bonuses; most powerful gifts
+Construction Materials
+Timber planks, stone block, river clay brick, ironbark beam
+Home expansion; district projects; Reed Harlow quests
+Lore Items
+Reconstructed Sacred Document pages, translated survey markers, sky-stone display cases
+Archive Hall progress; Clara Finch quests; Act 3 unlock events
+
+### Mucks Economy in Crafting
+Rare crafting materials (alloys, special dyes, imported seeds) are purchased with mucks from Muckmarket Row. Common materials are gathered freely from the world. The player is never blocked from crafting by an inability to earn mucks — rare materials only gate optional cosmetics and master-tier recipes, not main quest progress.
+## 8.4 Cooking System
+
+Cooking is the most socially powerful system in the game. A well-made cooked meal is the strongest possible gift — more effective at deepening NPC Closeness than any purchased item. Cooking also provides the best in-game stamina and Knack bonuses.
+- Personal cooking station at the homestead (upgradeable alongside the craft station)
+- Public cooking participation at Marjorie Bell lineage events (community event cooking mini-challenges)
+- 40+ recipes unlockable through exploration finds, NPC gifts, Sacred Document fragment translations, and seasonal discovery
+- Seasonal recipes unlock festival participation options — some festivals require a specific dish to participate fully
+- Cooked meals provide: stamina restoration (better than raw food), temporary Knack bonuses (1 in-game day duration), and Closeness relationship boosts when given as gifts
+## 8.5 Homestead Building & Decoration
+
+The player's inherited homestead is the emotional center of the game. It begins in a state of warm disrepair — dusty but full of memories — and the player transforms it into their own space over the course of the game. The homestead is also a social space: NPCs visit and react to its contents.
+### Building System
+- Place and rotate furniture and objects on a grid within the home interior and personal outdoor space
+- Outdoor space includes the personal garden plot, a small patio area, and access to the Green Spring path
+- Items unlocked through crafting, Muckmarket Row purchase, NPC gifts, and exploration finds
+- NPC visitors comment on decor choices — each named NPC has 3–5 unique decor reactions relevant to their character
+### Home Expansions
+
+Expansion
+Unlocks
+Requirements
+Bedroom Wing
+Additional rest options, guest bed (NPC sleepover events), wardrobe expansion
+Timber planks x20, river clay brick x10, Reed Harlow Closeness Level 2
+Personal Workshop
+Craft Station Tier 3 unlock, dedicated crafting room, tool wall display
+Ironbark beam x8, stone block x15, Chester Lang quest completion
+Greenhouse
+Any-season crop slots (4 slots), Moose Water irrigation tank, advanced seed storage
+Timber planks x30, river clay brick x20, Fern Vale Closeness Level 3
+
+# Section 9 — Social & Relationship System
+
+
+The relationship system is the emotional engine of Mooseville Adventures. It must feel human — not gamified. NPCs should feel like neighbors, not progress bars. Every design decision in this system must serve the feeling of genuine friendship, not the feeling of unlocking rewards.
+
+## 9.1 Philosophy
+
+Relationships in Mooseville are not managed through a dialogue menu or gift-spam loop. They develop through accumulated presence and remembered interactions. The game tracks what the player has done with each NPC and reflects it organically in dialogue, availability, and the depth of quests they offer. A player who spends three weeks fishing with Storm Winslow will have a fundamentally different experience of Storm than a player who only completed his assigned quest.
+## 9.2 Relationship Mechanics
+
+Each named NPC has a Closeness Level from 1 to 6. Closeness is never displayed as a numerical value to the player — instead, it manifests as changes in how NPCs speak to the player, what they share, and where they are willing to go.
+
+Closeness Level
+Player Experience
+Gameplay Unlock
+1 — Familiar
+NPC knows the player's name and parentage; warm but general dialogue
+Basic quests available; NPC location NOT shown on map
+2 — Acquaintance
+NPC remembers one past interaction; greets with specificity
+NPC location shown on map; first personal detail shared
+3 — Friend
+NPC initiates conversation; mentions player in dialogue with others
+Deeper quests available; Chester Lang's advanced crafting unlocked
+4 — Close Friend
+NPC visits the player's homestead; shares personal history; more candid in dialogue
+Home expansion collaborations; NPC shares lore the player character could not find alone
+5 — Trusted
+NPC will accompany player on wilderness visits; offers their most personal story arc
+NPC companion during exploration (passive, flavor-only, no combat); deepest quests
+6 — Legacy Bond
+Unique "Legacy Moment" story beat triggered — a one-time, permanent, emotionally significant scene
+Legacy Moment recorded permanently in the Archive Hall; unique cosmetic or lore unlock
+
+### Closeness Growth Actions
+- Gifting — especially cooked meals (highest value), crafted items, and foraged finds the NPC has mentioned wanting
+- Showing up — visiting an NPC during their scheduled hours at their usual location, consistently
+- Quest completion — completing their personal arc quests
+- Event attendance — attending events they host or care about
+- Remembered conversations — the player engages with topics the NPC cares about
+### Remembered Conversations System
+The game logs up to 5 remembered conversation tags per NPC. These are topics the player has discussed with that NPC — a fishing trip, a crop failure, a discovery in the woods. NPCs reference these tags in future dialogue naturally and unprompted. This system is implemented via the SaveGame object and referenced by the NPC Dialogue Graph at conversation start. NPCs who have more remembered conversations with the player speak with noticeably more warmth and specificity.
+## 9.3 NPC Schedule System
+
+Every named NPC has a full daily schedule implemented via the DailySchedule Actor Component. NPCs move through their routine across all time-of-day phases whether or not the player is nearby. Players learn NPC schedules through observation, conversation, and community board announcements — not through a map indicator (until Closeness Level 2).
+This design creates the feeling of a town that lives independently — one of the most important atmospheric contributions of the social system. Players who pay attention are rewarded with found moments: Chester at his forge at dawn, Melvin and Martha walking to the Green Spring at dusk, Clara working late in the Archive Quarter on rainy nights.
+## 9.4 Community Events
+
+
+Event
+Season
+Key Activity
+Relationship Effect
+Starfall Memorial Night
+Spring
+Lantern ceremony at the Green Spring; stargazing quests; Melvin's annual address
+All attending NPCs +1 Closeness warmth; unique night dialogue for all Tier 1 NPCs
+Harvest Week
+Autumn
+Community cooking challenge; surplus donation drive; festival foods at Muckmarket Row
+Marjorie Bell lineage NPCs +Closeness; Harvest Festival cooking unlocks
+Muck Market Grand Day
+Summer
+Market stall expansions; rare goods available for 1 day only; muck income doubled
+Muckmarket Row NPC Closeness opportunities; rare recipe purchases
+Green Spring Ceremony
+Winter
+Civic gathering at the Enhancement Works; Moose Water blessing; community reflection
+Storm Winslow quest trigger; Melvin and Martha appear together; Act 2 hint moment
+First Circle Remembrance
+Spring (late)
+Archive Quarter gathering; reading of founding names; player adds own contribution to the record
+Clara Finch Closeness; all Tier 1 NPC unique dialogue; emotional narrative anchor
+New Arrival Welcome
+Any (triggered)
+Town gathering for each newly joined moose from the wilderness
+June Price Closeness; new NPC introduction; community cohesion boost
+
+Attending community events simultaneously advances relationships with all NPC attendees. Missing an event is never penalized — NPCs will mention the player's absence warmly ("We missed you at the memorial — the lanterns were beautiful") without applying any Closeness reduction.
+# Section 10 — Exploration & Quest Systems
+
+
+This section defines how the player moves through the world beyond Mooseville and how they engage with the game's structured content. The guiding principle is that exploration should always feel like discovery, and quests should always feel like stories — never like checklists.
+
+## 10.1 Exploration Philosophy
+
+The wilderness is not a danger zone — it is a wonder zone. There are no enemies. Obstacles are environmental in nature: stamina barriers, locked areas requiring tools or relationship keys, and seasonal access gates. The reward for exploration is discovery, lore, materials, and new NPC encounters. The wilderness should feel like it is waiting for the player — curious, patient, and full of things that will only become meaningful once the player understands the history behind them.
+
+The Exploration Promise
+Every biome must contain at least one thing the player cannot fully understand the first time they find it. The valley earns its depth by rewarding return visits — a ruin that made no sense in Act 1 becomes profoundly legible in Act 3. Environment Artists should design with this principle in mind: plant questions before planting answers.
+
+## 10.2 Stamina System
+
+
+Parameter
+Design Spec
+Trail Stamina Bar
+Visual bar (bottom-left HUD); wood-framed, amber liquid fill; pulses softly when below 20%
+Depletion Actions
+Running, swimming, climbing, prolonged sprinting
+Restoration Methods
+Resting (sit on any bench or log for 5 in-game minutes), eating cooked food, drinking Moose Water
+Empty Stamina Behavior
+Player is reduced to a slow walk — never fully stopped. The player always moves forward.
+Trail Knack Effect
+Tier 1: +20% bar length. Tier 3: reduced drain rate. Tier 5: swimming costs no stamina.
+No Death / Collapse
+Stamina reaching zero is never a fail state. The player simply slows. This is non-negotiable.
+
+## 10.3 Quest Types
+
+
+Quest Type
+Description
+Example
+Patient?
+Main Story Quest
+Advances one of the three mystery threads
+"Follow the tremor crack toward the eastern pass"
+Yes — waits indefinitely
+NPC Story Quest
+Advances a named NPC's personal story arc; tied to Closeness progression
+"Reed Harlow needs ancient stone from the ruins for the New Arrivals District"
+Yes — waits indefinitely
+Community Quest
+Town-wide challenge with a collective reward shared by all participants
+"Grow enough Goldenwheat for the Harvest Festival"
+Soft deadline (festival date); alternative path if missed
+Discovery Quest
+Triggered by finding something in the wilderness; player-initiated
+"Translate the rusted survey stake markings found near the eastern ridge"
+Yes — triggered by find; waits thereafter
+Seasonal Quest
+Festival-tied activities; time-limited but with fallback completion paths
+"Decorate the Heartfire for the Starfall Memorial Night"
+Soft (festival-tied); can be completed at next occurrence if missed
+Archive Quest
+Reconstruct a Sacred Document page from fragments found in the wilderness
+"Find the three torn fragments of the Garden Manual"
+Yes — fragments persist until found
+
+## 10.4 Quest Journal
+
+The Personal Journal is the player's primary interface with quest tracking. It is a hand-drawn, in-character notebook written in the player character's voice — automatically updated after key events, discoveries, and conversations. It is not a task list. It reads like a diary with purpose.
+- Active quests are noted with the player character's own emotional reaction to them, not just the objective
+- Completed quests are marked with a small hand-sketched illustration of the key moment
+- Quest markers are optional — a toggle in settings hides all world-space markers for players who prefer pure exploration
+- The Journal is accessed through the main menu interface (the leather-bound journal object), never through a pause-menu list
+## 10.5 Wilderness Discovery System
+
+- The world map starts partially blank — filled in through player exploration. Each new biome area entered generates an automatic journal entry with the player character's first impressions.
+- Landmark Naming: When the player discovers an unnamed landmark (a waterfall, a ruin, a stone formation, a meadow overlook), they are given the option to name it. Named landmarks appear on the town map permanently. NPCs reference the player's chosen name in dialogue afterward — "Oh, you went out past what you're calling the Antler Falls? Beautiful out there."
+- Atlas Reed's map fills in systematically as the player explores — each biome unlocked with the player earns a map section from Atlas (see his NPC profile in Section 13).
+## 10.6 New Arrival Moose Encounters
+
+At certain wilderness locations, the player may encounter a recently awakened moose — partially regressed, confused, and in need of help. These encounters are among the game's most emotionally resonant moments and directly mirror Mooseville's founding values of invitation and consent.
+### Encounter Arc (Multi-Step)
+- Approach carefully — the moose is startled; the player must move slowly (a proximity patience mechanic)
+- Communicate gently — a simple choice-based interaction (3 options); choices affect the encounter tone but not the outcome
+- Provide Moose Water — costs 1 Moose Water portion; restores the new arrival's clarity and allows fuller communication
+- Offer a choice — join Mooseville, or be assisted back to their home territory. The player respects the choice either way.
+Each new arrival who joins Mooseville becomes a permanent NPC with their own daily schedule, relationship arc, and unique backstory. Up to 8 new arrivals can join over the course of a full playthrough. The New Arrivals District in Mooseville grows visibly as each arrival settles in.
+# Section 11 — The Green Spring & Moose Water System
+
+
+The Green Spring and Moose Water are the metaphysical heart of Mooseville Adventures. This section defines how that metaphysical concept becomes a concrete, satisfying, and narratively resonant gameplay system. Moose Water must feel special every single time the player uses it.
+
+## 11.1 Moose Water as Gameplay Resource
+
+
+Parameter
+Detail
+Source
+The Enhancement Works (civic Shard Station), located in the Enhancement Works district
+Daily Collection Limit
+5 portions per day (free; civic resource)
+Spring Knack Bonus
++1 portion per Spring Knack tier (max +5 at Tier 5, for a total of 10 per day)
+Carry Capacity
+10 portions base; upgraded via crafted carrying vessel (Craft Knack Tier 3)
+Visual Identity
+Gently glowing green liquid; unique shimmer animation in the player's inventory panel
+Audio Identity
+Soft resonant hum + green shimmer tone when collected or used; distinct from all other sounds
+
+### Moose Water Uses
+- Enhanced crop irrigation — 1 portion per crop slot; produces Enhanced Variant crop
+- Stamina restoration — 1 portion restores 60% of Trail Stamina (better than any food item)
+- New arrival dosing — 1 portion per encounter; required for the New Arrival encounter arc
+- Sky-stone deposit activation — 1–2 portions per dormant deposit; unlocks lore fragment
+- Advanced crafting — certain Lore Item recipes and master-tier food items require 1–2 portions as ingredient
+- Enhancement Works upgrade fuel — a portion of collected daily Moose Water automatically feeds the civic system; increasing supply benefits all of Mooseville
+## 11.2 Sky-Stone Deposits
+
+Sky-stone deposits are scattered throughout the wilderness, acting as both gameplay resources and lore delivery mechanisms. They are the physical remnants of the Starfall — and interacting with them deepens the player's understanding of Mooseville's origin and the three mystery threads.
+
+Parameter
+Detail
+Visual
+Clusters of dark stone with faint green veining; glow intensity increases at night
+Audio
+Low resonant heartbeat sound when the player is within proximity radius
+Base Interaction
+Requires Spring Knack Tier 2+; player touches the stone and receives a lore fragment (ambient VO + journal auto-write)
+Dormant Deposits
+Some deposits are inert without Moose Water activation; require 1–2 portions and Spring Knack Tier 1+
+Relocation
+High Shelf deposits discovered in Act 2 can be safely relocated to the Enhancement Works (main quest beat); increases civic daily Moose Water yield
+Total Deposits
+14 deposits across all biomes: 3 Emerald Forest, 2 Golden Meadow, 2 Crystal Lakeshore, 2 Ancient Ruins, 3 High Shelf, 2 Far Valley (Act 3)
+
+## 11.3 The Green Spring at Night
+
+The original Green Spring — located on the path between the player's homestead and the Emerald Forest — is a special ambient space that only fully reveals itself at night. It is the most atmospheric location in the game, and it is entirely optional to visit.
+- Night visits trigger unique ambient events: soft light patterns on the water surface, fish surfacing with faint green shimmer, constellations above that match sky-stone formations in shape
+- Constellation events are lore delivery moments — the player character traces a pattern in the journal, and Clara Finch can help interpret it if shown
+- Melvin and Martha walk to the spring together each evening. Finding them there opens unique, quiet dialogue that is not available anywhere else in the game — some of the most meaningful writing in the project lives in these night-spring moments
+- Night spring visits are not required for any quest or progression — they are a reward for players who explore with patience and curiosity
+# Section 12 — Economy & Currency
+
+
+Mooseville's economy must feel generous, fair, and philosophically aligned with the Two Laws. The player should never feel financially anxious. The economy's purpose is to give meaningful weight to player choices about how to spend surplus — not to create scarcity or pressure.
+
+## 12.1 Mucks
+
+Mucks are carved wooden coins — the only currency in Mooseville. They are beautiful objects in the world: hand-carved discs with the Green Spring glyph on one face and the founding year on the other. They are exchanged only for non-essential goods and services. Their existence reflects Mooseville's founding values: you trade for the things you want, never for the things you need.
+
+Category
+Examples
+Typical Price Range
+Earning: Crop Sales
+Goldenwheat, Mossberry, Enhanced crop variants
+5–30 mucks per unit
+Earning: Fish Sales
+Common fish 3–10 mucks; rare fish 40–80 mucks
+3–80 mucks per fish
+Earning: Crafted Goods
+Jams, oils, carved tokens, basic tools
+15–60 mucks per item
+Earning: Community Quests
+Public contribution rewards
+50–200 mucks per completion
+Spending: Home Decor
+Carved lantern, woven rug, bookshelf
+30–150 mucks
+Spending: Clothing & Cosmetics
+Festival outfits, antler jewelry, seasonal wraps
+80–300 mucks
+Spending: Rare Materials
+Alloy ingots, imported seeds, special dyes
+100–500 mucks
+Spending: Archive Translations
+Clara Finch's advanced lore purchases
+200–400 mucks
+Spending: Home Expansion Materials
+Purchased components for bedroom/workshop/greenhouse
+500–1,200 mucks total per expansion
+
+## 12.2 The Two Laws in Gameplay
+
+
+The Two Laws — Mechanical Implementation
+Law I — Moose Water is free. The Enhancement Works dispenses a minimum of 1 free Moose Water portion per day to the player regardless of save state, story progress, or resource level. This floor cannot be set below 1 by any system. If the Enhancement Works is temporarily degraded (Act 1 story event), the daily minimum of 1 portion still applies via emergency reserves held by Storm Winslow.
+Law II — Basic food is free. Marjorie Bell's public meal station always has at least 3 free basic food items available for the player per day. These items restore a small amount of stamina and prevent the player from going hungry. This supply cannot be depleted by the player taking it.
+These laws also apply to NPCs within the simulation: the community food supply level affects NPC dialogue flavor (a well-fed town speaks with more contentment). A depleted supply does not affect NPC function — it only affects dialogue tone and provides motivation to restore the supply.
+
+## 12.3 Muck Economy Balance
+
+
+Parameter
+Value
+Starting Mucks
+50 mucks (gift from Melvin at homecoming)
+Typical Daily Earn (early game)
+20–40 mucks
+Typical Daily Earn (mid game)
+40–80 mucks
+Typical Daily Earn (late game)
+80–200 mucks (rare fish, enhanced crops, master crafts)
+Average Play Session Earn
+30–90 mucks per real-time hour of play
+Balance Philosophy
+Players should rarely feel broke. Large purchases (expansions, rare materials) require intentional saving — they are aspirational, not gated. The economy feels like abundance, not scarcity.
+
+# Section 13 — NPC Roster
+
+
+Every named NPC in Mooseville Adventures must feel like a person, not a function. This section defines the tier structure, the canonical character profiles, and the design constraints that apply to all NPC implementation. Character Artists, Animators, and Writers must treat this section as the primary reference for all named characters.
+
+## 13.1 Tier System
+
+
+Tier
+Description
+Closeness Arc
+Quest Depth
+Tier 1 — Founding Generation (Elders)
+Melvin, Martha, Chester Lang, and surviving First Circle members. Deeply story-integrated across all three acts.
+1–5 (Legacy Moment reserved for end-game narrative beat, not at Level 6)
+Full — act-gated story integration
+Tier 2 — Second Generation
+Children and grandchildren of the First Circle. Primary quest givers and relationship companions.
+1–6 (full arc including Legacy Moment)
+Full — personal arc quests across all acts
+Tier 3 — New Arrivals
+Up to 8 recruitable wilderness encounter moose. Join Mooseville at player invitation.
+1–6 (unlocks after joining town)
+Personal arrival arc + 2–3 follow-up quests
+Tier 4 — Townspeople
+Named background characters who contribute to community events and ambient life. No deep quest arcs.
+1–3 (flavor only)
+Community quests only
+
+## 13.2 Key NPC Profiles
+
+
+MELVIN — Tier 1 Elder, Town Founder
+"As long as the spring glows, we're not done yet."
+Role: Father figure, town founder, informal spiritual leader. Now works as a voluntary guide for new arrivals to Mooseville — the perfect second chapter for the moose who brought the first wave of arrivals in.
+Personality: Steady, warm, economical with words. Rarely leaves Mooseville but walks to the Green Spring each evening without fail. He listens more than he talks — but when he speaks, the room quiets.
+Closeness Path: Unlocked through shared meals at the homestead, night visits to the Green Spring (finding him there), and completing Act 1. Tier 1 special: his Legacy Moment triggers at game end, not at a Closeness threshold — he gives the player the original private journal from the metal trunk. The one he never shared publicly.
+Appearance Reference: Dark brown fur, teal-green overalls, red plaid shirt beneath, gold wheat stalk emblem on chest pocket, large warm palmated antlers with gentle curve. Moves with quiet authority — never hurried, never still.
+Voice Direction: Deep, unhurried, warm. A voice that has said important things before and isn't afraid to say them again slowly.
+
+
+MARTHA — Tier 1 Elder, Town Co-Founder
+"A town is only as strong as the people it refuses to leave behind."
+Role: Mother figure, primary strategist of the founding. Now runs the Archive Quarter alongside Gloria Finch's grandchild Clara. The intellectual engine behind most of Mooseville's civic systems.
+Personality: Warm but precise. She sees things before others do and asks questions instead of making statements. She will gently challenge the player if they neglect community duties — not with disappointment, but with curiosity ("I noticed you haven't been to the community board this week — everything alright?").
+Closeness Path: Unlocked through Archive quest completions, community event participation, and completing Act 2. Legacy Moment: She formally adds the player character's name to the Archive Hall founding record — the game's emotional climax, delivered quietly and with absolute certainty.
+Voice Direction: Clear, precise, with warmth underneath the precision. A voice that plans ahead and still finds time to laugh.
+
+
+FERN VALE — Tier 2, Grower (Doris Vale's Grandchild)
+"If Grandma Doris could make things grow in rock, I can make them grow in winter."
+Role: Primary farming NPC and the player's most enthusiastic early companion. Manages Doris Vale's farm with enormous energy and slightly chaotic organizational skills.
+Personality: Young, enthusiastic, obsessed with Moose Water crop variants. Best friend energy — she adopts the player immediately and assumes mutual friendship whether they've earned it or not.
+Quest Arc: The Coldroot Project — developing a crop that grows in winter without Moose Water enhancement, making Mooseville food-secure in the harshest season. Requires wilderness foraging for specific soil samples, Cold Shelf mineral finds, and multiple crafting stages. Completion unlocks the Coldroot crop and the greenhouse expansion prerequisite.
+Legacy Moment: The first winter Coldroot harvest. Fern and the player pick the crop together at dawn. She names the field after Doris Vale. The field appears on the town map as "Vale's Winter Garden."
+
+
+REED HARLOW — Tier 2, Builder (Raymond Harlow's Son)
+"Stone doesn't lie. Neither do I."
+Role: Primary building and construction NPC. Manages all significant structural projects in Mooseville and is the player's key collaborator on home expansions.
+Personality: Quiet, methodical, better with materials than with words. He communicates through doing — he shows up when he says he will, works without complaint, and leaves when the job is done. His affection is expressed through making things for people.
+Quest Arc: Designing and building the New Arrivals District — permanent housing for incoming moose from the wilderness. Requires the player to source ancient stone from the ruins, specific timber from the Emerald Forest, and river clay from the Marsh Shallows. The district grows visible in the town with each building completed.
+Legacy Moment: Reed builds the player a custom piece for the homestead — something specific to the player character's family history — without being asked. He just leaves it by the door one morning with no note.
+
+
+CLARA FINCH — Tier 2, Archivist (Gloria Finch's Granddaughter)
+"The Documents know more than I do. That's why I can't stop reading them."
+Role: Primary lore delivery NPC and the player's partner in unraveling the Sacred Documents mystery thread. Manages the Archive Hall with a sense of personal responsibility that sometimes tips into anxiety.
+Personality: Brilliant, anxious, carries the weight of history like a physical burden. She knows more about Mooseville's founding than anyone except Melvin and Martha — and she worries constantly that she might misremember something important.
+Quest Arc: Translating an untouched section of the Sacred Documents that no one in the Archive has been able to read — a technical manual that, once decoded, reveals specifics about the valley's pre-Starfall survey history. Requires wilderness artifact finds (translated survey markers, fragment documents from the ruins) across Acts 1–2.
+Legacy Moment: Clara reads the final translated page aloud to the player at the Archive Hall. The page contains the name of the human who surveyed the valley. A quiet, devastating, beautiful moment.
+
+
+STORM WINSLOW — Tier 2, Water Watcher (Harold Winslow's Son)
+"I know the lake better than I know most people. The lake doesn't change its mind."
+Role: Primary water and weather NPC. Monitors the Enhancement Works alongside his civic duties and is the first to notice the system's degradation in Act 1.
+Personality: Dramatic, loves weather, secretly terrified that the Enhancement Works is more fragile than the town admits. He performs confidence but is genuinely afraid — and his quest arc is about facing that fear honestly.
+Quest Arc: Discovers a new sky-stone seep emerging from the Crystal Lakeshore bed. Needs the player's help securing it before the unstable deposit destabilizes the lake's green-water flow. Requires fishing and diving (swimming obstacle), Spring Knack Tier 1, and Moose Water activation. Resolves the Act 1 Enhancement Works degradation plotline.
+Legacy Moment: He admits to the player — quietly, at the lakeshore at dusk — that he's been scared since he was a calf that the water would stop working. "You helped me stop being scared of a thing that might not happen by fixing the thing that was actually happening." He names the lakeshore stabilization site "Winslow's Calm."
+
+
+JUNE PRICE — Tier 2, Mediator (Evelyn Price's Daughter)
+"Everyone has a right to feel at home. Even if they're not sure yet what home means."
+Role: Primary new arrivals integration NPC and the player's social compass for community dynamics. Runs the welcome hall in the New Arrivals District and is deeply emotionally attuned.
+Personality: Diplomatic, perceptive, first point of contact for all new arrivals. She sees what people need before they can say it. She is endlessly patient with everyone except those who are unkind to newcomers.
+Quest Arc: A conflict emerges between two new-arrival groups who have incompatible territorial histories from beyond the valley. June needs the player to mediate — listen to both sides, find a shared need, and propose a compromise. A nuanced, emotionally intelligent quest with no wrong outcome — only more or less graceful ones.
+Legacy Moment: The two groups share a meal together. June and the player watch from the doorway. She says: "This is what Mom always said the job was. Not fixing things. Just staying until there's room for everyone."
+
+
+CHESTER LANG — Tier 1 (surviving First Circle member)
+"If it's worth building, it's worth building right. And if it breaks, it was worth building anyway."
+Role: Master craftsperson, living link to the First Circle era. Still sharpening tools at dawn. Still repairing whatever breaks. The oldest active working Moosian in the game, and proud of it.
+Personality: Old, gruff, and deeply warm beneath three layers of gruffness. He respects effort above all things. He will not help anyone who won't try first. Once the player has demonstrated genuine commitment, he is fiercely loyal.
+Quest Arc: His masterwork — building the player's Personal Workshop expansion — but he needs a specific alloy that can only be smelted from a mineral found near the Starfall impact site on the High Shelf. A mid-to-late Act 2 quest that ties the crafting system to the main story geography.
+Legacy Moment: He finishes the workshop and stands back to look at it. He says nothing for a long moment. Then: "Melvin built the first workshop with his hooves and a rock and a lot of wrong guesses. Yours is better." He means it as the highest possible compliment.
+
+
+ATLAS REED — Tier 2, Mapper (Vincent Reed's Son)
+"I've mapped every inch of this valley. I'm just not showing you yet."
+Role: The exploration gatekeeper NPC — holds the most complete map of the valley and refuses to share it until the player has earned each section through their own exploration.
+Personality: Born to explore. Competitive in a playful way. He challenges the player not out of gatekeeping instinct but because he genuinely believes you only understand a place you've found yourself. He is also secretly delighted every time the player names a landmark differently than he did.
+Quest Arc: A push-pull relationship of mutual respect: he shares a map section for each biome the player has entered and documented. As the player's map fills in, Atlas becomes more open — first professionally respectful, then genuinely excited that someone else is finally exploring at his level.
+Legacy Moment: He shows the player his personal map — hand-drawn, dense with notes, full of landmarks named in his own hand — and asks the player to write their landmark names alongside his. "The valley should have two witnesses." A map image of the completed, dual-authored valley map is permanently available in the journal.
+
+# Section 14 — World Map & Biome Guide
+
+
+This section is the primary reference for Environment Artists and Level Designers. Every biome has a precise visual identity, mood, and gameplay function. Biomes should feel distinct but connected — as if they are all chapters of the same valley, not separate environments stitched together.
+
+## 14.1 Map Overview
+
+The valley is roughly circular, with Mooseville positioned near the center-south of the playable area. Key spatial relationships:
+- Mooseville (Center-South) — the hub; all roads lead back here
+- Green Spring (North of town center) — between the homestead and the Emerald Forest; glows visibly from town at night
+- Emerald Forest (North, wrapping NW) — the first wilderness area; surrounds the upper valley
+- Golden Meadow (West, open) — the valley's breathing room; visible from Mooseville's western edge
+- Crystal Lakeshore (Northwest) — a bowl-shaped depression fed by snowmelt; reachable via the meadow path
+- Ancient Ruins (East, mid-range) — hidden in the tree line; not visible from Mooseville
+- High Shelf (North, elevated) — above the forest canopy; reached by climbing trail
+- Sealed Eastern Pass (Northeast, far) — the landslide zone; visible as a dark notch in the mountain ring from the High Shelf
+- Far Valley (Beyond the pass, East) — out of sight until Act 3; the unknown
+## 14.2 Biome Visual and Gameplay Summary
+
+
+Biome
+Visual Palette
+Music Mood
+Primary Activity
+Season Access
+Key Discovery
+Mooseville Town
+Warm wood tones, emerald garden plots, gold firelight, lantern glow
+Cozy acoustic, plucked strings, light percussion
+All village activities
+All seasons
+Home base; Central Fire; Archive Hall
+Emerald Forest
+Deep greens, filtered shafts of gold light, misty lower shadows, cedar bark brown
+Ambient forest, low woodwind, minimal melody
+Foraging, wildlife observation
+All seasons (snow cover in winter)
+First sky-stone deposit; bear encounter; first foraging basket materials
+Golden Meadow
+Warm amber grass, wildflower bursts (purple, yellow, white), open sky, horizon mountains
+Upbeat light folk, fiddle, open-air feel
+Gathering, picnic quests, seasonal flowers
+Spring / Summer peak; tawny in Autumn; snow-brushed in Winter
+Atlas Reed's first map share; seasonal rare flower gathering
+Crystal Lakeshore
+Aqua-blue deep water, white quartz rock shores, soft green shimmer at water edges, clear sky reflections
+Gentle chimes, water ambience, reverb-heavy piano notes
+Fishing, Storm Winslow quests, sky-stone discovery
+All seasons; ice-covered in deep Winter (requires ice-hole tool)
+Storm Winslow's shard discovery; Shimmertrout night fishing; sky-stone seep
+Ancient Ruins
+Grey moss stone, vine-wrapped columns, rusted metal fragments, autumn leaf cover
+Low mystery, sparse piano notes, long silences, subtle ambient undertone
+Lore discovery, Sacred Document fragment hunts
+Autumn / Winter primary (summer foliage partially obscures); accessible all year
+Human survey notes; Sacred Document fragments; translated stake markings
+The High Shelf
+Exposed granite, sparse wind-bent trees, sky-stone veins glowing in rock, wide mountain vista
+Wind textures, distant echo, sparse orchestral note
+Sky-stone recovery, Act 2 climax
+Summer / early Autumn (Winter access treacherous without Tier 2 Trail Knack)
+Large sky-stone deposit; Chester Lang alloy mineral; Act 2 story beat
+Sealed Eastern Pass
+Dark fractured stone, cracked ancient ice, green light seeping through fissures, cold mist
+Low tension build; music almost stops; heartbeat-like percussion enters
+Main quest gate; story crossing
+Winter (Act 2 crack opens); accessible after Act 2 climax
+First crossing moment; visual reveal of Far Valley; Act 2 final beat
+The Far Valley
+Untouched wilderness; star-stone crater with concentrated green glow; ancient trees; moose traces; no human construction
+New wonder theme — breathy strings, distant choir hum, the game's most expansive orchestral moment
+End-game exploration; Starfall truth discovery; new arrival encounters
+All seasons (Act 3 unlock)
+The full Starfall origin truth; the human survey origin; final narrative choice
+
+# Section 15 — UI/UX Design
+
+
+Mooseville's user interface must feel like it was made by Moosians — carved from wood, edged in hammered gold, functional but warm. There is no cold tech HUD. Every interface element should look like it belongs in the world. The UI Artist and UX Designer must treat immersion as the primary constraint, not information density.
+
+## 15.1 UI Philosophy
+
+The guiding aesthetic is: a town that makes its own tools. Every UI element should look like it was hand-made by an intelligent, craft-proud civilization working with wood, stone, pressed paper, and hammered metal. No glass panels. No glowing digital displays. No sharp geometric abstraction. The HUD is warm, minimal, and diegetic in character — it should feel like it grew out of the world, not out of a software toolkit.
+## 15.2 HUD Elements — Minimal by Design
+
+
+Element
+Position
+Visual Design
+Behavior
+Trail Stamina Bar
+Bottom-left
+Wood-framed horizontal bar; warm amber liquid fill; carved moose-hoof icon at left end
+Fills/drains smoothly; pulses softly with a warm glow when below 20%; fades when full and not in motion
+Day/Time Indicator
+Top-right corner
+Carved wooden sun/moon dial; two hands (day phase, season); small leaf icon rotates through the 4 season colors
+Always visible; non-intrusive; glows slightly at dusk and dawn phases
+Active Quest Reminder
+Bottom-right
+Small worn parchment tab; handwritten-style font showing active quest title only (never objectives)
+Fades during exploration if no active quest; player can pin or unpin from Journal
+Interaction Prompt
+Center-bottom
+Appears only near interactive objects; gold leaf icon + action text in warm serif font
+Fades in when proximity threshold met; fades out immediately when player moves away
+No Minimap
+N/A
+Intentionally absent during gameplay
+Map accessed only through the Journal — a deliberate friction that encourages engagement with the world
+
+## 15.3 Menu System
+
+
+Menu
+Access Method
+Visual Design
+Contents
+The Journal
+Dedicated button (J key / controller button); physical open animation
+Hand-drawn leather-bound journal; worn edges; ink-stained pages; leather bookmark tabs
+Inventory, quests, world map, relationships (Closeness overview), Knack trees, settings; all tabbed by worn leather bookmark
+The Community Board
+In-world object in Heartfire District; walk up and interact
+Large pinned-paper bulletin board; items pinned with hand-carved wooden tacks
+Active community quests, upcoming events calendar, Muckmarket Row prices, new arrival announcements
+Pause Menu
+Escape / Start button
+Simple warm overlay; the world behind is softened not darkened
+Resume, Settings, Save & Rest (advance to next morning), Exit to Main Menu
+Crafting Menu
+Approach crafting station + interact
+Open notebook-style layout on a crafting table surface; ingredient icons are hand-illustrated
+Available recipes by category; ingredient status; crafting queue
+
+## 15.4 Notification System
+
+Mooseville Adventures does not interrupt the player's experience with pop-up notifications during exploration or social interaction. All notifications are queued and delivered through the Journal system:
+- A small wood-carved notification panel appears at the bottom of the screen — a gentle tap sound and a warm amber pulse
+- The panel shows only: how many notifications are waiting (a carved number)
+- Notifications are read by opening the Journal — they become a new auto-written entry
+- Quest completions, Closeness level changes, new discoveries, and community events are all delivered this way
+- The one exception: the Central Fire event bell rings audibly when a community event begins — an in-world sound, not a UI element
+## 15.5 Accessibility Options
+
+
+Option
+Detail
+Text Size
+3 sizes: Standard, Large, Extra Large — applies to all in-game text including Journal and dialogue
+Color Blind Modes
+3 presets: Deuteranopia, Protanopia, Tritanopia — adjusts UI palette, sky-stone glow color, and Moose Water indicator
+High Contrast Mode
+Increases contrast of all UI elements; bolds all HUD text; increases interaction prompt visibility
+Stamina Bar Text Readout
+Displays numerical percentage alongside the visual bar for players who prefer text over visual fills
+Fishing Assisted Mode
+Wider timing windows on all fishing minigame bars; slower indicator movement; available from settings at any time
+Subtitle Options
+Full subtitles for all voiced dialogue; size, background opacity, and speaker name display all adjustable
+Input Remapping
+Full remapping for both keyboard/mouse and controller; no locked inputs
+Quest Marker Toggle
+World-space quest markers individually toggleable per quest; global on/off option
+Day Cycle Speed
+Adjustable from 10 to 40 real-time minutes per in-game day; accessible in settings at any time
+
+# Section 16 — Audio Direction
+
+
+Mooseville's audio is not background decoration — it is a primary storytelling medium. The valley should feel like it has a sound, and that sound should evolve as the player's understanding of it deepens. The Composer and Sound Designer are full creative collaborators on this project, not service providers. Their work defines the emotional register of the game as much as the writing does.
+
+## 16.1 Music Philosophy
+
+The Mooseville soundtrack should feel like the valley itself composed it — natural, warm, acoustic-first, with occasional moments of unexpected wonder that earn their emotional weight by contrast with the quieter foundation. No aggressive tracks anywhere in the game. No looping monotony. Music evolves with time of day, player location, and the emotional state of the game's narrative progression.
+
+The Music Rule
+If a piece of music could plausibly play in a cozy game set in a modern human town, it is probably right for Mooseville. If it would fit in an action game, an ambient electronic game, or a horror game, it does not belong in Mooseville. When in doubt — quieter, warmer, more acoustic.
+
+## 16.2 Instrumentation by Zone
+
+
+Zone / Context
+Instrumentation
+Character
+Mooseville Village (Day)
+Acoustic guitar, banjo, light hand percussion, hand flute
+Warm folk feel; productive, social, bright
+Mooseville Village (Night)
+Quieter piano-led, occasional cello, soft wind texture
+Reflective, peaceful, slightly wistful
+Player's Homestead
+Dedicated cozy variant — simpler, more intimate; acoustic guitar solo or piano
+Home. Safety. Belonging. Does not repeat outside this space.
+Emerald Forest
+Ambient forest sounds dominant; music is sparse; low woodwind and sustained drone notes
+Ancient, breathing, alive but quiet
+Golden Meadow
+Upbeat fiddle, penny whistle, open-air sound design with wind texture
+Joy, space, freedom, summer afternoon
+Crystal Lakeshore
+Water sounds dominant, crystalline chimes, reverb-heavy piano, soft bell tones
+Clear, still, slightly mysterious in depth
+Ancient Ruins
+Minimalist — solo piano notes with long silence between them, subtle ambient undertone
+Age, loss, discovered memory
+The High Shelf
+Wind texture, distant echo, sparse orchestral note that fades before resolving
+Exposed, vast, the edge of what is known
+Green Spring at Night
+Breathy flute, distant choir hum, the game's only synthesized element: green shimmer texture
+Wonder. The most magical 90 seconds of music in the game. Earns it by being singular.
+Sealed Eastern Pass
+Music nearly stops; ambient tension; heartbeat-like low percussion enters
+Threshold. The moment before everything changes.
+End-Game / Starfall Reveal
+Full orchestral swell; first prominent appearance of strings across the entire soundtrack
+The payoff of 30+ hours of quiet build. Earned, never imposed.
+
+## 16.3 Dynamic Music System
+
+- Music transitions smoothly between states using layered stems via Unreal Engine's MetaSound system — no hard cuts between biomes or times of day
+- NPC Proximity Layers: Approaching named NPCs at their work locations adds subtle instrument layers. Chester Lang adds a rhythmic hammer-beat. Fern Vale's greenhouse area adds a melodic whistle motif. Storm Winslow's water station area adds a water texture layer.
+- Community events have unique music variants that do not play anywhere else in the game — they are reserved exclusively for their event
+- The Player's Homestead theme plays only at the homestead — it never bleeds into outdoor areas
+- Music parameters: Biome (zone), TimeOfDay (enum), NPCProximity (nearest named NPC ID), NarrativeState (Act 1 / 2 / 3) — all fed into MetaSound parameter system
+## 16.4 Voice Acting
+
+
+Character Tier
+Voice Scope
+Notes
+Tier 1 — Melvin & Martha
+Fully voiced for all major and minor dialogue
+Priority casting; the emotional anchors of the game
+Tier 1 — Chester Lang
+Fully voiced for quest dialogue; general barks/murmurs for ambient
+Gruff, warm, unmistakable
+Tier 2 — All Second Generation NPCs
+Key story moments (quest milestones, Legacy Moments) fully voiced; general dialogue uses barks/murmurs
+Upgrade to full VO if funding allows post-funding confirmation
+Tier 3 — New Arrivals
+Fully voiced for introduction sequence; general ambient barks thereafter
+Each new arrival has a distinct voice that reflects their wilderness origin
+Player Character
+Silent protagonist; no voice in dialogue
+Journal entries narrated as ambient voice-over — toggleable in settings; warm, quiet, reflective tone
+
+## 16.5 Sound Design
+
+- Crafting SFX: Every crafting action has a distinct material-based sound — wood chop, stone grind, water pour, metal shape, leaf press. No two crafting sounds are the same.
+- Moose Water Audio Identity: A soft resonant hum plus a green shimmer tone — used consistently whenever Moose Water is collected, poured, or applied. This sound is never used for anything else in the game.
+- Sky-Stone Deposits: A low resonant heartbeat pulse when the player is within proximity radius. Intensifies as the player approaches. Goes quiet again when the player backs away.
+- Footsteps: Distinct layered footstep sounds for: grass, stone paths, wood plank walkways, shallow water, deep water, snow, and mud. Moose hooves on each surface are a satisfying, grounded audio experience.
+- NPC Activity Sounds: Named NPCs produce ambient activity sounds at their work locations — Chester's hammer, Fern's trowel, Storm's water measurement tools, the Archive Hall's turning pages.
+- Community Fire: The Central Fire has a consistent, warm crackling audio presence. It is the acoustic anchor of Mooseville — always there, always steady.
+# Section 17 — Unreal Engine 5 Technical Specifications
+
+
+This section defines the technical architecture of Mooseville Adventures for the UE5 programming and technical art teams. Every system listed here has been evaluated for feasibility against the project's scope and team size. Programmers should treat this as a starting architecture, not a constraint — improvements are welcome, regressions are not.
+
+## 17.1 Engine Version & Core Systems
+
+
+System
+Technology
+Rationale
+Engine
+Unreal Engine 5 (latest stable at time of development)
+Lumen, Nanite, World Partition, MetaSound — all required systems native to UE5
+Global Illumination
+Lumen GI (dynamic)
+The warm, dynamic lighting of golden hour is a core visual requirement; Lumen delivers it dynamically across the day cycle
+Geometry
+Nanite (environment meshes); standard meshes for characters and interactive props
+Forest density and ruin geometry benefit from Nanite; characters require traditional rigging pipelines
+Post-Process
+Custom cel-shading post-process material pass (per Rendering Bible)
+Mooseville's visual identity is warm and illustrative — not photorealistic. Cel-shading is non-negotiable.
+Open World
+World Partition + Level Streaming
+Seamless travel between all biomes with no loading screens — required per design spec
+Physics
+Chaos Physics
+Environmental debris, water simulation, cloth on character clothing
+Audio
+MetaSound (primary); Wwise integration optional for advanced states
+Layered stem system and parameter-driven transitions are native MetaSound capabilities
+
+## 17.2 Core Technical Architecture
+
+
+System
+UE5 Implementation
+Notes
+Open World
+World Partition + Level Streaming
+No biome loading screens; streaming cells sized for valley scale (approximately 200m grid)
+Character Movement
+Character Movement Component with custom stamina overlay
+Trail Knack modifies MaxWalkSpeed and StaminaDrainRate via Attribute Set
+NPC AI
+Behavior Trees + Environmental Query System (EQS)
+Schedule-based daily routines; EQS for contextual location queries (nearest bench, preferred activity spot)
+NPC Scheduling
+Custom Actor Component: DailyScheduleComponent
+Time-of-day driven waypoint movement; subscribes to TimeManager broadcast events; each NPC has a DataTable row defining schedule
+Dialogue
+Custom Dialogue Graph (Blueprint or third-party plugin evaluation recommended)
+Remembered conversation tracking stored in SaveGame; NPC Dialogue Graph queries player save data at conversation start to select appropriate lines
+Crafting
+Data Table driven recipe system
+Recipe unlock via bool flag in SaveGame; Knack tier integer checked at recipe display time; no runtime recipe generation
+Farming
+Grid-based Actor placement + CropLifecycleComponent per crop slot Actor
+Moose Water flag stored per slot; CropLifecycleComponent ticks on DayTransition event; growth state is integer (0=planted, 1=growing, 2=ready)
+Economy
+MuckCount integer in PlayerSaveGame; Market prices from Data Table
+No server dependency; fully local; muck count cannot go below 0 (enforced in transaction function)
+Save System
+UE5 SaveGame object; auto-save on DayTransition event + manual save via pause menu
+3 save slots; slot-based serialization; save objects must be versioned from day 1 to support future content updates
+Knack System
+Custom Attribute Set (GAS-lite or standalone component); activity tracking floats per Knack category
+Tier threshold per float value; tier-up events broadcast to all relevant systems; Knack values stored in SaveGame
+Seasonal / Time System
+Game-wide TimeManager singleton — broadcasts DayPhaseChanged and SeasonChanged events
+All relevant actors (crops, NPCs, weather, music) subscribe via delegate; no polling; season/phase stored in SaveGame
+Quest System
+Custom QuestManager with state machine per quest object
+Quest states: Unavailable, Available, Active, Complete; Journal auto-writes via QuestStateChanged delegate; no hardcoded quest flow — event-driven
+Sky-Stone Interaction
+Proximity trigger (SphereComponent) + Spring Knack tier check; lore fragment plays as ambient VO + journal write
+Each deposit is a DataAsset with LoreFragmentID, ActivationCost, RequiredKnackTier; results read from a centralized LoreFragmentTable
+MetaSound Music
+Layered stem system; parameter-driven transitions via MetaSound Parameter Bus
+Parameters: BiomeID (enum), TimeOfDayPhase (enum), NearestNPCID (name), NarrativeAct (int); Music Manager singleton pushes parameters on state change
+Moose Water System
+MooseWaterCount integer in PlayerSaveGame; DailyYield calculated from SpringKnackTier + CivicUpgradeLevel
+DailyMinimum of 1 portion enforced by hard floor in MooseWaterManager; cannot be reduced below 1 by any system
+Relationship System
+Per-NPC ClosenessData struct in PlayerSaveGame: ClosenessLevel (int), RememberedConversationTags (array, max 5), InteractionHistory (lightweight log)
+ClosenessLevel change triggers ClosenessLevelChanged delegate broadcast; dialogue system subscribes to query appropriate line set
+
+## 17.3 Performance Targets
+
+
+Platform Tier
+Target FPS
+Target Resolution
+Lumen
+Nanite
+Shadow Quality
+Foliage Density
+PC High
+60 FPS
+1440p / 4K (DLSS recommended for 4K)
+On — full quality
+On
+High
+Full
+PC Medium
+60 FPS
+1080p
+On — reduced settings (Software Lumen)
+On
+Medium
+70%
+PC Low / Minimum Spec
+30 FPS stable
+1080p
+Off — pre-baked GI fallback
+Off
+Low
+40%
+
+## 17.4 Unreal-Specific Art Pipeline
+
+
+Art System
+UE5 Implementation
+Notes
+Character Rigging
+UE5 Control Rig; shared base moose skeleton
+Morph target variation for body type, antler style, and fur length; all moose characters share one skeleton for animation reuse
+Facial Animation
+Blend shapes via Control Rig; 32-shape FACS-lite set
+Full FACS set for Tier 1 characters (Melvin, Martha, Chester); simplified 16-shape set for Tier 2; no facial animation for Tier 4
+Foliage
+UE5 Foliage Tool + PCG (Procedural Content Generation) for forest density control
+Wind animation via Material vertex offset; foliage density scalar exposed per quality level; PCG graphs authored per biome
+Water
+WaterSystem plugin for Crystal Lakeshore and Town Creek; custom Moose Water shader override for Green Spring
+Moose Water shader: standard WaterSystem base + custom emissive layer driven by time-of-day parameter; green shimmer most intense at night (NightBlend float 0–1)
+Cel Shading
+Post-process material with edge detection; configurable per-character outline width
+Edge detection threshold and outline width defined in per-character Material Parameter Collection override; see Rendering Bible Section 5 for full spec
+Landscape
+UE5 Landscape tool with splatmap-driven material
+Maximum 4 blend layers per landscape chunk (Rendering Bible Section 7); layers: base terrain, grass, rock, path material
+Sky-Stone VFX
+Niagara particle system; emissive material on deposit mesh
+Particle emission rate driven by proximity to player (0 at 20m+, full at 2m); emissive intensity driven by NightBlend parameter from TimeManager
+Weather System
+Dynamic sky + weather Blueprint; rain, snow (Winter), and mist (Emerald Forest) variants
+Weather state broadcast via TimeManager alongside season; weather affects ambient audio wet bus send level
+
+# Section 18 — Development Roadmap
+
+
+This section defines the production phases, milestones, and team structure for bringing Mooseville Adventures from this GDD to a shippable product. The roadmap is designed for a small-to-mid indie team with a realistic scope. Milestones are the primary accountability mechanism — if a milestone is at risk, scope is adjusted before schedule.
+
+## 18.1 Phase Overview
+
+
+Phase
+Name
+Duration
+Key Deliverable
+Phase 0
+Pre-Production
+3 months
+GDD finalized; vertical slice (player home + Heartfire District + Green Spring); core systems proof-of-concept (farming, NPC schedule, save, crafting); Rendering Bible v1.0
+Phase 1
+Alpha
+8 months
+All biomes blocked out and passable; full daily loop functional; Act 1 complete and playable end-to-end; all Tier 2 NPC arcs in design; audio placeholder complete
+Phase 2
+Beta
+6 months
+Full Act 1–3 content playable; all Tier 1–2 NPCs implemented; all biomes art-complete; music integrated (final stems); all voiced dialogue recorded and integrated; economy balanced
+Phase 3
+Polish & QA
+3 months
+Performance optimization to all three PC tiers; accessibility full pass and certification review; full QA coverage; localization strings extracted; Steam store build ready
+Phase 4
+Launch
+—
+PC (Windows) release on Steam; day-one patch process established; community feedback pipeline active
+Phase 5
+Post-Launch
+Ongoing
+New Arrival DLC (additional wilderness moose characters); seasonal content updates (new festival events); Mac / console port evaluation; New Game+ mode
+
+## 18.2 Key Milestones
+
+
+Milestone
+Target Month
+Definition of Done
+Vertical Slice
+Month 3 (end of Phase 0)
+Melvin's homestead playable; Green Spring visual; farming system functional; Martha as 1 NPC with dialogue; Day 1 main quest start; day/night cycle working; save functional
+Alpha Lock
+Month 11 (end of Phase 1)
+All biomes passable; full daily loop playable; Act 1 story complete; all Tier 2 NPC designs finalized; performance profiling baseline established
+Beta Lock
+Month 17 (mid Phase 2)
+Full game playable start to finish (rough); all NPCs implemented; all music integrated; all dialogue written; economy tuning pass complete
+Content Complete
+Month 19 (end of Phase 2)
+No new content added; all quest content finalized; all VO recorded; all biomes art-complete; all UI final
+Gold Candidate
+Month 20 (mid Phase 3)
+All platform requirements met; accessibility certified; all three PC performance tiers validated; full QA regression pass; localization strings extracted
+Ship
+Month 21
+Steam release build approved; launch trailer live; press review copies distributed; community Discord open
+
+## 18.3 Team Requirements — Recommended Minimum
+
+
+Role
+Head Count
+Notes
+Game Director / Lead Designer
+1
+GDD owner, creative lead, final decision authority on all design questions
+Narrative Designer / Writer
+1
+NPC arcs, quest writing, journal voice, all in-game text; authority on Section 5 and Section 13
+UE5 Gameplay Programmer
+2
+Systems architecture, AI, quest system, save system, Knack system, farming, economy
+Technical Artist
+1
+Shader pipeline, cel-shading implementation, Rendering Bible enforcement, PCG foliage, performance tools
+Environment Artist
+2
+Biome art, modular asset kit, world dressing, landscape materials, ruin and ruins detail
+Character Artist
+1
+Moose character models, rigging oversight, blend shape library, clothing assets
+UI / UX Artist
+1
+Journal design, HUD elements, all menus, notification system, crafting interface
+VFX Artist
+1
+Green Spring Moose Water VFX, sky-stone effects, weather particles, community fire, seasonal particles
+Composer
+1 (contract)
+Full original soundtrack; MetaSound stem mastering; must be briefed on Section 16 audio philosophy in full
+Sound Designer
+1 (contract)
+Complete SFX library; MetaSound implementation for dynamic systems; Moose Water audio identity; footstep layering
+Producer
+1
+Milestone tracking, team coordination, risk management, publisher/platform relations
+QA Tester
+2
+Alpha through Gold; one tester specialized in accessibility validation
+
+# Section 19 — Risk Assessment
+
+
+This section identifies the most significant production risks for Mooseville Adventures and documents the mitigation strategy for each. The Producer and Game Director should review this section at every milestone and update likelihood assessments based on current project state.
+
+
+Risk
+Likelihood
+Impact
+Mitigation Strategy
+Scope creep on NPC count
+High
+Medium
+Hard cap enforced: 8 Tier 2 NPCs, 4 Tier 1 characters at ship. Additional NPCs are Post-Launch DLC. Any new NPC proposal during production requires Game Director approval and a scope trade-off identification before it enters development.
+Open-world performance on minimum-spec PC
+Medium
+High
+World Partition + aggressive LOD strategy per Rendering Bible; minimum-spec target hardware locked in Phase 0 and profiled at every milestone; pre-baked GI fallback path tested from Alpha onward; foliage density scalar tuned per biome.
+Narrative pacing — cozy vs. adventure balance
+Medium
+High
+Weekly playtests with target audience families (parents and children ages 8–14) from Alpha onward; playtests specifically measure session motivation and "what do I want to do next" clarity; results reviewed against the Five Pillars at each milestone.
+MetaSound complexity causing audio bugs
+Low
+Medium
+Audio tech spike completed in Phase 0 before full audio investment; fallback to simpler crossfade stem system documented and ready if MetaSound parameter complexity causes instability; Sound Designer with UE5 MetaSound experience required in hiring.
+Lumen performance on medium-spec hardware
+Medium
+Medium
+Lumen off toggle with pre-baked GI fallback; both paths tested from Alpha with performance benchmarks; cel-shading post-process may partially compensate for reduced GI quality at lower settings.
+Player disengagement without fail states
+Low
+Medium
+Engagement monitored via playtests and early access session data; optional challenge modes (no quest markers, time-limited community quests) available as settings toggle for players who want more structure; pacing addressed through always-available "next thing to do" via Community Board and NPC schedule visibility.
+Voice acting budget overrun
+Medium
+Low
+Tier 1 full VO budget confirmed before production begins; Tier 2 defaults to key-moment-only VO with barks (documented); upgrade to fuller Tier 2 VO is a named stretch goal tied to funding milestones, not assumed in base budget.
+Small team burnout over 20-month production
+Medium
+High
+No-crunch policy documented in team charter; scope cuts preferred to schedule extension when milestone risk is identified; Phase 3 includes deliberate "no new features" protection period; mental health days budgeted per quarter.
+Save system version incompatibility post-launch
+Low
+High
+SaveGame objects versioned from day 1; version migration function required before shipping; post-launch content additions must include save version bump and backward-compatible migration path — documented in save system coding standards.
+NPC schedule system performance at town scale
+Low
+Medium
+DailyScheduleComponent only ticks on DayPhaseChanged events, not per-frame; NPCs outside player proximity use simplified navigation (waypoint teleport to next scheduled location); profiled at Alpha with full NPC count active.
+
+# Section 20 — Appendices
+
+## Appendix A: Mooseville Glossary
+
+
+This glossary is the canonical reference for all terminology used in Mooseville Adventures. Writers, designers, and QA must use these terms consistently. Any new term introduced in development must be added here with Game Director and Narrative Designer approval.
+
+
+Term
+Definition
+Moosian
+Any moose citizen of Mooseville or awakened by contact with the Green Spring or Moose Water. The preferred self-identifier used by all awakened moose.
+The Starfall
+The meteor event that triggered the awakening, approximately 22 years before game start. The central historical event of Mooseville's founding mythology.
+Green Spring
+The original spring where sky-stone shards settled after the Starfall. Still glows green at night. Located near the player's homestead. The physical source of the awakening.
+Moose Water
+Water enhanced by sky-stone contact through the Enhancement Works system. A free civic resource that reverses awakening regression and has multiple gameplay uses. Governed by the First Law.
+Mucks
+Carved wooden coins; Mooseville's local currency for non-essential goods. Never required for food or Moose Water.
+Sky-Stone
+Physical fragments of the meteor that fell during the Starfall. The source of the awakening's magical substrate. Found scattered in wilderness deposits throughout the valley.
+Sacred Documents
+The books, magazines, field guides, and printed manuals found in the old human campsite. Mooseville's founding cultural artifacts. Preserved in the Archive Hall.
+The First Circle
+Melvin, Martha, and their eight specialist collaborators who founded and shaped Mooseville. The founding generation; their descendants are the primary Tier 2 NPCs.
+Enhancement Works
+The civic system that channels sky-stone influence into the town's water supply, producing Moose Water for public distribution. A critical infrastructure element with gameplay significance in Act 1.
+The Fading Years
+The crisis period (Year 4–5 post-Starfall) when the green water stream was diverted, causing regression in some Moosians. Mooseville's defining historical trauma.
+The Far Side Arrivals
+The first wave of awakened moose who arrived from the opposite side of the valley, brought there temporarily by the diverted green water. Their arrival transformed Mooseville into a welcoming community rather than merely a surviving one.
+Knack
+The player's progression system. Five Knack Trees (Harvest, Craft, Heart, Trail, Spring) advance through gameplay action rather than XP spending. Each tree has 5 tiers with 3 abilities each.
+Trail Stamina
+The player's exploration energy resource. Depletes during running, swimming, and climbing. Never causes a fail state — depleted Stamina reduces the player to a walk, never stops them.
+Closeness Level
+The 1–6 relationship depth scale with each named NPC. Never displayed numerically to the player; expressed through NPC dialogue warmth, availability, and quest depth.
+Legacy Moment
+The special, unique story beat that occurs at Closeness Level 6 with a Tier 2 NPC (or at story completion for Tier 1 NPCs). Permanently recorded in the Archive Hall. Cannot be repeated or undone.
+Archive Hall
+The building in the Archive Quarter where Mooseville's history is preserved in writing. The location where the player character's name is formally inscribed at the end of the game — the final narrative reward.
+Rendering Bible
+The companion technical art document that defines all visual standards for Mooseville Adventures (cel-shading parameters, landscape layer limits, LOD strategy, lighting rules). Authoritative alongside this GDD.
+DailyScheduleComponent
+The custom UE5 Actor Component that governs NPC daily routines. Subscribes to the TimeManager's DayPhaseChanged event and moves NPCs to their scheduled locations accordingly.
+The Two Laws
+The two inviolable civic laws of Mooseville: (1) Moose Water is free, (2) Basic food is free. Mechanically enforced in gameplay — the player cannot be denied either resource.
+
+## Appendix B: Design Intention Summary
+
+
+The Final Word on Mooseville Adventures
+Mooseville Adventures is not a game about surviving. It is not a game about conquering. It is not a game about winning.
+It is a game about remembering that the best things — the fire that stays lit, the water that stays free, the name that gets carved into stone — are built by people who stayed, who helped, and who looked at the world around them and decided it was worth caring for.
+The player carries Melvin and Martha's name. They inherit a town that is already extraordinary. The question the game asks — quietly, warmly, and without judgment — is: what will you add to it?
+By the end of the game, they will have an answer. And it will be theirs alone.
+That is Mooseville Adventures.
+
+This document represents the complete design vision for Mooseville Adventures v1.0. All sections are canonical. Discrepancies between this document and any downstream design documentation should be resolved in favor of this GDD unless a formal revision is issued and versioned. The Game Director is the final authority on all interpretive questions.
+
+Mooseville Adventures GDD v1.0  |  June 2026  |  Confidential — Internal Development Use Only
+

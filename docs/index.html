@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mooseville Adventures — Design Wiki</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── Sidebar ── -->
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters & NPCs</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes & Maps</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems & Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+
+  <div class="sidebar-footer">
+    Mooseville Adventures<br>
+    Design Wiki — Internal Use<br>
+    Updated June 2026
+  </div>
+</nav>
+
+<!-- ── Main ── -->
+<main class="main">
+
+  <div class="page-hero">
+    <div class="hero-label">Internal Design Reference</div>
+    <h1>Mooseville Adventures</h1>
+    <p class="hero-desc">
+      A unified design wiki for the Mooseville Adventures game — covering world lore,
+      art direction, game systems, asset catalogs, and production milestones.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- Stat bar -->
+    <div class="stat-bar">
+      <div class="stat-item">
+        <span class="stat-value">6</span>
+        <span class="stat-label">Biomes</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">12</span>
+        <span class="stat-label">Businesses</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">12</span>
+        <span class="stat-label">NPC Roles</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="ms-complete-count">0/9</span>
+        <span class="stat-label">Milestones</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">4</span>
+        <span class="stat-label">Campaigns</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">7</span>
+        <span class="stat-label">Festivals</span>
+      </div>
+    </div>
+
+    <!-- Concept pitch -->
+    <div class="card">
+      <div class="card-header">
+        <span>☄️</span>
+        <h3>The Core Concept</h3>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Mooseville Adventures</strong> is an Unreal Engine 5 open-world game that blends
+          exploration, farming, and city-building in a sealed 20-square-mile valley. Twenty years ago,
+          a meteor struck the eastern peaks — sealing the pass out of the valley and scattering
+          sky-stone shards into a mountain spring below.
+        </p>
+        <p>
+          The moose who drank from that spring were transformed. Over generations they became
+          bipedal, intelligent, and deeply curious. Now they build <em>Mooseville</em>:
+          their first civilization — learning to farm, trade, govern, and care for one another
+          while navigating the tension between ancient instinct and new intelligence.
+        </p>
+        <div class="pull-quote">
+          "Mooseville exists because Moosians chose to care for one another while learning
+          a world they did not ask to inherit."
+        </div>
+        <div class="tag-list">
+          <span class="tag tag-emerald">Exploration</span>
+          <span class="tag tag-emerald">Farming</span>
+          <span class="tag tag-emerald">City-Building</span>
+          <span class="tag tag-gold">UE5</span>
+          <span class="tag tag-gold">Single-Player</span>
+          <span class="tag tag-brown">Family-Friendly</span>
+          <span class="tag tag-brown">Pastel Cartoon</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav cards -->
+    <div class="section-header">
+      <span class="section-icon">🧭</span>
+      <h2>Design Areas</h2>
+    </div>
+
+    <div class="nav-cards">
+      <a href="lore.html" class="nav-card">
+        <span class="nav-card-icon">📖</span>
+        <h3>World Lore</h3>
+        <p>The Starfall, the Awakening, Mooseville's founding history, and the Sacred Documents.</p>
+      </a>
+      <a href="characters.html" class="nav-card">
+        <span class="nav-card-icon">🦌</span>
+        <h3>Characters & NPCs</h3>
+        <p>Melvin, Martha, the First Circle, NPC role families, and job identity systems.</p>
+      </a>
+      <a href="world.html" class="nav-card">
+        <span class="nav-card-icon">🗺️</span>
+        <h3>Biomes & Maps</h3>
+        <p>Six biomes, map gallery across all seasons, plant & animal ecosystem reference.</p>
+      </a>
+      <a href="art.html" class="nav-card">
+        <span class="nav-card-icon">🎨</span>
+        <h3>Visual Style Guide</h3>
+        <p>Master color palette, shader settings, lighting profiles, and art direction principles.</p>
+      </a>
+      <a href="design.html" class="nav-card">
+        <span class="nav-card-icon">⚙️</span>
+        <h3>Systems & Economy</h3>
+        <p>Core design pillars, Mucks economy, crafting chains, quests, and skill progression.</p>
+      </a>
+      <a href="assets.html" class="nav-card">
+        <span class="nav-card-icon">🏗️</span>
+        <h3>Asset Catalog</h3>
+        <p>12 businesses, infrastructure, costume sets, props, and resource pipeline assets.</p>
+      </a>
+      <a href="milestones.html" class="nav-card">
+        <span class="nav-card-icon">📊</span>
+        <h3>Milestone Tracker</h3>
+        <p>Interactive M1–M9 production tracker with status, dependencies, and sprint targets.</p>
+      </a>
+      <a href="technical.html" class="nav-card">
+        <span class="nav-card-icon">🔧</span>
+        <h3>Technical Reference</h3>
+        <p>Unreal Engine systems, recommended plugins, naming conventions, and LOD strategy.</p>
+      </a>
+    </div>
+
+    <!-- Design pillars -->
+    <div class="section-header">
+      <span class="section-icon">🏛️</span>
+      <h2>Core Design Pillars</h2>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header"><span>🔄</span><h3>One Continuous Loop</h3></div>
+        <div class="card-body">
+          <p>Explorer, farmer, and city-builder are not separate modes — they are one
+          interconnected gameplay loop. Exploration feeds resources. Resources feed farming.
+          Farming feeds construction. Construction grows the town and opens new exploration.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🏛️</span><h3>Contribution Drives Progress</h3></div>
+        <div class="card-body">
+          <p>Advancement comes through civic contribution: mucks earned, buildings raised,
+          citizens trained. Solo effort can keep the town alive, but community
+          infrastructure is required to grow it efficiently.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>👔</span><h3>Jobs Are Identity</h3></div>
+        <div class="card-body">
+          <p>Each citizen role carries a title, daily routine, outfit, and social affinity.
+          NPCs are not generic workers — they are Moosians with personality, and their
+          proficiency level shapes what the whole town can do.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>💧</span><h3>Essentials Are Free</h3></div>
+        <div class="card-body">
+          <p>Moose Water and basic food are always free. No citizen loses their mind or
+          body due to poverty. The economy of mucks governs non-essentials, cosmetics,
+          and specialty goods — never survival.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🦌</span><h3>Always Moosian, Never Human</h3></div>
+        <div class="card-body">
+          <p>Every imported idea from the Sacred Documents was recast in Moosian form.
+          Wide hoof-friendly rows in farming. Antler arches in architecture. Mane houses
+          instead of barber shops. Useful idea, Moosian design.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🤝</span><h3>Consent in Every Quest</h3></div>
+        <div class="card-body">
+          <p>Recruitment is invitation-based, never forced. Wild moose offered Moose Water
+          are given a clear choice: join Mooseville or return to the wild. Both choices
+          are honored. The town grows by trust, not conquest.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign overview -->
+    <div class="section-header">
+      <span class="section-icon">📜</span>
+      <h2>Campaign Arc Overview</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Campaign</th>
+            <th>Name</th>
+            <th>Timeline</th>
+            <th>Trigger</th>
+            <th>System Unlock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-tier-a">I</span></td>
+            <td><strong>The Fading Glow Crisis</strong></td>
+            <td>Year 4–5 post-founding</td>
+            <td>Citizens regressing — posture, speech, cognition</td>
+            <td>Water diagnostics system</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-tier-b">II</span></td>
+            <td><strong>Green Water Recovery</strong></td>
+            <td>Shortly after Campaign I</td>
+            <td>Diverted green flow identified</td>
+            <td>Enrichment Station, Moose Water management</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-tier-c">III</span></td>
+            <td><strong>Strangers from the Far Side</strong></td>
+            <td>Post-recovery</td>
+            <td>Far-side moose arrive regressed and desperate</td>
+            <td>Integration district and diplomacy tracks</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-tier-d">IV</span></td>
+            <td><strong>The Wide Valley Choice</strong></td>
+            <td>Ongoing late-game</td>
+            <td>Valley search teams organized</td>
+            <td>Repeatable recruitment expeditions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Festival calendar -->
+    <div class="section-header">
+      <span class="section-icon">🎉</span>
+      <h2>Festival Calendar</h2>
+    </div>
+
+    <div class="grid-4" style="gap:.9rem">
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#E8F5FF,#F5F0FF)">
+          <span>❄️</span><h3 style="color:#2A4080">Thawlight Eve</h3>
+        </div>
+        <div class="card-body"><p class="text-sm">Spring prep, irrigation reset, field blessing. Lantern repair, channel clearing, prep contracts.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#E8FFE8,#F5FFE8)">
+          <span>🌱</span><h3 style="color:#1A6020">Almanac Furrow Day</h3>
+        </div>
+        <div class="card-body"><p class="text-sm">Planting optimization. Seed exchange, soil prep, crop challenge plots.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#FFF5E8,#FFEFE0)">
+          <span>🔨</span><h3 style="color:#804020">Splitbend Builder's Fair</h3>
+        </div>
+        <div class="card-body"><p class="text-sm">Public build and repair. Timed construction events, salvage contracts.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#FFF0F8,#FFE8F5)">
+          <span>✂️</span><h3 style="color:#802060">Mane & Antler Week</h3>
+        </div>
+        <div class="card-body"><p class="text-sm">Identity and style. Cosmetic crafting, grooming showcase, social buffs.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#E8E8FF,#F0E8FF)">
+          <span>🌙</span><h3 style="color:#402880">Archive Night Vigil</h3>
+        </div>
+        <div class="card-body"><p class="text-sm">Memory and research. Symbol puzzles, restoration tasks, lore unlock chains.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#E8FFF5,#E0FFEE)">
+          <span>🥾</span><h3 style="color:#1A5040">Long Loop Trailmark</h3>
+        </div>
+        <div class="card-body"><p class="text-sm">Navigation and safety routes. Fog/rain traversal trials, waypoint restoration.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#FFF8E8,#FFF3E0)">
+          <span>🔥</span><h3 style="color:#804808">Hearth of Names</h3>
+        </div>
+        <div class="card-body"><p class="text-sm">Belonging, family ties, and civic trust. Mentorship, integration ceremonies, relationship quests.</p></div>
+      </div>
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>

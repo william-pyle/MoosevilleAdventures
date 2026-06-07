@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asset Catalog — Mooseville Adventures</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters & NPCs</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes & Maps</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems & Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+  <div class="nav-group">
+    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+  </div>
+  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
+</nav>
+
+<main class="main">
+
+  <div class="page-hero hero-assets">
+    <div class="hero-label">Production · Assets</div>
+    <h1>Asset Catalog</h1>
+    <p class="hero-desc">
+      The complete 3D asset planning brief: 12 businesses, 12 core infrastructure
+      buildings, expansion structures, costume sets, props, and the full resource chain
+      pipeline — all with moose-themed visual direction.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- Tier legend -->
+    <div class="info-box">
+      <strong>Tier System:</strong>
+      <span class="badge badge-tier-a">A</span> Town-critical, first playable loop &nbsp;|&nbsp;
+      <span class="badge badge-tier-b">B</span> Growth assets, economy and role progression &nbsp;|&nbsp;
+      <span class="badge badge-tier-c">C</span> Social depth and visual variety &nbsp;|&nbsp;
+      <span class="badge badge-tier-d">D</span> Late-game and narrative arcs
+    </div>
+
+    <!-- Global style rules -->
+    <div class="section-header">
+      <span class="section-icon">📐</span>
+      <h2>Global Building Style Rules</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <div class="biome-section-title">Primary Materials</div>
+            <ul class="styled-list">
+              <li>Timber, stone, brick, clay tile</li>
+              <li>Iron fittings, woven reed panels</li>
+            </ul>
+            <div class="biome-section-title">Architectural Language</div>
+            <ul class="styled-list">
+              <li>Antler arches and beam carvings</li>
+              <li>Hoof-friendly ramps (no steps where possible)</li>
+              <li>Carved beam ends and tine motifs</li>
+              <li>Glowing green vial lantern accents</li>
+            </ul>
+          </div>
+          <div>
+            <div class="biome-section-title">Scale & Color</div>
+            <ul class="styled-list">
+              <li>Medium village scale</li>
+              <li>Doors and walkways oversized for broad-shouldered Moosians</li>
+              <li>Cedar brown, moss green, river slate, clay red, warm cream</li>
+            </ul>
+            <div class="biome-section-title">Construction Rules</div>
+            <ul class="styled-list">
+              <li>Visible production spaces reflect each building's function</li>
+              <li>Modular design — upgrades layer over base structures</li>
+              <li>Antler-safe door clearance on all entries</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 Business buildings -->
+    <div class="section-header">
+      <span class="section-icon">🏪</span>
+      <h2>Business Buildings (12)</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Business</th>
+            <th>Function</th>
+            <th>Job Family</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>BIZ-01</td><td><strong>Antler Almanac Co-op</strong></td><td>Farm planning, seed exchange, seasonal advisories</td><td>Grower</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>BIZ-02</td><td><strong>Rack and Rafter Works</strong></td><td>Construction, repairs, mill expansion</td><td>Builder</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>BIZ-03</td><td><strong>Hoof n Buff Shine Stand</strong></td><td>Hoof care and style buffs</td><td>Groomer</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>BIZ-04</td><td><strong>Tine and Trim Mane House</strong></td><td>Mane and antler styling</td><td>Barber-Stylist</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>BIZ-05</td><td><strong>Hide and Hem Clothhouse</strong></td><td>Clothing, role uniforms, textiles</td><td>Tailor-Weaver</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>BIZ-06</td><td><strong>Velvet Tine Bakehouse</strong></td><td>Specialty pies, cakes, event foods</td><td>Baker</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>BIZ-07</td><td><strong>Muck and Measure Market Hall</strong></td><td>Trade, contracts, specialty sales</td><td>Trader</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>BIZ-08</td><td><strong>Carved Coin Lodge</strong></td><td>Mucks treasury, minting, civic accounting</td><td>Treasurer</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>BIZ-09</td><td><strong>Tine and Twine Outfitters</strong></td><td>Exploration tools and gear</td><td>Outfitter-Toolwright</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>BIZ-10</td><td><strong>Pinecone Press Archive</strong></td><td>Maps, records, document study</td><td>Archivist-Mapkeeper</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>BIZ-11</td><td><strong>Lick and Leaf Remedies</strong></td><td>Herbal support and recovery</td><td>Herbalist-Caregiver</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>BIZ-12</td><td><strong>Green Vial Commons</strong></td><td>Free Moose Water — no sales allowed by law</td><td>Water Keeper</td><td><span class="badge badge-tier-a">A</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Building briefs -->
+    <h3 class="subsection-header">Building Briefs — Key Design Notes</h3>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>🌱</span><h3>BIZ-01 · Antler Almanac Co-op</h3><span class="card-tag"><span class="badge badge-tier-a">A</span></span></div>
+        <div class="card-body">
+          <div class="biome-section-title">Moose Theme</div>
+          <p class="text-sm">Roof ridge shaped like crossed antlers; weather vane is a carved moose head.</p>
+          <div class="biome-section-title">Key Exterior</div>
+          <p class="text-sm">Open front canopy for seed stalls, chalk board wall, hanging planting charts.</p>
+          <div class="biome-section-title">Signature Props</div>
+          <p class="text-sm">Seed barrels, weather rods, moon-phase board, carved furrow markers.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🔨</span><h3>BIZ-02 · Rack and Rafter Works</h3><span class="card-tag"><span class="badge badge-tier-a">A</span></span></div>
+        <div class="card-body">
+          <div class="biome-section-title">Moose Theme</div>
+          <p class="text-sm">Massive beam trusses carved to resemble tine branching.</p>
+          <div class="biome-section-title">Key Exterior</div>
+          <p class="text-sm">Wide yard with stacked logs, crane gantry, half-built frame display.</p>
+          <div class="biome-section-title">Signature Props</div>
+          <p class="text-sm">Timber saw horses, peg bins, blueprint rolls, load harness rack.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>💧</span><h3>BIZ-12 · Green Vial Commons</h3><span class="card-tag"><span class="badge badge-tier-a">A</span></span></div>
+        <div class="card-body">
+          <div class="biome-section-title">Moose Theme</div>
+          <p class="text-sm">Glowing green vials integrated into every architectural detail — sills, arches, lanterns.</p>
+          <div class="biome-section-title">Key Exterior</div>
+          <p class="text-sm">Open-front distribution counter, purity gauge displays, queue lanes for citizens.</p>
+          <div class="biome-section-title">Special Rule</div>
+          <p class="text-sm" style="color:var(--emerald-dark);font-weight:700">No sales transactions allowed at this building — free distribution only, by civic law.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>📦</span><h3>BIZ-07 · Muck and Measure Market Hall</h3><span class="card-tag"><span class="badge badge-tier-a">A</span></span></div>
+        <div class="card-body">
+          <div class="biome-section-title">Moose Theme</div>
+          <p class="text-sm">Large carved muck coin medallion over entry arch.</p>
+          <div class="biome-section-title">Key Exterior</div>
+          <p class="text-sm">Arcaded market front, stall bays, price board columns.</p>
+          <div class="biome-section-title">Signature Props</div>
+          <p class="text-sm">Scale sets, coin trays, crate stacks, rotating deal placards.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infrastructure buildings -->
+    <div class="section-header">
+      <span class="section-icon">🏭</span>
+      <h2>Core Infrastructure (12)</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Infrastructure</th><th>Gameplay Function</th><th>Priority</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>INF-01</td><td><strong>Town Hall of Tines</strong></td><td>Governance, job assignment, civic decisions</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>INF-02</td><td><strong>Commons Kitchen and Free Table</strong></td><td>Free staple food distribution</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>INF-03</td><td><strong>Sawmill Yard</strong></td><td>Logs to boards at scale (bulk processing)</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>INF-04</td><td><strong>Quarry Works</strong></td><td>Rock extraction and stone shaping</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>INF-05</td><td><strong>Brick Kiln Complex</strong></td><td>Clay to brick production</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>INF-06</td><td><strong>Smelter and Forge Hall</strong></td><td>Iron ore to bars to nails production</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>INF-07</td><td><strong>Granary and Seed Vault</strong></td><td>Food and seed security storage</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>INF-08</td><td><strong>Barn and Pack Stable</strong></td><td>Utility logistics and harness storage</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>INF-09</td><td><strong>Reservoir and Irrigation Gatehouse</strong></td><td>Water control for farms and town</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>INF-10</td><td><strong>Roadworks Depot</strong></td><td>Path and bridge maintenance</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>INF-11</td><td><strong>Watchtower and Storm Bell</strong></td><td>Hazard alerts and weather warning</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>INF-12</td><td><strong>Clinic and Recovery Lodge</strong></td><td>Injury and regression recovery</td><td><span class="badge badge-tier-c">C</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Expansion infrastructure -->
+    <div class="section-header">
+      <span class="section-icon">🔭</span>
+      <h2>Expansion Infrastructure (4)</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Asset</th><th>Gameplay Function</th><th>Priority</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>EXP-01</td><td><strong>Festival Grounds Pavilion</strong></td><td>Event content and social mini-games</td><td><span class="badge badge-tier-d">D</span></td></tr>
+          <tr><td>EXP-02</td><td><strong>Integration Housing Court</strong></td><td>New citizen intake and settlement</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>EXP-03</td><td><strong>Expedition Gatepost</strong></td><td>Search team launch and return logistics</td><td><span class="badge badge-tier-d">D</span></td></tr>
+          <tr><td>EXP-04</td><td><strong>Craft Mentor Schoolhouse</strong></td><td>NPC training and skill progression</td><td><span class="badge badge-tier-c">C</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Costume index -->
+    <div class="section-header">
+      <span class="section-icon">👗</span>
+      <h2>Costume Index</h2>
+    </div>
+
+    <h3 class="subsection-header">Relaxing Styles (6)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Style</th><th>Use Case</th><th>Priority</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CST-R01</td><td>Hearthglow Loungewear</td><td>Home and evening social scenes</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>CST-R02</td><td>Riverbank Leisure Set</td><td>Day-off exploration and social scenes</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>CST-R03</td><td>Meadow Picnic Set</td><td>Festivals and public leisure</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>CST-R04</td><td>Rainy Lodge Comfort Set</td><td>Storm-day indoor scenes</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>CST-R05</td><td>Moonwatch Night Set</td><td>Night events and glowwatch</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>CST-R06</td><td>Trail Camp Rest Set</td><td>Post-quest rest scenes</td><td><span class="badge badge-tier-b">B</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-header">Role Uniform Sets (24 — 2 per role)</h3>
+    <div class="info-box">
+      Each of the 12 roles has Style A and Style B, each with male and female fit variants.
+      Total: 24 distinct costume designs × 2 fit variants = 48 costume assets.
+    </div>
+
+    <h3 class="subsection-header">Player Progression Sets (9)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Set</th><th>Track</th><th>Priority</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CST-PF1</td><td>Early Fieldhand</td><td>Farming</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>CST-PF2</td><td>Seasoned Grower</td><td>Farming</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>CST-PF3</td><td>Harvest Captain</td><td>Farming</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>CST-PT1</td><td>Apprentice Mentor</td><td>Teaching</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>CST-PT2</td><td>Foremoose Instructor</td><td>Teaching</td><td><span class="badge badge-tier-c">C</span></td></tr>
+          <tr><td>CST-PT3</td><td>High Steward Tutor</td><td>Teaching</td><td><span class="badge badge-tier-d">D</span></td></tr>
+          <tr><td>CST-PQ1</td><td>Scout Runner</td><td>Questing</td><td><span class="badge badge-tier-a">A</span></td></tr>
+          <tr><td>CST-PQ2</td><td>Valley Ranger</td><td>Questing</td><td><span class="badge badge-tier-b">B</span></td></tr>
+          <tr><td>CST-PQ3</td><td>Campaign Commander</td><td>Questing</td><td><span class="badge badge-tier-c">C</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Production batches -->
+    <div class="section-header">
+      <span class="section-icon">📦</span>
+      <h2>Recommended Production Batches</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#FFE8E8,#FFEEEE)">
+          <span>🏆</span><h3 style="color:#800">Batch 1 — First Playable Town</h3>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>BIZ-01, BIZ-02, BIZ-12</li>
+            <li>INF-02, INF-03, INF-07, INF-09</li>
+            <li>CST-PF1, CST-PQ1, ACC-U base set</li>
+            <li>PRP-R01, PRP-R02, PRP-R12</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#FFF5E8,#FFEEDC)">
+          <span>📈</span><h3 style="color:#803000">Batch 2 — Economy & Build Scaling</h3>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>BIZ-07, BIZ-08, BIZ-09, BIZ-10</li>
+            <li>INF-04, INF-05, INF-06, INF-10</li>
+            <li>Resource chain props: stone, brick, iron, nails</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#FFF5FF,#FFEEFF)">
+          <span>👔</span><h3 style="color:#600060">Batch 3 — Identity & Social Depth</h3>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>BIZ-05, BIZ-06, BIZ-03, BIZ-04, BIZ-11</li>
+            <li>CST-R01 to CST-R06</li>
+            <li>Full CST role sets A and first half of B</li>
+            <li>Business interior prop packs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="background:linear-gradient(to right,#E8EEFF,#EEEEFF)">
+          <span>🚀</span><h3 style="color:#202080">Batch 4 — Expansion & Late Progression</h3>
+        </div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>INF-01, INF-08, INF-11, INF-12</li>
+            <li>EXP-01 to EXP-04</li>
+            <li>CST-PT2, CST-PT3, CST-PQ2, CST-PQ3</li>
+            <li>Festival reward prop packs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resource pipeline -->
+    <div class="section-header">
+      <span class="section-icon">⛏️</span>
+      <h2>Resource Pipeline Visual Assets Required</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>🪵</span><h3>Raw → Refined Chain Props</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Trees, stumps, log piles</li>
+            <li>Sawn board stacks, beam bundles</li>
+            <li>Quarry rock nodes, stone blocks, cut pavers</li>
+            <li>Clay pits, wet clay bins, brick stacks</li>
+            <li>Iron ore nodes, iron bars, nail trays</li>
+            <li>Fuel props: charcoal piles, peat bundles, kiln fuel bins</li>
+            <li>Fiber props: flax bundles, thread spools, cloth bolts</li>
+            <li>Glass props: sand bins, panes, vial racks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🏭</span><h3>Processing Station Modules</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Sawmill station modules (Line I–III)</li>
+            <li>Stone shaping bench modules</li>
+            <li>Brick kiln modules</li>
+            <li>Smelter and forge modules</li>
+            <li>Fiber processing and loom modules</li>
+            <li>Glass and vial bench modules</li>
+            <li>Mortar mixing modules</li>
+            <li>Resin press and pitch barrel station</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Naming schema -->
+    <div class="section-header">
+      <span class="section-icon">🏷️</span>
+      <h2>Asset Naming Schema</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <div class="biome-section-title">Folder Structure</div>
+            <pre>Assets/Buildings/Businesses
+Assets/Buildings/Infrastructure
+Assets/Buildings/Expansion
+Assets/Characters/Costumes/Relax
+Assets/Characters/Costumes/Roles
+Assets/Characters/Costumes/Player
+Assets/Props/Accessories
+Assets/Props/Business
+Assets/Props/Infrastructure
+Assets/Props/ResourceChain
+Assets/Props/FestivalRewards</pre>
+          </div>
+          <div>
+            <div class="biome-section-title">Naming Format</div>
+            <pre>Building: BLD_{ID}_{Name}_{Tier}
+Costume:  CST_{ID}_{Role}_{Variant}
+Prop:     PRP_{ID}_{Pack}_{Variant}
+Env Pack: ENV_{Group}_{ID}_{Variant}</pre>
+            <div class="biome-section-title" style="margin-top:1rem">Examples</div>
+            <pre style="font-size:.75rem">BLD_BIZ-02_RackAndRafterWorks_A
+CST_CST-04A_Barber_StyleA
+PRP_PRP-R10_ArchivistKit_A
+ENV_INF_03_SawmillPack_A</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>

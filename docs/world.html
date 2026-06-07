@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biomes &amp; Maps — Mooseville Adventures</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ── Page-specific: biome cards ─────────────────────────────── */
+  .biome-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    background: var(--cream-light);
+  }
+  .biome-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    color: #fff;
+  }
+  .biome-header-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: .1rem;
+  }
+  .biome-header h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 .15rem;
+    line-height: 1.2;
+  }
+  .biome-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin-top: .4rem;
+  }
+  .biome-meta-pill {
+    font-size: .71rem;
+    background: rgba(255,255,255,.22);
+    color: #fff;
+    border-radius: 20px;
+    padding: .15rem .6rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+  }
+  .biome-body {
+    padding: 1.3rem 1.4rem;
+  }
+  .biome-section-label {
+    font-size: .68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--text-muted);
+    margin: 1rem 0 .35rem;
+  }
+  .biome-section-label:first-child { margin-top: 0; }
+  .biome-body p { margin-bottom: .75rem; color: var(--text-body); line-height: 1.65; }
+  .biome-body p:last-child { margin-bottom: 0; }
+
+  /* ── District grid ──────────────────────────────────────────── */
+  .district-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .district-card {
+    background: var(--cream-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid var(--cream-dark);
+  }
+  .district-header {
+    background: linear-gradient(135deg, var(--emerald-dark), var(--emerald));
+    color: #fff;
+    padding: .85rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+  }
+  .district-num {
+    background: rgba(255,255,255,.22);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .district-header h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .district-function {
+    font-size: .72rem;
+    opacity: .8;
+    margin-top: .1rem;
+  }
+  .district-body {
+    padding: 1rem 1.1rem;
+    font-size: .88rem;
+  }
+  .district-poi {
+    font-weight: 700;
+    color: var(--emerald-dark);
+    margin: .7rem 0 .15rem;
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .district-poi:first-child { margin-top: 0; }
+  .district-body p { color: var(--text-body); line-height: 1.6; margin-bottom: .4rem; }
+  .ambient-note {
+    margin-top: .85rem;
+    padding: .6rem .9rem;
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: .8rem;
+    color: var(--text-medium);
+    font-style: italic;
+  }
+
+  /* ── Wayrest points list ────────────────────────────────────── */
+  .wayrest-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+  .wayrest-item {
+    background: var(--cream-light);
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius);
+    padding: .85rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .wayrest-compass {
+    color: var(--gold-dark);
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .wayrest-name {
+    font-weight: 700;
+    color: var(--emerald-dark);
+    font-size: .92rem;
+    margin-bottom: .15rem;
+  }
+  .wayrest-loc {
+    font-size: .78rem;
+    color: var(--text-medium);
+  }
+  .wayrest-unlock {
+    font-size: .75rem;
+    color: var(--text-light);
+    margin-top: .2rem;
+    font-style: italic;
+  }
+
+  /* ── Layer definition table accent ─────────────────────────── */
+  .layer-num {
+    display: inline-block;
+    background: var(--emerald-dark);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    padding: .1rem .5rem;
+    font-size: .78rem;
+    font-weight: 700;
+    min-width: 2rem;
+    text-align: center;
+  }
+
+  /* ── Sky-stone state pills ──────────────────────────────────── */
+  .ss-dormant  { background:#E8F5EE; color:#0F4C2A; border:1px solid #A8D88F; padding:.1rem .5rem; border-radius:4px; font-size:.78rem; font-weight:700; }
+  .ss-active   { background:#FFFDE0; color:#6B4030; border:1px solid #E4B646; padding:.1rem .5rem; border-radius:4px; font-size:.78rem; font-weight:700; }
+  .ss-depleted { background:#F0F0F0; color:#555;     border:1px solid #ccc;    padding:.1rem .5rem; border-radius:4px; font-size:.78rem; font-weight:700; }
+  .ss-buried   { background:#2C1508; color:#EDD5B8;  border:1px solid #5C3520; padding:.1rem .5rem; border-radius:4px; font-size:.78rem; font-weight:700; }
+
+  /* ── Compass doctrine table ─────────────────────────────────── */
+  .compass-table td:first-child { font-weight: 700; text-align: center; font-size: 1.1rem; }
+
+  /* ── Fishing zones ──────────────────────────────────────────── */
+  .fishing-zone-none { color: var(--emerald-dark); font-weight: 600; }
+
+  /* ── Section nav jumplinks ──────────────────────────────────── */
+  .page-jumpnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+    background: var(--cream-light);
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius);
+  }
+  .page-jumpnav a {
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--emerald-dark);
+    text-decoration: none;
+    padding: .25rem .7rem;
+    border-radius: 20px;
+    background: var(--emerald-bg);
+    border: 1px solid rgba(15,76,42,.15);
+    transition: background .15s, color .15s;
+  }
+  .page-jumpnav a:hover {
+    background: var(--emerald-dark);
+    color: #fff;
+  }
+
+  /* ── Version badge ──────────────────────────────────────────── */
+  .doc-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: .75rem 1rem;
+    background: var(--gold-pale);
+    border-radius: var(--radius);
+    border: 1px solid var(--gold-light);
+    font-size: .8rem;
+    color: var(--text-medium);
+  }
+  .doc-meta-bar strong { color: var(--text-dark); }
+
+  /* ── Grid helpers used on this page ────────────────────────── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem; }
+  @media (max-width: 860px) { .grid-2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters &amp; NPCs</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link active"><span class="nav-icon">🗺️</span> Biomes &amp; Maps</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems &amp; Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+  <div class="nav-group">
+    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+  </div>
+  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
+</nav>
+
+<main class="main">
+
+  <div class="page-hero hero-world">
+    <div class="hero-label">World · Environment</div>
+    <h1>Biomes &amp; Maps</h1>
+    <p class="hero-desc">
+      World Geography, Biome Reference &amp; Landmark Atlas — a 12km × 8km mountain-ringed
+      basin, eight wilderness biomes, eight town districts, a sky-stone network, and a travel
+      system that connects them all. Read this before placing any terrain, structure, or landmark asset.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- Document metadata -->
+    <div class="doc-meta-bar">
+      <span><strong>Document:</strong> World Map Document</span>
+      <span><strong>Version:</strong> v1.0</span>
+      <span><strong>Date:</strong> June 2026</span>
+      <span><strong>Engine:</strong> Unreal Engine 5 — World Partition</span>
+      <span><strong>Status:</strong> <span class="badge" style="background:var(--emerald-dark);color:#fff">APPROVED FOR PRODUCTION USE</span></span>
+      <span><strong>Audience:</strong> Level Designers · Environment Artists · Narrative Designers · Technical Artists · QA · Audio</span>
+    </div>
+
+    <!-- Jump navigation -->
+    <div class="page-jumpnav">
+      <a href="#valley-overview">Valley Overview</a>
+      <a href="#scale-table">Scale Reference</a>
+      <a href="#compass-doctrine">Compass Doctrine</a>
+      <a href="#town-districts">Town Districts</a>
+      <a href="#biome-philosophy">Biome Philosophy</a>
+      <a href="#biome-emerald">Emerald Forest</a>
+      <a href="#biome-meadow">Golden Meadow</a>
+      <a href="#biome-lake">Crystal Lakeshore</a>
+      <a href="#biome-marsh">Marsh Shallows</a>
+      <a href="#biome-ruins">Ancient Ruins</a>
+      <a href="#biome-highshelf">High Shelf</a>
+      <a href="#biome-pass">Sealed Eastern Pass</a>
+      <a href="#biome-farvalley">Far Valley</a>
+      <a href="#old-campsite">Old Campsite</a>
+      <a href="#travel-system">Travel System</a>
+      <a href="#wayrest-points">Wayrest Points</a>
+      <a href="#seasonal-access">Seasonal Access</a>
+      <a href="#world-partition">World Partition Layers</a>
+      <a href="#naming-conventions">Naming Conventions</a>
+      <a href="#skystone-states">Sky-Stone States</a>
+      <a href="#map-aesthetic">Map Aesthetic</a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 1 — WORLD OVERVIEW & MASTER GEOGRAPHY
+    ═════════════════════════════════════════════════════════════ -->
+
+    <div id="valley-overview" class="section-header">
+      <span class="section-icon">🏔️</span>
+      <h2>Section 1 — World Overview &amp; Master Geography</h2>
+    </div>
+
+    <div class="pull-quote">
+      Core geographic context for all level design, environment art, and world-building decisions.
+      Read this section before placing any terrain, structure, or landmark asset.
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>🗺️</span>
+        <h3>1.1 The Valley — Master Description</h3>
+      </div>
+      <div class="card-body">
+        <p>The Valley is a <strong>mountain-ringed basin approximately 12km × 8km</strong> in total playable area. It is a <strong>closed geographic system</strong> — ringed by high peaks on all sides except the sealed eastern pass. The valley floor descends gently from north to south, with the Green Spring originating near the northern peak cluster and draining south through Mooseville into the Crystal Lake and then the southern marsh.</p>
+        <p>This geography means water — and with it, the influence of the sky-stone — flows through the entire living heart of the valley.</p>
+
+        <div class="info-box" style="margin-top:1rem">
+          <strong>Narrative Geography Note:</strong> The valley has never been seen in its entirety from above by any Moosian. Its full shape is known only from the highest ridge lookout, which shows only the inner basin. What lies beyond the peaks is unknown, except for what came through the eastern pass — and that pass has been sealed for 22 years.
+        </div>
+
+        <h4 style="margin-top:1.25rem;margin-bottom:.5rem;color:var(--emerald-dark)">World Spine</h4>
+        <p>The Green Spring runs <strong>North → South</strong> as the world's primary axis. All water, sky-stone influence, and most major geographic features are organized relative to this spine. Level design traversal pathways should feel oriented around it.</p>
+      </div>
+    </div>
+
+    <!-- World Scale Reference Table -->
+    <div id="scale-table" class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>📏</span>
+        <h3>1.2 World Scale Reference Table</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Coordinates (rel. to Mooseville Center)</th>
+                <th>Approximate Distance</th>
+                <th>Travel Time (on foot, no Trail Knack)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Mooseville Town Center (Heartfire District)</strong></td>
+                <td><code>0, 0</code></td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Green Spring (original)</td>
+                <td>200m North</td>
+                <td>200m</td>
+                <td>~2 min</td>
+              </tr>
+              <tr>
+                <td>Emerald Forest (entry)</td>
+                <td>300m Northwest</td>
+                <td>300m</td>
+                <td>~3 min</td>
+              </tr>
+              <tr>
+                <td>Golden Meadow (entry)</td>
+                <td>500m East</td>
+                <td>500m</td>
+                <td>~5 min</td>
+              </tr>
+              <tr>
+                <td>Crystal Lakeshore (entry)</td>
+                <td>1.2km South</td>
+                <td>1.2km</td>
+                <td>~12 min</td>
+              </tr>
+              <tr>
+                <td>Marsh Shallows</td>
+                <td>800m Southwest</td>
+                <td>800m</td>
+                <td>~8 min</td>
+              </tr>
+              <tr>
+                <td>Ancient Ruins</td>
+                <td>2.5km Northwest</td>
+                <td>2.5km</td>
+                <td>~25 min</td>
+              </tr>
+              <tr>
+                <td>High Shelf (meteor impact site)</td>
+                <td>3.5km North</td>
+                <td>3.5km</td>
+                <td>~35 min</td>
+              </tr>
+              <tr>
+                <td>The Sealed Eastern Pass</td>
+                <td>4.5km East</td>
+                <td>4.5km</td>
+                <td>~45 min</td>
+              </tr>
+              <tr>
+                <td>The Far Valley (Act 3 only)</td>
+                <td>Beyond the Pass</td>
+                <td>Unknown</td>
+                <td>Act 3 unlocked</td>
+              </tr>
+              <tr>
+                <td>The Old Campsite (human remnants)</td>
+                <td>2.2km West</td>
+                <td>2.2km</td>
+                <td>~22 min</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compass Doctrine -->
+    <div id="compass-doctrine" class="card" style="margin-bottom:2rem">
+      <div class="card-header">
+        <span>🧭</span>
+        <h3>1.3 Orientation Rules for Level Design — Compass Doctrine</h3>
+      </div>
+      <div class="card-body">
+        <div class="warn-box" style="margin-bottom:1rem">
+          <strong>Compass Doctrine — All Teams Must Follow.</strong> These directional rules are absolute and must be maintained across all level design, lighting, and environment art decisions.
+        </div>
+        <div class="table-wrap">
+          <table class="compass-table">
+            <thead>
+              <tr>
+                <th>Cardinal Direction</th>
+                <th>Elevation</th>
+                <th>Character</th>
+                <th>Narrative Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>North</td>
+                <td>Higher</td>
+                <td>Mountain peaks, colder, sky-stone sources</td>
+                <td>Origin, power, discovery</td>
+              </tr>
+              <tr>
+                <td>South</td>
+                <td>Lower</td>
+                <td>Marsh, warmer, older forest</td>
+                <td>Ancient past, slow time, deep ecology</td>
+              </tr>
+              <tr>
+                <td>East</td>
+                <td>Mid</td>
+                <td>Sealed pass, the unknown</td>
+                <td>Narrative tension, the threshold, Act 3 resolution</td>
+              </tr>
+              <tr>
+                <td>West</td>
+                <td>Mid-high</td>
+                <td>Oldest part of valley, human remnants</td>
+                <td>Ancient mystery, archaeological discovery</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 2 — MOOSEVILLE TOWN DISTRICT ATLAS
+    ═════════════════════════════════════════════════════════════ -->
+
+    <div id="town-districts" class="section-header">
+      <span class="section-icon">🏘️</span>
+      <h2>Section 2 — Mooseville Town District Atlas</h2>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>🏡</span>
+        <h3>2.1 Town Overview &amp; Philosophy</h3>
+      </div>
+      <div class="card-body">
+        <p>Mooseville is the player's home base and social hub. Its population is approximately <strong>80–120 Moosians</strong> at game start. It grew organically from the First Gathering site near the Green Spring outflow, expanding district by district over 22 years. The architecture is a blend of hand-adapted human concepts (from the Sacred Documents) and Moosian invention: wide doorways, antler racks, hoof-friendly ramps, low wide tables, and curved wall niches designed for a moose's broad body.</p>
+
+        <div class="info-box" style="margin-top:.85rem">
+          <strong>Town Layout Philosophy:</strong> Mooseville is <em>not</em> a grid. It grew along the natural path of the stream and the terrain. Streets curve around old cedar trees. Buildings cluster by function, but not rigidly. The central fire at the Heartfire District is always visible from any point in town — it is the visual and emotional anchor. <strong>This sight-line must be preserved in all environment art layouts.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="district-grid">
+
+      <!-- District 1 -->
+      <div class="district-card">
+        <div class="district-header">
+          <div class="district-num">1</div>
+          <div>
+            <h3>The Heartfire District</h3>
+            <div class="district-function">Town Center · Civic Life · Community Gathering</div>
+          </div>
+        </div>
+        <div class="district-body">
+          <div class="district-poi">The Central Fire</div>
+          <p>The original fire Melvin and Martha lit on the first cold night. Never extinguished in 22 years. Surrounded by carved log benches radiating outward. NPCs gather here every evening. <strong>This fire must always be rendering — no LOD culling at any viewable distance.</strong></p>
+
+          <div class="district-poi">The Gathering Hall</div>
+          <p>Largest building in Mooseville. Carved timber frame, wide arched doorway (antler-clearance height), open interior with a central clay hearth, hanging woven banners — each representing a founding value: community, water, memory, shelter, growth. Used for festivals, votes, announcements, and emergency meetings.</p>
+
+          <div class="district-poi">The Community Board</div>
+          <p>Wooden announcement board outside the Gathering Hall. Displays active community quests, event announcements, new arrival notices, and seasonal calendar. Player checks this daily. Interactive object — text dynamically populated from quest state.</p>
+
+          <div class="district-poi">Melvin &amp; Martha's Home</div>
+          <p>The founders' current residence, adjacent to the Heartfire. Larger than most homes, well-worn, full of artifacts. The player will visit this regularly for story beats. Tag: <code>LD_StoryAnchor_MelvinMartha</code>.</p>
+
+          <div class="district-poi">The Archive Hall</div>
+          <p>Gloria Finch's lineage-managed hall of records. Houses Sacred Document copies, census records, hand-drawn maps, and the Wall of Names (founding members inscribed in order). Player's name added here at game's end.</p>
+
+          <div class="ambient-note">Ambient: Smoke from the Central Fire rises visibly from anywhere in town. Children moose play around the benches in the afternoon. Elders gather for evening conversation. The sound of the nearby Green Spring outflow is audible as a gentle underscore.</div>
+        </div>
+      </div>
+
+      <!-- District 2 -->
+      <div class="district-card">
+        <div class="district-header">
+          <div class="district-num">2</div>
+          <div>
+            <h3>Muckmarket Row</h3>
+            <div class="district-function">Commerce · Crafts · Specialty Food · Social Exchange</div>
+          </div>
+        </div>
+        <div class="district-body">
+          <div class="district-poi">The Muck Exchange</div>
+          <p>A carved wooden market building where players can sell surplus goods (crops, fish, crafted items) for Mucks and browse specialty goods unavailable elsewhere.</p>
+
+          <div class="district-poi">Market Stalls (6–8 Rotating)</div>
+          <p>Individual vendors set up daily with different inventory. Some are permanent residents; others are new arrivals running their first stall. Stall placement and vendor schedules driven by dynamic NPC system.</p>
+
+          <div class="district-poi">The Tasting Corner</div>
+          <p>Marjorie Bell's secondary location — a small outdoor counter where she offers free daily tastings of a featured dish. Interacting here gives players a seasonal recipe hint.</p>
+
+          <div class="district-poi">The Clothier Stall</div>
+          <p>Sells cosmetic clothing items, dyeable fabrics, accessory pieces. Cosmetic system integration required.</p>
+
+          <div class="district-poi">The Rarity Rack</div>
+          <p>One stall run by Chester Lang's apprentice that sells rare crafting materials not found in the wilderness. Inventory reset schedule: <strong>weekly (in-game time)</strong>.</p>
+
+          <div class="ambient-note">Ambient: Busy morning and midday. Quieter evenings. The sound of bartering, wood carving, and friendly argument. Gold-painted wooden Muck coins hang decoratively from stall awnings.</div>
+        </div>
+      </div>
+
+      <!-- District 3 -->
+      <div class="district-card">
+        <div class="district-header">
+          <div class="district-num">3</div>
+          <div>
+            <h3>The Growing Circle</h3>
+            <div class="district-function">Agriculture · Greenhouses · Seed Keeping · Community Food Supply</div>
+          </div>
+        </div>
+        <div class="district-body">
+          <div class="district-poi">Doris Vale's Farm</div>
+          <p>The largest agricultural plot. A working farm managed by Doris Vale's descendants. Player can volunteer here for relationship points and crop-type knowledge.</p>
+
+          <div class="district-poi">The Seed Archive</div>
+          <p>A small stone-floored building where all known crop seeds are catalogued and stored. Players can purchase rare seeds; donating new seed varieties discovered in the wilderness adds to the archive and updates the catalogue UI.</p>
+
+          <div class="district-poi">Community Greenhouse</div>
+          <p>A glass-and-timber greenhouse (constructed Year 8 post-Starfall) for winter crop growing. Player can access for crafting cold-weather variants. Glass material must maintain interior warmth visual even during winter exterior conditions.</p>
+
+          <div class="district-poi">Player's Personal Plot</div>
+          <p>Adjacent to the Growing Circle (attached to the inherited homestead). Starts at <strong>6×6 tile</strong> growing area; expands to <strong>12×12</strong> at full upgrade. Grid system with seasonal soil variation.</p>
+
+          <div class="district-poi">The Irrigation Channel</div>
+          <p>Stone-lined water channel running Moose Water from the Enhancement Works through the Growing Circle. Visible flowing green-tinted water in channels. Beautiful at night — add glow emitter pass to channel material.</p>
+
+          <div class="ambient-note">Ambient: Soil smell, tool sounds, bees, birdsong. Sunrise light hits this district perfectly — golden rays through greenhouse glass. Doris Vale's lineage NPC can always be found here in the mornings.</div>
+        </div>
+      </div>
+
+      <!-- District 4 -->
+      <div class="district-card">
+        <div class="district-header">
+          <div class="district-num">4</div>
+          <div>
+            <h3>The Archive Quarter</h3>
+            <div class="district-function">Records · Education · History · Sacred Documents</div>
+          </div>
+        </div>
+        <div class="district-body">
+          <div class="district-poi">Gloria Finch's Archive Hall</div>
+          <p>The official Archive. Has two rooms: the Public Reading Room (anyone may enter) and the Secure Document Room (relationship Level 3+ with Gloria's lineage NPC required). Gate state managed via relationship system flag.</p>
+
+          <div class="district-poi">The Sacred Documents Display Case</div>
+          <p>The original trunk found at the human campsite is preserved here, behind glass. The recovered books are laid open to key pages. New players can read these for lore. Interaction triggers journal entry auto-write.</p>
+
+          <div class="district-poi">The Map Room</div>
+          <p>A separate alcove within the Archive filled with hand-drawn maps of the valley made by Vincent Reed and successors. The player's exploration adds to the master map displayed here. <strong>Live map update system — reflect player discovery state in rendered texture.</strong></p>
+
+          <div class="district-poi">The Inscription Wall</div>
+          <p>Stone wall with names of all known Moosians, by arrival order. Founding eight names are carved deepest; newer names are lighter. Player's name ends the wall — added in end-game sequence.</p>
+
+          <div class="ambient-note">Ambient: Quiet. Dusty. Warm lamp light (oil lamps modeled after a device from the Sacred Documents). The scent of old paper and cedar. NPCs here whisper and read.</div>
+        </div>
+      </div>
+
+      <!-- District 5 -->
+      <div class="district-card">
+        <div class="district-header">
+          <div class="district-num">5</div>
+          <div>
+            <h3>The Docks &amp; Drying Racks</h3>
+            <div class="district-function">Fishing · Water Management · Secondary Moose Water Distribution</div>
+          </div>
+        </div>
+        <div class="district-body">
+          <div class="district-poi">Town Creek Dock</div>
+          <p>Small wooden dock on the outflow creek where town-accessible fishing occurs. Starting fishing location for the player. Entry-level fish spawn table active here from Day 1.</p>
+
+          <div class="district-poi">Fish Drying Racks</div>
+          <p>Long wooden racks where caught fish are hung to cure. Visual landmark communicating community food production. Fish assets populate dynamically based on recent catch events.</p>
+
+          <div class="district-poi">Harold Winslow's Water Station</div>
+          <p>The meteorological and hydrological observation post. Weather predictions, flood warnings, and seasonal river condition reports are posted here. Harold's lineage NPC present most mornings. Interface for weather forecast system.</p>
+
+          <div class="district-poi">The Net Shed</div>
+          <p>Crafting location for fishing gear (rods, nets, bait containers). Requires <strong>Craft Knack Tier 1</strong> to use advanced workbench inside.</p>
+
+          <div class="ambient-note">Ambient: Running water sound constant. Morning mist. Frogs. Birds diving for fish. The smell of fresh water and cedar planks.</div>
+        </div>
+      </div>
+
+      <!-- District 6 -->
+      <div class="district-card">
+        <div class="district-header">
+          <div class="district-num">6</div>
+          <div>
+            <h3>The Repair Yard</h3>
+            <div class="district-function">Crafting · Building · Tool Repair · Salvage Workshop</div>
+          </div>
+        </div>
+        <div class="district-body">
+          <div class="district-poi">Chester Lang's Workshop</div>
+          <p>The primary advanced crafting location. Full range of tools and workbenches. Chester's lineage NPC can teach the player recipes not learnable elsewhere. Upgrade state modifies available workbench tiers visually.</p>
+
+          <div class="district-poi">The Salvage Pile</div>
+          <p>A constantly shifting pile of recovered materials from wilderness exploration and demolition. Players can sort through it <strong>once per day</strong> for free material finds. Random loot table, refresh daily.</p>
+
+          <div class="district-poi">The Build Yard</div>
+          <p>Open outdoor workspace where Raymond Harlow's lineage NPC coordinates town construction projects. Player can volunteer to assist for relationship points and materials.</p>
+
+          <div class="district-poi">The Tool Wall</div>
+          <p>Display of every tool type used in Mooseville, built as a teaching reference from Sacred Document illustrations. Clicking any tool gives lore description. Interactive UI element with <strong>18 distinct tool entries</strong>.</p>
+
+          <div class="ambient-note">Ambient: Hammering, sawing, fire from the forge. Busy all day. Chester's apprentices move materials. The smell of cut wood and metal.</div>
+        </div>
+      </div>
+
+      <!-- District 7 -->
+      <div class="district-card">
+        <div class="district-header">
+          <div class="district-num">7</div>
+          <div>
+            <h3>The Player's Homestead</h3>
+            <div class="district-function">Player Base · Personal Crafting · Personal Farm · Rest Point</div>
+          </div>
+        </div>
+        <div class="district-body">
+          <div class="district-poi">The Original Home</div>
+          <p>Built by Melvin and Martha as their first permanent structure. Now gifted to the player. <strong>Three rooms at start</strong> (main room, sleeping alcove, small storage). Expandable to <strong>6 rooms</strong>. Room expansion modifies mesh and interior layout dynamically.</p>
+
+          <div class="district-poi">Personal Crafting Station</div>
+          <p>Tier 1 available from day one. Upgradeable to Tier 3 through materials + Raymond's lineage NPC relationship. Each tier adds new mesh attachments and available recipe categories.</p>
+
+          <div class="district-poi">The Green Spring View</div>
+          <p>The homestead has a clear sightline to the original Green Spring — intentional by Melvin and Martha. On clear nights, the spring's glow illuminates the homestead windows. <strong>Confirm sight-line is unobstructed at all vegetation LOD levels.</strong></p>
+
+          <div class="district-poi">The Memory Wall</div>
+          <p>Inside the homestead, a wall where old photographs (hand-drawn portraits), Melvin's tools, and Martha's first written records are displayed. Story items found by the player can be added here. Dynamic display — each placed item updates the wall composition.</p>
+
+          <div class="ambient-note">Ambient: Home sounds — wind on wooden walls, fire crackling, birdsong through open windows. This is the player's safest and calmest space. Reverb preset: <strong>Indoor Warm Domestic</strong>.</div>
+        </div>
+      </div>
+
+      <!-- District 8 -->
+      <div class="district-card">
+        <div class="district-header">
+          <div class="district-num">8</div>
+          <div>
+            <h3>The Enhancement Works</h3>
+            <div class="district-function">Moose Water Production · Civic Distribution</div>
+          </div>
+        </div>
+        <div class="district-body">
+          <div class="district-poi">The Shard Station</div>
+          <p>A stone basin system where water passes through chambers containing secured sky-stone shards, taking on the beneficial trace. The original engineering design by Harold Winslow, Year 5 post-Starfall. Sky-stone visual effect active in water material shader.</p>
+
+          <div class="district-poi">The Distribution Tap</div>
+          <p>Public tap where any Moosian (including the player) may fill containers with Moose Water, free of charge, up to the daily civic limit. Interaction: fill container. State resets at dawn.</p>
+
+          <div class="district-poi">The Shard Observation Window</div>
+          <p>A glass viewing panel where sky-stone shards can be seen glowing green through the water flow. One of the most visually iconic spots in town. <strong>Highest priority for visual polish.</strong> Glow emitter: <code>#1B5E20</code> with bloom, intensity increases at night.</p>
+
+          <div class="district-poi">The Civic Notice Post</div>
+          <p>Emergency notices specific to Enhancement Works health. Degradation warnings during Act 1 are posted here first. Text dynamically populated from narrative event triggers.</p>
+
+          <div class="ambient-note">Ambient: The sound of flowing water over stone. A faint, warm green glow at all hours, brightest at dusk and night. The most visited location in Mooseville after the Central Fire.</div>
+        </div>
+      </div>
+
+    </div><!-- /.district-grid -->
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 3 — WILDERNESS BIOMES
+    ═════════════════════════════════════════════════════════════ -->
+
+    <div class="section-header">
+      <span class="section-icon">🌿</span>
+      <h2>Section 3 — Wilderness Biomes — Detailed Atlas</h2>
+    </div>
+
+    <div id="biome-philosophy" class="card" style="margin-bottom:1.75rem">
+      <div class="card-header">
+        <span>🧠</span>
+        <h3>3.1 Biome Design Philosophy</h3>
+      </div>
+      <div class="card-body">
+        <p>Each biome is a <strong>distinct emotional register</strong>. Moving between them should feel like turning a page. No biome is hostile — each is inviting in a different way. The wilderness is not a danger zone; it is a <em>wonder zone</em>. Obstacles are environmental, not aggressive.</p>
+        <p>The biome system is the primary vehicle for environmental storytelling. Each biome must deliver a unique sensory signature — in lighting, sound, material palette, vegetation density, and sky framing. <strong>Transitions between biomes should be gradual (a 30–50m blend zone) but unmistakable in character.</strong></p>
+      </div>
+    </div>
+
+    <!-- BIOME 1 — Emerald Forest -->
+    <div id="biome-emerald" class="biome-card">
+      <div class="biome-header" style="background:linear-gradient(135deg,#0F4C2A,#1A7A42)">
+        <span class="biome-header-icon">🌲</span>
+        <div>
+          <h3>Biome 1 — Emerald Forest</h3>
+          <div class="biome-meta-row">
+            <span class="biome-meta-pill">~1.8km × 1.2km</span>
+            <span class="biome-meta-pill">Northwest quadrant</span>
+            <span class="biome-meta-pill">Elev: +20–60m</span>
+            <span class="biome-meta-pill">Open from game start</span>
+          </div>
+          <div style="margin-top:.4rem;font-size:.82rem;opacity:.85;font-style:italic">Emotional Register: Ancient, sheltered, close, watchful</div>
+        </div>
+      </div>
+      <div class="biome-body">
+
+        <div class="biome-section-label">Season Variation</div>
+        <p>Bright spring green → dense summer canopy → amber/rust autumn → deep snow-laden winter (most dramatic winter transformation).</p>
+
+        <div class="biome-section-label">Terrain Description</div>
+        <p>Dense old-growth pine, cedar, and fir. Canopy so thick that sunlight enters only in shafts and patches. Fern hollows fill every open floor space. Fallen nurse logs create habitat for fungi, insects, and small animals. The forest floor is soft — almost soundless walking. Underground root networks cause occasional ground-surface texture variation.</p>
+
+        <div class="biome-section-label">Key Landmarks</div>
+
+        <div class="district-poi">The First Path</div>
+        <p>The original trail worn by moose hooves before awakening. Still visible as a subtle depression in the forest floor. Melvin and Martha walked this path every morning for years. Now a meditation walk for elder Moosians. Tag: <code>Landmark_The_FirstPath</code></p>
+
+        <div class="district-poi">The Hollow Cedar</div>
+        <p>A massive cedar tree with a lightning-carved hollow large enough for a moose to stand inside. Used historically as emergency shelter. Now a known meeting spot — NPCs leave notes here. Notes are readable interactive objects.</p>
+
+        <div class="district-poi">The Nurse Log Gallery</div>
+        <p>A sequence of seven enormous fallen logs in a rough line, each supporting its own micro-ecosystem of moss, ferns, fungi, and small creatures. Primary foraging hot spot. Each log has a unique material and vegetation cluster.</p>
+
+        <div class="district-poi">Bear Family Territory</div>
+        <p>Northwest quadrant. Home to a bear family (two adults, one or two cubs depending on season). Bears are non-threatening. At Closeness Level 1 (via non-aggressive interaction), they become landmark companions — present at predictable times. Schedule driven by wildlife AI system.</p>
+
+        <div class="district-poi">The Amber Glade</div>
+        <p>A natural clearing where the canopy opens and golden-hour light floods in. The only place in the forest with full sunlight. Deer visit at dawn. One of the most visually spectacular locations for any time of day. <strong>Wayrest Point: The Forest Hollow.</strong></p>
+
+        <div class="district-poi">Sky-Stone Trace #1 (Dormant)</div>
+        <p>A faint green vein visible in a rocky outcrop near the northern forest edge. Activatable with Spring Knack Tier 2 and Moose Water. Tag: <code>SS_Deposit_1_Dormant</code>. Lore fragment: impression of impact, heat, and speed — the Starfall's moment of arrival.</p>
+
+        <div class="biome-section-label">Foraging Yield</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Resource</th><th>Season</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pine Mushroom</td><td>Spring, Autumn</td><td>Cooking ingredient; rare variant in winter</td></tr>
+              <tr><td>Brackfern</td><td>Spring, Summer</td><td>Crafting material</td></tr>
+              <tr><td>Cedar Bark</td><td>Year-round</td><td>Building material</td></tr>
+              <tr><td>Amber Resin</td><td>Summer</td><td>Crafting, adhesive</td></tr>
+              <tr><td>Forest Berry</td><td>Summer</td><td>Cooking, gifting</td></tr>
+              <tr><td>Bear Moss</td><td>Year-round</td><td>Rare; only in bear territory with relationship Level 1+</td></tr>
+              <tr><td>Old Nail (salvage)</td><td>Year-round</td><td>Human remnant; random low yield</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="biome-section-label">Ambient Soundscape</div>
+        <p>Deep forest quiet — distant wind in high canopy, nearby birdcall, soft fern rustle, occasional woodpecker percussion, bear movement in northwest.</p>
+      </div>
+    </div>
+
+    <!-- BIOME 2 — Golden Meadow -->
+    <div id="biome-meadow" class="biome-card">
+      <div class="biome-header" style="background:linear-gradient(135deg,#8A6000,#C49A20)">
+        <span class="biome-header-icon">🌾</span>
+        <div>
+          <h3>Biome 2 — Golden Meadow</h3>
+          <div class="biome-meta-row">
+            <span class="biome-meta-pill">~2.5km × 1.5km</span>
+            <span class="biome-meta-pill">East, curving southeast</span>
+            <span class="biome-meta-pill">Elev: +5–15m</span>
+            <span class="biome-meta-pill">Open from game start</span>
+          </div>
+          <div style="margin-top:.4rem;font-size:.82rem;opacity:.85;font-style:italic">Emotional Register: Open, warm, joyful, alive, spacious</div>
+        </div>
+      </div>
+      <div class="biome-body">
+
+        <div class="biome-section-label">Season Variation</div>
+        <p>Wildflower explosion in spring → tall grass/heat shimmer summer → golden harvest autumn → frost-dusted winter flats with visible animal tracks.</p>
+
+        <div class="biome-section-label">Terrain Description</div>
+        <p>The most open biome in the valley. Rolling grassland interrupted by occasional rocky outcrops, lone trees, and low shrubs. Grass height varies — knee-height on a moose in spring, shoulder-height in late summer. Wind is constant and visible in the grass. The meadow provides the only unobstructed view of the sky in the valley, making it the best stargazing location.</p>
+
+        <div class="biome-section-label">Key Landmarks</div>
+
+        <div class="district-poi">The Lone Oak</div>
+        <p>A massive solitary oak tree at the meadow's center. Completely anomalous — oaks don't grow here naturally. A long-standing mystery with a lore payoff in Act 2 (a Sacred Document page reveals a human planted it as a survey marker). Player can picnic under it. NPCs have carved initials in the bark. <strong>Wayrest Point: The Meadow Marker.</strong></p>
+
+        <div class="district-poi">The Survey Stake Cluster</div>
+        <p>Three rusted metal stakes with faded orange survey ribbon still attached. The oldest human remnants encountered early in the game. Interact to begin the human mystery thread. Journal entry auto-written on interaction. Tag: <code>QT_HumanMystery_01_Discover</code></p>
+
+        <div class="district-poi">The Wildflower Meadow</div>
+        <p>In spring, a half-kilometer swath of wildflowers blooms in rings of color. Used for flower-gathering quests, gifting materials, and festival decoration sourcing. Vegetation density driven by season override volume.</p>
+
+        <div class="district-poi">The Deer Crossing</div>
+        <p>At dawn and dusk, a herd of deer crosses the eastern meadow between forest edge and rocky ridge. Non-interactive but beautiful — a camera-worthy moment the game draws attention to via a soft UI hint on first occurrence.</p>
+
+        <div class="district-poi">The Star Watching Flat</div>
+        <p>A wide flat area near meadow center, slightly elevated, with no tree obstruction above. NPCs hold informal stargazing nights here. Key location for night lore events tied to the constellation mystery. <strong>Night sky must be fully rendered from this position — no billboard vegetation occlusion overhead.</strong></p>
+
+        <div class="district-poi">The Old Fence Line</div>
+        <p>A barely visible row of rusted wire and rotten posts stretching 200m. More human remnants. Suggests the meadow was once bordered or parceled. Lore fragment available in Act 2.</p>
+
+        <div class="district-poi">Sky-Stone Trace #2 (Surface)</div>
+        <p>A scatter of small glowing fragments embedded in the soil, exposed by spring rainstorms. Collectible sky-stone shards for Enhancement Works upgrade in Act 2. Tag: <code>SS_Deposit_2_Active</code></p>
+
+        <div class="biome-section-label">Gathering Yield</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Resource</th><th>Season</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Goldenwheat</td><td>Summer</td><td>Primary crop (wild variant); cultivatable in player plot</td></tr>
+              <tr><td>Wildflower Bundle</td><td>Spring</td><td>Gifting, festival decoration</td></tr>
+              <tr><td>Meadow Grass</td><td>Year-round</td><td>Weaving material</td></tr>
+              <tr><td>Survey Marker Fragment</td><td>Any</td><td>Quest item; limited quantity</td></tr>
+              <tr><td>Honey (from hive near Lone Oak)</td><td>Summer, Autumn</td><td>Cooking ingredient</td></tr>
+              <tr><td>Deer Antler Shed</td><td>Spring</td><td>Crafting, decoration; seasonal and ground-spawned</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="biome-section-label">Ambient Soundscape</div>
+        <p>Wind over grass (dominant). Birdsong (meadowlarks, sparrows). Distant deer movement. Summer insect hum. Winter: near-silence with wind and crunch of frost.</p>
+      </div>
+    </div>
+
+    <!-- BIOME 3 — Crystal Lakeshore -->
+    <div id="biome-lake" class="biome-card">
+      <div class="biome-header" style="background:linear-gradient(135deg,#0A3A60,#1560A0)">
+        <span class="biome-header-icon">💎</span>
+        <div>
+          <h3>Biome 3 — Crystal Lakeshore</h3>
+          <div class="biome-meta-row">
+            <span class="biome-meta-pill">Lake ~800m diameter</span>
+            <span class="biome-meta-pill">Shore ~2km circumference</span>
+            <span class="biome-meta-pill">Elev: −10m (water table sink)</span>
+            <span class="biome-meta-pill">Inner shore: Trail Knack Tier 2</span>
+          </div>
+          <div style="margin-top:.4rem;font-size:.82rem;opacity:.85;font-style:italic">Emotional Register: Serene, reflective, sacred, magical, still</div>
+        </div>
+      </div>
+      <div class="biome-body">
+
+        <div class="biome-section-label">Season Variation</div>
+        <p>Mist-covered mornings in spring → crystal-clear summer → deep amber autumn reflections → partially frozen edges in winter.</p>
+
+        <div class="biome-section-label">Terrain Description</div>
+        <p>The valley's primary water body. Water clarity is exceptional — from shore, the bottom is visible to <strong>4m depth</strong>. In the shallows (0–1m), green-tinged water reveals sky-stone mineral trace from spring inflow. Shoreline alternates between sandy patches, smooth stone flats, and reed beds. The eastern shore has a rock shelf above the waterline used as a natural observation platform. A small island (30m diameter) sits in the lake center — accessible only by crafted raft (Trail Knack Tier 3 or Craft Knack Tier 2).</p>
+
+        <div class="biome-section-label">Key Landmarks</div>
+
+        <div class="district-poi">The Green Shallows</div>
+        <p>The northwestern shore where spring inflow enters the lake. Water glows faintly green at the edge, day and night. Sky-stone trace clearly visible in substrate. Non-drinkable from the lake (diluted). <strong>One of the most photographed in-game locations. High-priority water shader polish.</strong></p>
+
+        <div class="district-poi">The Stone Dock</div>
+        <p>A natural flat rock ledge used as the primary fishing platform. Harold's lineage brings a weather instrument kit here each morning. Best location for 8 of the 24 fish species. <strong>Wayrest Point: The Shore Stone.</strong></p>
+
+        <div class="district-poi">The Reed Beds (North Shore)</div>
+        <p>Dense cattail and reed growth. Harvesting materials for weaving and crafting. Waterfowl nesting — disturbing nests has a relationship consequence with wildlife-caring NPCs. Nest disturbance tracked by interaction flag.</p>
+
+        <div class="district-poi">The Observation Rock (East Shore)</div>
+        <p>A flat-topped boulder 3m above water level. Best view of the full lake and mountain reflections. Player journal entries written here have special illustrated formatting — trigger journal style override on interaction.</p>
+
+        <div class="district-poi">Center Island</div>
+        <p>Small wooded island. Contains a rusted metal lockbox (human remnant — Act 2 quest), one unique fish species habitat, and a strange circular stone arrangement of unknown origin. Raft crafting requirement gate enforced by trigger volume.</p>
+
+        <div class="district-poi">The Melt Pool (High Water, Spring Only)</div>
+        <p>A temporary pool that forms on the northwest shore during spring snowmelt. Hosts 2 rare fish species for a 2-week in-game window only. Seasonal spawn condition: <code>Season == Spring &amp;&amp; Week &lt;= 2</code>.</p>
+
+        <div class="district-poi">Sky-Stone Trace #3 (Submerged)</div>
+        <p>Visible from above in summer (clearest water). Requires crafted diving weight to reach. Spring Knack Tier 3 activates it. Tag: <code>SS_Deposit_3_Dormant</code>. Lore: impression of cold, silence, depth — the sky-stone sensing the water.</p>
+
+        <div class="biome-section-label">Fishing Zones — Full Specification</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Zone</th><th>Location</th><th>Fish Available</th><th>Access Requirement</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Town Creek</td><td>Town Docks</td><td>6 common species</td><td class="fishing-zone-none">None</td></tr>
+              <tr><td>Stone Dock</td><td>Crystal Lakeshore</td><td>8 species (mid-tier)</td><td class="fishing-zone-none">None</td></tr>
+              <tr><td>Reed Beds</td><td>North Shore</td><td>4 species (carp-type, seasonal)</td><td class="fishing-zone-none">None</td></tr>
+              <tr><td>Deep Lake</td><td>Center (rowboat)</td><td>6 species (rare)</td><td>Trail Knack Tier 2</td></tr>
+              <tr><td>Melt Pool</td><td>Northwest Shore</td><td>2 ultra-rare (spring only)</td><td>Seasonal access only</td></tr>
+              <tr><td>High Shelf Pool</td><td>High Shelf Biome</td><td>4 night-only species</td><td>Trail Knack Tier 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="biome-section-label">Ambient Soundscape</div>
+        <p>Gentle water lapping. Frog calls at dusk. Reed-bed wind. Waterfowl mornings. High stillness at midday in summer.</p>
+      </div>
+    </div>
+
+    <!-- BIOME 4 — Marsh Shallows -->
+    <div id="biome-marsh" class="biome-card">
+      <div class="biome-header" style="background:linear-gradient(135deg,#2A4A1A,#3A6A28)">
+        <span class="biome-header-icon">🌿</span>
+        <div>
+          <h3>Biome 4 — The Marsh Shallows</h3>
+          <div class="biome-meta-row">
+            <span class="biome-meta-pill">~1.5km × 1km</span>
+            <span class="biome-meta-pill">Southwest quadrant</span>
+            <span class="biome-meta-pill">Elev: −5m (valley low point)</span>
+            <span class="biome-meta-pill">Deeper areas: Craft Knack Tier 2</span>
+          </div>
+          <div style="margin-top:.4rem;font-size:.82rem;opacity:.85;font-style:italic">Emotional Register: Slow, ancient, quiet, slightly mysterious, alive-underfoot</div>
+        </div>
+      </div>
+      <div class="biome-body">
+
+        <div class="biome-section-label">Terrain Description</div>
+        <p>The southern wetland carved by beavers before awakening. Still-active beaver dams on the western edge maintain water levels. The marsh is navigable via raised root paths and old moose-worn raised ground. Water is <strong>0.1–0.5m deep</strong> in most traversable areas; deeper sections blocked by thick reed walls. Rich in wildlife and plant life. A sense of deep time — this part of the valley has changed least since before the Starfall.</p>
+
+        <div class="biome-section-label">Key Landmarks</div>
+
+        <div class="district-poi">The Beaver Dams</div>
+        <p>Two active beaver dams on the west marsh. Beavers are present (non-awakened; pure wildlife). Their maintenance of the dams maintains marsh water levels — a point of ecology mentioned by Harold's lineage NPC. Water level system responds to dam state.</p>
+
+        <div class="district-poi">The Raised Root Paths</div>
+        <p>Natural elevated root networks from old-growth marsh trees forming navigable walkways. Following them leads to inner marsh areas. Navigation aid — paths subtly highlighted when Closeness Level 1 with marsh-associated NPC is achieved.</p>
+
+        <div class="district-poi">The Sunken Log Platform</div>
+        <p>An enormous old log, half-submerged, forming a natural raft-like platform. Used as a resting spot and secondary fishing location. Custom physics: slight float response to player weight.</p>
+
+        <div class="district-poi">The Oldest Tree</div>
+        <p>A massive bald cypress at the marsh's center — estimated pre-Starfall age of <strong>200+ years</strong>. The First Circle held their first formal meeting under this tree (Year 2). A carved marker at its base commemorates this. <strong>Wayrest Point: The Marsh Root.</strong></p>
+
+        <div class="district-poi">Sky-Stone Trace #4 (Buried)</div>
+        <p>Beneath the marsh substrate. Not accessible until Act 3 — marsh draining is a quest event that reveals this deposit. Tag: <code>SS_Deposit_4_Buried</code>. Locked by: <code>QT_Act3_MarshDrain_Complete</code>.</p>
+
+        <div class="biome-section-label">Ambient Soundscape</div>
+        <p>Frog chorus. Insect drone. Slow water movement. Reed-bed wind. Heron calls. Beaver activity (distant splashing and gnawing). Deep quiet underneath it all.</p>
+      </div>
+    </div>
+
+    <!-- BIOME 5 — Ancient Ruins -->
+    <div id="biome-ruins" class="biome-card">
+      <div class="biome-header" style="background:linear-gradient(135deg,#3A3028,#6A5040)">
+        <span class="biome-header-icon">🏛️</span>
+        <div>
+          <h3>Biome 5 — Ancient Ruins</h3>
+          <div class="biome-meta-row">
+            <span class="biome-meta-pill">Ruin complex ~600m × 400m</span>
+            <span class="biome-meta-pill">Surrounding wilderness 1.5km buffer</span>
+            <span class="biome-meta-pill">Elev: +120m (natural rock plateau)</span>
+            <span class="biome-meta-pill">Trail Knack Tier 1 required</span>
+          </div>
+          <div style="margin-top:.4rem;font-size:.82rem;opacity:.85;font-style:italic">Emotional Register: Awe, mystery, old silence, slightly unsettling (not threatening), discovery</div>
+        </div>
+      </div>
+      <div class="biome-body">
+
+        <div class="biome-section-label">Terrain Description</div>
+        <p>A natural stone plateau overgrown with moss, lichen, and low scrub. The "ruins" are not traditional buildings — they are human-built structures collapsed into weathered stone frames, rusted metal frames, and concrete pads reclaimed by vegetation. At first glance they appear as odd natural formations. On closer inspection, the regularity becomes unmistakable: this was constructed. By whom? For what?</p>
+
+        <div class="biome-section-label">Key Landmarks</div>
+
+        <div class="district-poi">The Survey Station (Ruins Site A)</div>
+        <p>The most intact structure — a collapsed cabin frame with a partial roof of rusted corrugated metal. Inside: a weathered folding table, three metal stakes still upright, and a rusted canister containing the most intact human-written pages found outside the original trunk. Act 1 quest destination. <strong>Wayrest Point: The Ruin Shelf.</strong></p>
+
+        <div class="district-poi">The Equipment Cache (Ruins Site B)</div>
+        <p>A buried cache revealed by the Act 1 tremor. Contains human tools (measuring instruments, a compass, glass vials). Each item brought to the Archive yields a lore entry. Inventory items: discoverable post-tremor event only.</p>
+
+        <div class="district-poi">The Foundation Grid</div>
+        <p>A series of concrete pad corners in a 4×4 grid pattern (<strong>16 pads total</strong>). Suggests a planned structure never completed — or demolished. Grid alignment points directly toward the eastern pass. <strong>This alignment must be preserved exactly in level geometry.</strong></p>
+
+        <div class="district-poi">The Moss Inscription</div>
+        <p>On a flat stone slab, barely visible under moss. A carved grid of letters and numbers. Translation quest (Archive-based) reveals it as survey coordinates pointing to the High Shelf impact site. Text revealed progressively as translation quest advances.</p>
+
+        <div class="district-poi">Eagle Lookout</div>
+        <p>Eagles nest here. At Closeness Level 2 with the eagle pair (via sustained respectful presence), one eagle will guide the player toward hidden items in the Ruins and High Shelf areas. Eagle guidance system: directional flight animation toward target.</p>
+
+        <div class="biome-section-label">Ambient Soundscape</div>
+        <p>Wind across stone, hawk calls, distant creek sound, occasional dislodged pebble. <strong>Quietest biome — almost meditative.</strong></p>
+      </div>
+    </div>
+
+    <!-- BIOME 6 — High Shelf -->
+    <div id="biome-highshelf" class="biome-card">
+      <div class="biome-header" style="background:linear-gradient(135deg,#1A1A30,#2A2A50)">
+        <span class="biome-header-icon">⛰️</span>
+        <div>
+          <h3>Biome 6 — The High Shelf</h3>
+          <div class="biome-meta-row">
+            <span class="biome-meta-pill">Plateau ~800m × 600m</span>
+            <span class="biome-meta-pill">Impact crater 150m diameter</span>
+            <span class="biome-meta-pill">Elev: +280m (highest accessible point)</span>
+            <span class="biome-meta-pill">Trail Knack Tier 2 + Craft Knack Tier 2</span>
+            <span class="biome-meta-pill">Act 2 quest unlocks path fully</span>
+          </div>
+          <div style="margin-top:.4rem;font-size:.82rem;opacity:.85;font-style:italic">Emotional Register: Vast, exposed, humbling, sacred, the top of the world</div>
+        </div>
+      </div>
+      <div class="biome-body">
+
+        <div class="biome-section-label">Terrain Description</div>
+        <p>A high mountain plateau reached via a steep switchback trail accessible after clearing a small rockslide (Act 2 quest). The plateau is above the treeline — exposed, windswept, with scattered alpine plants, lichen-covered boulders, and snow patches year-round. The impact crater from the Starfall is clearly visible: a bowl-shaped depression approximately <strong>150m across, 20m deep at center</strong>, with shattered and fused rock at the rim.</p>
+
+        <div class="biome-section-label">Key Landmarks</div>
+
+        <div class="district-poi">The Impact Crater</div>
+        <p>The origin point of the Starfall. The crater floor contains the highest concentration of sky-stone in the valley. Shards visible on surface. The crater glows green at night — visible from Mooseville as a distant light on clear nights, though no Moosian has known what it was until the player discovers it. Night glow emitter: distant light actor at crater center, radius <strong>500m</strong>.</p>
+
+        <div class="district-poi">The Primary Sky-Stone Deposit</div>
+        <p>Main deposit at crater center. Interacting (Spring Knack Tier 3) triggers the deepest and longest lore vision in the game — the full Starfall moment, the sky-stone's origin, and the first hint of intentionality. Act 2 climax. Cinematic trigger on interaction. Tag: <code>SS_Deposit_Primary_Dormant</code></p>
+
+        <div class="district-poi">The Human Flag Post</div>
+        <p>A metal pole, corroded but still standing, at the plateau edge. A fragment of faded cloth still attached. The significance becomes clear in Act 3 — this was a survey team's claim marker. Interactive lore object; full context unlocked in Act 3.</p>
+
+        <div class="district-poi">The Valley Overlook</div>
+        <p>The only point in the game from which the full valley interior is visible. A mandatory story moment — the player sees Mooseville from above for the first time. Deeply emotional beat. Cinematic camera: pan from impact crater to valley overlook on first visit. Cutscene flag: <code>HS_ValleyOverlook_Seen</code>.</p>
+
+        <div class="district-poi">The High Shelf Melt Pool</div>
+        <p>A permanent snowmelt pool near the impact crater, fed by year-round snowfields. Contains 4 unique fish species found nowhere else (night fishing only). Water has the highest sky-stone trace of any accessible water body. Pool water shader: <strong>highest intensity sky-stone glow variant</strong>.</p>
+
+        <div class="biome-section-label">Ambient Soundscape</div>
+        <p>High-altitude wind (dominant). Alpine silence between gusts. Distant eagle calls. At night: near-total silence except wind — and a very faint harmonic hum from the crater (sky-stone ambient audio layer).</p>
+      </div>
+    </div>
+
+    <!-- BIOME 7 — Sealed Eastern Pass -->
+    <div id="biome-pass" class="biome-card">
+      <div class="biome-header" style="background:linear-gradient(135deg,#3A1A10,#6A3020)">
+        <span class="biome-header-icon">🚧</span>
+        <div>
+          <h3>Biome 7 — The Sealed Eastern Pass</h3>
+          <div class="biome-meta-row">
+            <span class="biome-meta-pill">Pass corridor ~200m wide, 800m long</span>
+            <span class="biome-meta-pill">Elev: +150m</span>
+            <span class="biome-meta-pill">Act 2 crack opens narrow entry</span>
+            <span class="biome-meta-pill">Full traversal: Act 3</span>
+          </div>
+          <div style="margin-top:.4rem;font-size:.82rem;opacity:.85;font-style:italic">Emotional Register: Tension, anticipation, blockage, the threshold</div>
+        </div>
+      </div>
+      <div class="biome-body">
+
+        <div class="biome-section-label">Terrain Description</div>
+        <p>The original migration route through the eastern mountain range, sealed by the Starfall landslide. The pass is a narrow canyon between two peak faces, filled with consolidated debris: granite boulders, ice chunks (still frozen 22 years later in the canyon shadow), uprooted trees compacted into fill, and fine debris cemented by freeze-thaw cycles. The landslide fill is not loose — it has become its own geological formation. Crossing is not dangerous in-game, but atmospherically heavy. <strong>This is where the old world ended.</strong></p>
+
+        <div class="biome-section-label">Key Landmarks</div>
+
+        <div class="district-poi">The Landslide Face</div>
+        <p>The wall of consolidated debris visible from the eastern meadow for 22 years. On close inspection, fragments of the sky-stone impact shockwave are still visible as fused sections of rock. Visible from Golden Meadow — <strong>must read as a distant visual landmark at biome boundary range.</strong></p>
+
+        <div class="district-poi">The Act 2 Crack</div>
+        <p>A fissure opened by the Act 1 tremor, wide enough for a single moose to squeeze through sideways. The player is the first Moosian to enter since the Starfall. Geometry gated by Act 2 narrative state flag. Squeeze animation trigger on entry.</p>
+
+        <div class="district-poi">The Echo Chamber</div>
+        <p>A natural void within the debris where sound behaves strangely — voices echo in an unsettling delay. NPC dialogue here has unique reverb treatment. Audio: <strong>Reverb Preset = Echo Chamber (custom). Delay: 0.4s, Decay: 3.0s.</strong></p>
+
+        <div class="district-poi">The First Crossing View</div>
+        <p>Emerging from the pass into the far side — the moment the player sees the Far Valley for the first time. One of the most significant visual moments in the entire game. <strong>Mandatory cinematic camera on exit trigger.</strong></p>
+
+        <div class="biome-section-label">Ambient Soundscape</div>
+        <p>Canyon wind amplified through narrow walls. Dripping ice melt. Occasional deep creak of settling debris. Echoes of own footsteps. The Echo Chamber applies custom reverb to all audio in its trigger volume.</p>
+      </div>
+    </div>
+
+    <!-- BIOME 8 — Far Valley -->
+    <div id="biome-farvalley" class="biome-card">
+      <div class="biome-header" style="background:linear-gradient(135deg,#1A3030,#2A5A50)">
+        <span class="biome-header-icon">🌄</span>
+        <div>
+          <h3>Biome 8 — The Far Valley <span class="biome-meta-pill" style="background:rgba(255,200,50,.25);color:#FFE590;font-size:.75rem;vertical-align:middle">Act 3 Only</span></h3>
+          <div class="biome-meta-row">
+            <span class="biome-meta-pill">~3km × 2km (not fully mapped)</span>
+            <span class="biome-meta-pill">Act 3 exclusive</span>
+            <span class="biome-meta-pill">Full pass traversal required</span>
+          </div>
+          <div style="margin-top:.4rem;font-size:.82rem;opacity:.85;font-style:italic">Emotional Register: Unknown, expansive, different, mirror-image, hope</div>
+        </div>
+      </div>
+      <div class="biome-body">
+
+        <div class="biome-section-label">Description</div>
+        <p>The far side of the eastern pass reveals a second valley — smaller than the main valley, with different vegetation (more open, fewer conifers, more birch and aspen), a second stream, and clear signs of a separate awakened moose community — primitive early settlement, reminiscent of Mooseville's Year 1–2 state. This is where the "Far Side Arrivals" from the lore originated.</p>
+        <p>A second sky-stone deposit is visible on the far valley's western cliff face. And at the far valley's northern end, a second sealed pass with something glowing on its other side — the final unresolved mystery, left for a future sequel.</p>
+
+        <div class="warn-box" style="margin-top:1rem">
+          <strong>Design Note — Act 3 Scope:</strong> The Far Valley exploration zone is intentionally limited in Act 3 scope — it is a discovery, not a second full game world. Do not over-build. The emotional impact comes from possibility and implication, not complete revelation. The second sealed pass at the far valley's north is a visual landmark only — <strong>not traversable in v1.0.</strong>
+        </div>
+
+        <div class="biome-section-label">Ambient Soundscape</div>
+        <p>Similar to the main valley but lighter, less canopy-dense. More birch-wind sound (lighter leaf rattle vs. pine depth). A different birdsong mix — unfamiliar calls that signal truly new territory. The second sky-stone deposit has its own faint harmonic, slightly different in tone from the High Shelf.</p>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 4 — THE OLD CAMPSITE
+    ═════════════════════════════════════════════════════════════ -->
+
+    <div id="old-campsite" class="section-header">
+      <span class="section-icon">🏕️</span>
+      <h2>Section 4 — The Old Campsite — Human Remnant Site</h2>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>🔍</span>
+        <h3>Site Classification &amp; Description</h3>
+      </div>
+      <div class="card-body">
+        <div class="grid-2" style="margin-bottom:1rem">
+          <div>
+            <p><strong>Classification:</strong> Points of Interest, non-biome (located within Emerald Forest western edge)</p>
+            <p><strong>Emotional Register:</strong> Archaeological wonder, unsettling recognition, narrative weight</p>
+            <p><strong>Access:</strong> Optional discovery — no quest marker. Player-initiated exploration only.</p>
+          </div>
+          <div class="warn-box">
+            <strong>Organic Discovery — Design Priority:</strong> Do not add a map marker, waypoint, or quest indicator under any circumstances. The player must find this on their own. The only signal is the natural visual curiosity of an overgrown clearing with a distinctive rock formation at its edge.
+          </div>
+        </div>
+
+        <p>The original abandoned campsite discovered by the First Gathering. A rise above a creek bend, now heavily overgrown. The original Sacred Documents trunk has been removed to the Archive — but the campsite itself remains.</p>
+        <p>Players who find it — entirely optionally, with no quest marker directing them — discover the following scene:</p>
+        <ul class="styled-list">
+          <li>The outline of a tent footprint in the soil (visible as a subtle rectangular depression)</li>
+          <li>A rusted fuel canister (interactable — yields lore entry on human fuel technology)</li>
+          <li>A collapsed folding chair (barely recognizable; yields lore entry on human furniture)</li>
+          <li>A glass lens (optic fragment) half-buried (yields lore entry; hints at human optical instruments)</li>
+          <li>A plaque left by the First Circle: <em>"Here we found memory. Here we became more."</em> (carved in Moosian script)</li>
+        </ul>
+
+        <p style="margin-top:1rem">All of Mooseville's culture traces back to this single point. Finding it without a quest prompt is one of the game's most rewarding organic discovery moments.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Item Found</th>
+            <th>Interaction Type</th>
+            <th>Lore Entry Triggered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tent Footprint</td>
+            <td>Proximity observation</td>
+            <td>"A Shelter That Came Before" — journal entry auto</td>
+          </tr>
+          <tr>
+            <td>Rusted Fuel Canister</td>
+            <td>Pickup interact</td>
+            <td>"What They Carried" — lore item added to Archive</td>
+          </tr>
+          <tr>
+            <td>Collapsed Folding Chair</td>
+            <td>Examine interact</td>
+            <td>"Resting in a Strange Place" — journal entry</td>
+          </tr>
+          <tr>
+            <td>Glass Lens Fragment</td>
+            <td>Pickup interact</td>
+            <td>"To See Further" — lore item, Archive display case eligible</td>
+          </tr>
+          <tr>
+            <td>First Circle Plaque</td>
+            <td>Read interact</td>
+            <td>Narrative moment — no journal entry; spoken inner monologue by player character</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 5 — TRAVEL & ACCESS SYSTEM
+    ═════════════════════════════════════════════════════════════ -->
+
+    <div id="travel-system" class="section-header">
+      <span class="section-icon">🧳</span>
+      <h2>Section 5 — Travel &amp; Access System</h2>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>🏃</span>
+        <h3>5.1 Movement Modes</h3>
+      </div>
+      <div class="card-body">
+        <p style="margin-bottom:1rem">All movement speeds are relative to the baseline walking speed. Stamina drain values are tuning targets — subject to adjustment by gameplay systems team. These values represent design intent.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Speed Multiplier</th>
+                <th>Stamina Cost</th>
+                <th>Unlock Condition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Walking</strong></td>
+                <td>1.0× (Baseline)</td>
+                <td>None</td>
+                <td>Default — available from start</td>
+              </tr>
+              <tr>
+                <td>Running</td>
+                <td>1.8×</td>
+                <td>Low drain</td>
+                <td>Default — available from start</td>
+              </tr>
+              <tr>
+                <td>Sprinting</td>
+                <td>2.5×</td>
+                <td>High drain</td>
+                <td>Trail Knack Tier 1</td>
+              </tr>
+              <tr>
+                <td>Swimming</td>
+                <td>0.7×</td>
+                <td>Moderate drain</td>
+                <td>Default (slow); speed improves with Trail Knack Tier 2</td>
+              </tr>
+              <tr>
+                <td>Climbing (handholds)</td>
+                <td>0.5×</td>
+                <td>High drain</td>
+                <td>Trail Knack Tier 1; speed improves with Tier 2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>🪨</span>
+        <h3 id="wayrest-points">5.2 Fast Travel &amp; Wayrest Points</h3>
+      </div>
+      <div class="card-body">
+        <p>Fast travel is available between discovered <strong>Wayrest Points</strong> — carved stone markers placed by Vincent Reed's mapping team throughout the valley. Each Wayrest has a distinct carved symbol and must be physically visited to unlock. Discovery is the gating mechanic.</p>
+
+        <div class="info-box" style="margin:1rem 0">
+          <strong>Fast Travel UI Note:</strong> Fast travel UI renders as a parchment-toned hand-drawn carved-map visual — matches Mooseville's physical cartography aesthetic. No loading screen iconography. Transitions are a brief environmental dissolve with ambient sound maintained throughout. <strong>No black screens.</strong>
+        </div>
+
+        <ul class="wayrest-list">
+          <li class="wayrest-item">
+            <span class="wayrest-compass">✦</span>
+            <div>
+              <div class="wayrest-name">The Heartfire Stone</div>
+              <div class="wayrest-loc">Town Center — Heartfire District</div>
+              <div class="wayrest-unlock">Available from game start</div>
+            </div>
+          </li>
+          <li class="wayrest-item">
+            <span class="wayrest-compass">✦</span>
+            <div>
+              <div class="wayrest-name">The Forest Hollow</div>
+              <div class="wayrest-loc">Emerald Forest — Amber Glade</div>
+              <div class="wayrest-unlock">Explore to Amber Glade</div>
+            </div>
+          </li>
+          <li class="wayrest-item">
+            <span class="wayrest-compass">✦</span>
+            <div>
+              <div class="wayrest-name">The Meadow Marker</div>
+              <div class="wayrest-loc">Golden Meadow — Lone Oak</div>
+              <div class="wayrest-unlock">Find the Lone Oak</div>
+            </div>
+          </li>
+          <li class="wayrest-item">
+            <span class="wayrest-compass">✦</span>
+            <div>
+              <div class="wayrest-name">The Shore Stone</div>
+              <div class="wayrest-loc">Crystal Lakeshore — Stone Dock</div>
+              <div class="wayrest-unlock">Visit the Stone Dock</div>
+            </div>
+          </li>
+          <li class="wayrest-item">
+            <span class="wayrest-compass">✦</span>
+            <div>
+              <div class="wayrest-name">The Marsh Root</div>
+              <div class="wayrest-loc">Marsh Shallows — Oldest Tree</div>
+              <div class="wayrest-unlock">Find the Oldest Tree</div>
+            </div>
+          </li>
+          <li class="wayrest-item">
+            <span class="wayrest-compass">✦</span>
+            <div>
+              <div class="wayrest-name">The Ruin Shelf</div>
+              <div class="wayrest-loc">Ancient Ruins — Survey Station A</div>
+              <div class="wayrest-unlock">Complete Act 1 quest destination</div>
+            </div>
+          </li>
+          <li class="wayrest-item">
+            <span class="wayrest-compass">✦</span>
+            <div>
+              <div class="wayrest-name">The High Stone</div>
+              <div class="wayrest-loc">High Shelf — Crater Rim</div>
+              <div class="wayrest-unlock">Reach the High Shelf (Act 2)</div>
+            </div>
+          </li>
+          <li class="wayrest-item">
+            <span class="wayrest-compass">✦</span>
+            <div>
+              <div class="wayrest-name">The Pass Stone</div>
+              <div class="wayrest-loc">Eastern Pass — midpoint</div>
+              <div class="wayrest-unlock">Act 2+ — pass entry unlocked</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="seasonal-access" class="card" style="margin-bottom:2rem">
+      <div class="card-header">
+        <span>🌸</span>
+        <h3>5.3 Seasonal Access Changes</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Season</th><th>Access Changes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Spring</strong></td>
+                <td>Melt Pool active at Crystal Lake (2-week window); High Shelf trail slippery — slower climb speed; marsh water at highest seasonal level; wildflower gathering available</td>
+              </tr>
+              <tr>
+                <td><strong>Summer</strong></td>
+                <td>All areas fully accessible; heat shimmer in Golden Meadow (visual only); deer crossing most active at dawn/dusk; full fishing species available</td>
+              </tr>
+              <tr>
+                <td><strong>Autumn</strong></td>
+                <td>Some trails leaf-covered (slight navigation difficulty); deer crossing peak activity; harvest yields highest in Golden Meadow; bear family enters pre-hibernation routine</td>
+              </tr>
+              <tr>
+                <td><strong>Winter</strong></td>
+                <td>High Shelf snow-locked without winter gear (Craft Knack Tier 2 required); lake edge frozen; marsh partially iced; bear family hibernating; reduced foraging yields across all biomes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 6 — WORLD MAP LEGEND & NOTATION STANDARDS
+    ═════════════════════════════════════════════════════════════ -->
+
+    <div class="section-header">
+      <span class="section-icon">📋</span>
+      <h2>Section 6 — World Map Legend &amp; Notation Standards</h2>
+    </div>
+
+    <div class="warn-box" style="margin-bottom:1.25rem">
+      For use by <strong>Level Design and Cartography Teams</strong>. All tagging conventions in this section are mandatory. Non-compliant asset tags will be flagged in QA reviews.
+    </div>
+
+    <!-- World Partition Layers -->
+    <div id="world-partition" class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>🗂️</span>
+        <h3>6.1 Map Layer Definitions (UE5 World Partition)</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Layer</th><th>Layer Name</th><th>Contents</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="layer-num">1</span></td>
+                <td><strong>Terrain</strong></td>
+                <td>Height map, terrain material splatmap, water bodies</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">2</span></td>
+                <td><strong>Structures</strong></td>
+                <td>All buildings, bridges, docks, crafted structures</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">3</span></td>
+                <td><strong>Vegetation</strong></td>
+                <td>Trees, shrubs, grass, ferns (Nanite + billboard LOD)</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">4</span></td>
+                <td><strong>NPCs &amp; Wildlife</strong></td>
+                <td>NPC spawn points, schedule paths, wildlife territories</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">5</span></td>
+                <td><strong>Landmarks</strong></td>
+                <td>Named landmark collision volumes + interaction triggers</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">6</span></td>
+                <td><strong>Wayrest Points</strong></td>
+                <td>Fast travel trigger volumes + unlock conditions</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">7</span></td>
+                <td><strong>Sky-Stone Deposits</strong></td>
+                <td>Deposit trigger volumes + activation state tracking</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">8</span></td>
+                <td><strong>Quest Volumes</strong></td>
+                <td>Quest trigger zones, discovery event volumes</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">9</span></td>
+                <td><strong>Weather</strong></td>
+                <td>Fog volumes, precipitation zones, seasonal override areas</td>
+              </tr>
+              <tr>
+                <td><span class="layer-num">10</span></td>
+                <td><strong>Lighting</strong></td>
+                <td>Light bake groups, sky light zones, night-glow emitters</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Naming Conventions -->
+    <div id="naming-conventions" class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>🏷️</span>
+        <h3>6.2 Standard Landmark Notation &amp; Naming Conventions</h3>
+      </div>
+      <div class="card-body">
+        <p style="margin-bottom:1rem">All teams must use the following naming conventions for landmark actors and volumes in Unreal Engine. These conventions are enforced by the automated naming validator in the CI pipeline.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Asset Type</th><th>Naming Convention</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Named Landmarks (visible, in-world)</td>
+                <td><code>[Location]_Landmark_[Name]</code></td>
+                <td><code>EmeraldForest_Landmark_HollowCedar</code></td>
+              </tr>
+              <tr>
+                <td>Discoverable Landmarks (hidden until found)</td>
+                <td><code>Landmark_Hidden_[Name]</code></td>
+                <td><code>Landmark_Hidden_OldCampsite</code></td>
+              </tr>
+              <tr>
+                <td>Sky-Stone Deposits</td>
+                <td><code>SS_Deposit_[Number]_[State]</code></td>
+                <td><code>SS_Deposit_3_Dormant</code></td>
+              </tr>
+              <tr>
+                <td>Quest Trigger Volumes</td>
+                <td><code>QT_[QuestID]_[TriggerType]</code></td>
+                <td><code>QT_HumanMystery_01_Discover</code></td>
+              </tr>
+              <tr>
+                <td>Wayrest Points</td>
+                <td><code>Wayrest_[Name]_Trigger</code></td>
+                <td><code>Wayrest_ForestHollow_Trigger</code></td>
+              </tr>
+              <tr>
+                <td>Story Anchor Locations</td>
+                <td><code>LD_StoryAnchor_[Name]</code></td>
+                <td><code>LD_StoryAnchor_MelvinMartha</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sky-Stone Deposit States -->
+    <div id="skystone-states" class="card" style="margin-bottom:1.5rem">
+      <div class="card-header">
+        <span>💠</span>
+        <h3>Sky-Stone Deposit State Reference</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>State Tag</th><th>Meaning</th><th>Visual Indicator</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="ss-dormant">_Dormant</span></td>
+                <td>Deposit exists but not yet activated by player</td>
+                <td>Faint green vein visible; no glow emitter active</td>
+              </tr>
+              <tr>
+                <td><span class="ss-active">_Active</span></td>
+                <td>Deposit activated — lore vision triggered; full glow</td>
+                <td>Strong green glow; particle effect active; ambient audio added</td>
+              </tr>
+              <tr>
+                <td><span class="ss-depleted">_Depleted</span></td>
+                <td>Deposit fully used (narrative event)</td>
+                <td>No glow; cracked surface texture; dark residue material</td>
+              </tr>
+              <tr>
+                <td><span class="ss-buried">_Buried</span></td>
+                <td>Not yet accessible (terrain event required)</td>
+                <td>Not visible until revealing event; no actor visible in scene</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warn-box" style="margin-top:1rem">
+          <strong>Compliance Required:</strong> All sky-stone deposit actors must have their state variable initialized in Blueprint defaults. Deposits found with <code>_State = None</code> at QA will be treated as a <strong>P1 bug</strong>. Coordinate with the narrative systems team when transitioning deposit states through quest events — do not drive state changes directly from level geometry triggers.
+        </div>
+
+        <h4 style="margin:1.25rem 0 .6rem;color:var(--emerald-dark)">Known Sky-Stone Deposits — Valley Index</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Tag</th><th>Location</th><th>Initial State</th><th>Unlock Condition</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>SS_Deposit_1_Dormant</code></td>
+                <td>Emerald Forest — rocky outcrop, northern edge</td>
+                <td><span class="ss-dormant">_Dormant</span></td>
+                <td>Spring Knack Tier 2 + Moose Water</td>
+              </tr>
+              <tr>
+                <td><code>SS_Deposit_2_Active</code></td>
+                <td>Golden Meadow — soil surface fragments</td>
+                <td><span class="ss-active">_Active</span></td>
+                <td>Act 2 — exposed by spring rainstorms</td>
+              </tr>
+              <tr>
+                <td><code>SS_Deposit_3_Dormant</code></td>
+                <td>Crystal Lakeshore — submerged</td>
+                <td><span class="ss-dormant">_Dormant</span></td>
+                <td>Spring Knack Tier 3 + crafted diving weight</td>
+              </tr>
+              <tr>
+                <td><code>SS_Deposit_4_Buried</code></td>
+                <td>Marsh Shallows — beneath substrate</td>
+                <td><span class="ss-buried">_Buried</span></td>
+                <td>Act 3 — <code>QT_Act3_MarshDrain_Complete</code></td>
+              </tr>
+              <tr>
+                <td><code>SS_Deposit_Primary_Dormant</code></td>
+                <td>High Shelf — Impact Crater center</td>
+                <td><span class="ss-dormant">_Dormant</span></td>
+                <td>Spring Knack Tier 3; Act 2 climax trigger</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- In-Game Map Aesthetic -->
+    <div id="map-aesthetic" class="card" style="margin-bottom:2rem">
+      <div class="card-header">
+        <span>🗺️</span>
+        <h3>6.3 In-Game Map Aesthetic</h3>
+      </div>
+      <div class="card-body">
+        <p>The player's map is rendered as a <strong>parchment-toned hand-drawn illustration</strong> matching Mooseville's lore world of physical cartography. This is not a satellite view or HUD minimap. It is a living artifact that reflects the world as the Moosians understand it.</p>
+
+        <ul class="styled-list" style="margin:1rem 0">
+          <li><strong>Fill behavior:</strong> The map fills in progressively as the player physically explores. Unexplored areas are blank parchment — no silhouettes, no fog-of-war gradients.</li>
+          <li><strong>Landmark icons:</strong> Named landmarks appear with small illustrated icons in a carved-wood style. Icons are designed by the UI team in the landmark icon style guide (separate document).</li>
+          <li><strong>Wayrest markers:</strong> Each discovered Wayrest Point is marked with a compass rose symbol rendered in gold (<code>#FFD700</code>).</li>
+          <li><strong>Player position:</strong> Indicated by a small moose-antler silhouette stamp in deep green (<code>#1B5E20</code>).</li>
+          <li><strong>Map update trigger:</strong> Discovery events write to the exploration state array. Map texture updates are batched on scene transition to avoid mid-scene redraws.</li>
+          <li><strong>The Map Room effect:</strong> When the player's exploration data matches what is displayed in the Archive Map Room, a special lore moment triggers — the hand-drawn map in the Archive is updated to show the player's name as the cartographer.</li>
+        </ul>
+
+        <div class="pull-quote">
+          The parchment quality, ink-line style, and icon illustration must remain consistent with the Mooseville aesthetic — warm, handmade, imperfect, and full of love. Reference: <strong>Map_StyleGuide_v1.0.pdf</strong> (UI team documentation). Do not use procedural map generation.
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         DOCUMENT REVISION HISTORY
+    ═════════════════════════════════════════════════════════════ -->
+
+    <div class="section-header">
+      <span class="section-icon">📝</span>
+      <h2>Document Revision History</h2>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom:1.5rem">
+      <table>
+        <thead>
+          <tr><th>Version</th><th>Date</th><th>Author(s)</th><th>Summary of Changes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge" style="background:var(--emerald-dark);color:#fff">v1.0</span></td>
+            <td>June 2026</td>
+            <td>World Design Team</td>
+            <td>Initial release. Full world overview, all 8 town districts, all 8 wilderness biomes, travel system, notation standards.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box">
+      <strong>Document Ownership:</strong> This document is owned and maintained by the World Design Lead in coordination with the Level Design, Environment Art, and Narrative Design departments. All proposed additions or revisions must be submitted as tracked changes to the Document Custodian before the next milestone review. This document supersedes all previous informal biome and district notes.
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>

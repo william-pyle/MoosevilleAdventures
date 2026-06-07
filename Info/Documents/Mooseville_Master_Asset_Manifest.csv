@@ -1,0 +1,108 @@
+AssetID,Category,Subcategory,Name,FunctionOrUse,LinkedRole,PriorityTier,SourceFile,SourceSection,Batch,Status,Owner,Notes
+BIZ-01,Building,Business,Antler Almanac Co-op,"Farm planning, seed exchange, seasonal advisories",Grower,A,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,1,Planned,,
+BIZ-02,Building,Business,Rack and Rafter Works,"Construction, repairs, mill expansion",Builder,A,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,1,Planned,,
+BIZ-03,Building,Business,Hoof n Buff Shine Stand,"Hoof care and style buffs",Groomer,C,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,3,Planned,,
+BIZ-04,Building,Business,Tine and Trim Mane House,"Mane and antler styling",Barber-Stylist,C,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,3,Planned,,
+BIZ-05,Building,Business,Hide and Hem Clothhouse,"Clothing, uniforms, textiles",Tailor-Weaver,B,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,3,Planned,,
+BIZ-06,Building,Business,Velvet Tine Bakehouse,"Specialty baked goods and event foods",Baker,B,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,3,Planned,,
+BIZ-07,Building,Business,Muck and Measure Market Hall,"Trade, contracts, specialty sales",Trader,A,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,2,Planned,,
+BIZ-08,Building,Business,Carved Coin Lodge,"Mucks treasury, minting, civic accounting",Treasurer,B,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,2,Planned,,
+BIZ-09,Building,Business,Tine and Twine Outfitters,"Exploration tools and gear",Outfitter-Toolwright,B,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,2,Planned,,
+BIZ-10,Building,Business,Pinecone Press Archive,"Maps, records, document study",Archivist-Mapkeeper,B,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,2,Planned,,
+BIZ-11,Building,Business,Lick and Leaf Remedies,"Herbal support and recovery",Herbalist-Caregiver,C,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,3,Planned,,
+BIZ-12,Building,Business,Green Vial Commons,"Free Moose Water distribution and purity",Water Keeper,A,Documents/Mooseville_Building_Creation_Catalog.md,Business Buildings,1,Planned,,
+INF-01,Building,Infrastructure,Town Hall of Tines,"Governance, job assignment, civic decisions",,B,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,4,Planned,,
+INF-02,Building,Infrastructure,Commons Kitchen and Free Table,"Free staple food distribution",,A,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,1,Planned,,
+INF-03,Building,Infrastructure,Sawmill Yard,"Bulk logs to boards production",,A,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,1,Planned,,
+INF-04,Building,Infrastructure,Quarry Works,"Rock extraction and stone shaping",,A,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,2,Planned,,
+INF-05,Building,Infrastructure,Brick Kiln Complex,"Clay to brick production",,B,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,2,Planned,,
+INF-06,Building,Infrastructure,Smelter and Forge Hall,"Iron refining and nail production",,B,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,2,Planned,,
+INF-07,Building,Infrastructure,Granary and Seed Vault,"Food and seed security",,A,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,1,Planned,,
+INF-08,Building,Infrastructure,Barn and Pack Stable,"Utility logistics and harness storage",,B,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,4,Planned,,
+INF-09,Building,Infrastructure,Reservoir and Irrigation Gatehouse,"Water control for farms and town",,A,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,1,Planned,,
+INF-10,Building,Infrastructure,Roadworks Depot,"Path and bridge maintenance",,B,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,4,Planned,,
+INF-11,Building,Infrastructure,Watchtower and Storm Bell,"Hazard and weather alerts",,C,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,4,Planned,,
+INF-12,Building,Infrastructure,Clinic and Recovery Lodge,"Injury and regression recovery",,C,Documents/Mooseville_Building_Creation_Catalog.md,Core Infrastructure,4,Planned,,
+EXP-01,Building,Expansion,Festival Grounds Pavilion,"Holiday events and social minigames",,D,Documents/Mooseville_Building_Creation_Catalog.md,Optional Expansion,4,Planned,,
+EXP-02,Building,Expansion,Integration Housing Court,"New citizen intake and settlement",,C,Documents/Mooseville_Building_Creation_Catalog.md,Optional Expansion,4,Planned,,
+EXP-03,Building,Expansion,Expedition Gatepost,"Search team launch and return",,D,Documents/Mooseville_Building_Creation_Catalog.md,Optional Expansion,4,Planned,,
+EXP-04,Building,Expansion,Craft Mentor Schoolhouse,"NPC training and skill progression",,C,Documents/Mooseville_Building_Creation_Catalog.md,Optional Expansion,4,Planned,,
+CST-R01,Costume,Relax,Hearthglow Loungewear,"Home and evening social scenes",,B,Documents/Mooseville_Costume_Creation_Catalog.md,Relaxing Costumes,3,Planned,,Male+Female variants required
+CST-R02,Costume,Relax,Riverbank Leisure Set,"Day-off exploration and social scenes",,B,Documents/Mooseville_Costume_Creation_Catalog.md,Relaxing Costumes,3,Planned,,Male+Female variants required
+CST-R03,Costume,Relax,Meadow Picnic Set,"Festivals and public leisure",,C,Documents/Mooseville_Costume_Creation_Catalog.md,Relaxing Costumes,3,Planned,,Male+Female variants required
+CST-R04,Costume,Relax,Rainy Lodge Comfort Set,"Storm-day indoor scenes",,C,Documents/Mooseville_Costume_Creation_Catalog.md,Relaxing Costumes,3,Planned,,Male+Female variants required
+CST-R05,Costume,Relax,Moonwatch Night Set,"Night events and glowwatch",,C,Documents/Mooseville_Costume_Creation_Catalog.md,Relaxing Costumes,3,Planned,,Male+Female variants required
+CST-R06,Costume,Relax,Trail Camp Rest Set,"Post-quest rest scenes",,B,Documents/Mooseville_Costume_Creation_Catalog.md,Relaxing Costumes,3,Planned,,Male+Female variants required
+CST-01A,Costume,Role,Grower Style A,"Role uniform style A",Grower,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-01B,Costume,Role,Grower Style B,"Role uniform style B",Grower,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-02A,Costume,Role,Builder Style A,"Role uniform style A",Builder,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-02B,Costume,Role,Builder Style B,"Role uniform style B",Builder,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-03A,Costume,Role,Groomer Style A,"Role uniform style A",Groomer,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-03B,Costume,Role,Groomer Style B,"Role uniform style B",Groomer,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-04A,Costume,Role,Barber-Stylist Style A,"Role uniform style A",Barber-Stylist,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-04B,Costume,Role,Barber-Stylist Style B,"Role uniform style B",Barber-Stylist,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-05A,Costume,Role,Tailor-Weaver Style A,"Role uniform style A",Tailor-Weaver,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-05B,Costume,Role,Tailor-Weaver Style B,"Role uniform style B",Tailor-Weaver,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-06A,Costume,Role,Baker Style A,"Role uniform style A",Baker,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-06B,Costume,Role,Baker Style B,"Role uniform style B",Baker,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-07A,Costume,Role,Trader Style A,"Role uniform style A",Trader,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-07B,Costume,Role,Trader Style B,"Role uniform style B",Trader,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-08A,Costume,Role,Treasurer Style A,"Role uniform style A",Treasurer,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-08B,Costume,Role,Treasurer Style B,"Role uniform style B",Treasurer,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-09A,Costume,Role,Outfitter-Toolwright Style A,"Role uniform style A",Outfitter-Toolwright,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-09B,Costume,Role,Outfitter-Toolwright Style B,"Role uniform style B",Outfitter-Toolwright,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-10A,Costume,Role,Archivist-Mapkeeper Style A,"Role uniform style A",Archivist-Mapkeeper,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-10B,Costume,Role,Archivist-Mapkeeper Style B,"Role uniform style B",Archivist-Mapkeeper,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-11A,Costume,Role,Herbalist-Caregiver Style A,"Role uniform style A",Herbalist-Caregiver,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-11B,Costume,Role,Herbalist-Caregiver Style B,"Role uniform style B",Herbalist-Caregiver,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-12A,Costume,Role,Water Keeper Style A,"Role uniform style A",Water Keeper,B,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-12B,Costume,Role,Water Keeper Style B,"Role uniform style B",Water Keeper,C,Documents/Mooseville_Costume_Creation_Catalog.md,Role and Business Costumes,3,Planned,,Male+Female variants required
+CST-PF1,Costume,Player,Early Fieldhand,"Main player farming progression",,A,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,1,Planned,,Male+Female variants required
+CST-PF2,Costume,Player,Seasoned Grower,"Main player farming progression",,B,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,2,Planned,,Male+Female variants required
+CST-PF3,Costume,Player,Harvest Captain,"Main player farming progression",,C,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,3,Planned,,Male+Female variants required
+CST-PT1,Costume,Player,Apprentice Mentor,"Main player teaching progression",,B,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,2,Planned,,Male+Female variants required
+CST-PT2,Costume,Player,Foremoose Instructor,"Main player teaching progression",,C,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,4,Planned,,Male+Female variants required
+CST-PT3,Costume,Player,High Steward Tutor,"Main player teaching progression",,D,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,4,Planned,,Male+Female variants required
+CST-PQ1,Costume,Player,Scout Runner,"Main player questing progression",,A,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,1,Planned,,Male+Female variants required
+CST-PQ2,Costume,Player,Valley Ranger,"Main player questing progression",,B,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,4,Planned,,Male+Female variants required
+CST-PQ3,Costume,Player,Campaign Commander,"Main player questing progression",,C,Documents/Mooseville_Costume_Creation_Catalog.md,Main Player Costume Variations,4,Planned,,Male+Female variants required
+ACC-U01,Prop,Accessory,Universal Accessory Set,"Belts, satchels, mantles, wraps, badges, clasps",,A,Documents/Mooseville_Prop_Accessory_Catalog.md,Universal Character Accessory Set,1,Planned,,Includes base attach points
+PRP-R01,Prop,RoleKit,Grower Kit,"Wearables, hand tools, grow station props",Grower,A,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,1,Planned,,
+PRP-R02,Prop,RoleKit,Builder Kit,"Rigging, hand tools, framing station props",Builder,A,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,1,Planned,,
+PRP-R03,Prop,RoleKit,Groomer Kit,"Shine tools and service station props",Groomer,C,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,3,Planned,,
+PRP-R04,Prop,RoleKit,Barber-Stylist Kit,"Grooming tools and style station props",Barber-Stylist,C,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,3,Planned,,
+PRP-R05,Prop,RoleKit,Tailor-Weaver Kit,"Loom tools and cloth station props",Tailor-Weaver,B,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,3,Planned,,
+PRP-R06,Prop,RoleKit,Baker Kit,"Baking tools and pastry station props",Baker,B,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,3,Planned,,
+PRP-R07,Prop,RoleKit,Trader Kit,"Ledger tools and market station props",Trader,B,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,2,Planned,,
+PRP-R08,Prop,RoleKit,Treasurer Kit,"Stamp tools and treasury station props",Treasurer,B,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,2,Planned,,
+PRP-R09,Prop,RoleKit,Outfitter-Toolwright Kit,"Expedition and repair tools",Outfitter-Toolwright,B,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,2,Planned,,
+PRP-R10,Prop,RoleKit,Archivist-Mapkeeper Kit,"Map and document tools",Archivist-Mapkeeper,B,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,2,Planned,,
+PRP-R11,Prop,RoleKit,Herbalist-Caregiver Kit,"Remedy tools and care props",Herbalist-Caregiver,C,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,3,Planned,,
+PRP-R12,Prop,RoleKit,Water Keeper Kit,"Purity and distribution tools",Water Keeper,A,Documents/Mooseville_Prop_Accessory_Catalog.md,Role Accessory Kits,1,Planned,,
+PRP-P01,Prop,PlayerSet,Farming Set,"Main player farming accessory set",,A,Documents/Mooseville_Prop_Accessory_Catalog.md,Main Player Signature Accessory Sets,1,Planned,,
+PRP-P02,Prop,PlayerSet,Teaching Set,"Main player teaching accessory set",,B,Documents/Mooseville_Prop_Accessory_Catalog.md,Main Player Signature Accessory Sets,2,Planned,,
+PRP-P03,Prop,PlayerSet,Questing Set,"Main player questing accessory set",,A,Documents/Mooseville_Prop_Accessory_Catalog.md,Main Player Signature Accessory Sets,1,Planned,,
+ENV-BIZ-01,Prop,EnvPack,Business Front Prop Packs,"Exterior and interior props per business",,B,Documents/Mooseville_Prop_Accessory_Catalog.md,Business Front Prop Packs,3,Planned,,12 building-specific packs
+ENV-INF-01,Prop,EnvPack,Core Infrastructure Prop Packs,"Function-critical town systems",,A,Documents/Mooseville_Prop_Accessory_Catalog.md,Core Infrastructure Prop Packs,1,Planned,,12 infrastructure-specific packs
+ENV-FST-01,Prop,EnvPack,Festival and Quest Reward Props,"Seasonal and milestone reward objects",,C,Documents/Mooseville_Prop_Accessory_Catalog.md,Festival and Quest Reward Props,4,Planned,,
+RSC-01,Resource,Raw,Trees,"Timber source",,A,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,1,Planned,,Feeds logs
+RSC-02,Resource,Refined,Logs,"From trees",,A,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,1,Planned,,Feeds boards/beams
+RSC-03,Resource,Advanced,Boards,"From logs by hand or mill",,A,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,1,Planned,,Construction critical
+RSC-04,Resource,Raw,Rock,"Masonry source",,A,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,2,Planned,,Feeds stone blocks
+RSC-05,Resource,Refined,Stone Blocks,"From rock",,A,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,2,Planned,,Foundations and roads
+RSC-06,Resource,Raw,Clay,"Ceramic source",,B,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,2,Planned,,Feeds bricks
+RSC-07,Resource,Refined,Bricks,"From clay via kiln",,B,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,2,Planned,,Masonry growth
+RSC-08,Resource,Raw,Iron Ore,"Metal source",,B,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,2,Planned,,Feeds iron bars
+RSC-09,Resource,Refined,Iron Bars,"From iron ore via smelter",,B,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,2,Planned,,Feeds nails/tools
+RSC-10,Resource,Advanced,Nails,"From iron bars via forge",,B,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,2,Planned,,Construction fasteners
+RSC-11,Resource,Raw,Flax,"Fiber source",,B,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Feeds thread
+RSC-12,Resource,Refined,Thread,"From flax",,B,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Feeds cloth
+RSC-13,Resource,Advanced,Cloth Bolt,"From thread",,B,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Costumes and textiles
+RSC-14,Resource,Raw,Pine Sap,"Resin source",,C,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Feeds pitch
+RSC-15,Resource,Refined,Pitch,"From sap",,C,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Sealant and waterproofing
+RSC-16,Resource,Raw,Silica Sand,"Glass source",,C,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Feeds panes
+RSC-17,Resource,Refined,Glass Panes,"From sand and fuel",,C,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Feeds vials/lenses
+RSC-18,Resource,Advanced,Vials,"From glass panes",,A,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,1,Planned,,Moose Water system
+RSC-19,Resource,Raw,Limestone,"Lime source",,C,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Feeds quicklime
+RSC-20,Resource,Refined,Quicklime,"From limestone",,C,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Feeds mortar
+RSC-21,Resource,Advanced,Mortar,"From quicklime sand water",,C,Documents/Mooseville_Game_Design_Companion.md,Construction Resource Economy,3,Planned,,Masonry bonding

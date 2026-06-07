@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Style Guide — Mooseville Adventures</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters & NPCs</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes & Maps</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems & Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+  <div class="nav-group">
+    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+  </div>
+  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
+</nav>
+
+<main class="main">
+
+  <div class="page-hero hero-art">
+    <div class="hero-label">Art Direction</div>
+    <h1>Visual Style Guide</h1>
+    <p class="hero-desc">
+      Master color palette, shader settings, lighting profiles, material guidelines,
+      and the visual principles that unify the Mooseville look — a Barbie Horse Trails
+      pastel aesthetic meets warm, nature-grounded Moosian charm.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- Visual philosophy -->
+    <div class="section-header">
+      <span class="section-icon">🎯</span>
+      <h2>Visual Philosophy</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <h4 class="subsection-header">Core Principles</h4>
+            <ul class="styled-list">
+              <li><strong>Soft, not sharp:</strong> no harsh edges, no gritty detail</li>
+              <li><strong>Pastel, not neon:</strong> colors are bright but slightly milky</li>
+              <li><strong>Simple, not noisy:</strong> one idea per asset; avoid micro-detail</li>
+              <li><strong>Readable silhouettes:</strong> shapes clear at a glance</li>
+              <li><strong>Consistent outlines:</strong> same thickness rules everywhere</li>
+            </ul>
+            <h4 class="subsection-header" style="margin-top:1rem">Do</h4>
+            <ul class="styled-list">
+              <li>Use large, clean color blocks</li>
+              <li>Exaggerate curves and round corners</li>
+              <li>Keep texture resolution modest but crisp (512–1024 for most props)</li>
+              <li>Use color/value contrast more than texture detail</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="subsection-header">Visual References</h4>
+            <div class="pull-quote">
+              Barbie Horse Trails aesthetic: soft GI, pastel lighting, smooth surfaces,
+              gentle bloom, minimal roughness variation, friendly cartoon shapes.
+              Combined with Mooseville's identity: emerald green, gold, thick outlines,
+              warm browns.
+            </div>
+            <h4 class="subsection-header" style="margin-top:1rem">Don't</h4>
+            <ul class="styled-list">
+              <li>Use photo textures or scanned materials</li>
+              <li>Use high-frequency noise in normals or albedo</li>
+              <li>Push specular/metallic into realistic territory</li>
+              <li>Let shadows go near-black</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Master Color Palette -->
+    <div class="section-header">
+      <span class="section-icon">🎨</span>
+      <h2>Master Color Palette</h2>
+    </div>
+
+    <h3 class="subsection-header">🌿 Core Identity Colors</h3>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#0F7A4C"></div><div class="swatch-info"><span class="swatch-name">Emerald (Primary)</span><span class="swatch-hex">#0F7A4C</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1FBF7A"></div><div class="swatch-info"><span class="swatch-name">Emerald Highlight</span><span class="swatch-hex">#1FBF7A</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E4B646"></div><div class="swatch-info"><span class="swatch-name">Gold (Primary)</span><span class="swatch-hex">#E4B646</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F7D98A"></div><div class="swatch-info"><span class="swatch-name">Gold Highlight</span><span class="swatch-hex">#F7D98A</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#8A5A3B"></div><div class="swatch-info"><span class="swatch-name">Moose Brown (Primary)</span><span class="swatch-hex">#8A5A3B</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#C79A72"></div><div class="swatch-info"><span class="swatch-name">Moose Brown Light</span><span class="swatch-hex">#C79A72</span></div></div>
+    </div>
+
+    <h3 class="subsection-header">🌲 Environment Colors — Greens</h3>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#A8D88F"></div><div class="swatch-info"><span class="swatch-name">Pastel Leaf Green</span><span class="swatch-hex">#A8D88F</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#7CCB6B"></div><div class="swatch-info"><span class="swatch-name">Meadow Green</span><span class="swatch-hex">#7CCB6B</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#3E7A3F"></div><div class="swatch-info"><span class="swatch-name">Deep Forest Green</span><span class="swatch-hex">#3E7A3F</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#C7E3B2"></div><div class="swatch-info"><span class="swatch-name">Soft Moss</span><span class="swatch-hex">#C7E3B2</span></div></div>
+    </div>
+
+    <h3 class="subsection-header">🪵 Environment Colors — Browns & Trail</h3>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#C49A6C"></div><div class="swatch-info"><span class="swatch-name">Soft Trail Brown</span><span class="swatch-hex">#C49A6C</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#9A6B45"></div><div class="swatch-info"><span class="swatch-name">Warm Bark Brown</span><span class="swatch-hex">#9A6B45</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E8C9A1"></div><div class="swatch-info"><span class="swatch-name">Light Sand Brown</span><span class="swatch-hex">#E8C9A1</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#A89A8A"></div><div class="swatch-info"><span class="swatch-name">Rock Gray-Brown</span><span class="swatch-hex">#A89A8A</span></div></div>
+    </div>
+
+    <h3 class="subsection-header">🌊 Sky & Water</h3>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#AEE3FF"></div><div class="swatch-info"><span class="swatch-name">Pastel Sky Blue</span><span class="swatch-hex">#AEE3FF</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#6BC7F2"></div><div class="swatch-info"><span class="swatch-name">Clear Water Blue</span><span class="swatch-hex">#6BC7F2</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#3A8FBF"></div><div class="swatch-info"><span class="swatch-name">Deep Lake Blue</span><span class="swatch-hex">#3A8FBF</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F7F9FB"></div><div class="swatch-info"><span class="swatch-name">Soft Cloud White</span><span class="swatch-hex">#F7F9FB</span></div></div>
+    </div>
+
+    <h3 class="subsection-header">🌸 Accents — Flowers, UI, Collectibles</h3>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#F7A9C4"></div><div class="swatch-info"><span class="swatch-name">Pastel Pink</span><span class="swatch-hex">#F7A9C4</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#C9B7F7"></div><div class="swatch-info"><span class="swatch-name">Pastel Lavender</span><span class="swatch-hex">#C9B7F7</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F7E46A"></div><div class="swatch-info"><span class="swatch-name">Sunshine Yellow</span><span class="swatch-hex">#F7E46A</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F7A27A"></div><div class="swatch-info"><span class="swatch-name">Soft Coral</span><span class="swatch-hex">#F7A27A</span></div></div>
+    </div>
+
+    <h3 class="subsection-header">🏡 Building Colors</h3>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#E46A6A"></div><div class="swatch-info"><span class="swatch-name">Barn Red (Pastel)</span><span class="swatch-hex">#E46A6A</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#B47A52"></div><div class="swatch-info"><span class="swatch-name">Cabin Wood</span><span class="swatch-hex">#B47A52</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#7ED1C4"></div><div class="swatch-info"><span class="swatch-name">Pastel Teal Trim</span><span class="swatch-hex">#7ED1C4</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#C7C7C7"></div><div class="swatch-info"><span class="swatch-name">Soft Roof Gray</span><span class="swatch-hex">#C7C7C7</span></div></div>
+    </div>
+
+    <h3 class="subsection-header">✨ VFX Colors</h3>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#FFD3F7"></div><div class="swatch-info"><span class="swatch-name">Sparkle Pink</span><span class="swatch-hex">#FFD3F7</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FFE8A3"></div><div class="swatch-info"><span class="swatch-name">Magic Gold Glow</span><span class="swatch-hex">#FFE8A3</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#D8C2A1"></div><div class="swatch-info"><span class="swatch-name">Soft Dust Brown</span><span class="swatch-hex">#D8C2A1</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#CFF3FF"></div><div class="swatch-info"><span class="swatch-name">Water Ripple</span><span class="swatch-hex">#CFF3FF</span></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1A1A1A"></div><div class="swatch-info"><span class="swatch-name">Outline Black</span><span class="swatch-hex">#1A1A1A</span></div></div>
+    </div>
+
+    <!-- Material Library -->
+    <div class="section-header">
+      <span class="section-icon">🧱</span>
+      <h2>Material Library</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Asset Type</th>
+            <th>Roughness</th>
+            <th>Metallic</th>
+            <th>Normal Strength</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Moose / Characters</strong></td><td>0.65–0.85</td><td>0.0</td><td>0.05–0.1</td><td>Soft skin/fur, no pores</td></tr>
+          <tr><td><strong>Eyes</strong></td><td>0.1–0.2</td><td>0.0</td><td>0.0</td><td>Fake spec highlight, very glossy</td></tr>
+          <tr><td><strong>Hair / Mane</strong></td><td>0.45–0.6</td><td>0.0</td><td>0.05</td><td>Broad stylized highlight band</td></tr>
+          <tr><td><strong>Clothing</strong></td><td>0.6–0.8</td><td>0.0</td><td>0.05–0.1</td><td>Simple fabric tint, no weave detail</td></tr>
+          <tr><td><strong>Wood Props</strong></td><td>0.65–0.8</td><td>0.0</td><td>0.1–0.15</td><td>Faint plank lines only</td></tr>
+          <tr><td><strong>Rocks</strong></td><td>0.75–0.9</td><td>0.0</td><td>0.1</td><td>Rounded, soft shading</td></tr>
+          <tr><td><strong>Ground</strong></td><td>0.7–0.85</td><td>0.0</td><td>0.05</td><td>Painterly color zones, no noise</td></tr>
+          <tr><td><strong>Water</strong></td><td>0.05–0.15</td><td>0.0</td><td>0.0–0.05</td><td>Fresnel, subtle distortion</td></tr>
+          <tr><td><strong>Gold Accents</strong></td><td>0.25–0.4</td><td>0.15–0.25</td><td>0.05</td><td>Soft "toy" metal, not realistic</td></tr>
+          <tr><td><strong>UI Planes</strong></td><td>0.8–1.0</td><td>0.0</td><td>0.0</td><td>Pure flat color, no shading</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Outline shader -->
+    <div class="section-header">
+      <span class="section-icon">✏️</span>
+      <h2>Outline Shader (Critical for Mooseville Identity)</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <h4 class="subsection-header">Thickness by Asset Type</h4>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Asset</th><th>Thickness</th></tr></thead>
+                <tbody>
+                  <tr><td>Characters</td><td>2–3 px</td></tr>
+                  <tr><td>Props</td><td>1.5–2 px</td></tr>
+                  <tr><td>Buildings</td><td>1–1.5 px</td></tr>
+                  <tr><td>Terrain</td><td>0–1 px (optional)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <h4 class="subsection-header">Style Rules</h4>
+            <ul class="styled-list">
+              <li><strong>Color:</strong> always <code>#1A1A1A</code> — never pure black</li>
+              <li>Consistent thickness — no jitter</li>
+              <li>No sketchy or hand-drawn lines</li>
+              <li>Same rules apply regardless of distance (scale with LOD)</li>
+            </ul>
+            <div class="info-box" style="margin-top:.75rem">
+              The consistent outline system is what makes Mooseville feel cohesive and
+              readable — it must be uniform across all asset types.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lighting Profile -->
+    <div class="section-header">
+      <span class="section-icon">🌤️</span>
+      <h2>Lighting Profile</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span>☀️</span><h3>Light Sources</h3></div>
+        <div class="card-body">
+          <div class="biome-section-title">Key Light (Sun)</div>
+          <ul class="styled-list">
+            <li>Color: warm — <code>#FFE8C9</code></li>
+            <li>Intensity: medium-high</li>
+            <li>Shadows: soft, slightly blurred</li>
+          </ul>
+          <div class="biome-section-title">Fill Light (Sky)</div>
+          <ul class="styled-list">
+            <li>Color: cool pastel blue — <code>#CFEAFF</code></li>
+            <li>Intensity: low</li>
+            <li>No shadows</li>
+          </ul>
+          <div class="biome-section-title">Rim Light (Optional)</div>
+          <ul class="styled-list">
+            <li>Color: slightly warm or neutral</li>
+            <li>Intensity: low — only to help silhouettes pop</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🎬</span><h3>Post-Processing</h3></div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Effect</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>Bloom strength</td><td>0.1–0.25</td></tr>
+                <tr><td>Contrast</td><td>Slightly reduced</td></tr>
+                <tr><td>Saturation</td><td>+5–10%</td></tr>
+                <tr><td>Vignette</td><td>Off or extremely subtle</td></tr>
+                <tr><td>Color grading</td><td>Gentle pastel lift in midtones</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-box" style="margin-top:.75rem">
+            <strong>Global:</strong> Bright, low-contrast, pastel outdoor adventure.
+            Shadows never pitch-black. Bloom subtle but present.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Environment-specific shaders -->
+    <div class="section-header">
+      <span class="section-icon">🌲</span>
+      <h2>Environment Shader Settings</h2>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header"><span>🌲</span><h3>Trees</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Leaf clusters: flat color + soft gradient</li>
+            <li>No leaf textures</li>
+            <li>Trunks: smooth, rounded, minimal detail</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🪨</span><h3>Rocks</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Rounded shapes</li>
+            <li>Very soft normals</li>
+            <li>Roughness: 0.75–0.9</li>
+            <li>Pastel gray-brown palette</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🌿</span><h3>Grass & Ground</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Flat color cards, slight color variation (±5–8%)</li>
+            <li>No wind noise textures — simple sine-based sway</li>
+            <li>Ground: painterly, soft, low-contrast</li>
+            <li>Use color zones instead of texture detail</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🏠</span><h3>Buildings — Wood</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Smooth, stylized — very faint plank lines</li>
+            <li>Roughness: 0.65–0.8</li>
+            <li>Roofs: flat color with subtle shading</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>💧</span><h3>Water</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Soft Fresnel effect</li>
+            <li>Roughness: 0.05–0.15</li>
+            <li>Gentle distortion, no harsh refraction</li>
+            <li>Subtle color-coded for meteor zones (green tint)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>✨</span><h3>VFX</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Sparkles: additive blending, soft pastel colors, bloom-friendly</li>
+            <li>Dust trails: alpha-blended, soft falloff, pastel browns</li>
+            <li>Magic glow: additive + bloom, pastel gold/pink/blue</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Style summary table -->
+    <div class="section-header">
+      <span class="section-icon">📋</span>
+      <h2>Quick Reference Summary</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Key Settings</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Materials</strong></td><td>Smooth, pastel, minimal surface detail</td></tr>
+          <tr><td><strong>Roughness</strong></td><td>0.55–0.85 for most (high/soft)</td></tr>
+          <tr><td><strong>Metallic</strong></td><td>0.0 for almost everything (except gold accents: 0.15–0.25)</td></tr>
+          <tr><td><strong>Normal Maps</strong></td><td>Very subtle: 0.05–0.15 strength only</td></tr>
+          <tr><td><strong>Outlines</strong></td><td>Thick, clean, always #1A1A1A</td></tr>
+          <tr><td><strong>Key Light</strong></td><td>Warm #FFE8C9, soft shadows</td></tr>
+          <tr><td><strong>Fill Light</strong></td><td>Cool pastel blue #CFEAFF, no shadows</td></tr>
+          <tr><td><strong>Bloom</strong></td><td>Subtle: 0.1–0.25</td></tr>
+          <tr><td><strong>VFX</strong></td><td>Additive blend, pastel colors, soft gradients</td></tr>
+          <tr><td><strong>Terrain</strong></td><td>Painterly, low-contrast, rounded shapes, color zones</td></tr>
+          <tr><td><strong>Ambient Occlusion</strong></td><td>Very soft, 0.2–0.35 intensity, small radius</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Color philosophy -->
+    <div class="section-header">
+      <span class="section-icon">💡</span>
+      <h2>Color Philosophy</h2>
+    </div>
+
+    <div class="card" style="background:var(--emerald-darkest);color:white">
+      <div class="card-body" style="line-height:1.9">
+        <div style="color:var(--gold-light);font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;margin-bottom:1rem;font-weight:700">To keep Mooseville consistent:</div>
+        <ul style="list-style:none;padding:0">
+          <li>🟢 Use <strong style="color:var(--emerald-light)">emerald + gold</strong> as your signature brand colors</li>
+          <li>🌿 Use <strong style="color:#A8D88F">pastel greens + browns</strong> for terrain and props</li>
+          <li>🔵 Use <strong style="color:#6BC7F2">soft blues</strong> for water and sky</li>
+          <li>🌸 Use <strong style="color:#F7A9C4">pinks + yellows</strong> for accents and collectibles</li>
+          <li>⬛ Use <strong style="color:#CCC">thick outlines (#1A1A1A)</strong> for UI and characters</li>
+        </ul>
+        <div style="margin-top:1.25rem;color:var(--gold-light);font-style:italic">
+          This gives you a world that feels: warm · friendly · magical · consistent ·
+          and visually compatible with Barbie Horse Trails.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>

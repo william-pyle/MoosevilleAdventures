@@ -1,0 +1,2294 @@
+﻿
+# Mooseville Adventures
+Character Art Sheets — Living Production Bible
+Platform: PC  |  Engine: Unreal Engine 5  |  Style: Warm Cartoon / Family-Friendly
+Audience: Character Artists · Riggers · Animators · Technical Artists
+Prepared by: Jason  |  Springdale, AR  |  June 6, 2026
+VERSION 1.0 — LIVING DOCUMENT — ALL REFERENCE ART IS FIRST-DRAFT DIRECTIONAL
+
+
+⚠ Critical Framing Note — Read Before Anything Else
+All shared reference art throughout this document is FIRST-DRAFT DIRECTIONAL ONLY — not canonical. Artists must treat every piece of reference as a starting point, not a finish line. Colors, clothing, hairstyles, accessories, proportions, and silhouettes must all be massively expanded beyond what the drafts show. Every customization section proposes a full palette of options. Do not replicate the drafts literally — use them to understand the emotional direction, then push further. The goal is to feel like Mooseville, not to photocopy it.
+
+# Table of Contents
+
+Section 1 — Character Art Philosophy
+
+1A · Design Pillars  |  1B · Tonal Reference  |  1C · Anatomy Philosophy
+
+Section 2 — Base Moose Anatomy Reference
+
+2A · Adult Proportions  |  2B · Child/Youth Proportions  |  2C · Antler Type Catalog
+
+Section 3 — The 7-Layer Clothing Rig System
+
+3A · Layer Stack Reference  |  3B · UE5 Implementation Notes
+
+Section 4 — The Grayscale Mask Tinting System
+
+4A · Hair Tinting  |  4B · Glasses Dual-Channel System  |  4C · Other Maskable Accessories
+
+Section 5 — Player Character Customization Specification
+
+5A · Fur Colors  |  5B · Hair Styles  |  5C · Antler Options  |  5D · Clothing & Accessories
+
+Section 6 — Named NPC Character Sheets
+
+6A · Founding Generation Elders (NPCs 01–10)  |  6B · Second Generation Heirs (NPCs 11–18)  |  6C · New Arrivals (Wilderness)
+
+Section 7 — Child / Youth Character Proportions Guide
+
+7A · Proportion Standards  |  7B · Child-Specific Clothing  |  7C · Simplified Expression Set
+
+Section 8 — Expression Sheet Standards
+
+8A · Required 8 Expressions  |  8B · Antler & Ear Body Language
+
+Section 9 — Rotation / Turnaround Standards
+
+9A · Required Angles  |  9B · Per-Angle Documentation  |  9C · Sheet Layout Spec
+
+Section 10 — Wildlife Character Sheets
+
+10A · Bear Family  |  10B · Eagle Pair  |  10C · Background Wildlife
+
+Section 11 — Color Palette Master Reference
+
+Section 12 — Visual Do's and Don'ts
+
+
+
+# Section 1 — Character Art Philosophy
+
+Mooseville Adventures is built on a single promise: every character must make the player feel immediately at home. Not impressed. Not intimidated. Home. The visual language of Mooseville is warm, rounded, approachable, and unmistakably hand-crafted in spirit — as though someone built these characters out of felt, stuffed them with something soft, and sent them out to live their lives in a sun-dappled valley.
+### 1A — Design Pillars
+
+
+Pillar
+Description
+Practical Application
+1 · Readability at Any Distance
+Every character must be identifiable at thumbnail size (32×32px). The primary silhouette — shaped by antlers, build, and clothing outline — carries all the recognition work.
+Test every new character as a flat black silhouette at 64px width. If you cannot name the character from silhouette alone, redesign the outline.
+2 · Silhouette Uniqueness
+No two named characters share the same silhouette. Antler shape, body width, clothing bulk, and accessory profiles must all contribute to a unique readable outline per character.
+Maintain a silhouette comparison chart (one row per character, flat black fills). Update it whenever a new character is added. No duplicates allowed.
+3 · Emotional Expressiveness
+Moosians communicate emotion through large eyes, antler angle, ear position, and body lean — not just facial muscles. The entire character is an emotional antenna.
+Animators must rig ears and antlers independently. Ear and antler micro-animation is required in all cutscene shots — never static during dialogue.
+4 · Warm Color Harmony
+Earth tones, emerald greens, and gold accents define the palette. All character colors must harmonize against the four primary environment tones: emerald grass, golden wheat, sky blue, dark forest floor.
+Check every new character against the Environment Contrast Test (Section 11). No character should visually "disappear" into any of the four environments.
+5 · Family-Friendly Without Being Infantile
+Mooseville is appropriate for all ages, but adults must feel respected. NPCs have lives, histories, and emotional complexity. The art should reflect personality and depth, not just cuteness.
+Every NPC has at least one visual detail that hints at their backstory (worn leather, ink-stained hooves, notched antlers). These "story details" are mandatory, not optional.
+
+### 1B — Tonal Reference
+
+
+✦ Creative Direction Quote
+"Animal Crossing meets Stardew Valley with a touch of Pixar warmth." Characters must be instantly lovable. They should feel as though they stepped out of an illustrated children's book — but one that adults would keep on their shelf too. Think: the emotional weight of Toy Story characters with the cozy accessibility of Animal Crossing villagers, rendered in the warm-toned palette of a Ghibli countryside.
+
+- Animal Crossing influence: Approachable scale, non-threatening features, consistent world logic, characters with distinct daily routines and personalities.
+- Stardew Valley influence: Pixel-adjacent warmth, seasonal color shifts, characters who feel like they were there before the player arrived and will carry on after.
+- Pixar influence: Emotionally readable eyes, storytelling through physical design (a worn apron says more than dialogue), visual contrast between generations.
+### 1C — Moose Anatomy Philosophy
+
+
+⚠ Critical — Not Realistic Moose Anatomy
+Mooseville characters are stylized to cartoonish extremes. Real moose anatomy is a reference point only, not a blueprint. Artists who have not internalized this distinction should review the Base Proportion Guide (Section 2A) before touching any character work.
+
+Key anatomy departures from real moose (all intentional, all non-negotiable):
+- Head size: Enormous relative to body — 1:2.2 head-to-body ratio for adults. Real moose heads are proportionally smaller.
+- Snout/nose: Very round, bulbous, takes up the lower 40% of the face. Not elongated like real moose. More like a round rubber ball attached to the face.
+- Antlers: Disproportionately huge — should extend well beyond body width. They are the primary visual personality expression tool and should always be compositionally dominant.
+- Limbs: Short, thick, rounded — stubby proportions that convey groundedness and warmth. Barely any visible ankle.
+- Neck: Essentially absent — shoulders blend directly into head silhouette. No visible neck column.
+- Hooves: Small, dark, rounded — a detail, not a feature. Do not elongate or make angular.
+- Eyes: Large, wide-set, expressive — the emotional center of every face.
+
+
+# Section 2 — Base Moose Anatomy Reference
+
+## 2A — Adult Proportions
+
+
+
+REF: turn0image2 · Player Character Base Reference — Adult Moosian Proportions · FIRST-DRAFT DIRECTIONAL — Not Canonical
+
+
+✦ Artist Note — Reading This Proportion Guide
+All measurements below are given in "head units" — the height of the character's head from chin to top of skull (not including antlers). Use the head as your base measurement unit across all proportional work. One head unit = H.
+
+
+Body Region
+Measurement (Head Units)
+Design Notes
+Total body height (no antlers)
+3.2 H
+Head accounts for approximately 1H of total height. Compact, grounded, not tall and lanky.
+Head width
+1.1 H (slightly wider than tall)
+Round and wide. Never tall and narrow. Width creates a plush, soft reading.
+Snout protrusion from face
+0.3 H forward
+Very round, bulbous, occupies lower 40% of face height. Dark warm brown (#3D1C02 range).
+Antler height above skull
+0.8–1.2 H (varies by style)
+Antlers should always extend beyond shoulder width when viewed from front. They are a visual CROWN.
+Antler span (widest point)
+1.6–2.4 H wide (varies by style)
+The wider the antlers, the more space/authority the character occupies. Match to personality.
+Torso height
+1.2 H
+Round barrel shape. No visible neck — shoulders blur into base of skull. No waist definition.
+Torso width
+1.0–1.3 H (varies by character bulk)
+Raymond Harlow sits at 1.3H wide. Evelyn Price at 0.95H wide. Width = visual weight.
+Arm length
+0.9 H from shoulder to hoof tip
+Short and thick. Slightly curved downward. Hooves small and rounded at tips.
+Arm width
+0.25 H at widest
+Thick, no defined elbow protrusion. Gentle taper from shoulder to hoof.
+Leg length
+0.8 H from hip to hoof
+Very short. Characters should look slightly "planted" — close to the ground by design.
+Leg width
+0.22 H at thigh, 0.18 H at ankle
+Slight widening at ankle/hoof junction. Subtle grey-taupe hoof coloration on lower ankle.
+Hoof size
+0.12 H tall, 0.15 H wide
+Small, rounded, dark charcoal (#2A2A2A). Subtle gloss highlight spot on top surface.
+Eye diameter
+0.22 H
+Large white sclera, single dark iris with white highlight dot. Eyes placed wide apart on face.
+Eye placement (horizontal)
+0.55 H apart (center to center)
+Wide-set. Eyes sit in upper-middle face zone, above snout centerline.
+Ear width
+0.3 H wide, 0.2 H tall
+Wide, flat, slightly droopy in resting position. Salmon/peach inner color. Key emotion indicator.
+Ear placement
+Side of head at midline, below antler bases
+Ears and antlers occupy the same "crown zone" — ears flanking the antler base columns.
+Neck tuft / mane
+0.25 H tall, 0.4 H wide
+Fluffy golden-yellow fur at chin/neck junction. Present on most characters. Warmth anchor.
+
+## 2B — Child / Youth Proportions
+
+Youth Moosians appear in two contexts: background ambient children in Mooseville town areas, and child versions of NPCs in memory/flashback sequences. They use a separate proportion standard from adults — more chibi, more cartoonishly compressed, with proportionally enormous heads.
+
+✦ Artist Note — The "Must Read Younger" Rule
+Child characters must immediately read as children at any camera distance. If there is any ambiguity, make the head bigger, the limbs shorter, and the antler nubbins smaller. There is no such thing as "too chibi" for Mooseville children. The proportion gap between child and adult must be unmistakable.
+
+
+Body Region
+Adult (Head Units)
+Child (Head Units)
+Change / Notes
+Total body height (no antlers)
+3.2 H
+2.5 H
+~60% of adult height in world units. Head unit itself is smaller in absolute terms.
+Head-to-body ratio
+1:2.2
+1:1.6
+Head is much larger relative to body. Most recognizable chibi indicator.
+Head occupies % of total height
+~30%
+~40%
+Critical for readability as "young."
+Torso shape
+Rounded barrel
+Egg-shaped, even rounder
+Barely differentiated from the head visually. Almost one round mass.
+Leg length
+0.8 H
+0.4 H
+Very short — barely visible below torso hem. Legs almost hidden by clothing.
+Arm length
+0.9 H
+0.5 H
+Tiny, rounded nubs. Gesture range is limited and endearing.
+Eye diameter relative to face
+0.22 H (20% of face width)
+0.28 H (25% of face width)
+Proportionally even larger eyes. More of the face is "eye" than "anything else."
+Antler nubbins height
+0.8–1.2 H (full rack)
+0.08–0.12 H (tiny nubbins)
+10-15% of adult size. Soft, rounded tips. Still growing. Do NOT give children sharp tines.
+Mane/neck tuft
+0.25 H
+0.35 H (proportionally larger)
+Oversized tuft on small frame — one of the most endearing visual qualities of child Moosians.
+Clothing layers
+Up to 7
+Maximum 3 (Layers 1, 3, 5 only)
+Simplified layering. Children's silhouettes should read clean and uncomplicated.
+Expression complexity
+8 nuanced expressions
+6 binary expressions
+Big Happy, Big Sad, Surprised, Confused, Scared, Determined. Less emotional subtlety by design.
+
+## 2C — Antler Types Reference Catalog
+
+
+⚠ Critical — Antler Color as Gender Expression
+Antler color is the PRIMARY gender expression visual differentiator in Mooseville. Brown antlers (#6B3A2A outer, #C4956A inner cream highlight) are typically used for male-presenting characters. Pink/salmon antlers (#E8617A outer, #F4A0B0 inner cream highlight) are typically used for female-presenting characters. Body shape does NOT change between gender expressions — only antler color, hair style, accessories, and clothing distinguish gender presentation. This is a core design principle and must never be violated.
+
+
+#
+Style Name
+Description
+Tine Count
+Span vs. Head Width
+Associated NPCs
+Visual Personality
+01
+Classic Wide Rack
+Broad, symmetrical spread. Slightly curved outward from base. 3 tines per side, even spacing, gentle upward curve at tips.
+3 per side (6 total)
+2.0 H
+Melvin, Martha
+Dependable, familiar, warm authority. The "default hero" antler — instantly reassuring.
+02
+Tall Crown
+Upright, close-set, elegant. Tines reach straight up with minimal lateral spread. Refined and dignified silhouette.
+3 per side (6 total)
+1.4 H
+Gloria Finch, Renna Finch
+Intelligence, precision, refinement. Characters who think before they speak.
+03
+Asymmetric Wild
+One tine slightly shorter or at a different angle than its counterpart. Looks natural and lived-in. Not damaged — just naturally offset.
+3 + 2 (mismatched)
+1.9 H
+Bram Vale (wild variation)
+Individuality, naturalness, slightly unpredictable energy. Characters who don't conform to patterns.
+04
+Compact Stubby
+Shorter overall height, broader base, fewer tines, rounded tips. Younger-looking even on adults. Less intimidating presence.
+2 per side (4 total)
+1.3 H
+Moss Lang, younger NPCs
+Youth, approachability, harmlessness. Characters still "coming into their own."
+05
+Grand Palmated
+Wide, flat palm-like spreading at the tips. Majestic and unusual. Looks prehistoric and impressive at distance.
+4+ emergent tips from palm
+2.4 H
+Raymond Harlow
+Majesty, scale, dominance, deeply earned authority. The most visually imposing antler style.
+06
+Twisted Spiral
+Tines have a natural spiral or torsion twist along their length. Each tine is subtly rotated. Creates a distinctive silhouette unlike any other style.
+3 per side (6 total)
+1.8 H
+New Arrivals / Wilderness
+Mysticism, otherness, having come from somewhere unexpected. Slightly unsettling in the best way.
+07
+Forked Split
+Simple Y-fork shape. Minimal and clean. Two main branches, no secondary tines. Extremely readable silhouette.
+1 fork per side (4 total tips)
+1.6 H
+Harold Winslow (notched version)
+Practicality, directness, economy. Characters who cut through complexity.
+08
+Multi-Crown
+4+ tines per side. Maximum impressiveness and visual complexity. Takes up the most horizontal and vertical space of any style. Demands attention.
+4–5 per side (8–10 total)
+2.4+ H
+Raymond Harlow (base style), Elder authority figures
+Maximum power, community leadership, long-earned status. The crown that grew through decades of service.
+
+
+
+# Section 3 — The 7-Layer Clothing Rig System
+
+
+
+REF: turn0image1 · Melvin — 7-Layer Clothing Rig Diagram · FIRST-DRAFT DIRECTIONAL — Not Canonical
+
+
+⚙ Technical Note — Why 7 Layers?
+The 7-layer clothing rig system enables real-time outfit swapping in Unreal Engine 5 without re-rigging the base skeleton. Each layer is a separate skeletal mesh component parented to the base character skeleton. Layer visibility and mesh swap operations are handled by the Mooseville Wardrobe Manager system (Blueprint-driven). Artists must deliver each clothing item as a separate mesh per layer — combined meshes are not supported by the Wardrobe Manager and will break runtime swapping.
+
+## 3A — Layer Stack Reference
+
+Layers are numbered back-to-front (Layer 1 is deepest/furthest from camera; Layer 7 is frontmost). In a ¾ view — which is Mooseville's primary gameplay camera angle — the rendering order corresponds directly to perceived depth.
+
+Layer
+Name
+What It Controls
+Example Garments
+Notable NPC Items
+Visibility in ¾ View
+L1
+Braces / Collar
+Innermost undergarment layer. Everything that peeks out from under the main shirt or top. Sits behind ALL other clothing layers.
+Undershirt collars, brace straps, camisoles, turtlenecks, bandanas, neckties (tucked), inner vest straps
+Martha's yellow undershirt collar · Player's undershirt collar in Starter Set A
+Partial — collar/strap tips only visible at neckline
+L2
+Arm_1 (Back Arm)
+The "back" arm — typically the left arm in ¾ view. Rendered behind the torso mesh. Crucial for reading arm swings in animation.
+Any arm sleeve belonging to the back arm: shirt sleeve, jacket sleeve, bare fur arm, arm band
+Melvin's flannel sleeve (back arm) · Chester's leather apron strap (wraps behind)
+Partially occluded by torso in ¾ view. Fully visible in side profile.
+L3
+Dress Top / Shirt Body
+Main upper body garment. The primary clothing silhouette element. Defines the character's visual identity more than any other layer.
+Polo shirts, blouses, dresses (upper portion), jacket bodies, overalls bib panel, tunics, hoodies
+Melvin's teal overalls bib panel · Martha's red floral dress body · Player's red polo (Starter Set B)
+Always fully visible. Primary layer for costume design decisions.
+L4
+Bust / Torso Overlay
+Front chest accessories that sit ON TOP of the main shirt body. Adds personality and storytelling detail. Often contains the character's most recognizable visual signature.
+Suspender clips, chest pockets, badges, bow ties visible at collar, apron bib front, embroidered patches, medals, pin badges
+Melvin's gold wheat sheaf emblem (unique identifier) · Gloria's ink-stained cuff overlay · Chester's leather apron front
+Fully visible. Critical layer for character identification at distance.
+L5
+Leg_1 (Back Leg)
+Back leg — rendered behind the front leg. Includes the trouser leg, skirt back panel, or shorts. Crucial for leg-swing animation legibility.
+Trouser back leg, skirt back panel, shorts back, bloomers, overall leg (back)
+Melvin's teal overall leg (back) · Martha's layered skirt back panel
+Partially occluded by front leg in ¾ view. Fully visible at side profile angle.
+L6
+Leg_2 (Front Leg + Footwear)
+Front leg — the visible leg in ¾ view. Also includes footwear at hoof level. This layer gets the most "screen time" during walking animations.
+Trouser front leg, skirt front panel, shorts front, footwear (sneakers, boots, sandals)
+Player's red sneakers (Starter Set B) · Vincent's muddy expedition boots · Chester's prosthetic wooden hoof tips
+Fully visible. Footwear detail lives here — must be polished at all detail levels.
+L7
+Arm_2 (Front Arm)
+The "front" arm — typically the right arm in ¾ view. Rendered in front of ALL other layers, including the torso. This is the primary gesturing, tool-holding, and emoting arm.
+Front arm sleeve, any held item (basket, tool, book, map), wrist accessory, fingerless glove, measuring cord bracelet
+Pell Harlow's measuring cord bracelet · Lotte Bell's market tray · Vincent's compass tool · Marjorie's ladle (scene-specific)
+Always fully visible. The "action arm." Most visible arm in all gameplay states.
+
+
+⚙ Technical Note — UE5 Implementation
+Skeletal Mesh Components: Each layer is a separate USkeletalMeshComponent on the base ABP_MoosianCharacter Blueprint. Layer components are named SKM_L1 through SKM_L7. Mesh swapping is handled via SetSkeletalMesh() calls from the WardrobeManager subsystem. Color tinting is handled via Material Dynamic Instances — each layer mesh shares the same master material (M_MoosianClothing) with runtime-set scalar and vector parameters for the grayscale mask system (see Section 4). LOD: Each layer mesh must deliver LOD0 (full detail), LOD1 (medium shot), and LOD2 (background/crowd). Layer meshes must be skinned to the same skeleton as the base character body (SK_MoosianAdult or SK_MoosianChild). No separate skeletons per layer.
+
+
+
+# Section 4 — The Grayscale Mask Tinting System
+
+The Grayscale Mask Tinting System is the core technical art system powering all color customization in Mooseville Adventures. It enables infinite color variations from a single asset without duplicating meshes, textures, or materials. Every customizable element — hair, clothing, accessories, footwear — uses this pipeline.
+## 4A — Hair Tinting System
+
+### Pipeline Overview
+
+
+Step
+Operation
+Tool / Location
+Notes
+Step 1
+Create full-color hair texture with all shading, highlights, and curl detail baked in
+Substance Painter / Photoshop
+Work in full color at this step — shading must be rich and correct at this stage.
+Step 2
+Desaturate to greyscale — preserving all value relationships (light/shadow/highlight)
+Photoshop · Image → Adjustments → Desaturate
+Result should be a luminosity-correct greyscale. Verify highlights are near-white (#F8F8F8) and shadow areas are dark grey (#2A2A2A range).
+Step 3
+Paint red channel mask — solid #FF0000 red over all areas that should be tintable
+Photoshop — Red channel mask layer
+Tintable areas = all main hair color regions. Leave highlight specular spots as white (#FFFFFF) — these will not be tinted, preserving shine.
+Step 4
+At runtime, Wardrobe Manager applies chosen PlayerHairColor (Vector3 parameter) to the red-masked areas of the greyscale base
+UE5 Material — M_MoosianHair · Parameter: HairTintColor
+Multiplicative blend: Greyscale value × HairTintColor = Final pixel color. Preserves all shading detail regardless of chosen color.
+Step 5
+White areas in mask are ignored by tinting shader — rendered as-is (specular highlights)
+Automatic — shader handles masking
+Do NOT paint white areas red. Tinted specular highlights look wrong across all hair colors.
+
+
+✦ Artist Note — Result
+One hair mesh + one greyscale texture + one mask texture = infinite color variations with a single material parameter change. No texture duplication, no mesh variants. The system supports any RGB color, meaning artists can introduce new hair colors purely through game design/UX without any art pipeline work after the initial asset is complete.
+
+### Expanded Hair Color Palette (18 Colors Minimum)
+
+
+Family
+Color Name
+Hex Code
+Visual Character
+Warm Family
+Golden Wheat
+#FFD700
+Default player / Melvin/Martha reference. Sunny, warm, iconic.
+Honey Amber
+#E8A020
+Slightly darker and more golden than wheat. Autumn harvest warmth.
+Burnt Sienna
+#8B4513
+Rich reddish-brown. Warm but deep. Earthy and grounded.
+Chocolate
+#5C2E00
+Deep brown. Strong contrast against light fur options. Reliable classic.
+Deep Mahogany
+#3B0A00
+Near-black brown. Dramatic, deep, serious tone. Rich undertone in light.
+Cool Family
+Ash Silver
+#B0B8BE
+Cool grey-silver. Distinguished, mature. Harold Winslow family color.
+Pearl White
+#F0EDE8
+Warm-tinted white. Evelyn Price family trait. Rare and striking.
+Storm Grey
+#6E7780
+Mid grey with blue undertone. Weather-worn, thoughtful.
+Midnight Charcoal
+#1A1A1A
+Near-black. Maximum contrast. Dramatic and bold. Chester Lang family.
+Nature Family
+Autumn Copper
+#B45309
+Vivid copper-orange. Striking in golden wheat field environments.
+Russet
+#8B3A00
+Deep reddish-brown. Caro Reed and Vincent Reed family color.
+Sandy Blonde
+#E8C97A
+Light, summery, beachy. Doris Vale family connection. Gentle and soft.
+Fantasy Family
+Emerald Green
+#1B8C3A
+Vibrant forest green. Unusual and memorable. Unlockable via gameplay.
+Forest Moss
+#4A6741
+Muted dark green. Wilderness/New Arrival association. Earthy fantasy tone.
+Ocean Teal
+#1A7A8A
+Blue-green teal. Finn Winslow-adjacent family color expression.
+Lavender Mist
+#8B6BB1
+Soft purple. Festival/special occasion feel. Wren Price association.
+Soft Rose
+#D4637A
+Warm pink. Playful and bold. Festival unlockable.
+Sunset Orange
+#E85E20
+Vivid warm orange. High energy, unmissable in a crowd. Special event unlock.
+
+## 4B — Glasses Tinting System (Dual-Channel)
+
+The cat-eye glasses accessory (and all other eyewear designs) uses a two-channel mask for independent frame and lens tinting — giving the customization system maximum flexibility from a single asset.
+
+Channel
+Controls
+Material Parameter
+Notes
+Red Channel
+Primary Color — Outer frame, arms, rims, bridge
+GlassesFrameColor (Vector3)
+Most visible element. Default: Classic Red (#CC2200). Painted solid red on all frame regions in the mask.
+Blue Channel
+Secondary Color — Lens fill, tint area inside frame
+GlassesLensTint (Vector3 + Alpha scalar)
+Semi-transparent. Default: Sky Blue (#B8D4E8) at 60% opacity. Painted solid blue on lens areas in mask.
+White (unmasked)
+Specular highlights on lens surface — untinted
+N/A (unmasked)
+Always rendered as near-white. Preserves that glass-like optical highlight. Do NOT paint specular areas in any channel.
+Green Channel
+Reserved — currently unused (future: hinge/screw metal accent color)
+GlassesAccentColor (future)
+Leave green channel empty in current production. Road-mapped for v1.5.
+
+#### GLASSES FRAME COLOR OPTIONS (12 MINIMUM)
+
+Color Name
+Hex Code
+Tone / Notes
+Classic Red
+#CC2200
+Bold, retro, energetic. Default reference color.
+Cherry Pink
+#E8507A
+Playful and warm. Common with pink-antler characters.
+Midnight Blue
+#1A2C5C
+Deep and serious. Harold Winslow palette adjacent.
+Forest Green
+#1B5E20
+Mooseville brand color. Harmonizes with environment everywhere.
+Royal Purple
+#6B2D8B
+Distinctive and regal. Rare, unlockable option.
+Warm Gold
+#D4A017
+Mooseville accent color. Premium/earned feeling.
+Tortoise Shell
+#8B5E3C
+Natural, warm, organic. Gloria Finch's wooden frames adjacent.
+Jet Black
+#111111
+Maximum contrast. Clean and sharp. Chester Lang palette adjacent.
+Pearl White
+#F0EDE8
+Elegant, minimal, refined. Evelyn Price palette adjacent.
+Lavender
+#9B7FC4
+Soft and dreamy. Wren Price palette adjacent.
+Coral
+#E86441
+Warm orange-pink. Lively and market-friendly. Lotte Bell palette.
+Aqua
+#1A8C8C
+Teal-blue. Finn Winslow palette adjacent. Water-world association.
+
+#### LENS TINT COLOR OPTIONS (8 MINIMUM)
+
+Color Name
+Hex Code
+Opacity
+Mood / Notes
+Sky Blue
+#B8D4E8
+60%
+Default. Friendly, classic glasses look. Wide appeal.
+Rose Tint
+#E8C4C4
+55%
+Warm and nostalgic. "Rose-colored glasses" personality touch.
+Amber
+#E8C870
+65%
+Warm, hunter/outdoorsy feel. Vincent Reed palette adjacent.
+Mint
+#B8E8C4
+55%
+Fresh, natural, spring-adjacent. Bram Vale / gardener palette.
+Lavender
+#D4C8E8
+50%
+Dreamy, soft, gentle. Wren Price palette adjacent.
+Smoke Grey
+#8A8A8A
+70%
+Cool, detached, observational. Harold Winslow palette adjacent.
+Clear
+#F8F8F8
+15%
+Near-transparent. "No-tint" option for characters who need clean corrective look.
+Sunset Orange
+#E8A870
+60%
+Warm, festival, adventurous. Special event unlock.
+
+## 4C — Other Maskable Accessories
+
+The same dual/single-channel mask system applies to all other customizable elements. Below is the complete catalog of maskable asset types and their channel assignments:
+
+Asset Type
+Red Channel
+Blue Channel
+Notes
+Clothing — Top
+Primary fabric color (main garment body)
+Secondary / trim color (cuffs, collar, buttons, stripe)
+White = stitching, lace, embroidery highlight (unmasked). Gloria's ink stain detail is baked into greyscale, not masked.
+Clothing — Bottom
+Primary fabric color (leg panels)
+Secondary / waistband / cuff stripe
+Same dual-channel as tops. Shoes/boots are a separate asset on L6.
+Footwear
+Primary shoe body color
+Lace / sole / sole stripe color
+Sole material uses separate roughness parameter — sole is always slightly more matte than upper.
+Hats / Hair Accessories
+Primary hat body / headband color
+Accent — ribbon, band, trim, flower center
+Flower crowns: red = petal, blue = leaf. Hat brims get a baked-in shadow, not a masked channel.
+Antler Wrap Decorations
+Full wrap / ribbon color
+N/A (single channel for wraps)
+Antler wraps are a single-tint accessory. Marjorie's herb bundles are a non-tintable special asset.
+Scarf / Neck Items
+Primary scarf / bandana color
+Secondary stripe / pattern accent
+Scarf meshes attach to the L1 layer slot. They sit behind all other layers at the neck zone.
+Tool Belt / Utility
+Belt strap leather color
+Pouch / buckle accent color
+Utility items hanging from belt are non-tintable (fixed art assets, story-relevant props).
+
+
+
+# Section 5 — Player Character Customization Specification
+
+The player character is an adult Moosian of the founding generation — Melvin and Martha's grown child. They are returning to Mooseville after years away and are customized at game start. Customization can be revisited at the "Looking Glass" mirror in the player's inherited home at any time. The player character must support the full 7-layer clothing system and all tinting channels.
+
+✦ Artist Note — Player Character Design Philosophy
+The player character must have a "blank canvas" quality — visually warm and appealing in all default states, but never so distinctive that they feel like an authored character. They are the player's avatar, not a named NPC. Avoid any detail so specific it conflicts with player identity. The default Starter Set B (red polo + navy shorts) was chosen because it is warm, active, and visually neutral — it communicates "ready to start an adventure" without communicating "specific personality."
+
+## 5A — Fur Color Options
+
+
+#
+Color Name
+Base Hex
+Highlight Warmth
+Visual Feel
+Rarity
+01
+Founder's Brown
+#4A2010
+Warm orange-brown (#8B5A30)
+Classic dark warm brown. Matches parental generation. Default selection. Heritage feel.
+Default / Common
+02
+Warm Auburn
+#6B2E1A
+Amber-orange (#C87840)
+Reddish-brown, warm and vibrant. Catches golden hour light beautifully.
+Common
+03
+Sandy Blonde
+#C8916A
+Pale cream (#E8C8A8)
+Lighter, summery, sunlit quality. Doris Vale family color range.
+Common
+04
+Russet Copper
+#8B4020
+Bright copper (#D47830)
+Deep reddish-copper. Vivid and distinctive. Vincent/Caro Reed palette adjacent.
+Common
+05
+Classic Chocolate
+#3D1A08
+Mid warm brown (#7A4A28)
+Deep, rich brown. Maximum warmth and depth. Chester Lang palette adjacent.
+Common
+06
+Silver-Ash
+#9A9AA0
+Cool light grey (#D8D8DC)
+Unusual grey-toned coat. Harold Winslow family trait. Distinctive in any crowd.
+Uncommon
+07
+Midnight Black
+#1A0D06
+Subtle warm brown (#3A2010)
+Near-black with warm undertone in direct light. Chester Lang palette. Dramatic.
+Uncommon
+08
+Honey Gold
+#C8A050
+Bright warm yellow (#E8C870)
+Warm golden coat. Rare in the valley. Glows in late afternoon sunlight.
+Rare
+09
+Driftwood Grey
+#8A8A8A
+Cool pale grey (#C8C8C8)
+Cool-toned, weathered. Distinguished from Silver-Ash by neutrality — no blue-grey shift.
+Uncommon
+10
+Ember Tan
+#D4A070
+Warm light cream (#E8C8A0)
+Pale tan, the lightest option. Sun-bleached quality. Vincent Reed's flank color as full coat.
+Uncommon
+
+## 5B — Hair Style Options (16 Styles)
+
+
+⚠ Critical — Gender Neutral Hairstyles
+All 16 hairstyles are gender-expression-neutral. No hairstyle is labeled or designated as male or female. Players may combine any hairstyle with any antler color, fur color, and clothing combination. This is non-negotiable by design philosophy. Do not introduce any naming or categorization that implies gender restriction.
+
+
+#
+Style Name
+Description
+Silhouette Shape
+Tinting Notes
+01
+Classic Curly Crown
+Large, bouncy curls clustered at the crown of the head. Reference style from player character draft. Voluminous and friendly.
+Round cloud above skull center
+Curls create deep shadow valleys — greyscale must capture this depth. Most complex to tint correctly.
+02
+Tight Ringlets
+Smaller, denser ringlets than Classic Curly Crown. More compact silhouette, but same bouncy energy. Sits closer to the skull.
+Dense halo, tight profile
+Uniform curl diameter. Less shadow variance than Classic — simpler tint result.
+03
+Flowing Waves
+Loose S-curve waves. Longer at the sides, framing the face. Elegant and relaxed — Martha-adjacent style.
+Asymmetric soft oval, draping sides
+Long smooth gradients in greyscale. Beautiful tint color range — especially effective with warm tones.
+04
+Short Crop
+Very close to head, minimal volume. Clean and uncluttered. Lets facial features dominate.
+Thin cap, nearly flat
+Minimal shadow — greyscale is fairly flat. Tint color is very direct and saturated-looking as a result.
+05
+Mohawk Tuft
+Central ridge of fur spiked upward between antler bases. Sides shaved clean. Bold and distinctive.
+Single vertical fin silhouette
+Spike tips catch light dramatically. Bright highlight at tips. Works best with vivid fantasy colors.
+06
+Side Sweep
+Longer on one side, with an asymmetric swoosh across the forehead. Adds personality and a slightly off-kilter charm.
+Off-center arc
+One side has deep shadow, other has highlight sweep. Asymmetric tint gradient effect looks dynamic.
+07
+French Braid Crown
+Appears woven and twisted across the crown of the head. Complex texture detail — reward for artistic effort on the greyscale.
+Woven band across crown
+Braid weave creates repeating light/shadow pattern. Ensure braid geometry reads at LOD1.
+08
+High Ponytail
+Gathered tuft at top of head — small ponytail sitting at crown, pointing upward or slightly back. Bounces during movement.
+Vertical tuft above skull top
+Ponytail volume asset is separate from skull-cap base. Two mesh pieces, one material.
+09
+Low Ponytail
+Gathered behind the lower skull, at the nape of the neck. Hangs loosely behind head. Practical and relaxed.
+Rearward draping mass at back
+Most visible at side and ¾-back camera angles. Must look good from back view — often overlooked.
+10
+Space Buns
+Two round puffs of hair, one above each antler base. Framing the antler columns, adding a symmetrical decorative silhouette element.
+Two spheres flanking antler bases
+Buns interact with antler base geometry — must be authored to not clip antler base polygons at any angle.
+11
+Shaggy Mop
+Unkempt, layered, slightly overgrown. Falls loosely in multiple directions. Bram Vale energy.
+Irregular sprawling mass
+Rich shadow variance in greyscale. One of the most visually interesting tint results — expressive strands.
+12
+Sleek Back
+Smooth, flat against head, polished. Pulled back from forehead. Evelyn Price / Gloria Finch adjacent — authority and precision.
+Tight, flat, elongating skull
+Very smooth greyscale. Tint color reads very cleanly and uniformly. Good for showing off bold colors.
+13
+Undercut
+Shaved sides, volume only on top. Modern, bold, confident silhouette. Chester Lang / urban energy.
+Flat sides, top block
+Side panels are near-skull fur texture (not hair mesh). Top volume is separate hair mesh.
+14
+Curly Afro Puff
+Round, full volume all around the crown. Radially symmetric, impressive silhouette. Warm and celebratory energy.
+Large sphere, radially symmetric
+Largest silhouette addition of all hair styles. Must not clip antler geometry — author antler placement offset into account.
+15
+Braided Rows
+Tight parallel braids following skull contour from front to back. Precise, clean, shows scalp in furrows between rows.
+Lined texture, low profile
+Braid texture detail must read at LOD1. Rows create strong directional highlight pattern in greyscale.
+16
+Flipped Bob
+Short, with ends that flip outward — bouncy and retro. Hits just below the ear line. Lotte Bell energy.
+Short with outward flare at tips
+Flip tips catch light uniquely. Bounce animation during movement should emphasize the flip — key for character personality.
+
+## 5C — Antler Style Options
+
+The player may choose from all 8 antler styles documented in Section 2C, and may choose either brown or pink antler color family. Additional antler color variants (silver, gold, obsidian, etc.) are available as gameplay unlockables. See the Antler Type Catalog (Section 2C) for full style descriptions.
+## 5D — Clothing Starter Options and Unlockable System
+
+### Starter Outfits (3 Sets)
+
+
+Set
+Name
+Description
+Key Colors
+Set A
+Founder's Pride
+Teal overalls (#2A7A7A) over red-white plaid flannel shirt. Heritage aesthetic — paying homage to Melvin's founding generation style. Boots included.
+Teal #2A7A7A · Red plaid #CC2200 · White #F5F5F5
+Set B
+Active Adventurer
+Red polo shirt + navy athletic shorts with white side stripe + red sneakers. Reference draft outfit. Ready-to-go energy, practical and sporty.
+Red polo #CC2200 · Navy shorts #1A2C5C · White stripe #F5F5F5 · Red sneakers #CC2200
+Set C
+Wilderness Scout
+Olive canvas jacket with rolled sleeves + khaki cargo shorts with large pockets + brown work boots. Exploration-ready from day one.
+Olive #5A6830 · Khaki #C8B870 · Brown boot #6B4A20
+
+### Post-Game Unlockable Clothing Categories
+
+
+Category
+Quantity
+Examples
+Unlock Method
+Tops
+20+
+Polo shirts, blouses, tunics, hoodies, vests, tank tops, formal shirts, pea coats, varsity jackets, crop tops
+Shop, craft, festival reward, quest completion
+Bottoms
+15+
+Shorts, trousers, skirts (A-line, pleated, wrap), overalls, capri pants, bloomers, wide-leg pants
+Shop, craft, seasonal event
+Full Outfits
+10+
+Dresses, jumpsuits, overalls (full), robes, festival costumes, harvest suit, explorer's fatigues
+Quest milestone, festival event, community relationship level
+Footwear
+12+
+Sneakers, work boots, rain galoshes, sandals, loafers, slippers, wedge heels, moccasins, bare hooves (default), garden clogs, wading boots, hiking boots
+Shop, craft, exploration unlock
+Glasses
+6 frame shapes × 12 frame colors × 8 lens tints = 576 combinations
+Cat-eye, round, rectangular, oval, aviator, half-moon
+Frame shapes via shop/craft; colors via tinting system (always available)
+Hats
+10+
+Beanies, straw hats, baseball caps, flower crowns, hard hats, chef's toques, crowns, bonnets, wide-brim sunhats, berets
+Shop, seasonal event, friendship reward
+Scarves / Neck
+8+
+Bandanas, bow ties, silk scarves, knit scarves, necklaces (bead/shell/carved), leis, ascot, turtleneck overlay
+Shop, craft, friendship reward
+Tool Belt / Utility
+5+
+Craftsman tool belt, explorer's map satchel, seed pouch, water canteen strap, harvest basket harness
+Craft station unlock, community milestone
+
+
+
+# Section 6 — Named NPC Character Sheets
+
+Each NPC sheet is a complete visual and personality reference for character artists, riggers, and animators. Entries are organized by generation. Reference images are included where available. All hex codes are verified against the master palette in Section 11.
+
+⚠ Critical — Silhouette Uniqueness Rule
+Every named NPC must have a unique silhouette readable at 64px width (flat black fill test). The combination of antler style, body build, clothing bulk, and accessory profile must create an outline that cannot be confused with any other character. The Silhouette Reference Sheet (maintained separately in the Art Directory) must be updated any time a character design is finalized or revised.
+
+## 6A — Founding Generation Elders
+
+
+
+NPC 01 — MELVIN
+Co-Founder · Player's Father · Community Elder
+
+
+
+REF: turn0image1 · Melvin — Primary Character Reference + Rig Diagram · FIRST-DRAFT DIRECTIONAL — Expand Beyond This Draft
+
+Attribute
+Specification
+Build
+Stocky, broad-shouldered, solid. The most physically "substantial" elder — he takes up space without being threatening. He is the physical anchor of the group.
+Fur Color
+Dark warm brown base
+#3D1C0A
+· Muzzle greying slightly
+#6B5A4A
+· Warm brown highlight ridge
+#7A4A28
+Antler Style
+Classic Wide Rack (Style 01) · Brown
+#6B3A2A
+outer · Cream highlight
+#C4956A
+inner ·
+Distinguishing mark: right tine is slightly shorter than its left counterpart
+— a natural growth quirk, not damage
+Hair / Mane
+No styled hair. Golden neck mane tuft
+#D4A020
+prominent at chin/neck. Slightly greying edges
+#9A8A6A
+around tuft border.
+Distinguishing Silhouette
+Wide antler spread + broad torso + visible overalls bib + gold wheat emblem on chest. The overalls straps create a distinctive Y-shape over the shirt at the torso level.
+Default Outfit — Layer 3
+Teal overalls bib panel
+#2A7A7A
+· Beneath: Red-white plaid flannel shirt
+#CC2200
+/
+#F5F5F5
+· Cream collar peeks from underneath
+Default Outfit — Layer 4
+Gold wheat sheaf emblem
+#FFD700
+in chest pocket — his unique personal identifier. Non-tintable (fixed gold always). Layer 4 is his most important visual fingerprint.
+Default Outfit — Legs / Feet
+Teal overall legs
+#2A7A7A
+with light cuff roll at ankle · Dark charcoal hooves
+#1A1A1A
+Key Color Palette
+Teal
+#2A7A7A
+· Red plaid
+#CC2200
+· White
+#F5F5F5
+· Gold wheat
+#FFD700
+· Dark brown fur
+#3D1C0A
+· Hoof black
+#1A1A1A
+Personality Keywords
+Warm · Steady · Nostalgic · Proud · Gentle giant
+Posing Direction
+Open-armed stances. Grounded, never hurried. Often seen with hands resting on overalls straps, or one hand raised in slow, broad greeting. Feet planted wide. Never leaning against things — he is the thing others lean against.
+Expression Range
+Full warm smile (most common) · Soft thoughtful look · Tearful joy (rare, story moments only) · Proud stern look (very rare — reserved for one specific story beat)
+
+
+
+NPC 02 — MARTHA
+Co-Founder · Player's Mother · Memory Keeper
+
+Attribute
+Specification
+Build
+Slightly smaller and softer than Melvin — more elegant posture, slightly narrower torso. She and Melvin are visually a "matched pair" who nonetheless read immediately as distinct through antler color, hair, and outfit palette.
+Fur Color
+Dark brown consistent with Melvin
+#3D1C0A
+base — they share a family coloration. Highlights slightly warmer at
+#8B5A38
+.
+Antlers
+PINK/salmon Classic Wide Rack
+#E8617A
+outer · Inner cream highlight
+#F4A0B0
+· Slightly more delicate tines than Melvin — same style, feminine-expressed execution · KEY visual differentiator from Melvin
+Hair
+Golden curly/wavy
+#FFD700
+— sits lower on head, framing face more fully than player character's curls. More flowing waves than tight curls. Styled but naturally full.
+Distinguishing Silhouette
+Pink antlers (immediately distinguishable from Melvin's brown) + layered skirt hem silhouette + ruffle collar at neckline + golden hair volume around face
+Default Outfit — Layer 1
+Yellow undershirt collar peeking above main dress neckline
+#E8C820
+Default Outfit — Layer 3
+Red floral-pattern dress
+#CC2200
+with darker flower print motif
+#8B1A1A
+(flowers are subtle — not loud). Dress reaches to mid-shin.
+Default Outfit — Layer 4
+Pink ruffle collar overlay at neckline
+#E87090
+— a delicate separate garment layer above the dress neckline · Red lipstick detail on snout (baked into face texture, not a layer)
+Default Outfit — Hem / Feet
+Pink ruffle hem on dress bottom
+#E87090
+· Black hooves
+#1A1A1A
+Key Color Palette
+Red dress
+#CC2200
+· Yellow undershirt
+#E8C820
+· Pink ruffle
+#E87090
+· Antler pink
+#E8617A
+· Gold hair
+#FFD700
+Personality Keywords
+Warm · Deeply expressive · Storyteller · Content · Occasionally wistful
+Posing Direction
+Eyes often close in contentment — this is her signature expression in idle states. Poses often involve hands clasped at chest, or one hand raised to cheek in thought. She listens with her entire body — turns fully toward whoever is speaking.
+Expression Range
+Contentment - eyes closed, soft smile (most common) · Joyful open eyes · Misty memory look (eyes glisten, slight distance stare) · Firm resolve (rare) · Laughing openly
+
+
+
+NPC 03 — DORIS VALE
+Agricultural Founder · Master of Growing Things
+
+Attribute
+Specification
+Build
+Wiry-strong beneath a soft outer appearance — decades of field work have made her tougher than she looks. Slightly forward lean in all poses — a lifetime of bending toward growing things. Slightly shorter than average.
+Fur Color
+Originally sandy brown
+#C8916A
+now faded to patchy silver-white
+#D8D4C8
+— the transition is NOT uniform. Sandy brown patches remain around her ears and lower legs. This patchwork quality is her unique fur texture.
+Antlers
+Brown · Shorter and more worn than other elders · Implied lichen/moss texture on antler surface (baked into texture, not geometry) · Slightly asymmetric from years of bumping into things in the field
+Hair
+White/silver loose braid
+#E8E4DC
+— practical and functional. A few wisps escape at the temples. Never perfectly neat.
+Distinguishing Silhouette
+Multiple stacked apron layers creating a wide, layered lower-torso silhouette + deep pockets visible on outer apron + slightly forward-leaning posture (built into rig default pose)
+Default Outfit
+Three stacked aprons in earthy linen tones: Outer apron cream
+#F0EBD8
+· Middle apron sage green
+#7A9A70
+· Inner apron/base garment earth brown
+#8B6A4A
+· Worn leather sandals
+#8B6A4A
+· Soil stain implied by slightly darker hoof base (baked into hoof texture variant)
+Key Color Palette
+Cream
+#F0EBD8
+· Sage
+#7A9A70
+· Earth brown
+#8B6A4A
+· Silver-white fur
+#D8D4C8
+· Sandy patch fur
+#C8916A
+Personality Keywords
+Patient · Deeply observant · Comfortable with silence · Practical · Dry humor
+Expression Range
+Quiet contentment (most common) · Focused study · Gentle approval · Rare surprise · Dignified grief
+
+
+
+NPC 04 — RAYMOND HARLOW
+Construction Founder · LARGEST Moosian in Mooseville
+
+
+✦ Artist Note — Scale Reference
+Raymond must visibly read as the largest character in Mooseville. When standing next to Melvin (already a stocky, substantial elder), Raymond should appear noticeably taller AND wider. His scale is a storytelling choice — he built the buildings, and the buildings reflect his stature.
+
+Attribute
+Specification
+Build
+Substantially larger than ALL other NPCs — tall AND wide. Barrel-chested with visible muscle definition even through cartoon stylization. Head-and-shoulders above Melvin. Largest torso width in the cast.
+Fur Color
+Dark charcoal
+#2A2A30
+— the darkest non-black fur in the main cast. Has a very subtle cool blue undertone that catches in neutral light.
+Antlers
+Brown Grand Palmated / Multi-Crown hybrid (Styles 05+08) · Enormous flat palm at tips ·
+MISSING TIP of left antler
+— snapped off in a construction incident, his most distinctive personal identifier · Not repaired or replaced — he's proud of it
+Distinguishing Silhouette
+Head-and-shoulders taller than all other elders (built into character scale modifier) · Charcoal fur (unique in cast) · Thick belt visible at waist · Grand Palmated antlers with missing left tip — unmistakable in silhouette
+Default Outfit
+Heavy canvas work shirt dark olive
+#4A5A30
+with rolled sleeves (always) · Thick leather tool belt
+#5C3A1A
+with multiple pouches · Near-black work trousers
+#1A1A1A
+· Heavy work boots
+#2A1A0A
+Key Color Palette
+Charcoal fur
+#2A2A30
+· Olive canvas
+#4A5A30
+· Leather belt
+#5C3A1A
+· Boot black
+#1A1A1A
+Personality Keywords
+Big · Booming · Protective · Surprisingly gentle · Rarely flustered
+Posing Direction
+Poses emphasize scale — standing tall, calm, rarely animated. Arms at sides or crossed. Never fidgeting. He is the most still character in the cast — he doesn't need to move to command attention.
+Expression Range
+Proud approval (most common) · Belly laugh (rare, but enormous when it happens — whole body shakes) · Contemplative squint · Rare worry · Rare deep sorrow
+
+
+
+NPC 05 — GLORIA FINCH
+Records Keeper · Archivist Founder
+
+Attribute
+Specification
+Build
+Slim, upright, precise. Carries herself with careful economy of movement. She does not waste posture any more than she wastes words.
+Fur Color
+Honey-brown
+#C89040
+— warm, lighter than most elders. Ink-stained slightly darker at hoof tips (baked into hoof texture variant for Gloria specifically).
+Antlers
+Brown · Tall Crown style (Style 02) — upright and refined, exactly as precise as she is · Slightly worn at tips from years of brushing under low archive shelves
+Distinguishing Silhouette
+Many-pocketed vest creating a busy, layered silhouette at torso · Spectacles resting on snout bridge (always in silhouette) · Tall Crown antlers narrow and upright
+Default Outfit
+Many-pocketed vest forest green
+#2A5A30
+over cream blouse
+#F0EBD8
+· Carved wooden spectacles on snout — the ONLY wooden-frame glasses in the game (unique asset, non-tintable) · Ink-stained lower hoof tips (texture variant)
+Spectacles Note
+Gloria's glasses use a
+special non-tintable carved wood asset
+— they are a unique narrative prop, not from the standard glasses tinting system. They have their own mesh (SM_GloriaSpectacles) and material (M_WoodSpectacles).
+Key Color Palette
+Forest green
+#2A5A30
+· Cream blouse
+#F0EBD8
+· Honey fur
+#C89040
+· Wood-brown spectacle frame
+#8B5E30
+Personality Keywords
+Precise · Quietly enthusiastic about records · Slightly stern · Deeply loyal
+Expression Range
+Scholarly focus (most common) · Pleased discovery · Mild disapproval — one raised brow (signature expression) · Rare wide delight · Thoughtful frown
+
+
+
+NPC 06 — HAROLD WINSLOW
+Water & Weather Specialist Founder
+
+Attribute
+Specification
+Build
+Wiry, tall, slightly hunched from years of weather-watching — but this is an engaged hunch, not a defeated one. Perpetually looking slightly upward, as though the sky might offer new data at any moment.
+Fur Color
+BLUE-GREY
+#6A7A8A
+— unique and immediately distinctive family trait. No other founding elder shares this color. Cool-toned and unusual.
+Antlers
+Brown · Forked Split style (Style 07) · Multiple notches carved into antler surface — each notch marks a significant weather event he recorded · These are deliberate marks, not damage
+Distinguishing Silhouette
+Blue-grey fur (unique in cast — cannot be confused with anyone else) · Loops and hooks on coat visible in silhouette · Notched antler texture (readable at mid-distance)
+Default Outfit
+Weathered blue coat
+#2A3A5A
+with many loops and hooks for attaching weather instruments · Carved bone buttons
+#E8DCC0
+· Wading boots
+#1A2A3A
+(always, regardless of season — he's always ready to wade)
+Key Color Palette
+Blue-grey fur
+#6A7A8A
+· Navy coat
+#2A3A5A
+· Bone buttons
+#E8DCC0
+· Dark wading boot
+#1A2A3A
+Personality Keywords
+Distracted · Dreamy · Quietly obsessed · Warm underneath · Never quite fully present
+Expression Range
+Distracted wonder (most common — this is his idle state) · Excited discovery · Gentle confusion · Rare full presence/eye contact · Content
+
+
+
+NPC 07 — MARJORIE BELL
+Community Nourishment Founder · Cook
+
+Attribute
+Specification
+Build
+Round and soft — the most physically "cozy" of all elders. Warm in every dimension. Widest cheek pouches in the cast. Perpetually looks like she just came from a kitchen.
+Fur Color
+Cinnamon-brown
+#8B4A20
+— warm and inviting. Matches the color of baked goods. This is not an accident.
+Antlers
+Brown · Classic Wide Rack (Style 01) BUT with herb bundles and small dried flower bouquets wrapped at the base of each tine · These are non-tintable special decoration meshes (SM_MarjorieTineWrap) · A distinguishing decoration unique in the entire cast
+Distinguishing Silhouette
+Herb-wrapped antlers (visible at distance) · Perpetually stained apron creating a broad front visual mass · Round, soft body silhouette · Sleeves always rolled up
+Default Outfit
+Two stacked aprons: White outer
+#F0EBD8
+, mustard inner
+#D4A020
+· Rust-red blouse beneath both
+#8B3A20
+· Sleeves always rolled to elbow · Faint cooking stains on outer apron (baked into apron texture)
+Key Color Palette
+Cinnamon fur
+#8B4A20
+· Apron white
+#F0EBD8
+· Mustard
+#D4A020
+· Rust blouse
+#8B3A20
+Personality Keywords
+Enthusiastic · Nurturing · Uses food metaphors constantly · Always feeding someone
+Expression Range
+Bright enthusiastic smile (most common — cheeks puffed in delight) · Satisfied approval · Gentle scolding · Rare worry · Motherly comfort
+
+
+
+NPC 08 — CHESTER LANG
+Repair & Craft Founder · Master Mechanic
+
+Attribute
+Specification
+Build
+Compact and muscular — short but clearly powerful. Every limb looks like it has done serious work. The most "dense" body type in the cast.
+Fur Color
+Near-black
+#1A0D06
+— the darkest of the founding group. Subtle warm brown undertone visible in direct warm light only.
+Antlers
+Brown · Compact Stubby (Style 04) modified with tool hooks attached to each tine · Small tools (wrench, awl, hook) hang from the tines — functional decoration unique in the cast · These are rigged props (BP_ChesterToolHook) that sway during movement
+Distinguishing Silhouette
+Stocky near-black silhouette + antler tool hooks (visible dangling in silhouette) + wooden prosthetic hoof tips on front hooves · The prosthetics create a slightly wider/blocky hoof silhouette
+Default Outfit
+Worn dark work shirt
+#2A1A0A
+with many visible repairs/patches (baked texture detail) · Heavy leather apron front
+#5C3A1A
+· Wooden prosthetic hoof tips
+#8B6A30
+on front hooves — they make a distinctive click sound when he walks (audio implementation note)
+Key Color Palette
+Near-black fur
+#1A0D06
+· Dark work shirt
+#2A1A0A
+· Leather
+#5C3A1A
+· Prosthetic wood
+#8B6A30
+Personality Keywords
+Precise · Economical with words · Deeply competent · Dry wit
+Expression Range
+Focused concentration (most common) · Rare approval nod · Dry smirk · Impatient tap (foot or hoof click) · Surprised by something genuinely new
+
+
+
+NPC 09 — EVELYN PRICE
+Community Mediator · Diplomat Founder
+
+Attribute
+Specification
+Build
+Tallest and most elegant of all elders — willowy, refined posture. The only elder who appears to have maintained deliberate care of her physical bearing. Every movement is considered.
+Fur Color
+Silver-white
+#D8D4C8
+— this is a NATURAL BORN coat, not age-white. She was born this way. Extremely rare in Moosians. The warmth of the
+#FDFBF5
+undertone prevents it from reading as cold or clinical.
+Antlers
+SILVER-TONED antlers
+#C0B8B0
+— matches her fur. Unusual, striking, and immediately distinctive. No other character has silver antlers. Tall Crown style (Style 02) — refined and upright like her bearing.
+Distinguishing Silhouette
+Tall elegant silhouette (tallest female-presenting elder) · Silver-white fur + silver antlers (entirely unique combination) · Gold embroidery visible at collar/cuffs (glints in light) · Forest green clothing against white fur reads with extreme contrast
+Default Outfit
+Deep forest green ensemble
+#1B4A20
+— the quality of the fabric is apparent in its draping and weight · Gold thread embroidery at collar and cuffs
+#D4A017
+· Minimal accessories — the clothing quality speaks for itself · No apron, no tools, no utility items
+Key Color Palette
+Silver-white fur
+#D8D4C8
+· Forest green
+#1B4A20
+· Gold embroidery
+#D4A017
+· Silver antler
+#C0B8B0
+Personality Keywords
+Composed · Warm authority · Measured speech · Deeply wise
+Expression Range
+Serene listening (most common — she is always taking in more than she lets on) · Gentle smile · Firm resolve · Rare surprise · Pained compassion
+
+
+
+NPC 10 — VINCENT REED
+Cartographer & Explorer Founder
+
+Attribute
+Specification
+Build
+Wiry, travel-worn, always appears to be mid-expedition or just returned from one. Lean but not slight — trail-hardened. Posture is forward-leaning, as though perpetually about to set off.
+Fur Color
+Rust-brown
+#7A3A20
+at core/chest/head · Wind-bleached to lighter tan
+#C8916A
+at flanks and lower legs · The gradient transition is distinctive and tells his story of outdoor exposure
+Antlers
+Brown · Asymmetric Wild adjacent (Style 03) · One distinctive feature: a carved groove running along the length of the center tine — used as a straight-edge measuring tool · This groove is his unique identifier in the cast
+Distinguishing Silhouette
+Rolled leather map case slung diagonally over shoulder (visible in all views) · Muddy boots creating slightly wider hoof profile · Wiry frame — narrowest elder in the cast · Two-tone fur gradient reads from a distance
+Default Outfit
+Expedition shirt faded khaki
+#C8B870
+with rolled sleeves · Leather map case
+#6B4A20
+worn diagonally · Dark, well-worn boots
+#2A1A0A
+(always muddy — mud accent
+#4A3A28
+baked into boot texture) · Compass or bearing tool at belt
+Key Color Palette
+Rust-brown fur
+#7A3A20
+· Tan flank fur
+#C8916A
+· Faded khaki
+#C8B870
+· Leather brown
+#6B4A20
+· Mud
+#4A3A28
+Personality Keywords
+Restless · Curious · Perpetually planning the next route · Wistfully proud
+Expression Range
+Excited discovery (most common when actively doing something) · Thoughtful distance-stare (most common when idle) · Frustrated dead-end · Warm pride · Rare stillness
+
+## 6B — Second Generation — The Heirs
+
+The Heirs are the peer generation of the player character — they grew up in Mooseville as it was being built, and they are now building what comes next. Each carries a visual echo of their elder relatives while establishing their own distinct identity.
+
+
+NPC 11 — BRAM VALE
+Doris's Grandson · Field Worker
+
+Attribute
+Specification
+Fur / Distinguishing Feature
+Dark fur (#3D2010). Permanently soil-stained at elbows and knees — baked texture variants required at elbows/knee zones. GOLDEN-AMBER FUR STREAK at left shoulder
+#D4A020
+— a patch birthmark called the "spring-touch mark." This is his key identifier — completely unique in the cast.
+Antlers
+Brown · Asymmetric Wild (Style 03) · Naturally offset, slightly overgrown with occasional small leaf caught in tine
+Default Outfit
+Worn gardening shirt (faded sage) · Canvas knee-patch trousers · NO footwear — prefers bare hooves. Soil-stained hooves (texture variant).
+Key Colors
+Dark fur
+#3D2010
+· Amber streak
+#D4A020
+· Sage shirt
+#7A9A70
+· Soil stain
+#4A3A20
+Personality Pose
+Crouching toward the ground, hands always busy with soil or plants. Rarely at full height — he exists closer to the ground than any other character.
+
+
+
+NPC 12 — PELL HARLOW
+Raymond's Grandchild · Designer & Sketcher
+
+Attribute
+Specification
+Fur / Distinguishing Feature
+Light fur (#8A7060). WHITE FACIAL BLAZE — a
+#F0EDE8
+patch running from forehead to snout bridge, slightly off-center. Unique in cast. Contrast to grandfather Raymond's enormous frame — Pell is slight and delicate.
+Antlers
+Brown · Compact Stubby (Style 04) — delicate, appropriate for slight frame · Measuring cord bracelet always visible on right wrist (Layer 7 prop)
+Default Outfit
+Simple, practical shirt (muted olive) · Work shorts · Small sketchpad always in hand or visible in pocket (L7 prop). No decoration — clothing is irrelevant to Pell.
+Key Colors
+Light fur
+#8A7060
+· White blaze
+#F0EDE8
+· Olive shirt
+#6A7A50
+· Measuring cord
+#C8B870
+Personality Pose
+Head perpetually tilted. Stylus or pencil raised. Observing something just off-screen. Never quite fully in the conversation — always sketching it instead.
+
+
+
+NPC 13 — RENNA FINCH
+Gloria's Granddaughter · Scholar
+
+Attribute
+Specification
+Fur / Distinguishing Feature
+Pale honey-gold fur
+#D4A858
+— lighter than most, close to Doris Vale's sandy tone but distinctly warmer/golden. Inherits Gloria's upright precision in every movement.
+Antlers
+Brown · Tall Crown (Style 02) — inherits Gloria's antler style precisely · Wears Gloria's glasses design: same carved-wood frame shape (but a newer pair — clean wood, not worn)
+Default Outfit
+Organized many-pocketed vest (navy blue
+#1A2C5C
+) — same functional garment as Gloria but in navy · Very clean — she maintains her clothes meticulously · Always arms full of books (L7 carries two books at minimum)
+Key Colors
+Pale gold fur
+#D4A858
+· Navy vest
+#1A2C5C
+· Wood spectacle frame
+#8B5E30
+Personality Pose
+Cross-referencing — looking between two books simultaneously. Arms always full. Expression of perpetual comparison.
+
+
+
+NPC 14 — FINN WINSLOW
+Harold's Son · Water Watcher
+
+Attribute
+Specification
+Fur / Distinguishing Feature
+Blue-grey fur
+#6A7A8A
+— matching Harold exactly. Strong Winslow family trait. Fur texture shows darker wet patches at legs and belly (baked wet texture variant for Finn).
+Antlers
+Brown · Forked Split (Style 07) matching Harold's style · No notches yet — he hasn't earned them · Weather measurement tools dangle from belt
+Default Outfit
+Waterproof layered coat (dark blue
+#2A3A5A
+) · Tall wading boots always worn
+#1A2A3A
+· Belt of weather tools · Consistently damp-looking
+Key Colors
+Blue-grey fur
+#6A7A8A
+· Dark blue coat
+#2A3A5A
+· Boot navy
+#1A2A3A
+Personality Pose
+Looking up at clouds, legs planted in something wet. Feet never fully dry. Eyes tracking something in the sky.
+
+
+
+NPC 15 — LOTTE BELL
+Marjorie's Daughter · Market Vendor
+
+Attribute
+Specification
+Fur / Distinguishing Feature
+Cinnamon-brown fur
+#8B4A20
+— matching mother Marjorie. Energetic, bouncy stance — more kinetic than any other character. Always appears mid-motion.
+Antlers
+Brown · Classic Wide Rack (Style 01) — but smaller scale appropriate for her slightly shorter build · No decorations on antlers (unlike her mother's herb bundles)
+Default Outfit
+Market vendor apron (bright mustard yellow
+#D4A820
+) over cheerful yellow blouse
+#E8C820
+· Practical shorts · Quick lightweight shoes for market hustle · Always has a tray or market basket (L7 prop)
+Key Colors
+Cinnamon fur
+#8B4A20
+· Mustard apron
+#D4A820
+· Yellow blouse
+#E8C820
+Personality Pose
+Arms out offering something to anyone nearby. Mid-laugh in idle states. Never still — she bounces slightly even when standing.
+
+
+
+NPC 16 — MOSS LANG
+Chester's Apprentice
+
+Attribute
+Specification
+Fur / Distinguishing Feature
+Dark fur close to Chester's near-black
+#1A0D06
+. Smallest body size of the peer group — youngest-looking. TINY DEVELOPING ANTLER NUBBINS — barely 3cm, just beginning to grow. This places him visually between youth and adult stages.
+Antlers
+Just beginning — essentially Compact Stubby (Style 04) at 30% size. Smooth, no texture, no tines yet — two small rounded bumps. No tool hooks yet (hasn't earned them).
+Default Outfit
+Miniature version of Chester's work apron — slightly TOO BIG on him (sleeve cuffs fold over, apron hem nearly touches his hooves). Small hand tool always in pocket (L4 or L7 prop). Chester made it for him.
+Key Colors
+Near-black fur
+#1A0D06
+· Leather apron
+#5C3A1A
+· Tool handle wood
+#8B6A30
+Personality Pose
+Concentrating on a small repair. Tongue slightly out — pure focus. Small hands working on something tiny.
+
+
+
+NPC 17 — WREN PRICE
+Evelyn's Granddaughter · Event Planner
+
+Attribute
+Specification
+Fur / Distinguishing Feature
+NOT fully silver like Evelyn — base fur is neutral grey-brown
+#8A8A90
+with silver-white overtones specifically at ear tips and muzzle edge
+#D8D4C8
+. This inherited trait places her visually as Evelyn's kin without duplicating the full silver coat.
+Antlers
+Brown · Tall Crown (Style 02) — inheriting grandmother's style · Event planning tools always visible in pockets: small scroll lists, chalk sticks, tiny folded lanterns
+Default Outfit
+Practical-meets-elegant: tailored vest in deep teal
+#1A5A5A
+· Organized pocket skirt (forest green
+#2A5A30
+) · Always color-coordinated — she would never leave the house in clashing colors · Clipboard or small scroll always in hand (L7 prop)
+Key Colors
+Grey-brown fur
+#8A8A90
+· Silver tips
+#D8D4C8
+· Teal vest
+#1A5A5A
+· Forest green skirt
+#2A5A30
+Personality Pose
+Clipboard at the ready. Surveying scene with satisfied authority. One hoof slightly forward — ready to direct.
+
+
+
+NPC 18 — CARO REED
+Vincent's Daughter · Explorer
+
+Attribute
+Specification
+Fur / Distinguishing Feature
+Rust-brown fur
+#7A3A20
+matching father Vincent. Tallest and broadest of the peer generation — inherited unexpected physical scale from the community's diverse founding genetics. SHOULDER SCAR — a lighter fur patch
+#9A5A30
+on left shoulder from a wilderness encounter. Her key unique identifier.
+Antlers
+Brown · Asymmetric Wild (Style 03) — matching father's style · Carved groove on center tine like Vincent's (she carved it herself to honor him)
+Default Outfit
+Heavy exploration jacket (dark brown
+#4A2810
+) with many pockets · Multiple map cases — at least two visible · Tough canvas trousers (khaki
+#8B7A50
+) · The BEST expedition boots in Mooseville — high, well-maintained, clearly her pride
+#3A2010
+Key Colors
+Rust fur
+#7A3A20
+· Scar patch
+#9A5A30
+· Dark jacket
+#4A2810
+· Khaki trousers
+#8B7A50
+· Premium boot
+#3A2010
+Personality Pose
+Arms crossed confidently. Assessing terrain. Widest stance in the peer group. Does not shrink in any space.
+
+## 6C — New Arrivals (Wilderness Discoverable)
+
+New Arrivals are Moosians discovered in the wilderness beyond Mooseville's current borders. They awakened from different water sources and have developed in isolation — resulting in slightly wilder appearances, more natural materials, and in some cases unusual fur colorations. They are the same species as Mooseville residents, but their aesthetic reads as "found nature" rather than "built community."
+
+✦ Artist Note — New Arrivals Design Language
+New Arrivals should feel like they belong in Mooseville's world, but as if they came from a different chapter of it. Less polished, more elemental. Clothing is woven grass, bark strip wraps, seed-bead decoration, leaf fronds, stone-threaded jewelry. No manufactured clothing. The contrast with Mooseville's tailored garments should be immediately readable.
+
+
+Name
+Distinctive Physical Feature
+Fur Tone
+Natural Accessory
+Antler Style
+Personality Note
+Tassel
+Long decorative fur tassels hanging from ear edges — unusual fur growth pattern, unique in cast
+Warm caramel #C8804A
+Woven grass shawl; seed bead neck wrap
+Flowing Waves style antlers (compact)
+Curious, tactile, touches everything gently
+Branch
+Antlers have actual small twigs woven INTO the tines — nature has grown into the antler over time
+Dark forest brown #3A2010
+Bark-strip wrap clothing; moss shoulder piece
+Multi-Crown (Style 08) heavily decorated
+Ancient feeling, slow, deliberate, deeply calm
+Sedge
+Pale, reedy fur with a slight bluish-silver tint suggesting a water-adjacent awakening
+Pale blue-silver #A8B4C0
+Reed-woven tunic; water-smoothed stone bracelet
+Asymmetric Wild (Style 03)
+Fluid, observational, listens more than speaks
+Quill
+SHARP-TINED antlers — unusually pointed and angular compared to the rounded tines of Mooseville residents
+Deep pine green-grey #4A5A48
+Woven leaf cloak; thorn-hook clasps
+Twisted Spiral (Style 06) with sharp points
+Precise, wary, deeply protective of their space
+Clover
+UNUSUAL TRIPLE-CLOVER FUR PATCH on chest — a natural tri-lobed marking in lighter fur #8B6A40
+Golden tan #C8A070
+Flower-crown always worn; leaf-woven vest
+Compact Stubby (Style 04)
+Joyful, optimistic, sees good in everything
+Flint
+GREY STONE-COLORED FUR — cool, flat grey unlike Harold's blue-grey, suggesting a rocky highland awakening
+Stone grey #787878
+Stone-bead jewelry; rough-stone tool at belt
+Forked Split (Style 07) — minimal
+Stoic, efficient, uncomfortable with excess
+Yarrow
+Fur has a warm cream-yellow undertone suggesting meadow origin; tiny dried flowers caught in neck mane
+Meadow cream #E0C898
+Herb-pouch belt; meadow-woven wrap skirt
+Tall Crown (Style 02) — natural elegance
+Healer energy, quiet knowledge, gentle presence
+Ember
+WARM ORANGE-RED FUR — the most vivid and unusual fur color of any character in the game
+Ember orange-red #C84820
+Ash-dusted wrap clothing; coal-bead necklace
+Grand Palmated (Style 05) — dramatic spread
+Fierce, warm-hearted, intense, fiercely loyal once trust is earned
+
+
+
+# Section 7 — Child / Youth Character Proportions Guide
+
+## 7A — Proportion Standards
+
+See Section 2B for the complete Adult vs. Child comparison table. Key reminders for artists working on child assets:
+
+Child Proportion Quick Reference:
+Height = 60% of adult world height
+|
+Head = 40% of total height (vs. adult's 30%)
+|
+Antler nubbins = 10-15% adult size
+|
+Eyes = 25% larger relative to face area
+|
+Limbs: extremely short and rounded
+
+## 7B — Child-Specific Clothing
+
+
+Clothing Type
+Description
+Layer Structure
+Notes
+Romper / One-Piece
+Single-garment covering torso and legs. Simplest possible outfit for youngest children.
+Layer 3 only (combined body+leg mesh)
+Most common choice for youngest children in ambient crowd. Minimal seam/pocket detail at child LOD.
+Simple Tunic + Shorts
+Loose top reaching mid-torso + very short shorts. Common in warmer seasons.
+Layers 3 + 6
+Shorts barely visible below tunic hem — legs are so short this is mostly symbolic layering.
+Repurposed Adult Garments
+Oversized items from parent/elder — rolled-up sleeves, belted adult shirts as dresses, etc.
+Layer 3 with extreme scale mismatch
+Storytelling opportunity: pioneer town children made do. A shirt that reaches their ankles is endearing and worldbuilding.
+Natural Accessories
+Flower headbands (L1 equivalent), grass twist bracelets (L7 wrist prop), twig jewelry, leaf cap (hat slot)
+Accessory slots only
+Children in Mooseville play outdoors constantly. Natural accessory props are a key visual language of childhood.
+
+## 7C — Child Expression Simplified Set
+
+
+Expression
+Eye State
+Mouth State
+Ear Position
+Body Language
+Big Happy
+Large circles, sparkle highlight
+Wide open smile, visible teeth
+Up, perky
+Bouncing, open arms
+Big Sad
+Drooping, glassy
+Lower lip pushed out prominently — exaggerated pout
+Drooped fully
+Hunched, arms hanging
+Surprised
+VERY wide, whites showing all around iris
+Round O shape
+Raised and alert
+Whole body jerks back slightly
+Confused
+One slightly lower than the other — mild squint asymmetry
+Slight open, uncertain
+One up, one tilted
+Head tilted 15 degrees, small hoof raised to chin
+Scared
+Wide but pupils contracted to tiny dots
+Trembling lip, barely open
+Flat against head
+Curled inward, limbs tucked
+Determined
+Narrowed, focused — strong brow furrow
+Tight closed line — firm
+Forward and alert
+Small fist raised upward — the most iconic child pose in the game
+
+
+
+# Section 8 — Expression Sheet Standards
+
+Every named NPC and the player character requires a minimum 8-expression sheet, delivered as a flat turnaround-style layout with all expressions in the same character scale. Expression sheets are the primary reference for animation riggers and must be approved by the Art Director before rigging begins.
+
+
+REF: turn0image3 · Expression Sheet Format Reference · FIRST-DRAFT DIRECTIONAL — Expand Expression Range Beyond Draft
+
+## 8A — Required 8 Expressions Per Character
+
+
+#
+Expression Name
+Eye State
+Mouth State
+Brow State
+Usage Context
+01
+Neutral
+Relaxed, standard iris/sclera, soft focus
+Closed, gentle neutral line — not stern, not smiling
+Flat, resting
+Default idle state. The face the character returns to between all other expressions.
+02
+Happy / Open
+Bright, slightly widened, sparkle highlight present
+Broad open smile, upper teeth visible
+Gently raised
+Positive dialogue, greeting player, celebration moments. Most common expression in normal gameplay.
+03
+Content / Soft
+Eyes closed or half-closed — the "mm" face
+Gentle closed smile — slight upward curve
+Softly lowered
+Quiet satisfaction, post-task, receiving something appreciated, peaceful moment. Martha's signature expression.
+04
+Sad
+Downturned inner brow pushes eyes into angled drop
+Downturned corners, slight tremble in lower lip
+Inner brow raised, creating inner-brow triangle
+Story moments, loss, disappointment. Ear position is critical — ears must droop. Antlers tilt back.
+05
+Surprised
+Wide, whites showing above and below iris
+Open O or open vertical oval
+Raised high
+Unexpected discovery, player reveals, plot twist moments. Ears RAISE sharply — this is critical for believability.
+06
+Thinking / Curious
+One brow raised, one neutral — asymmetric
+Slight one-side smirk or neutral — thinking mode
+Asymmetric — one up, one flat
+Processing new information, player choice moments, puzzle dialogue. Eyes often look sideways or upward.
+07
+Frustrated / Annoyed
+Slightly narrowed, focused downward
+Tight closed line, corners pulled back
+Strong downward furrow — angled inward
+Mild conflict dialogue, when player fails a task repeatedly, comic exasperation. NOT rage — annoyance. Ears pull back.
+08
+Laughing / Overjoyed
+Eyes squeezed shut — classic joy squint
+Wide open laugh — teeth and tongue tip visible
+Raised and compressed upward
+Peak celebration, comedy payoff, warm reunion moments. Body MUST animate in sync — shoulders shake, body bounces. Not just a facial expression.
+
+## 8B — Antler and Ear Body Language
+
+
+⚙ Technical Note — Independent Antler & Ear Rigging
+Ears and antlers MUST be independently rigged from the face and from each other. Each ear has 3 bones (base, mid, tip). Antlers have 2 bones per tine minimum (base + tip) and additional bones at main rack junctions. Micro-animation of ears and antlers is mandatory in all cutscene shots — they must never remain static during any dialogue sequence. Ear and antler movement supplements, reinforces, and sometimes telegraphs facial expression before the face registers it.
+
+
+Body Language State
+Ear Position
+Antler Position
+Associated Expression(s)
+When to Use
+Alert / Happy / Interested
+Upright, forward-facing, perky
+Natural upright resting position
+Happy/Open, Surprised, Curious
+Active dialogue, engaging with player, discovering something
+Fearful / Ashamed / Submissive
+Pressed completely flat against skull
+Slight backward tilt from base
+Sad, Scared, Frustrated
+Conflict resolution, feeling caught out, genuinely frightened
+Sad / Tired / Dejected
+Drooped downward at tip — gravity-heavy
+Slight backward tilt, gentle droop at tips
+Sad, Content/Soft (tired variant)
+Story loss moments, end-of-day exhaustion, grief
+Aggressive / Assertive
+Pushed forward — almost horizontal at front
+Pronounced forward tilt — entire rack tilts forward from base
+Frustrated (intense) — rare in Mooseville
+Use sparingly. This is a cozy game. Only for one or two specific narrative beats.
+Relaxed / Content
+Slightly loose, light droop at tips but not sad — lazy and comfortable
+Slight backward tilt — resting back, no tension
+Content/Soft, Neutral
+Post-task satisfaction, evening idle states, being at home
+Startled (micro-moment)
+Snap to full upright in a single frame, then settle
+Micro-forward snap, then return
+Surprised (sudden onset)
+Sudden noise, player approach from behind, a comic moment. Ear snap is the comedic tell.
+
+
+
+# Section 9 — Rotation / Turnaround Standards
+
+Every major character (all 18 named NPCs + player character = 19 total) requires a complete 5-angle turnaround sheet before rigging can begin. Turnaround sheets are the single most critical delivery in the character art pipeline — they are the source of truth for riggers, animators, and technical artists.
+## 9A — Required Angles
+
+
+Angle Name
+Rotation
+Primary Use
+Silhouette Notes
+Front
+0° (facing viewer)
+Menu screens, character creation, intro cutscenes
+Antlers at maximum width reading. Eyes fully visible. Both ears visible. Clothing front detail fully readable.
+Three-Quarter Front
+45°
+PRIMARY gameplay camera angle — this is the angle characters are seen most often in normal play
+One front antler tine foreground, back tine slightly behind. Layer 7 arm fully visible. Layer 2 arm partially occluded. Most important angle — spend the most time here.
+Side Profile
+90°
+Walk cycle animation reference, conversations with wall-adjacent NPCs
+Snout profile prominent. Eye side-on. Antlers in profile — single rack silhouette. Full arm length visible for both arms. Clothing layers visible as thin overlapping panels.
+Three-Quarter Back
+135°
+Player-following camera, NPCs walking away, interiors
+Back of head/neck tuft visible. Layer 2 arm now the foreground arm. Hair/mane shape readable from behind. Antlers seen from back — different silhouette than front view.
+Full Back
+180°
+Crowd scenes, walking-away moments, interior views
+Neck mane tuft is the primary readable feature. Both legs visible. Antler rack from behind — outline quality matters. Back of clothing must be designed — no "forgotten back" syndrome.
+
+## 9B — Per-Angle Documentation Requirements
+
+
+Documentation Element
+Required at All 5 Angles
+Notes
+Layer visibility map
+Yes
+Label which layers are visible, partially visible, or fully occluded at each angle. Small numbered diagram overlay.
+Front arm identification
+Yes (note which arm is L7 at each angle)
+At 0° and 180° both arms are equal. At 45° right arm is typically L7. At 135° left arm is typically L7. At 90° context-dependent.
+Silhouette width annotation
+Yes
+Note the widest points in the silhouette at each angle. Antlers should always be the widest element at 0° and 45°.
+Fur hex consistency check
+Yes
+The same fur hex code must match at all angles under neutral lighting. No angle-specific color drift — this is a texturing error if present.
+Clothing back detail
+Yes — at 135° and 180°
+Clothing backs must be designed, not assumed to be mirrored fronts. Apron ties, jacket back panels, pocket placement all documented.
+Antler silhouette per angle
+Yes
+Antlers look significantly different from each angle. Document each antler silhouette separately — riggers need this to build correct antler bone influence maps.
+
+## 9C — Rotation Sheet Layout Specification
+
+
+⚙ Technical Note — Turnaround Sheet Format Spec
+Layout: All 5 angles on one page, arranged left-to-right in angle order (0° → 45° → 90° → 135° → 180°). Scale: All angles at identical height — bottom of hoof to top of skull (not antler) must be the same pixel measurement across all 5 poses. Background: Neutral mid-grey (#808080) — not white (washes out light fur), not black (loses dark fur). Character name, version number, and date in bottom-left corner. Color palette strip along the bottom of the sheet — all hex codes labeled. File format: .PSD with layers separated by angle for animators needing to isolate specific views. Also export flat .PNG for general reference.
+
+
+Sheet Element
+Specification
+Canvas size
+4800px × 2400px at 300dpi (print-ready)
+Character height (pixel target)
+1800px from hoof base to skull top (not antlers) for adults · 1100px for children
+Spacing between angles
+120px between each of the 5 poses — breathing room prevents visual merging
+Background color
+#808080 — neutral mid-grey. Non-negotiable.
+Name/version label
+Bottom-left, 24pt Calibri, white text on dark label bar
+Color palette strip
+Bottom of sheet — 32×32px color swatch per key color with hex code label below. All documented NPC colors included.
+Layer number overlays
+Small teal numbered badges (L1–L7) overlaid at appropriate clothing regions at the 45° angle pose only
+Art Director sign-off box
+Bottom-right corner, 200×80px box with "APPROVED / REVISION REQ'D" checkboxes and signature line
+
+
+
+# Section 10 — Wildlife Character Sheets
+
+Non-Moosian wildlife shares Mooseville Valley. They do not speak, do not wear clothing, and exist in a slightly more naturalistic register than Moosians — but they must remain visually consistent with the game's cartoon warm-toned art style. Line weight and shading approach must match the Moosian standard.
+## 10A — Bear Family
+
+
+Character
+Build
+Fur Color
+Distinguishing Features
+Expression Range
+Clothing
+Adult Bears (×2)
+Large, round, broad-shouldered. Slightly smaller overall than Raymond Harlow but bulkier in proportion. Low center of gravity.
+Rich brown #5A3A1A · Lighter muzzle #8B6A4A · Dark paw pads #2A1A0A
+Small rounded ears (unlike Moosian large ears) · No antlers · No mane tuft · Snout is broader and flatter than Moosian snout · Paw pads visible on underside
+Curious, Cautious, Content (subtle — bears are aware but not communicative) · Do NOT give bears human-level expression complexity
+NONE — never clothe wildlife. They are clearly wildlife by the absence of any manufactured item.
+Bear Cubs (×2–3)
+Much smaller, significantly chubbier. Comic proportions — round body, tiny limbs, enormous head relative to body. More chibi than adults.
+Lighter brown #8B6040 — cubs are lighter than adults · Warm cream muzzle #C8A870
+Ears proportionally even larger on small skull · Tiny paws · Stumbling, wobbly movement implied in animation · Eyes larger and rounder than adults
+Curious (wide-eyed), Playful (open mouth, bright eyes), Startled (flat ears) · Very limited range — they are simple, joyful creatures
+NONE
+
+
+✦ Artist Note — Bear Consistency
+Bears use the same line weight and warm shadow tinting approach as Moosians. Cool grey shadows are prohibited on bears as much as on any Moosian. The warmth of the bear family should make them feel like they belong in the same world — just a different chapter of it.
+
+## 10B — Eagle Pair
+
+
+Character
+Coloration
+Key Features
+Expression Range
+Environmental Role
+Eagles (×2 adults)
+White head/neck #F0EDE8 · Dark body with subtle blue-black sheen #1A1A1A + #1A1A2A · Yellow beak #E8C820 · Yellow talons #D4A820
+Wingspan reads impressively large relative to Moosian scale — this should feel majestic in environment shots · Nest on cliff rocks at valley edge · Slightly more realistic silhouette than Moosians while remaining cartoon-consistent
+Watchful (scanning distance — primary state) · Alert (head snapped to focus, pupils contracted to intense focus dot)
+Environmental storytellers — they are seen before major weather events, significant story moments, and at dawn/dusk. Their presence signals something worth paying attention to.
+
+## 10C — Background Wildlife (Ambient)
+
+
+Animal Type
+Art Approach
+Color Notes
+Animation Detail Level
+Interaction
+Deer Herds
+Simple, graceful, minimal cartoon detail. No face close-ups required. Silhouette quality more important than surface detail.
+Warm tan #C8916A · Cream underbelly #E8D8B8
+Simple 4-cycle walk loop + startled scatter. No idle expressions needed.
+Non-interactive background element. Scatters when player runs near.
+Beavers
+Small, round, busy. More cartoon-detailed than deer — they appear at stream edges working on constructions. Comic proportions.
+Mid-brown #6B4A20 · Large flat tail darker #3A2010
+3-expression set: Focused (working), Startled (upright, wide eyes), Content (chewing on stick). Loop-able work animation.
+Ambient — not interactive. But they react to player proximity with Startled expression before returning to work.
+Waterfowl (Ducks)
+Color-coded by type. Decorative, primarily decorative. Simple cartoon shapes.
+Mallard: Emerald head #1B5E20 · Brown body #8B5A30 · Yellow bill #E8C820
+Float + paddling loop. Occasionally dip underwater. Simple 2-state animation.
+Non-interactive. Environmental decoration on water surfaces.
+Waterfowl (Geese)
+Larger, more assertive silhouette than ducks. Slightly comically aggressive body language.
+White body #F0EDE8 · Orange bill #E87820 · Orange feet #E87820
+Walk cycle, float cycle, honk animation (head back, bill open). Goose "aggro" walk when player encroaches territory.
+Semi-interactive — geese will "threaten" player in their territory zone. A cozy game gag, not actual harm.
+
+
+
+# Section 11 — Color Palette Master Reference
+
+This master reference contains every production-approved color for Mooseville Adventures character work. All colors are verified for contrast against the four primary environment tones: Emerald Grass (#2A7A30), Golden Wheat Field (#D4A820), Sky Blue (#7AB8D4), and Dark Forest Floor (#2A1A0A).
+
+⚠ Critical — Environment Contrast Test
+Every new character color must pass the Environment Contrast Test: place the character flat color fill against each of the four environment tiles and verify the character reads clearly in all four. A character who "disappears" into any environment must have their color adjusted. Characters should be most legible against grass (the most common background) and least legible against dark forest floor (which is acceptable — dark areas are brief, not sustained environments).
+
+### Fur Colors — Player Options
+
+
+Color Name
+Use Category
+Hex Code
+RGB
+Environment Contrast Notes
+Founder's Brown
+Player Fur
+#4A2010
+R74 G32 B16
+Excellent on grass, sky, wheat. Blends slightly on dark forest floor — acceptable.
+Warm Auburn
+Player Fur
+#6B2E1A
+R107 G46 B26
+Good contrast on all four environments. Particularly vivid against sky blue.
+Sandy Blonde
+Player Fur
+#C8916A
+R200 G145 B106
+Strong against grass and forest. Slightly low contrast against wheat field — add slight darker outline in wheat zones.
+Russet Copper
+Player Fur
+#8B4020
+R139 G64 B32
+Excellent contrast across all environments.
+Classic Chocolate
+Player Fur
+#3D1A08
+R61 G26 B8
+Very strong contrast on grass and sky. Blends on dark forest — acceptable. Add light edge highlight on dark forest zones.
+Silver-Ash
+Player Fur
+#9A9AA0
+R154 G154 B160
+Excellent on grass and forest. Slightly low on sky (both blue-adjacent) — use outline enhancement in sky-heavy shots.
+Midnight Black
+Player Fur
+#1A0D06
+R26 G13 B6
+Maximum contrast on grass, wheat, sky. Requires light edge highlight layer on dark forest floor.
+Honey Gold
+Player Fur
+#C8A050
+R200 G160 B80
+Excellent on grass. Low contrast on wheat field — add darker outline in wheat zones.
+Driftwood Grey
+Player Fur
+#8A8A8A
+R138 G138 B138
+Good contrast generally. Verify in sky scenes — grey on blue-grey sky requires outline.
+Ember Tan
+Player Fur
+#D4A070
+R212 G160 B112
+Lowest wheat contrast of all options — always add 2px dark outline in wheat field environments.
+
+### Antler Colors
+
+
+Color Name
+Use Category
+Hex Code
+RGB
+Notes
+Antler Brown Outer
+Brown Antler Family
+#6B3A2A
+R107 G58 B42
+Primary antler surface color — all male-presenting + player option
+Antler Brown Inner Highlight
+Brown Antler Family
+#C4956A
+R196 G149 B106
+Inner face/underbelly of antler tines — lighter warm tone for depth
+Antler Pink Outer
+Pink Antler Family
+#E8617A
+R232 G97 B122
+Primary antler surface — female-presenting expression default
+Antler Pink Inner Highlight
+Pink Antler Family
+#F4A0B0
+R244 G160 B176
+Inner tine highlight — warm peach-pink
+Antler Silver
+Special Variant
+#C0B8B0
+R192 G184 B176
+Evelyn Price only — natural born, not unlockable by default
+Antler Shadow (all types)
+Shading Value
+#3A1A10
+R58 G26 B16
+Warm dark shadow in antler crevices — never use cool grey
+
+### NPC Primary Fur Colors
+
+
+Color Name
+NPC(s)
+Hex Code
+RGB
+Founding Dark Brown
+Melvin, Martha, Bram (dark variant)
+#3D1C0A
+R61 G28 B10
+Sandy Brown
+Doris Vale (base), Renna Finch (lighter)
+#C8916A
+R200 G145 B106
+Doris Silver-White
+Doris Vale (aged)
+#D8D4C8
+R216 G212 B200
+Charcoal Dark
+Raymond Harlow
+#2A2A30
+R42 G42 B48
+Honey Brown
+Gloria Finch
+#C89040
+R200 G144 B64
+Blue-Grey
+Harold Winslow, Finn Winslow
+#6A7A8A
+R106 G122 B138
+Cinnamon Brown
+Marjorie Bell, Lotte Bell
+#8B4A20
+R139 G74 B32
+Near-Black
+Chester Lang, Moss Lang
+#1A0D06
+R26 G13 B6
+Natural Silver-White
+Evelyn Price
+#D8D4C8
+R216 G212 B200
+Rust-Brown
+Vincent Reed, Caro Reed
+#7A3A20
+R122 G58 B32
+Pale Gold Fur
+Renna Finch
+#D4A858
+R212 G168 B88
+Ember Orange-Red
+Ember (Wilderness)
+#C84820
+R200 G72 B32
+Stone Grey
+Flint (Wilderness)
+#787878
+R120 G120 B120
+Blue-Silver Pale
+Sedge (Wilderness)
+#A8B4C0
+R168 G180 B192
+
+### Clothing Primary Colors
+
+
+Color Name
+Primary NPC(s)
+Hex Code
+RGB
+Notes
+Melvin Teal
+Melvin
+#2A7A7A
+R42 G122 B122
+Overalls — defining color of the founding generation patriarch
+Martha Red
+Martha
+#CC2200
+R204 G34 B0
+Dress — warm red, not orange-red
+Martha Yellow
+Martha
+#E8C820
+R232 G200 B32
+Undershirt — sunny and warm
+Martha Pink Ruffle
+Martha
+#E87090
+R232 G112 B144
+Collar/hem ruffle
+Doris Apron Cream
+Doris Vale
+#F0EBD8
+R240 G235 B216
+Also general-purpose document cream
+Doris Sage
+Doris Vale
+#7A9A70
+R122 G154 B112
+Middle apron — earthy garden green
+Raymond Olive
+Raymond Harlow
+#4A5A30
+R74 G90 B48
+Work shirt — military/construction olive
+Gloria Forest Green
+Gloria Finch
+#2A5A30
+R42 G90 B48
+Vest — slightly lighter than Evelyn's green
+Evelyn Deep Green
+Evelyn Price
+#1B4A20
+R27 G74 B32
+Full ensemble — most formal/refined green in cast
+Harold Navy
+Harold Winslow
+#2A3A5A
+R42 G58 B90
+Weather coat — deep stormy navy
+Marjorie Mustard
+Marjorie Bell
+#D4A020
+R212 G160 B32
+Inner apron and market use
+Vincent Khaki
+Vincent Reed, Caro Reed
+#C8B870
+R200 G184 B112
+Expedition shirt — faded sun-weathered khaki
+
+### UI / Document Theme Colors
+
+
+Color Name
+Use
+Hex Code
+RGB
+Mooseville Emerald
+Primary brand / document theme
+#1B5E20
+R27 G94 B32
+Mooseville Gold
+Accent / highlight / UI
+#FFD700
+R255 G215 B0
+Document Cream
+Background tone
+#FDFBF5
+R253 G251 B245
+Environment — Grass
+Primary outdoor environment tone
+#2A7A30
+R42 G122 B48
+Environment — Wheat
+Field / harvest environment tone
+#D4A820
+R212 G168 B32
+Environment — Sky
+Sky / high environment tone
+#7AB8D4
+R122 G184 B212
+Environment — Dark Forest
+Shaded forest floor environment tone
+#2A1A0A
+R42 G26 B10
+
+
+
+# Section 12 — Visual Do's and Don'ts
+
+These rules apply to all character work — new characters, revisions, costume additions, and expression work alike. They encode the fundamental design decisions of Mooseville Adventures. Violations will result in revision requests.
+
+✔ DO  Keep outlines thick and consistent — 3-4px at standard resolution. Moosians are outlined beings. Never feather or fade outlines at any edge. Use warm shadows — all character shadows should have an orange or red-brown tint. Shadow is #3A2010 warm, not cool grey. Ever. Ensure antlers always read in silhouette — antlers must never be visually buried in a busy background. If composition requires it, add a subtle halo/rim light around antler edges. Overlap antlers with backgrounds, not with other character elements. Antlers should frame the character, not clip other NPCs in conversation scenes. Make eyes the emotional core — they should always be the first element the player's eye lands on. Eyes before antlers. Eyes before clothing. Use the golden mane/neck tuft as a warmth anchor — every character who has this tuft should have it slightly golden, regardless of overall color scheme. It's the warm heart of every design. Expand customization imagination — the reference art shows one possibility per element. Propose ten more. The drafts are doors, not walls. Differentiate characters through antler shape, build, and clothing — the three-way combination must create unique silhouettes. Add story-telling details — ink stains, soil patches, worn knees, scratched antler tines. These details make characters feel lived-in. Test every character as a black silhouette at 64px width — if you can't name them, redesign the outline. Keep child proportions clearly distinct from adults — no ambiguity about age reads allowed. Rig ears and antlers independently — micro-animation of both is mandatory in all cutscenes.
+✖ DON'T  Don't create realistic moose anatomy — if it could pass as a National Geographic illustration, it's wrong. Push the cartoon further. Don't use cool grey shadows — ever, on any character element. Cool grey shadows are the single most common error in the Mooseville pipeline. They immediately break the warm tonal identity. Don't give two NPCs the same silhouette — at 64px, every character must be uniquely identifiable. No exceptions. Don't use the same fur color for more than 3 named characters — the cast is diverse. Use the full palette. Don't create child characters without clearly childlike proportions — they must read as younger at all times. Ambiguous age creates tonal problems. Don't exactly copy the first-draft reference — the drafts show directional intent, not final design. Always push further. Don't use high-contrast black outlines on dark fur without an edge highlight — dark fur + black outline becomes an undifferentiated dark mass. Add a 1px warm light highlight at the outermost edge of dark fur silhouettes. Don't differentiate character gender through body shape — all Moosians share the same base body type. Only antler color, hair, accessories, and clothing differ. Body shape is neutral and consistent. Don't forget to design clothing backs — the 135° and 180° views get as much screen time as fronts during gameplay. "Forgotten back syndrome" is a revision trigger. Don't make wildlife wear clothing — bears, eagles, deer, and all ambient animals are clearly wildlife by the absence of any manufactured items. Don't deliver combined layer meshes — each of the 7 clothing layers must be a separate mesh. The Wardrobe Manager will break on combined meshes. Don't paint specular highlight areas in the mask channels — specular stays white in both hair and glasses masks, always unmasked.
+
+
+✦ Final Note — The Spirit of Mooseville
+Every character in Mooseville Adventures was built — literally and figuratively — by community. The visual language should always reflect that: warmth over perfection, personality over polish, belonging over spectacle. If a character makes you want to sit with them on a porch and hear their story, you've done your job. If they make you feel slightly uneasy, they need another pass. The bar is simple and the bar is high: every Moosian should feel like a friend you haven't met yet.
+
+
+
+MOOSEVILLE ADVENTURES — Character Art Sheets — Living Production Bible
+Version 1.0 · Prepared by Jason · Springdale, AR · June 6, 2026
+This document is a living reference. All NPC descriptions, hex codes, and system specifications are subject to revision through the Art Director sign-off process.
+All reference art marked FIRST-DRAFT DIRECTIONAL is not canonical. Final designs must exceed the drafts in scope and imagination.
+Mooseville Adventures · Character Art Department · Unreal Engine 5 · PC
+

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Characters &amp; NPCs — Mooseville Adventures</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .npc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem; }
+  .npc-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--brown-pale); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .npc-card-header { padding: .9rem 1.1rem .7rem; border-bottom: 1px solid var(--brown-pale); }
+  .npc-id { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin-bottom: .2rem; }
+  .npc-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; font-weight: 700; color: var(--emerald-dark); margin-bottom: .15rem; }
+  .npc-role { font-size: .78rem; color: var(--text-medium); font-style: italic; }
+  .npc-card-body { padding: .9rem 1.1rem; font-size: .85rem; line-height: 1.6; }
+  .npc-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); margin-top: .7rem; margin-bottom: .2rem; display: block; }
+  .npc-quote { border-left: 3px solid var(--gold); padding: .5rem .75rem; background: var(--gold-pale); font-style: italic; font-size: .82rem; color: var(--text-dark); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: .6rem; }
+  .tier-header { background: var(--emerald-darkest); color: white; padding: .75rem 1.25rem; border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 0; }
+  .tier-header h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; font-weight: 700; margin: 0; }
+  .tier-header p { font-size: .8rem; color: rgba(255,255,255,.75); margin: .2rem 0 0; }
+  .tier-block { border: 1px solid var(--emerald-dark); border-radius: var(--radius); overflow: hidden; margin-bottom: 2rem; }
+  .tier-content { padding: 1.25rem; background: var(--cream-light); }
+  .closeness-table { width: 100%; font-size: .82rem; }
+  .closeness-table th { background: var(--emerald-dark); color: white; padding: .5rem .75rem; text-align: left; }
+  .closeness-table td { padding: .5rem .75rem; border-bottom: 1px solid var(--brown-pale); vertical-align: top; }
+  .closeness-table tr:last-child td { border-bottom: none; }
+  .closeness-table tr:nth-child(even) td { background: var(--cream); }
+  .closeness-level { font-weight: 700; color: var(--emerald-dark); }
+  .wildlife-card { background: var(--white); border: 1px solid var(--brown-pale); border-radius: var(--radius); padding: 1.1rem; margin-bottom: 1rem; }
+  .wildlife-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--brown-dark); margin-bottom: .35rem; }
+  .idiom-table { width: 100%; font-size: .83rem; }
+  .idiom-table th { background: var(--brown-dark); color: white; padding: .5rem .75rem; text-align: left; }
+  .idiom-table td { padding: .45rem .75rem; border-bottom: 1px solid var(--brown-pale); }
+  .idiom-table tr:nth-child(even) td { background: var(--cream); }
+  .badge-tier-1 { background: #7B1FA2; color: white; }
+  .badge-tier-2 { background: var(--emerald-dark); color: white; }
+  .badge-tier-3 { background: var(--brown); color: white; }
+  .badge-tier-4 { background: var(--text-muted); color: white; }
+  .npc-arc { background: var(--emerald-bg); border-radius: var(--radius-sm); padding: .5rem .75rem; font-size: .82rem; color: var(--emerald-dark); margin-top: .5rem; }
+  .new-arrival-card { background: var(--white); border: 1px solid var(--emerald-pale); border-left: 4px solid var(--emerald); border-radius: var(--radius); padding: 1rem 1.1rem; margin-bottom: 1rem; }
+  .schedule-badge { display: inline-block; background: var(--cream-dark); color: var(--text-medium); font-size: .72rem; padding: .15rem .5rem; border-radius: 10px; margin-right: .25rem; margin-bottom: .2rem; }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link active"><span class="nav-icon">🦌</span> Characters &amp; NPCs</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes &amp; Maps</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems &amp; Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+  <div class="nav-group">
+    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+  </div>
+  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
+</nav>
+
+<main class="main">
+
+  <div class="page-hero hero-chars">
+    <div class="hero-label">Story · Characters</div>
+    <h1>Characters &amp; NPCs</h1>
+    <p class="hero-desc">
+      The complete NPC Bible — every named Moosian from NPC-001 to NPC-022, wildlife characters, relationship systems, dialogue standards, and the Mooseville idiom reference.
+    </p>
+  </div>
+
+  <div class="content">
+
+    <!-- Closeness Level System -->
+    <div class="section-header"><span class="section-icon">💚</span><h2>The Closeness Level System</h2></div>
+    <div class="pull-quote">"NPCs are not quest dispensers. Every named Moosian in town has a life that continues whether or not the player interacts with them." — Design Pillar 2</div>
+
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">Relationship Mechanics — 6-Tier Closeness Framework</div>
+      <div class="card-body">
+        <p style="margin-bottom:1rem;font-size:.88rem">Closeness Level is <strong>never displayed as a number</strong> to the player. It manifests as changes in how NPCs speak, what they share, and where they are willing to go.</p>
+        <div class="table-wrap">
+          <table class="closeness-table">
+            <thead><tr><th>Level</th><th>Name</th><th>Player Experience</th><th>Gameplay Unlock</th></tr></thead>
+            <tbody>
+              <tr><td><span class="closeness-level">1</span></td><td><strong>Familiar</strong></td><td>NPC knows the player's name and parentage; warm but general dialogue</td><td>Basic quests available; NPC location NOT shown on map</td></tr>
+              <tr><td><span class="closeness-level">2</span></td><td><strong>Acquaintance</strong></td><td>NPC remembers one past interaction; greets with specificity</td><td>NPC location shown on map; first personal detail shared</td></tr>
+              <tr><td><span class="closeness-level">3</span></td><td><strong>Friend</strong></td><td>NPC initiates conversation; mentions player in dialogue with others</td><td>Deeper quests available; Chester Lang's advanced crafting unlocked</td></tr>
+              <tr><td><span class="closeness-level">4</span></td><td><strong>Close Friend</strong></td><td>NPC visits the player's homestead; shares personal history; more candid in dialogue</td><td>Home expansion collaborations; NPC shares lore player couldn't find alone</td></tr>
+              <tr><td><span class="closeness-level">5</span></td><td><strong>Trusted</strong></td><td>NPC will accompany player on wilderness visits; offers their most personal story arc</td><td>NPC companion during exploration (passive, flavor-only); deepest quests</td></tr>
+              <tr><td><span class="closeness-level">6</span></td><td><strong>Legacy Bond</strong></td><td>Unique "Legacy Moment" story beat triggered — one-time, permanent, emotionally significant</td><td>Legacy Moment recorded in Archive Hall; unique cosmetic or lore unlock</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box" style="margin-top:1rem">
+          <strong>Closeness Growth Actions:</strong> Gifting (especially cooked meals — highest value) · Showing up consistently during scheduled hours · Quest completion · Event attendance · Remembered conversations (the game logs up to 5 remembered conversation tags per NPC)
+        </div>
+      </div>
+    </div>
+
+    <!-- Three NPC Design Rules -->
+    <div class="card" style="margin-bottom:2rem">
+      <div class="card-header">Three Core NPC Design Rules</div>
+      <div class="card-body" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem">
+        <div style="background:var(--emerald-bg);border-radius:var(--radius-sm);padding:.9rem">
+          <div style="font-weight:700;color:var(--emerald-dark);margin-bottom:.35rem">NPCs Remember</div>
+          <div style="font-size:.83rem">Every NPC tracks up to 5 remembered conversation tags. These are topics the player has discussed — a fishing trip, a crop failure, a discovery in the woods. NPCs reference these tags in future dialogue naturally and unprompted. The callback should feel like a friend remembering something, not a system confirming a variable.</div>
+        </div>
+        <div style="background:var(--gold-pale);border-radius:var(--radius-sm);padding:.9rem">
+          <div style="font-weight:700;color:var(--gold-dark);margin-bottom:.35rem">NPCs Have Off Days</div>
+          <div style="font-size:.83rem">Named NPCs have mood states driven by story events, anniversaries, and world conditions. A subdued NPC who is quieter than usual is a narrative signal — attentive players notice before any quest reveals the reason.</div>
+        </div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.9rem">
+          <div style="font-weight:700;color:var(--brown-dark);margin-bottom:.35rem">NPCs Grow</div>
+          <div style="font-size:.83rem">Each NPC has an arc that unfolds across the game's three acts. Their dialogue, availability, and personal concerns evolve based on both story progression and the player's relationship with them. No NPC is static.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NPC Tier Overview -->
+    <div class="section-header"><span class="section-icon">🏛️</span><h2>NPC Tier Structure</h2></div>
+    <div class="table-wrap" style="margin-bottom:2rem">
+      <table style="width:100%;font-size:.83rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-darkest);color:white"><th style="padding:.6rem .9rem;text-align:left">Tier</th><th style="padding:.6rem .9rem;text-align:left">Description</th><th style="padding:.6rem .9rem;text-align:left">Closeness Arc</th><th style="padding:.6rem .9rem;text-align:left">Quest Depth</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--brown-pale)"><td style="padding:.6rem .9rem"><span class="badge badge-tier-1">Tier 1</span></td><td style="padding:.6rem .9rem"><strong>Founding Generation (Elders)</strong> — Melvin, Martha, Chester, surviving First Circle members. Deeply story-integrated across all three acts.</td><td style="padding:.6rem .9rem">1–5 (Legacy Moment reserved for end-game narrative beat, not at Level 6)</td><td style="padding:.6rem .9rem">Full — act-gated story integration</td></tr>
+          <tr style="border-bottom:1px solid var(--brown-pale)"><td style="padding:.6rem .9rem"><span class="badge badge-tier-2">Tier 2</span></td><td style="padding:.6rem .9rem"><strong>Second Generation</strong> — Children and grandchildren of the First Circle. Primary quest givers and relationship companions.</td><td style="padding:.6rem .9rem">1–6 (full arc including Legacy Moment)</td><td style="padding:.6rem .9rem">Full — personal arc quests across all acts</td></tr>
+          <tr style="border-bottom:1px solid var(--brown-pale)"><td style="padding:.6rem .9rem"><span class="badge badge-tier-3">Tier 3</span></td><td style="padding:.6rem .9rem"><strong>New Arrivals</strong> — Up to 8 recruitable wilderness encounter moose. Join Mooseville at player invitation.</td><td style="padding:.6rem .9rem">1–6 (unlocks after joining town)</td><td style="padding:.6rem .9rem">Personal arrival arc + 2–3 follow-up quests</td></tr>
+          <tr><td style="padding:.6rem .9rem"><span class="badge badge-tier-4">Tier 4</span></td><td style="padding:.6rem .9rem"><strong>Townspeople</strong> — Named background characters contributing to community events and ambient life.</td><td style="padding:.6rem .9rem">1–3 (flavor only)</td><td style="padding:.6rem .9rem">Community quests only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TIER 1: FOUNDING GENERATION -->
+    <div class="tier-block">
+      <div class="tier-header">
+        <h2>Tier 1 — Founding Generation Elders</h2>
+        <p>NPC-001 through NPC-010 · The First Circle + Co-Founders · Story-critical across all three acts</p>
+      </div>
+      <div class="tier-content">
+        <div class="npc-grid">
+
+          <!-- MELVIN -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-001 · Tier 1 Elder</div>
+              <div class="npc-name">Melvin</div>
+              <div class="npc-role">Town Co-Founder · New Arrival Guide · Informal Spiritual Leader</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Early-to-mid life (moose aging slower after awakening)
+              <span class="npc-label">Visual</span>Large dark brown moose, grey at muzzle. Teal overalls, red plaid flannel beneath. Gold wheat stalk emblem on chest pocket. Large warm palmated antlers with gentle curve. Moves with quiet authority — never hurried, never still.
+              <span class="npc-label">Personality</span>Steady, warm, economical with words. Rarely leaves Mooseville but walks to the Green Spring each evening without fail. He listens more than he talks — but when he speaks, the room quiets.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Dawn — Spring ritual at Green Spring</span>
+              <span class="schedule-badge">Morning — Growing Circle</span>
+              <span class="schedule-badge">Midday — Heartfire District</span>
+              <span class="schedule-badge">Afternoon — Repair Yard</span>
+              <span class="schedule-badge">Evening — Home with Martha</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">Letting go. He has built something extraordinary and is learning to step back. His Legacy Moment triggers at game end — not at Closeness Level 6 — when he gives the player the original private journal from the metal trunk. The one he never shared publicly.</div>
+              <span class="npc-label">Closeness Arc Beats</span>
+              <div style="font-size:.8rem;margin-top:.3rem">
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L1:</strong> Welcomes player home; mentions Melvin's Law ("Don't look away")</div>
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L2:</strong> Shares where the name "Mooseville" came from — a village image in the Sacred Documents</div>
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L3:</strong> Asks player to help him map the one trail he never finished before the pass sealed</div>
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L4:</strong> Takes player to the exact place he stood during the Fading Years crisis — says nothing, just stands with them</div>
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L5:</strong> Tells the player about the night before the First Gathering — what he was afraid of, and what made him walk to the spring anyway</div>
+                <div style="padding:.2rem 0"><strong>L6 — Legacy Moment:</strong> Gives the player the original private journal. The last entry is about the player — written the morning after they returned.</div>
+              </div>
+              <div class="npc-quote">"Everything we built, we built because we didn't look away. Don't look away either."</div>
+              <span class="npc-label">Voice Direction</span>Deep, unhurried, warm. A voice that has said important things before and isn't afraid to say them again slowly.
+            </div>
+          </div>
+
+          <!-- MARTHA -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-002 · Tier 1 Elder</div>
+              <div class="npc-name">Martha</div>
+              <div class="npc-role">Town Co-Founder · Archive Quarter Lead · Primary Strategist of the Founding</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Early-to-mid life (moose aging slower after awakening)
+              <span class="npc-label">Visual</span>Auburn fur, triple-fork left antler (unique identifier), earth-tone linen clothing, leather satchel always present. Deep green eyes. Ink stain on right hoof — always present regardless of costume.
+              <span class="npc-label">Personality</span>Warm but precise. She sees things before others do and asks questions instead of making statements. Will gently challenge the player if they neglect community duties — not with disappointment, but with curiosity.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Dawn — Writing at the Archive</span>
+              <span class="schedule-badge">Morning — Archive Quarter</span>
+              <span class="schedule-badge">Afternoon — Community visits</span>
+              <span class="schedule-badge">Evening — Gathering Hall · then home</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">Memory and the future. Her Legacy Moment is formally adding the player character's name to the Archive Hall founding record — the game's emotional climax, delivered quietly and with absolute certainty.</div>
+              <span class="npc-label">Closeness Arc Beats</span>
+              <div style="font-size:.8rem;margin-top:.3rem">
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L1:</strong> Hands player the homestead key; says their name aloud — a warm validation moment</div>
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L2:</strong> Shares the first page of her founding journal — written the night after the First Gathering</div>
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L3:</strong> Quest: "The Letter Project" — Help Martha compose a diplomatic letter to a far-valley community</div>
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L4:</strong> Quest: "The Quiet Ledger" — Investigate the Enhancement Works degradation quietly before she raises it publicly</div>
+                <div style="padding:.2rem 0;border-bottom:1px dashed var(--brown-pale)"><strong>L5:</strong> Shares a grief she's carried: she never found out who the humans at the campsite were, or whether they came back</div>
+                <div style="padding:.2rem 0"><strong>L6 — Legacy Moment:</strong> Presents the player with a hand-bound personal journal she has been writing about them since they returned. The last entry is blank — she hands them the pen.</div>
+              </div>
+              <div class="npc-quote">"This is the first thing I wrote. The night after we all sat by the spring and realized we were — this. I wrote: 'We are frightened and we are together and somehow that is enough.' It still is."</div>
+              <span class="npc-label">Voice Direction</span>Clear, precise, with warmth underneath the precision. A voice that plans ahead and still finds time to laugh.
+            </div>
+          </div>
+
+          <!-- DORIS VALE -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-003 · Tier 1 Elder</div>
+              <div class="npc-name">Doris Vale</div>
+              <div class="npc-role">First Circle — Agricultural Founder · Elder of the Growing Circle</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Mid-60s (one of the oldest awakened)
+              <span class="npc-label">Visual</span>Compact, wiry moose with sandy brown fur gone silver-white at the tips. Antlers modest and slightly asymmetric — she never minded. Almost always has soil under her hooves. Practical wrap-around aprons over sturdy linen. Moves with unexpected quickness for her age.
+              <span class="npc-label">Personality</span>Warm, direct, and deeply practical. No patience for hand-wringing but enormous patience for plants, young people, and anyone willing to learn. Her humor is deadpan and agricultural — comparisons to soil conditions, growth cycles, and harvest timing appear in everything she says about life.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Dawn to midday — Growing Circle (every single day; 22 years without a day off)</span>
+              <span class="schedule-badge">Afternoon — Nap at home</span>
+              <span class="schedule-badge">Evening — Heartfire District</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">Succession. She is ready to pass primary Growing Circle responsibility to her apprentice but has not yet articulated why. The player's involvement helps her name what she is handing over and what it means to let it go.</div>
+              <span class="npc-label">Key Quest</span>"What Doris Knows" — She takes the player through the entire crop cycle in one session. At the end, she gives them the Moose Water irrigation technique and asks them to promise to teach it to one more person.
+              <div class="npc-quote">"Soil doesn't care about your intentions. It cares about what you put in and what you take out. Same as most things."</div>
+            </div>
+          </div>
+
+          <!-- RAYMOND HARLOW -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-004 · Tier 1 Elder</div>
+              <div class="npc-name">Raymond Harlow</div>
+              <div class="npc-role">First Circle — Builder Founder · Semi-Retired Master of Construction</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Early 60s
+              <span class="npc-label">Visual</span>The largest moose in Mooseville. Enormous frame, dark charcoal fur, wide flat antlers (Grand Palmated). Always wears a thick work belt with hand-carved wooden tools hanging from it. Missing the tip of one ear from a building accident in Year 3 — he tells the story to everyone who asks.
+              <span class="npc-label">Personality</span>Loud, generous, and enormously proud of every building in Mooseville. He refers to buildings as "my children" and can recite the construction history of every structure in town. He is sentimental about craft — the difference between a well-jointed corner and a sloppy one matters to him morally.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Morning — Build Yard</span>
+              <span class="schedule-badge">Midday — Walking tours (inspecting structures)</span>
+              <span class="schedule-badge">Afternoon — Repair Yard with Chester's lineage</span>
+              <span class="schedule-badge">Evening — Heartfire</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">Legacy vs. innovation. His grandchild Pell wants to build something using a new technique from a recovered Sacred Document. Raymond is resistant. The player mediates the generational tension.</div>
+              <span class="npc-label">Key Quest</span>"New Joints" — Help Raymond and Pell design a hybrid structure combining old Harlow methods with the new technique. The completed building becomes a permanent landmark in town.
+            </div>
+          </div>
+
+          <!-- GLORIA FINCH -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-005 · Tier 1 Elder</div>
+              <div class="npc-name">Gloria Finch</div>
+              <div class="npc-role">First Circle — Records Founder · Archivist · Keeper of the Wall of Names</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Late 50s
+              <span class="npc-label">Visual</span>Slim moose with warm honey-brown fur and reading-glasses perched permanently on her nose (crafted from human remnant lens material and carved wood). Her antlers are neat and relatively small (Tall Crown). Wears layered garments with many pockets — each pocket contains something she needed to remember.
+              <span class="npc-label">Personality</span>Meticulous, curious, quietly witty, and absolutely certain that memory is the most important thing a civilization can have. She writes everything down. She is not cold — she is precise. Her affection shows in what she records: she keeps a private journal of kind things she has observed.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Morning — Archive Quarter</span>
+              <span class="schedule-badge">Midday — Community Board updates</span>
+              <span class="schedule-badge">Afternoon — Archive</span>
+              <span class="schedule-badge">Evening — Heartfire (often reads aloud)</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">The Secure Document Room. She has something locked in there — a translated fragment of human writing that changes the implications of the Starfall. The player earns the right to see it at Level 4. It is the key narrative beat connecting the human remnants to the sky-stone's origin.</div>
+              <span class="npc-label">Key Quest</span>"The Translated Page" (Level 4) — Gloria has been working for years on one particularly difficult document fragment. The player's help is needed to find a matching fragment in the Ruins. The content is Act 2's central revelation.
+            </div>
+          </div>
+
+          <!-- HAROLD WINSLOW -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-006 · Tier 1 Elder</div>
+              <div class="npc-name">Harold Winslow</div>
+              <div class="npc-role">First Circle — Water &amp; Weather Founder · Chief Hydrologist and Meteorologist</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Late 50s
+              <span class="npc-label">Visual</span>Medium-build moose with blue-grey fur (unusual coloring; he attributes it to heavy early exposure to Moose Water). Always carries a carved wooden instrument case. His antlers have small carved notches — one for each major weather event he has documented (22 notches).
+              <span class="npc-label">Personality</span>Methodical, observant, and quietly passionate. To Harold, water is not just water — it is information. He can read a stream's behavior the way others read a face. He has kept a continuous weather journal for 22 years, never missing a day.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Dawn — Water Station (daily instrument reading)</span>
+              <span class="schedule-badge">Midmorning — Crystal Lakeshore</span>
+              <span class="schedule-badge">Afternoon — Rotating field observations</span>
+              <span class="schedule-badge">Evening — Heartfire</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">He noticed the Enhancement Works degradation first — three years before anyone else — and has been quietly monitoring, waiting for the right person to tell. The player is that person.</div>
+              <span class="npc-label">Key Quest</span>"The Long Count" — Harold shows the player his 22-year weather journal and points to an anomaly in sky-stone mineral trace readings that precedes each degradation event. Finding the source requires a High Shelf visit.
+            </div>
+          </div>
+
+          <!-- MARJORIE BELL -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-007 · Tier 1 Elder</div>
+              <div class="npc-name">Marjorie Bell</div>
+              <div class="npc-role">First Circle — Community Nourishment Founder · Keeper of Shared Meals</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Mid-50s
+              <span class="npc-label">Visual</span>Round, soft-looking moose (deliberately — the most physically approachable character in the game) with warm cinnamon-brown fur and kind dark eyes. Wears an apron stained by every meal she has ever cooked — she considers the stains a record. Her antlers are wrapped in dried herbs and small flowers.
+              <span class="npc-label">Personality</span>The emotional center of Mooseville's daily life. Marjorie feeds people and in doing so, takes care of them. She remembers what everyone likes to eat. She is the most socially intuitive NPC in the game — the first to notice if the player seems sad or distracted.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Dawn to midday — Public meal station</span>
+              <span class="schedule-badge">Afternoon — Muckmarket Row Tasting Corner</span>
+              <span class="schedule-badge">Evening — Heartfire (shares prepared food)</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">Personal and intimate. She has been cooking for Mooseville for 22 years and recently realized she has never cooked a meal just for herself. The player helps her do that for the first time.</div>
+              <span class="npc-label">Key Quest</span>"Just For One" (Level 4) — Marjorie asks the player to help gather ingredients for a meal she has always wanted to make but always made for others first. Cooking it together is the quest. The meal is named after her and added to the public recipe board.
+            </div>
+          </div>
+
+          <!-- CHESTER LANG -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-008 · Tier 1 Elder</div>
+              <div class="npc-name">Chester Lang</div>
+              <div class="npc-role">First Circle — Repair/Craft Founder · Master of Tools and Salvage</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Early 60s
+              <span class="npc-label">Visual</span>Compact and muscular moose with dark fur worn to near-black from decades of workshop smoke and grease. His antlers have tool loops and small hooks attached — working antlers. Missing the tips of two hooves (industrial incident) with carved wooden prosthetics that click softly when he walks. His eyes are sharp and evaluating.
+              <span class="npc-label">Personality</span>Efficient with words, generous with time. Chester believes that a broken thing deserves to be fixed and that fixing things is one of the most profound acts of respect. He is mentoring-oriented — every conversation with him is an indirect lesson. His humor is tool-based: "That argument has a stripped thread."
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Morning — Workshop</span>
+              <span class="schedule-badge">Midday — Salvage Pile review</span>
+              <span class="schedule-badge">Afternoon — Repair Yard</span>
+              <span class="schedule-badge">Evening — Heartfire (whittles while listening)</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">The tool from the original human campsite — the one object he has never been able to figure out the function of. The player discovers what it is (a theodolite — a surveying instrument) and teaches Chester its purpose, unlocking an entire building precision system for the town.</div>
+              <span class="npc-label">Key Quest</span>"The Unknown Tool" — Identify the theodolite from human remnant fragments and Sacred Document images; return to Chester; unlock precision building options for town projects.
+              <div class="npc-quote">"If it's worth building, it's worth building right. And if it breaks, it was worth building anyway."</div>
+            </div>
+          </div>
+
+          <!-- EVELYN PRICE -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-009 · Tier 1 Elder</div>
+              <div class="npc-name">Evelyn Price</div>
+              <div class="npc-role">First Circle — Mediator Founder · Retired Conflict Resolution Elder</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Late 60s (oldest of the First Circle)
+              <span class="npc-label">Visual</span>The most elegant moose in Mooseville. Tall, slim, silver-white fur, high narrow antlers (Tall Crown). Moves with deliberate grace. Always dressed in deep forest green with subtle gold-thread embroidery — the only Moosian who consistently wears gold embellishments. Her voice is the calmest sound in any room.
+              <span class="npc-label">Personality</span>Evelyn has seen every conflict Mooseville has ever had. She is not passive — she is strategically patient. She knows that most arguments resolve themselves if given time and that most hurt feelings need witnessing before they need solving. She is the character NPCs go to when they are upset.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Morning — Walks perimeter of Mooseville (meditation)</span>
+              <span class="schedule-badge">Midmorning — Archive Quarter</span>
+              <span class="schedule-badge">Afternoon — Gathering Hall</span>
+              <span class="schedule-badge">Evening — Heartfire (most reliably present)</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">A conflict she failed to resolve in Year 8 — a disagreement about Enhancement Works resource allocation that split one family. She has carried the weight of it. The player helps her make peace with it, not by fixing the old conflict but by documenting it honestly in the Archive.</div>
+              <span class="npc-label">Key Quest</span>"The Eighth Year" — Help Evelyn compose an honest account of the Year 8 conflict for the Archive; find the two surviving family members and give them the opportunity to add their perspective.
+            </div>
+          </div>
+
+          <!-- VINCENT REED -->
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-010 · Tier 1 Elder</div>
+              <div class="npc-name">Vincent Reed</div>
+              <div class="npc-role">First Circle — Cartographer Founder · Original Mapper of the Valley</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Mid-50s
+              <span class="npc-label">Visual</span>Wiry, travel-worn moose with rust-brown fur faded at the flanks from years of outdoor exposure. Antlers moderate with a distinctive carved groove running down the center tine — his personal marking. Carries a rolled map case at all times. Boots are always muddy.
+              <span class="npc-label">Personality</span>Restless. Vincent is the only member of the First Circle who has never fully settled. He has mapped every part of the valley accessible without crossing the pass — twice. He was the one who argued most strongly, in Year 1, for exploring the eastern pass before the landslide sealed it. He didn't make it in time. This is his great regret.
+              <span class="npc-label">Daily Schedule</span>
+              <span class="schedule-badge">Variable — rotates field days with archive days</span>
+              <span class="schedule-badge">Field days — somewhere in the wilderness</span>
+              <span class="schedule-badge">Archive days — Map Room</span>
+              <span class="npc-label">Arc</span>
+              <div class="npc-arc">Directly tied to the main story. He has spent 22 years perfecting the map of everything that can be reached, waiting for the day something new becomes reachable. When the Act 2 crack opens the eastern pass, Vincent begs to go — but his age and health won't allow it. He gives the player everything: maps, notes, compass, and instructions. His Legacy Moment is learning what the player found on the other side.</div>
+              <span class="npc-label">Key Quest</span>"The Incomplete Map" — Vincent tasks the player with filling in the only unmapped section of the valley: the High Shelf. Upon returning, the player and Vincent together complete the 22-year map. It is framed and hung in the Gathering Hall.
+            </div>
+          </div>
+
+        </div><!-- /.npc-grid tier 1 -->
+      </div>
+    </div><!-- /.tier-block -->
+
+    <!-- TIER 2: SECOND GENERATION -->
+    <div class="tier-block">
+      <div class="tier-header" style="background: var(--emerald-dark)">
+        <h2>Tier 2 — Second Generation Heirs</h2>
+        <p>NPC-011 through NPC-018 · Children &amp; grandchildren of the First Circle · The player character's peer group</p>
+      </div>
+      <div class="tier-content">
+        <p style="font-size:.85rem;color:var(--text-medium);margin-bottom:1.25rem">These characters are younger (20s–40s), fully formed in the town's values, and facing their own questions about what comes next. Their arcs are generally more forward-looking than their elders' — less about preservation and more about expansion, innovation, and identity.</p>
+        <div class="npc-grid">
+
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-011 · Tier 2</div>
+              <div class="npc-name">Bram Vale</div>
+              <div class="npc-role">Doris Vale's Grandson · Head Grower-in-Training · Growing Circle Lead (Emerging)</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Late 20s
+              <span class="npc-label">Visual</span>Shares his grandmother's compact build but has deep brown fur with an unexpectedly bright streak of golden-amber at his left shoulder (considered a spring-touch mark). Asymmetric antlers (Style 03). Always dirty. Genuinely happy about it.
+              <span class="npc-label">Personality</span>Earnest, hardworking, and quietly competitive with the seasons. He takes growing personally. He has all of Doris's practical warmth but less of her patience — he is still learning to wait.
+              <span class="npc-label">Schedule</span><span class="schedule-badge">Morning — Growing Circle</span><span class="schedule-badge">Afternoon — Seed Archive</span><span class="schedule-badge">Evening — Heartfire</span>
+              <span class="npc-label">Arc</span><div class="npc-arc">Learning to let go of control — to trust the soil, trust the season, and trust the player. His quest involves a crop that keeps failing and eventually requires the player's Moose Water knowledge to save.</div>
+              <div class="npc-quote">"Fourteen days. Same seed, same soil, same water. Fourteen days and nothing. I'm starting to think the seed is doing it on purpose."</div>
+            </div>
+          </div>
+
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-012 · Tier 2</div>
+              <div class="npc-name">Pell Harlow</div>
+              <div class="npc-role">Raymond Harlow's Grandchild · Innovative Young Builder · Architect of New Ideas</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Mid-20s
+              <span class="npc-label">Visual</span>Slight build. Medium brown fur with white facial markings (a blaze from forehead to nose). Wears a rolled-up measuring cord around one wrist like a bracelet. Always sketching in a small journal.
+              <span class="npc-label">Personality</span>Quietly revolutionary. Pell has studied the Sacred Documents more than anyone else in their generation and has developed genuine architectural theories. Respectful of Raymond's legacy but certain that there are better ways to build some things. Gentle in how they advocate for change; persistent.
+              <span class="npc-label">Arc</span><div class="npc-arc">The new-versus-old tension with Raymond. Their completed quest building is one of the permanent physical changes to Mooseville's landscape during the game.</div>
+            </div>
+          </div>
+
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-013 · Tier 2</div>
+              <div class="npc-name">Renna Finch</div>
+              <div class="npc-role">Gloria Finch's Granddaughter · Junior Archivist · Linguist in Training</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Early 20s
+              <span class="npc-label">Visual</span>Tall and angular moose with pale honey-gold fur and Gloria's same eyeglasses (newer pair, same design). Almost always reading. Writes in margins. Has strong opinions about handwriting.
+              <span class="npc-label">Personality</span>Intellectually intense and socially endearing. Renna wants to understand the human language from the Sacred Documents — not just translate the pictures but actually read the words. She is nervous about being wrong and will not share findings until she is certain.
+              <span class="npc-label">Arc</span><div class="npc-arc">Her arc culminates in the first successful translation of a human sentence from a Sacred Document. The translated sentence is meaningful and poetic — and raises more questions than it answers. The player is present for the translation as a witness.</div>
+              <span class="npc-label">Key Quest</span>"The First Sentence" — Help Renna find the missing page that provides the phonetic key to the human script. The quest takes the player to the Ancient Ruins and the human campsite.
+            </div>
+          </div>
+
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-014 · Tier 2</div>
+              <div class="npc-name">Finn Winslow</div>
+              <div class="npc-role">Harold Winslow's Son · Fisherman and Water Ecologist · Crystal Lakeshore Regular</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Early 30s
+              <span class="npc-label">Visual</span>Medium build, blue-grey fur (family trait). Tall rubber wading boots, waterproof overshirt, perpetually damp. Carries fishing gear and water testing equipment simultaneously.
+              <span class="npc-label">Personality</span>Meditative and observational. Most at home in or near water. Speaks slowly and precisely. Finds most things interesting and nothing alarming. He is the calmest person in any room — which makes his distress, if ever seen, deeply meaningful.
+              <span class="npc-label">Arc</span><div class="npc-arc">Finn has noticed something his water testing is revealing — sky-stone mineral content in the lake has been decreasing very slowly for two years. He does not yet know the cause. This connects directly to Harold's Enhancement Works degradation story and the Act 2 quest line.</div>
+            </div>
+          </div>
+
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-015 · Tier 2</div>
+              <div class="npc-name">Lotte Bell</div>
+              <div class="npc-role">Marjorie Bell's Daughter · Muckmarket Row Vendor · Social Connector</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Mid-30s
+              <span class="npc-label">Visual</span>Inherits her mother's warmth in a more energetic package — cinnamon fur, quicker movements, louder laugh. Runs the most popular stall in Muckmarket Row (specialty preserved foods and fermented drinks).
+              <span class="npc-label">Personality</span>The most socially connected NPC in the game. Lotte knows everyone's business (benevolently) and can be drawn upon for information about other NPCs' moods, schedules, and needs — a social information resource for the player.
+              <span class="npc-label">Arc</span><div class="npc-arc">Starting something of her own rather than being "Marjorie's daughter." She wants to establish a second public meal station on the other side of town for new arrivals. The player helps her make the case, gather materials, and launch it.</div>
+            </div>
+          </div>
+
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-016 · Tier 2</div>
+              <div class="npc-name">Moss Lang</div>
+              <div class="npc-role">Chester Lang's Apprentice · Salvage Specialist · Youngest Master-Level Craftsperson</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Late teens
+              <span class="npc-label">Visual</span>Small for their age, dark fur like Chester, but with bright curious eyes and an alert energy that makes everything they do look like an experiment. Their antlers have just begun to develop — two small nubbins they are intensely proud of.
+              <span class="npc-label">Personality</span>Enthusiastic, question-asking, and fearless about taking things apart. The only NPC in the game who will pick up a human-remnant artifact and immediately try to figure out how it works. Occasionally breaks things. Always learns from it.
+              <span class="npc-label">Arc</span><div class="npc-arc">Moss discovers an unexpected application for a sky-stone shard fragment — it can power a small light source indefinitely. This discovery has significant implications for Mooseville's future. The player helps them navigate sharing the discovery with the right people in the right order.</div>
+            </div>
+          </div>
+
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-017 · Tier 2</div>
+              <div class="npc-name">Wren Price</div>
+              <div class="npc-role">Evelyn Price's Granddaughter · Mediator in Training · Community Event Organizer</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Late 20s
+              <span class="npc-label">Visual</span>Tall like Evelyn, with similar silver-tipped fur but a warmer undertone. Moves with energy rather than Evelyn's deliberate calm — she is still learning the patience. Wears event planning tools tucked into her pockets: small calendar, chalk, colored cords for layout markers.
+              <span class="npc-label">Personality</span>Warm, organized, and genuinely excited about community. She loves festivals with the same intensity Bram loves growing. She also worries — too many events? Too few? Does everyone feel included?
+              <span class="npc-label">Arc</span><div class="npc-arc">Organizing the Starfall Memorial Night — the game's most important annual event. But something in the planning goes wrong, and she needs the player's help to pivot gracefully and make the result better than the original plan.</div>
+            </div>
+          </div>
+
+          <div class="npc-card">
+            <div class="npc-card-header">
+              <div class="npc-id">NPC-018 · Tier 2</div>
+              <div class="npc-name">Caro Reed</div>
+              <div class="npc-role">Vincent Reed's Daughter · Wilderness Guide · Best Trail-Finder in Mooseville</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Age</span>Mid-30s
+              <span class="npc-label">Visual</span>Rust-brown fur from her father, but taller and broader. Carries a pack at all times. Scar across the left shoulder from a trail accident she is entirely untroubled by. Best boots in Mooseville.
+              <span class="npc-label">Personality</span>Competent, dry-humored, and completely unimpressed by things other people find impressive. Respects effort above all else. Does not give compliments easily — which makes hers worth having.
+              <span class="npc-label">Arc</span><div class="npc-arc">Caro has never left the valley — and has never felt the need to. When the eastern pass opens, she is the first to volunteer to accompany the player. Her Act 3 arc involves encountering something in the Far Valley that challenges her pragmatic worldview in a way she did not expect.</div>
+              <span class="npc-label">Key Quest</span>"Caro Knows the Way" — Early game, she teaches the player wilderness navigation fundamentals and reveals two shortcuts in the Emerald Forest and Ancient Ruins that are otherwise hidden.
+            </div>
+          </div>
+
+          <!-- KEY TIER 2 NARRATIVE NPCs -->
+          <div class="npc-card" style="border-left:3px solid var(--gold)">
+            <div class="npc-card-header">
+              <div class="npc-id">Tier 2 · Key Narrative NPC</div>
+              <div class="npc-name">Fern Vale</div>
+              <div class="npc-role">Doris Vale's Grandchild · Primary Farming NPC · Player's First Companion</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Personality</span>Young, enthusiastic, obsessed with Moose Water crop variants. Best friend energy — she adopts the player immediately and assumes mutual friendship whether they've earned it or not.
+              <span class="npc-label">Arc</span><div class="npc-arc">The Coldroot Project — developing a crop that grows in winter without Moose Water enhancement, making Mooseville food-secure in the harshest season. Requires wilderness foraging for specific soil samples, Cold Shelf mineral finds, and multiple crafting stages. Completion unlocks the Coldroot crop and the greenhouse expansion prerequisite.</div>
+              <span class="npc-label">Legacy Moment</span>The first winter Coldroot harvest. Fern and the player pick the crop together at dawn. She names the field after Doris Vale. The field appears on the town map as "Vale's Winter Garden."
+              <div class="npc-quote">"If Grandma Doris could make things grow in rock, I can make them grow in winter."</div>
+            </div>
+          </div>
+
+          <div class="npc-card" style="border-left:3px solid var(--gold)">
+            <div class="npc-card-header">
+              <div class="npc-id">Tier 2 · Key Narrative NPC</div>
+              <div class="npc-name">Reed Harlow</div>
+              <div class="npc-role">Raymond Harlow's Son · Primary Building NPC · Home Expansion Collaborator</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Personality</span>Quiet, methodical, better with materials than with words. He communicates through doing — he shows up when he says he will, works without complaint, and leaves when the job is done. His affection is expressed through making things for people.
+              <span class="npc-label">Arc</span><div class="npc-arc">Designing and building the New Arrivals District — permanent housing for incoming moose from the wilderness. Requires the player to source ancient stone from the ruins, specific timber from the Emerald Forest, and river clay from the Marsh Shallows. The district grows visible in the town with each building completed.</div>
+              <span class="npc-label">Legacy Moment</span>Reed builds the player a custom piece for the homestead — something specific to the player character's family history — without being asked. He just leaves it by the door one morning with no note.
+              <div class="npc-quote">"Stone doesn't lie. Neither do I."</div>
+            </div>
+          </div>
+
+          <div class="npc-card" style="border-left:3px solid var(--gold)">
+            <div class="npc-card-header">
+              <div class="npc-id">Tier 2 · Key Narrative NPC</div>
+              <div class="npc-name">Clara Finch</div>
+              <div class="npc-role">Gloria Finch's Granddaughter · Primary Lore Delivery NPC · Archive Hall Manager</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Personality</span>Brilliant, anxious, carries the weight of history like a physical burden. She knows more about Mooseville's founding than anyone except Melvin and Martha — and she worries constantly that she might misremember something important.
+              <span class="npc-label">Arc</span><div class="npc-arc">Translating an untouched section of the Sacred Documents — a technical manual that, once decoded, reveals specifics about the valley's pre-Starfall survey history. Requires wilderness artifact finds across Acts 1–2.</div>
+              <span class="npc-label">Legacy Moment</span>Clara reads the final translated page aloud to the player at the Archive Hall. The page contains the name of the human who surveyed the valley. A quiet, devastating, beautiful moment.
+              <div class="npc-quote">"The Documents know more than I do. That's why I can't stop reading them."</div>
+            </div>
+          </div>
+
+          <div class="npc-card" style="border-left:3px solid var(--gold)">
+            <div class="npc-card-header">
+              <div class="npc-id">Tier 2 · Key Narrative NPC</div>
+              <div class="npc-name">Storm Winslow</div>
+              <div class="npc-role">Harold Winslow's Son · Primary Water/Weather NPC · Enhancement Works Monitor</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Personality</span>Dramatic, loves weather, secretly terrified that the Enhancement Works is more fragile than the town admits. He performs confidence but is genuinely afraid — and his quest arc is about facing that fear honestly.
+              <span class="npc-label">Arc</span><div class="npc-arc">Discovers a new sky-stone seep emerging from the Crystal Lakeshore bed. Needs the player's help securing it before the unstable deposit destabilizes the lake's green-water flow. Requires fishing and diving (swimming obstacle), Spring Knack Tier 1, and Moose Water activation. Resolves the Act 1 Enhancement Works degradation plotline.</div>
+              <span class="npc-label">Legacy Moment</span>"You helped me stop being scared of a thing that might not happen by fixing the thing that was actually happening." He names the lakeshore stabilization site "Winslow's Calm."
+              <div class="npc-quote">"I know the lake better than I know most people. The lake doesn't change its mind."</div>
+            </div>
+          </div>
+
+          <div class="npc-card" style="border-left:3px solid var(--gold)">
+            <div class="npc-card-header">
+              <div class="npc-id">Tier 2 · Key Narrative NPC</div>
+              <div class="npc-name">June Price</div>
+              <div class="npc-role">Evelyn Price's Daughter · New Arrivals Integration Lead · Social Compass</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Personality</span>Diplomatic, perceptive, first point of contact for all new arrivals. She sees what people need before they can say it. She is endlessly patient with everyone except those who are unkind to newcomers.
+              <span class="npc-label">Arc</span><div class="npc-arc">A conflict emerges between two new-arrival groups who have incompatible territorial histories from beyond the valley. June needs the player to mediate — listen to both sides, find a shared need, and propose a compromise. A nuanced quest with no wrong outcome — only more or less graceful ones.</div>
+              <span class="npc-label">Legacy Moment</span>The two groups share a meal together. June and the player watch from the doorway. She says: "This is what Mom always said the job was. Not fixing things. Just staying until there's room for everyone."
+              <div class="npc-quote">"Everyone has a right to feel at home. Even if they're not sure yet what home means."</div>
+            </div>
+          </div>
+
+          <div class="npc-card" style="border-left:3px solid var(--gold)">
+            <div class="npc-card-header">
+              <div class="npc-id">Tier 2 · Key Narrative NPC</div>
+              <div class="npc-name">Atlas Reed</div>
+              <div class="npc-role">Vincent Reed's Son · Exploration Gatekeeper · Valley Mapper</div>
+            </div>
+            <div class="npc-card-body">
+              <span class="npc-label">Personality</span>Born to explore. Competitive in a playful way. He challenges the player not out of gatekeeping instinct but because he genuinely believes you only understand a place you've found yourself. Secretly delighted every time the player names a landmark differently than he did.
+              <span class="npc-label">Arc</span><div class="npc-arc">Push-pull relationship of mutual respect: he shares a map section for each biome the player has entered and documented. As the player's map fills in, Atlas becomes more open — first professionally respectful, then genuinely excited that someone else is finally exploring at his level.</div>
+              <span class="npc-label">Legacy Moment</span>He shows the player his personal map — hand-drawn, dense with notes — and asks the player to write their landmark names alongside his. "The valley should have two witnesses."
+              <div class="npc-quote">"I've mapped every inch of this valley. I'm just not showing you yet."</div>
+            </div>
+          </div>
+
+        </div><!-- /.npc-grid tier 2 -->
+      </div>
+    </div><!-- /.tier-block -->
+
+    <!-- TIER 3: NEW ARRIVALS -->
+    <div class="tier-block">
+      <div class="tier-header" style="background: var(--brown-dark)">
+        <h2>Tier 3 — New Arrival NPCs</h2>
+        <p>NPC-019 through NPC-022 · Found in the wilderness · Join Mooseville at player invitation</p>
+      </div>
+      <div class="tier-content">
+        <div class="info-box" style="margin-bottom:1.25rem">
+          <strong>New Arrival System:</strong> Up to 8 new-arrival moose can join Mooseville during a full playthrough. Each is found in the wilderness through a multi-step encounter: <strong>approach → communicate → Moose Water → invitation</strong>. New arrival arcs operate on a simplified Levels 1–4 system. Level 4 serves as their Legacy Moment.
+        </div>
+
+        <div class="new-arrival-card">
+          <div class="npc-id">NPC-019</div>
+          <div class="npc-name" style="font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:700;color:var(--emerald-dark)">Tassel</div>
+          <div style="font-size:.78rem;color:var(--text-medium);margin-bottom:.6rem">New Arrival · Far Valley Origin</div>
+          <span class="npc-label">Discovery Location</span>Emerald Forest northwest (near Bear Territory)
+          <span class="npc-label">Arrival Condition</span>Calm but lost; speech partially faded; recognizes tools
+          <span class="npc-label">Backstory</span>Tassel was awakened earlier than most — a secondary sky-stone deposit in the far valley. They built a small camp alone, waiting for others. No one came. They started walking.
+          <span class="npc-label">Skill Contribution</span>Knows a second-valley crop not in the Mooseville Seed Archive. Arrival adds a new seed variety to the Growing Circle's catalogue.
+          <div class="npc-quote">"...water. You have the good water. I can smell it from here. Please."</div>
+        </div>
+
+        <div class="new-arrival-card">
+          <div class="npc-id">NPC-020</div>
+          <div class="npc-name" style="font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:700;color:var(--emerald-dark)">Branch</div>
+          <div style="font-size:.78rem;color:var(--text-medium);margin-bottom:.6rem">New Arrival · Far Valley Origin</div>
+          <span class="npc-label">Discovery Location</span>Golden Meadow eastern edge (near the Lone Oak)
+          <span class="npc-label">Arrival Condition</span>Regressing; four-hoof movement; retains basic curiosity
+          <span class="npc-label">Backstory</span>Branch was part of a small far-valley group that split — half stayed, half wandered. Branch wandered.
+          <span class="npc-label">Skill Contribution</span>Natural weather-reading ability. Assists Harold/Finn's lineage NPCs; adds +1 weather forecast accuracy day to Harold's journal projections.
+        </div>
+
+        <div class="new-arrival-card">
+          <div class="npc-id">NPC-021</div>
+          <div class="npc-name" style="font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:700;color:var(--emerald-dark)">Sable</div>
+          <div style="font-size:.78rem;color:var(--text-medium);margin-bottom:.6rem">New Arrival · Far Valley Origin</div>
+          <span class="npc-label">Discovery Location</span>Crystal Lakeshore (found fishing with makeshift tools)
+          <span class="npc-label">Arrival Condition</span>Stable; speech intact; watchful
+          <span class="npc-label">Backstory</span>The most articulate new arrival. They were highly awakened in the far valley before regression. They carry a story about a second community that collapsed due to Enhancement Works failure (no sky-stone access). A warning and a mirror.
+          <span class="npc-label">Skill Contribution</span>Fishing technique variant — new recipe unlock: far-valley fish preparation method.
+        </div>
+
+        <div class="new-arrival-card" style="border-left-color:var(--gold)">
+          <div class="npc-id">NPC-022</div>
+          <div class="npc-name" style="font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:700;color:var(--emerald-dark)">Wattle</div>
+          <div style="font-size:.78rem;color:var(--text-medium);margin-bottom:.6rem">New Arrival · Far Valley Origin</div>
+          <span class="npc-label">Discovery Location</span>Marsh Shallows (hiding in reed beds)
+          <span class="npc-label">Arrival Condition</span>Frightened; regressing; non-verbal at encounter
+          <span class="npc-label">Backstory</span>Wattle experienced something frightening in the far valley that they reveal only gradually after full recovery (Level 3+). The frightening thing turns out to be: they heard sounds from beyond the second sealed pass. The sounds were not animal sounds.
+          <span class="npc-label">Skill Contribution</span>Once recovered: exceptional listener with a talent for remembering oral stories. Their arc involves helping Marjorie document Mooseville recipes that were never written down.
+          <div class="warn-box" style="margin-top:.75rem">
+            <strong>Narrative Note — Handle with Care:</strong> Wattle's revelation about the sounds beyond the second pass is a significant Act 3 setup. This information must not surface before Level 3 under any dialogue condition. Implement dialogue gates strictly.
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /.tier-block -->
+
+    <!-- WILDLIFE CHARACTERS -->
+    <div class="section-header"><span class="section-icon">🐻</span><h2>Wildlife Characters</h2></div>
+    <p style="font-size:.85rem;color:var(--text-medium);margin-bottom:1rem">Non-Moosian characters — animals who have not undergone awakening but who have observable personalities and respond to player interaction over time. They operate on a hidden familiarity system independent of the Closeness Level framework. Wildlife interactions are entirely optional and never signposted.</p>
+
+    <div class="wildlife-card">
+      <div class="wildlife-name">The Bear Family — Thorn, Ember, and Cubs</div>
+      <div style="font-size:.78rem;color:var(--text-muted);margin-bottom:.5rem">Location: Emerald Forest northwest</div>
+      <p style="font-size:.83rem">A brown bear pair (Thorn — male, large; Ember — female, slightly smaller) with one or two cubs (season-dependent; visible spring through autumn). Non-threatening. Thorn is territorial about specific foraging areas but not aggressive if approached calmly and slowly.</p>
+      <span class="npc-label">Familiarity System</span>
+      <div style="font-size:.82rem">
+        <div>Level 1–2: Baseline tolerance — neither approach nor flee</div>
+        <div>Level 3: Thorn and Ember allow the player to rest near them without moving away</div>
+        <div>Level 5: Cubs will approach the player directly — one of the most emotionally rewarding optional moments in the game</div>
+      </div>
+      <div class="info-box" style="margin-top:.75rem"><strong>Lore Connection:</strong> Thorn and Ember were present at the First Gathering. They sat at the edge of the group and watched. They were there when Melvin first spoke. Melvin mentions this at Closeness Level 4.</div>
+    </div>
+
+    <div class="wildlife-card">
+      <div class="wildlife-name">The Eagle Pair (Named by Player at Discovery)</div>
+      <div style="font-size:.78rem;color:var(--text-muted);margin-bottom:.5rem">Location: Ancient Ruins / High Shelf cliff faces</div>
+      <p style="font-size:.83rem">Two bald eagles who nest on the ruins plateau and hunt along the High Shelf. At high familiarity, one eagle will periodically circle above the player in wilderness areas and call attention to hidden items or new arrival locations. This mechanic is never explained in the UI — players who invest in the wildlife relationship are rewarded organically.</p>
+      <p style="font-size:.83rem;color:var(--text-medium);margin-top:.35rem"><em>Player-assigned names appear in the in-game journal and on the natural history illustration in the Archive Quarter, once Gloria's lineage records the pair.</em></p>
+    </div>
+
+    <div class="wildlife-card">
+      <div class="wildlife-name">The Beaver Colony</div>
+      <div style="font-size:.78rem;color:var(--text-muted);margin-bottom:.5rem">Location: Marsh Shallows western edge</div>
+      <p style="font-size:.83rem">A beaver colony maintaining two active dams. Their dam maintenance sustains the marsh water level — an ecology fact Harold Winslow discusses. If the player accidentally damages a dam, Harold's lineage NPC notices and a small community repair quest activates automatically.</p>
+    </div>
+
+    <!-- NPC SUMMARY TABLE -->
+    <div class="section-header"><span class="section-icon">📋</span><h2>NPC Quick-Reference Table</h2></div>
+    <div class="table-wrap">
+      <table style="width:100%;font-size:.8rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-darkest);color:white"><th style="padding:.5rem .75rem">NPC ID</th><th style="padding:.5rem .75rem">Name</th><th style="padding:.5rem .75rem">Role</th><th style="padding:.5rem .75rem">Age Group</th><th style="padding:.5rem .75rem">Key Arc Theme</th><th style="padding:.5rem .75rem">First Found</th></tr></thead>
+        <tbody>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-001</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)"><strong>Melvin</strong></td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Co-Founder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Legacy and letting go</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Homestead arrival</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-002</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)"><strong>Martha</strong></td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Co-Founder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Memory and the future</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Homestead arrival</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-003</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Doris Vale</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Agricultural Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Succession</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Growing Circle</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-004</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Raymond Harlow</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Builder Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Tradition vs. innovation</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Build Yard</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-005</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Gloria Finch</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Archivist Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Hidden truth</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Archive Quarter</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-006</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Harold Winslow</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Water Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Long observation</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Water Station</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-007</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Marjorie Bell</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Nourishment Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Cooking for oneself</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Meal Station</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-008</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Chester Lang</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Craft Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">The unknown tool</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Repair Yard</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-009</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Evelyn Price</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Mediation Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Old wounds</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Heartfire</td></tr>
+          <tr style="background:rgba(124,29,136,.08)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-010</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Vincent Reed</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Cartographer Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Elder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">The unreached horizon</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Map Room</td></tr>
+          <tr><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-011</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Bram Vale</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Grower</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Young Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Patience and trust</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Growing Circle</td></tr>
+          <tr><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-012</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Pell Harlow</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Builder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Young Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">New methods</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Build Yard</td></tr>
+          <tr><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-013</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Renna Finch</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Linguist</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Young Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">First translation</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Archive</td></tr>
+          <tr><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-014</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Finn Winslow</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Ecologist</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Water mystery</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Crystal Lakeshore</td></tr>
+          <tr><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-015</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Lotte Bell</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Vendor</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Independence</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Muckmarket Row</td></tr>
+          <tr><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-016</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Moss Lang</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Apprentice</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Teen</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Discovery and responsibility</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Repair Yard</td></tr>
+          <tr><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-017</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Wren Price</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Event Organizer</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Young Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Community and inclusion</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Heartfire</td></tr>
+          <tr><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-018</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Caro Reed</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Guide</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Pragmatism meets wonder</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Town edge</td></tr>
+          <tr style="background:rgba(92,53,32,.06)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-019</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Tassel</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">New Arrival</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Finding the water</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Emerald Forest</td></tr>
+          <tr style="background:rgba(92,53,32,.06)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-020</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Branch</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">New Arrival</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Coming home</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Golden Meadow</td></tr>
+          <tr style="background:rgba(92,53,32,.06)"><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">NPC-021</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Sable</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">New Arrival</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Adult</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">The warning carried</td><td style="padding:.45rem .75rem;border-bottom:1px solid var(--brown-pale)">Crystal Lakeshore</td></tr>
+          <tr style="background:rgba(92,53,32,.06)"><td style="padding:.45rem .75rem">NPC-022</td><td style="padding:.45rem .75rem">Wattle</td><td style="padding:.45rem .75rem">New Arrival</td><td style="padding:.45rem .75rem">Adult</td><td style="padding:.45rem .75rem">What was heard</td><td style="padding:.45rem .75rem">Marsh Shallows</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DIALOGUE WRITING GUIDELINES -->
+    <div class="section-header" style="margin-top:2rem"><span class="section-icon">✍️</span><h2>Dialogue Writing Guidelines</h2></div>
+
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">Voice and Register</div>
+      <div class="card-body">
+        <ul style="font-size:.86rem;padding-left:1.25rem;line-height:2">
+          <li>All Moosian dialogue is warm, slightly formal in grammar (they learned language from reading; their speech patterns reflect written-to-spoken translation), and rich in nature-and-community metaphors.</li>
+          <li><strong>No Moosian uses idioms borrowed directly from human culture.</strong> All idioms are Mooseville-invented.</li>
+          <li>Moosian speech never uses the word "human" — they refer to campsite occupants as <em>"the old visitors"</em> or <em>"the ones from before."</em></li>
+          <li>Vocabulary draws from seasonal observation, water behavior, soil conditions, sky events, and tool metaphors.</li>
+          <li>Even the most casual NPC speaks with quiet care. The town's speech has a settled, gentle quality — as though everyone is slightly aware that language is a gift they are still learning to use well.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">Dialogue Length Standards</div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table style="width:100%;font-size:.83rem;border-collapse:collapse">
+            <thead><tr style="background:var(--brown-dark);color:white"><th style="padding:.5rem .75rem;text-align:left">Context</th><th style="padding:.5rem .75rem;text-align:left">Length</th><th style="padding:.5rem .75rem;text-align:left">Notes</th></tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--brown-pale)"><td style="padding:.45rem .75rem">Casual greeting</td><td style="padding:.45rem .75rem">1–2 sentences</td><td style="padding:.45rem .75rem">No exposition; relationship-appropriate warmth only</td></tr>
+              <tr style="background:var(--cream);border-bottom:1px solid var(--brown-pale)"><td style="padding:.45rem .75rem">Story dialogue (quest, arc)</td><td style="padding:.45rem .75rem">3–6 sentences per exchange beat</td><td style="padding:.45rem .75rem">Maximum per beat; break longer scenes into multiple beats</td></tr>
+              <tr style="border-bottom:1px solid var(--brown-pale)"><td style="padding:.45rem .75rem">Memory callback</td><td style="padding:.45rem .75rem">1–3 sentences</td><td style="padding:.45rem .75rem">Reference [REMEMBER: tag] naturally, never mechanically</td></tr>
+              <tr style="background:var(--cream);border-bottom:1px solid var(--brown-pale)"><td style="padding:.45rem .75rem">Legacy Moment dialogue</td><td style="padding:.45rem .75rem">4–10 sentences</td><td style="padding:.45rem .75rem">Use [PAUSE] direction tags; allow silence to carry weight</td></tr>
+              <tr><td style="padding:.45rem .75rem">Wildlife interaction (observer comment)</td><td style="padding:.45rem .75rem">1 sentence</td><td style="padding:.45rem .75rem">Spoken by NPCs nearby only; never by wildlife directly</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDIOM TABLE -->
+    <div class="card" style="margin-bottom:2rem">
+      <div class="card-header">Mooseville Idiom Reference Table</div>
+      <div class="card-body">
+        <p style="font-size:.83rem;color:var(--text-medium);margin-bottom:.75rem">Writers must use the following Mooseville-original idioms in place of their human-language equivalents. This table is a living reference — new idioms can be proposed to the Narrative Lead for approval.</p>
+        <div class="table-wrap">
+          <table class="idiom-table">
+            <thead><tr><th>Human Idiom</th><th>Mooseville Equivalent</th></tr></thead>
+            <tbody>
+              <tr><td>"I'm in trouble"</td><td><strong>"I'm antler-deep"</strong></td></tr>
+              <tr><td>"Keep calm"</td><td><strong>"Hold your water"</strong></td></tr>
+              <tr><td>"Think about it carefully"</td><td><strong>"Let it run through you like spring"</strong></td></tr>
+              <tr><td>"It's not my place to say"</td><td><strong>"That's not my fire to tend"</strong></td></tr>
+              <tr><td>"Something big is happening"</td><td><strong>"The shelf is moving"</strong></td></tr>
+              <tr><td>"I don't know"</td><td><strong>"The frost hasn't reached me yet"</strong></td></tr>
+              <tr><td>"We'll figure it out together"</td><td><strong>"We'll walk the root path together"</strong></td></tr>
+              <tr><td>"That's a bold claim"</td><td><strong>"That's a wide antler spread"</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- REMEMBERED CONVERSATION TAGS -->
+    <div class="card" style="margin-bottom:2rem">
+      <div class="card-header">Remembered Conversation Tags — Technical Spec</div>
+      <div class="card-body">
+        <p style="font-size:.86rem;margin-bottom:.75rem">Each NPC tracks up to 5 remembered conversation tags set by player dialogue choices. Tags are referenced in future dialogue using the syntax below and resolve to contextual callback phrases provided at implementation time.</p>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem;font-family:monospace;font-size:.82rem;margin-bottom:.75rem">
+          <strong>Tag Syntax:</strong> [REMEMBER: tag_name] → inserts contextual callback phrase<br><br>
+          Example tags: PLAYER_FISHES_MORNING · PLAYER_MISSES_HOME · PLAYER_CURIOUS_ABOUT_PASS · PLAYER_TALKED_ABOUT_MELVIN
+        </div>
+        <div class="info-box">Tags are set silently at dialogue branch selection and persist across sessions. If all 5 tag slots are filled, the oldest tag is replaced. Writers should treat the tag as an opportunity for the NPC to demonstrate genuine attentiveness — not as a data readout. The callback should feel like a friend remembering something, not a system confirming a variable.</div>
+      </div>
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>

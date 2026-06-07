@@ -1,0 +1,2205 @@
+﻿
+Mooseville Rendering Bible
+Technical Art & Rendering Standards for Mooseville Production
+Document Version
+v1.0
+Status
+Production — Authoritative
+Release Date
+June 2026
+Classification
+Confidential — Internal Use Only
+Maintained By
+Technical Art Department
+Approved By
+Rendering Director
+Applies To
+All art disciplines — Character, Environment, VFX, UI, Lighting
+
+
+Executive Summary — The Mooseville Rendering Bible is the authoritative reference governing every visual decision made by the technical art and rendering teams during the production of Mooseville. This document defines the studio's hybrid cel-shaded rendering model, the emerald-and-gold visual identity system, shader and material specifications, character and environment rendering rules, VFX and UI standards, naming conventions, pipeline workflow, performance targets, and the do/don’t visual guidelines that enforce the Mooseville aesthetic across all platforms and all disciplines. Rooted in the warm, painterly, storybook sensibility of late-1990s and early-2000s stylized 3D titles — drawing specific inspiration from the rich saturated palettes, soft cel-shaded character work, and inviting natural environments of games like Barbie Horse Adventures — Mooseville builds a distinctive visual identity of its own: a deep emerald forest world alive with golden-hour light, moose-scale architecture, hand-crafted surfaces, and a sense of joyful wonder that must be present in every frame. Every team member who creates, reviews, or integrates visual assets is expected to have read, understood, and internalized this document before contributing to production; deviations from any specification herein require written approval from the Rendering Director.
+
+# Table of Contents
+
+1. Artistic Vision & Rendering Philosophy
+The Mooseville Promise • Core Visual Pillars • Barbie Horse Adventures Inspiration • Style Position • Scope
+2. Color & Lighting Philosophy
+Color System • Hex Spec Table • Lighting Philosophy • Light Temperature • Contrast Ratios • Forbidden Combinations • Emerald Depth & Gold Accent Rules
+3. Shader Rules & Rendering Model
+Hybrid Model Overview • Master Shader Architecture • Cel Band Rules • Shadow / Specular / Rim / AO / Normal Map Rules • Prohibited Practices
+4. Material Language
+Material Vocabulary • Material Spec Table • Surface Storytelling • Weathering Tiers • Variation Rules
+5. Outline / Silhouette System
+Outline Philosophy • Rendering Method • Width Spec • Color Rules • Distance Falloff • Disabled Scenarios • Temporal Smoothing
+6. Character Rendering
+Overview • Shader Layers • Skin/Fur Rules • Eye Spec • Hair/Mane • LOD Table • Cloth & Accessories • Lighting Overrides • Facial Animation
+7. Environment Rendering
+Philosophy • Terrain • Foliage • Tree Spec • Water • Sky • Weather • Biome Table • LOD Strategy
+8. VFX Rendering
+VFX Philosophy • Shader Types • Particle Budget • Color Rules • Magic VFX Spec • Outlines & Decals • Performance Rules
+9. UI Rendering
+UI Philosophy • UI Shader • UI Color System • UI Outlines • Typography • Icons • Inventory & Map • Screen-Space Effects • Accessibility
+10. Scene Composition & Camera Rules
+Compositional Philosophy • Camera Parameters • DoF • Post-Processing Stack • Bloom • Tone Mapping • Color Grading • Cinematic Framing • Forbidden Elements
+11. Performance & LOD Strategy
+Performance Targets • LOD Transitions • Impostors • Occlusion Culling • Batching • Memory Streaming • Draw Call Budget • Shader Variants • Profiling Gates
+12. Texture Standards
+Format Table • Albedo Guidelines • Normal Convention • Channel Packing • Tiling Rules • UV Rules • Mip Maps • Naming Convention
+13. Naming Conventions & Asset Taxonomy
+Master Table • Suffixes • File Extensions • Folder Structure • Reserved Prefixes • Anti-Patterns
+14. Pipeline Rules & Workflow Standards
+Pipeline Overview • Export Standards • Import Validation • Material Assignment • Lighting Bake • Version Control • QA Checklist • Change Management
+15. Do & Don’t Visual Guidelines
+Do / Don’t Table • Visual Anti-Patterns • Rendering Quality Bar Checklist
+
+# 1. Artistic Vision & Rendering Philosophy
+
+
+Section Intent: Establish the irreducible aesthetic soul of Mooseville so that every downstream technical decision is grounded in shared artistic purpose.
+
+## 1.1 The Mooseville Promise
+Every frame of Mooseville must deliver a feeling — not merely a scene. That feeling is warmth, wonder, storybook magic, and lived-in nature. The player should sense that the forest has always been here, that it breathes and grows, that golden light filters through canopy leaves as though the world is perpetually caught in a perfect late-afternoon moment. Characters must feel like they belong to the world — soft, readable, full of personality — and the environment must feel like somewhere a child might have once imagined in the back of a storybook. Nothing should feel cold, clinical, or mechanically generated. Every asset, every shader decision, every color choice must serve this promise.
+
+THE MOOSEVILLE PROMISE
+Every frame must answer YES to this question: “Does this feel like stepping into a warm, living, illustrated world full of wonder?” If the answer is no, the frame is not finished.
+
+## 1.2 Core Visual Pillars
+
+Pillar 1 — Emerald Alive
+The green world of Mooseville is never static, never flat, never cold. Foliage shifts in the breeze, moss catches dappled light, and the deep emerald palette breathes with warm undertones of gold and amber. Every environment asset must contribute to the sense of a living, photosynthesizing world.
+
+
+Pillar 2 — Golden Hour Always
+Mooseville’s lighting defaults to the warmth and directionality of the golden hour regardless of in-world time of day. Even noon scenes are lit with a slight warm cast; even night scenes carry amber torch-glow as their primary light source. The sun of Mooseville is always generous and inviting, never harsh or bleaching.
+
+
+Pillar 3 — Storybook Legibility
+Every character, prop, and landmark must be immediately readable in silhouette and color at all expected gameplay distances. Cel-shading bands, outlines, and saturated palette choices are all in service of clarity. Mooseville never sacrifices readability for photorealism or complexity.
+
+
+Pillar 4 — Tactile Warmth
+Surfaces in Mooseville feel hand-made. Wood looks carved. Stone looks stacked by careful hands. Fabric looks woven. The material language must communicate craft, care, and age — the sense that someone built this world with love. Roughness values, normal maps, and albedo variation all work together to prevent anything from feeling mass-produced or procedurally cold.
+
+
+Pillar 5 — Joyful Contrast
+Mooseville uses bold, saturated color contrast not for shock but for joy. The interplay of deep emerald forest with warm gold accents, rich bark browns with cream highlights, sky blue with soft lavender — these combinations must feel delightful, balanced, and intentional. Contrast is always in service of clarity and emotion, never gratuitous.
+
+## 1.3 The Barbie Horse Adventures Inspiration
+The soft, saturated, hand-painted aesthetic of early 3D equestrian titles — most notably the Barbie Horse Adventures series — serves as one of Mooseville’s primary reference points for emotional tone and visual quality bar. The following specific visual qualities are identified as worth borrowing and adapting:
+
+Visual Quality from Reference
+How Mooseville Adapts It
+Mooseville Distinction
+Painterly shadow bands on character surfaces — soft, warm 2–3 step cel shading that avoids hard ray-traced lines
+MV_Character shader uses 3-band cel shading with warm shadow tints rather than neutral grey darks
+Shadow tint biased toward deep forest amber (#6B3A1F) rather than pink or lavender
+Soft rim lighting on characters — a consistent warm halo that separates character from background without feeling artificial
+Amber rim light (#FFB347) hardcoded in character shader, width 0.08–0.12 screen-space
+Rim is always warm amber; no cool rims ever appear on hero characters
+Vibrant natural greens — environments saturated beyond photographic reference, suggesting an idealized natural world
+Emerald palette pushed 15–25% beyond photographic saturation; foliage albedo never exceeds 210/255 channel value
+Greens always carry warm golden undertones; never cyan-shifted or cool-tinted
+Warm ambient fill — no scene feels shadowed into darkness; even unlit areas retain warm color and readability
+Scene ambient color always warm (minimum 3200K equivalent), never neutral grey or cold blue
+Night scenes use deep blue-green ambient but retain warm character fill light rig
+Storybook environment composition — environments staged as backdrops for character performance, not as open-world realism
+Every scene framed by tech art as a “painting” — rule of thirds enforced in camera and asset placement guidelines
+Mooseville adds moose-scale architecture (oversized doors, high ceilings, broad paths) unique to the IP
+
+What makes Mooseville distinctly its own: Where the reference aesthetic is bright and meadow-centric, Mooseville lives primarily in deep emerald forest, with gold accents as discovery moments rather than background wallpaper. The architecture is moose-scale — proportioned for large characters, giving interiors a grand, cathedral-of-trees quality. The world has more mystique and depth than the reference aesthetic, while retaining all of its warmth and accessibility.
+## 1.4 Style Position
+The following conceptual diagram positions Mooseville’s rendering style on two axes: Stylized↔Realistic (X-axis) and Flat↔Volumetric (Y-axis). Mooseville targets approximately 70% Stylized and 60% Volumetric.
+
+VOLUMETRIC (100%)
+                              |
+                              |
+    Mooseville Target --------X----- (60% Volumetric, 70% Stylized)
+                              |
+   REALISTIC (0%) ____________|____________ STYLIZED (100%)
+        |              50%   |   50%
+        |                    |
+        |                    |
+                        FLAT (0%)
+
+  KEY:
+  X = Mooseville target zone (~70% Stylized, ~60% Volumetric)
+  70% Stylized = strong cel influence, non-photorealistic palette, readable silhouettes
+  60% Volumetric = 3D form reads clearly; not flat 2D; shadows and rims add depth
+  Reference comparison: Pure cel-shaded games sit at 100% Stylized / 10-20% Volumetric
+  Reference comparison: AAA photorealistic games sit at 10% Stylized / 90% Volumetric
+
+## 1.5 Scope — What This Bible Governs vs. Does Not Govern
+
+This Bible GOVERNS
+This Bible Does NOT Govern
+All real-time rendering decisions: shaders, materials, lighting, post-processing, VFX, UI rendering, character rendering, environment rendering
+Game design decisions: level layouts, quest structure, gameplay mechanics — these are governed by the Game Design Document
+Asset creation standards: polygon budgets, texture formats, naming conventions, pipeline workflow, import/export rules
+Concept art style guide: 2D illustration standards, key art, marketing materials — governed by the Visual Development Bible
+Performance targets and optimization strategies for all rendering systems
+Audio and music direction — governed by the Audio Design Document
+Color and lighting standards across all biomes, times of day, and rendering contexts
+Narrative and story content — governed by the Narrative Design Document
+All QA rendering acceptance criteria and visual quality bar definitions
+Animation curves, rigging standards, motion capture processing — governed by the Animation Bible
+
+
+# 2. Color & Lighting Philosophy
+
+
+Section Intent: Define the complete color and lighting system that gives Mooseville its unmistakable warm emerald-and-gold identity, with enough specificity that any artist can match the intended look without guesswork.
+
+## 2.1 The Mooseville Color System
+### Primary Palette
+
+Color Role
+Description
+Hex
+Usage Context
+Do Not Use With
+Emerald Deep
+Primary forest dark green; hero environment color
+#1B5E20
+Section headers, foliage shadow, UI primary, deep canopy
+Cool cyan, pure magenta, bright orange
+Emerald Mid
+Mid-range foliage; primary leaf surface
+#388E3C
+Leaf albedo base, mossy stone overlay, meadow grasses
+Pure desaturated grey, cold blue-white
+Emerald Light
+Sunlit foliage highlight; canopy translucency glow
+#81C784
+Leaf highlight cel band, foliage tip color, translucency tint
+Bright red, neon yellow-green
+Gold Hero
+Primary gold accent; interactable highlight color
+#FFD700
+UI accents, magic VFX, hero prop highlight, outline tint on interactive elements
+Bright white highlight directly adjacent, pure cyan backgrounds
+Gold Warm
+Sunset/rim light warm gold
+#FFC107
+Rim light tint, lantern glow, character warm highlight cel band
+Cold blue, desaturated silver
+Warm Cream
+Character skin highlight; architectural light surface
+#FFF8E7
+Character face highlight, building stonework highlight, UI text primary
+Pure white (#FFFFFF) — always use cream instead
+Deep Bark Brown
+Primary wood/bark dark tone
+#3E2723
+Tree trunk shadow, wooden architecture shadow, UI text dark
+Pure black (#000000) — use warm near-black instead
+Bark Mid
+Medium wood tone; primary bark surface
+#5D3A1A
+Bark albedo midtone, wooden prop surfaces, secondary UI text
+Cool grey, pure blue
+
+### Secondary Palette
+
+Color Role
+Description
+Hex
+Usage Context
+Do Not Use With
+Sky Blue
+Daytime sky base; water shallow highlight
+#81D4FA
+Sky dome base, shallow water surface, soft atmosphere
+Bright green directly adjacent, neon yellow
+Soft Lavender
+Dusk atmosphere; distance haze tint
+#CE93D8
+Distance fog tint at dusk, floral props, subtle sky gradient
+Bright orange, heavy saturation reds
+Mushroom Red
+Accent prop color; small landmark indicator
+#C62828
+Mushroom caps, warning UI, danger indicators, small floral accents
+Emerald green directly adjacent (low contrast), magenta
+Berry Purple
+Magical accent; rare prop highlight
+#7B1FA2
+Magic crystal surfaces, rare flower props, special event VFX
+Bright gold directly adjacent, pure black
+
+## 2.2 Full Hex Code Specification Table
+
+#
+Color Name
+Hex
+Swatch Approx.
+Usage Context
+Do Not Use With
+1
+Emerald Deep
+#1B5E20
+Dark Forest Green
+UI primary, deep foliage shadow, section headers
+Pure cyan, neon orange, cold magenta
+2
+Emerald Mid
+#388E3C
+Forest Green
+Leaf albedo, mossy stone, meadow base
+Pure cool grey (#808080), cold blue-white
+3
+Emerald Light
+#81C784
+Sage Green
+Sunlit leaf highlight, translucency tint, foliage tip
+Neon red, saturated cyan
+4
+Gold Hero
+#FFD700
+Vivid Gold
+Interactive highlights, UI accents, magic VFX endpoint, hero props
+Pure white background, bright cyan
+5
+Gold Warm
+#FFC107
+Amber Gold
+Rim light tint, lantern glow, warm highlight cel band
+Cool blue (#2196F3) directly adjacent, silver
+6
+Amber Rim
+#FFB347
+Soft Amber
+Character rim light only — never used as surface color
+Any cool-tinted surface as the only rim source
+7
+Warm Cream
+#FFF8E7
+Parchment White
+UI text primary, character highlight, architectural stone light
+Pure white (#FFFFFF) — cream replaces white throughout
+8
+Deep Bark
+#3E2723
+Near-Black Brown
+Outline darkest tone, wood shadow, UI near-black
+Pure black (#000000) — warm near-black only
+9
+Bark Mid
+#5D3A1A
+Warm Brown
+Bark albedo, wooden props, secondary UI text
+Cool grey, blue-tinted backgrounds
+10
+Sky Blue
+#81D4FA
+Powder Blue
+Sky dome daytime, shallow water, atmosphere haze
+Saturated green directly adjacent, neon yellow
+11
+Outline Warm Black
+#1A0F00
+Near-Black Warm
+Character outline color — this is the darkest outline allowed
+Never use pure #000000 as outline
+12
+Forest Outline Black
+#0D2B0A
+Deep Forest Black-Green
+Environment foreground outline — alternate darkest option
+Never use on UI or character outlines
+13
+Soft Lavender
+#CE93D8
+Lilac
+Dusk haze, floral props, distance atmosphere tint
+Saturated orange, heavy reds
+14
+Mushroom Red
+#C62828
+Deep Red
+Warning UI, mushroom caps, danger props
+Emerald green at same luminance (camouflages)
+15
+Berry Purple
+#7B1FA2
+Deep Purple
+Magic crystals, rare events, special VFX
+Bright gold directly adjacent, pure black background
+
+## 2.3 Lighting Philosophy — “Golden Hour Default”
+Mooseville operates under a core lighting philosophy: the default state of any scene is golden-hour quality light. This means a warm directional key light with a slight downward angle (15°–35° above horizon), a soft warm fill from the opposite direction, and an ambient light that carries at minimum a 3200K warmth. This philosophy applies even at simulated noon (the key light is still warm and directional, not overhead and white) and even at night (the ambient is deep blue-green but characters retain their warm fill light rig).
+The reasoning: players spend most of their time in Mooseville’s forests and meadows. These environments are most inviting, most readable, and most emotionally resonant when lit with directional warmth that creates clear shadow definition without harsh contrast. The golden-hour default also means that the emerald palette reads with maximum vibrancy — warm light on cold green produces the characteristic jewel-like quality that is Mooseville’s visual signature.
+## 2.4 Light Temperature Rules
+
+Time of Day
+Key Light Temperature
+Fill Light Temperature
+Ambient Color
+Key Intensity (normalized)
+Notes
+Morning (6–10am)
+4500K–5000K
+5500K (slightly cooler fill)
+Soft warm blue #B3D9FF
+0.65
+Low angle, long shadows; gentle awakening quality
+Daytime (10am–4pm)
+5500K–6000K
+4200K–4500K (warm fill)
+Pale warm gold #FFEFD5
+1.0 (reference)
+Never overhead white; maintain 20°–35° key angle
+Late Afternoon (4–6pm)
+4000K–4500K
+4000K
+Warm amber #FFD080
+0.85
+Transition zone toward dusk; golden hour intensifying
+Dusk (6–8pm)
+3200K–3800K
+5000K (sky remnant fill)
+Warm rose-gold #FFB87A
+0.55
+Maximum golden-hour warmth; most saturated sky state
+Night
+2800K (lantern/torch)
+8000K+ (deep blue ambient fill)
+Deep teal-blue #0A1F2E
+0.3 (lantern only)
+Characters retain warm fill rig; sky ambient is cool but character ambient is warm
+
+## 2.5 Contrast Ratio Guidelines
+
+Element Category
+Minimum Luminance Contrast
+Maximum Luminance Contrast
+Rationale
+Gameplay-critical UI (health, objectives)
+7:1
+No maximum
+Must be legible in all lighting conditions
+Interactive prop highlight vs. background
+4.5:1
+15:1
+Must stand out; too much contrast reads as VFX, not prop
+Character vs. environment background
+3:1
+No maximum
+Character must separate from background at all times
+Decorative environment details
+No minimum
+6:1
+Must not compete with gameplay-critical elements
+Body text in UI
+4.5:1
+No maximum
+WCAG AA compliance minimum
+Large display text in UI (>18pt)
+3:1
+No maximum
+WCAG AA large text standard
+
+## 2.6 Forbidden Color Combinations
+
+FORBIDDEN COLOR COMBINATIONS — Never Use
+1.  Pure Cyan (#00FFFF) on Pure Magenta (#FF00FF) — Maximally clashing, vibrates, causes visual fatigue; prohibited in all contexts.
+2.  Desaturated Grey (#808080) on White (#FFFFFF) — Insufficient contrast, reads as disabled/broken state; use warm cream background instead.
+3.  Neon Yellow-Green (#CCFF00) on Emerald Deep (#1B5E20) — Appears clinical and toxic; undermines the organic warmth of the palette.
+4.  Pure Black (#000000) on Bark Brown (#5D3A1A) — Insufficient contrast and reads as a texture artifact, not intentional color use.
+5.  Cold Blue (#2196F3) on Warm Gold (#FFD700) — Temperature clash destroys the warm-world identity; any blue accent near gold must be softened to sky-blue or lavender.
+6.  Saturated Red (#FF0000) on Saturated Green (#00FF00) — Color-blindness failure case; unusable for gameplay-critical information.
+7.  White (#FFFFFF) as any surface or background color — Pure white does not exist in Mooseville; always substitute Warm Cream (#FFF8E7) or a tinted near-white.
+8.  Pure Black (#000000) as any outline or line color — All outlines must use warm near-black (#1A0F00) or forest black-green (#0D2B0A). See Section 5.
+
+## 2.7 The “Emerald Depth” Rule
+
+RULE: Emerald Depth
+All green colors in Mooseville must carry warm undertones — they must lean toward yellow-green on the hue wheel, never toward cyan-green or blue-green. In HSL terms, all environment greens must maintain a hue value between 95° and 130° (yellow-leaning green range). Greens that drift below 95° toward yellow are acceptable with caution; greens that drift above 130° toward cyan are prohibited in all surface albedo, lighting, and UI contexts. When in doubt, add a +5° to +10° hue shift toward yellow and increase saturation slightly — this will restore the signature Mooseville emerald quality.
+
+## 2.8 The “Gold Accent” Rule
+
+RULE: Gold Accent Discipline
+Gold (#FFD700 and the warm gold family) is never used as a base fill color for large surfaces. Gold is exclusively reserved for: (1) specular highlights and rim light tints on characters and props, (2) interactable object outlines and UI accents, (3) hero prop surface inlays and decorative embossing, (4) magic VFX endpoint color, (5) text headers in the Rendering Bible and formal documentation. Any surface larger than approximately 0.25m² that appears predominantly gold is a violation of this rule and must be revised to use a warm cream or bark-brown base with gold accent highlights overlaid.
+
+
+# 3. Shader Rules & Rendering Model
+
+
+Section Intent: Specify Mooseville’s hybrid rendering model and all shader-level rules in enough technical detail that a rendering engineer can implement or audit any shader against this standard.
+
+## 3.1 Hybrid Rendering Model Overview
+Mooseville uses a hybrid rendering model: a cel-shaded diffuse base (the primary aesthetic driver) combined with selective PBR metallic/roughness for specific surface categories where physical plausibility adds to the storybook quality rather than undermining it. The PBR layer is not a compromise — it is a deliberate choice to make water sparkle convincingly, metal gleam warmly, and gem inlays catch light with believable depth. The cel shading is the soul; the PBR details are the craft.
+- Cel diffuse base: All surfaces receive a stepped diffuse calculation (2–3 bands depending on surface type). This is the primary lighting evaluation path.
+- Selective PBR layer: Applied only to water, metal accents, glass/crystal, and gem inlays. This layer uses standard metallic-roughness inputs and is composited on top of the cel base at a controlled blend weight.
+- No ray tracing: Ray tracing is not used in Mooseville’s real-time rendering pipeline. All reflections use baked cube maps or planar reflection passes. All shadows use baked + cascade hybrid.
+## 3.2 Master Shader Architecture
+
+Shader Name
+Surface Type
+Cel Bands
+Rim Light
+Specular Type
+Emissive
+Notes
+MV_Character
+Character skin, fur, fabric — all organic hero surfaces
+3 (shadow / midtone / highlight)
+Yes — Amber #FFB347, 0.08–0.12 width
+Single-dot Blinn-Phong, gold tint
+Eyes/accessories via emissive mask
+Primary characters only; lightweight version for NPCs
+MV_Character_NPC
+Non-hero character surfaces
+2 (shadow / highlight)
+Yes — reduced intensity 0.5×
+None
+No
+Used for background villagers, animals. No SSS approximation.
+MV_Environment_Foliage
+Leaves, grass, ferns — all foliage
+2 (shadow / sunlit)
+No
+None
+No (translucency channel instead)
+Requires vertex-color wind animation; translucency enabled
+MV_Environment_Terrain
+Ground, rock, dirt, sand — terrain splatmap surfaces
+2 (shadow / lit)
+No
+None
+No
+Splatmap 4-layer max; macro tint overlay enabled
+MV_Water
+Rivers, lakes, puddles — all water surfaces
+1 (no cel stepping — smooth diffuse)
+No
+PBR specular with cubemap reflection
+Foam mask emissive (subtle, white-warm)
+Dual-layer normal scroll; vertex displacement; depth color blend
+MV_Metal_Accent
+Gold inlays, metal fixtures, hammered surfaces
+1 (smooth — PBR-dominant)
+No
+PBR metallic/roughness — cubemap reflection
+Optional subtle emissive on polished inlay
+Metallic value 0.85–1.0; used sparingly per Gold Accent Rule
+MV_Glass_Crystal
+Crystal formations, gem inlays, magical glass
+1 (smooth)
+No
+PBR specular + refraction approximation
+Yes — inner glow, color-tinted per gem type
+Alpha dither for transparency; no screen-space refraction
+MV_VFX_Additive
+Magic sparkles, glows, energy effects
+None (additive blend)
+No
+None
+Full emissive — self-illuminated
+Additive blend only; never alpha blend for glow VFX
+MV_VFX_Soft
+Smoke, breath, pollen, soft atmospheric particles
+None
+No
+None
+No
+Soft alpha blend; no cel bands; warm desaturated tones
+MV_UI_Flat
+All UI elements — panels, icons, text
+None (unlit)
+No
+None
+UI emissive for glow effects only
+Always renders on top; no depth test; 9-slice for bordered elements
+
+## 3.3 Cel Shading Band Rules
+
+Surface Category
+Band Count
+Band 1 (Shadow)
+Band 2 (Midtone)
+Band 3 (Highlight)
+Band Transition Sharpness
+Characters (hero)
+3
+Albedo × 0.45, tint #6B3A1F
+Albedo × 1.0 (base)
+Albedo × 1.25, tint warm cream
+Sharp (0.02 smoothstep width)
+Characters (NPC)
+2
+Albedo × 0.5, neutral tint
+Albedo × 1.0 (base)
+N/A
+Sharp (0.02 smoothstep width)
+Environment (general)
+2
+Albedo × 0.55, warm shadow tint
+Albedo × 1.0 (base)
+N/A
+Slightly soft (0.05 smoothstep width)
+VFX particles
+1 (no banding)
+N/A
+Particle color full
+N/A
+No stepping — additive glow only
+
+## 3.4 Shadow Rules
+- Characters — NO hard ray-traced shadows. Characters cast only blob/contact shadows (circular Gaussian soft shadow projected onto terrain, radius = character foot radius × 1.2). No cascaded shadow maps from characters onto environment.
+- Environment shadows: Baked lightmap shadows for static geometry + real-time cascaded shadow maps (CSM) for dynamic objects and time-of-day variation.
+- Maximum CSM cascade count: 3 cascades on PC High; 2 cascades on PC Medium and Console; 1 cascade on Mobile. Far cascade blends into baked lightmap.
+- Shadow color: Shadows are never pure black. Shadow color must always be a tinted dark — environment shadows tinted deep teal-green (#0A2010), character contact shadows tinted warm bark brown (#3E2723).
+- Shadow softness: PCF (Percentage Closer Filtering) with 4-sample kernel on all platforms minimum; 16-sample on PC High.
+## 3.5 Specular Rules
+- Character specular: Single-dot Blinn-Phong highlight only. Always tinted warm gold (within 20° hue of #FFD700). Specular power range: 32–64. No anisotropic specular on character skin or fur.
+- Environment specular: Disabled on all terrain, foliage, stone, and wood surfaces. Specular enabled ONLY on water (MV_Water) and metal accent surfaces (MV_Metal_Accent).
+- Water specular: PBR specular with baked cubemap reflection + planar reflection for hero water bodies. Roughness range 0.05–0.35 (calm to choppy).
+- Metal specular: PBR metallic, cubemap-based. Reflection tinted warm gold to match world identity.
+## 3.6 Rim Light Specification
+
+CHARACTER RIM LIGHT SPEC — Mandatory
+•  Color: Warm amber #FFB347 — never cold-colored, never pure white, never blue or cyan.
+•  Width: 0.08–0.12 in screen space (at 1080p = approximately 8–13px wide at closest gameplay distance).
+•  Intensity: 0.6–0.8 normalized; rim should complement, not overpower, the diffuse shading.
+•  Direction: Opposite to primary key light direction, slightly elevated (10°–20° above horizon opposite key).
+•  Applied to: All hero characters (Moose family, named NPCs). Reduced 50% on generic NPC characters. Disabled on props and environment.
+•  NEVER USE: Cold rim colors (#4FC3F7 blue, #80DEEA cyan, #B39DDB lavender) on any hero character.
+
+## 3.7 Ambient Occlusion Rules
+- Method: SSAO (Screen Space Ambient Occlusion) — enabled on all platforms except Mobile (baked AO only on Mobile).
+- Strength range: 0.35–0.55. Below 0.35 reads as absent; above 0.55 creates a “dirty” look inconsistent with the Mooseville aesthetic.
+- Radius range: 0.4m–0.8m world-space. Larger radius creates softer, more ambient occlusion suitable for open environments; tighten to 0.4m in dense interior spaces.
+- AO color: Never pure black. AO tint must be warm dark green (#0D1A0A) to preserve the emerald identity in shadowed crevices.
+- Character AO: Character surfaces use baked AO texture only (packed in texture channel — see Section 12). SSAO is disabled on character layer to prevent “dirty” noise artifacts on moving character surfaces.
+## 3.8 Normal Map Intensity Rules
+
+Surface Category
+Normal Map Strength Range
+Rationale
+Notes
+Character skin / fur
+0.3–0.5
+Subtle surface detail; cel shading should dominate form
+Too strong reads as bumpy/rough; contradicts storybook softness
+Character cloth / accessories
+0.4–0.6
+Fabric weave detail; slightly stronger than skin
+Must not create visual noise in motion
+Environment — wood / bark
+0.6–0.85
+Strong grain and carving detail needed for tactile warmth
+Embossed pattern normals required on gold accent surfaces
+Environment — stone
+0.7–0.9
+Maximum roughness variation for ancient, weathered quality
+Must not clip or artifact at steep view angles
+Environment — terrain
+0.5–0.75
+Ground plane normals for dappled light quality
+Blended via splatmap weights
+Water
+0.4–0.7 (animated)
+Dual-layer normal scroll creates water movement
+Animated strength via time-based sine offset; see Section 7
+
+## 3.9 Prohibited Shader Practices
+
+PROHIBITED SHADER PRACTICES — Zero Tolerance
+1.  No screen-space reflections (SSR) on foliage — SSR on alpha-clipped geometry creates severe artifact bands. Foliage has no reflections.
+2.  No subsurface scattering (SSS) on non-organic surfaces — SSS is reserved for primary character skin approximation only. Never on wood, stone, water, or fabric.
+3.  No physically-based sky (IBL from HDRI) as sole ambient source — The IBL must always be color-graded to the golden-hour default. Raw HDRI capture from reference photos is never used directly.
+4.  No runtime shader compilation — All shader variants must be pre-compiled and stripped at build time. No dynamic shader keyword toggling at runtime.
+5.  No normal map on VFX particles — VFX particles use flat color + emissive only. Normal maps on particles waste memory and create visual noise.
+6.  No anisotropic specular on character skin — Skin uses single-dot Blinn-Phong only. Anisotropic is reserved for hair/mane (MV_Hair_Anisotropic shader only).
+7.  No pure emission on environment architecture — Environment emissive (lanterns, glowing fungi) must use a masked emissive with maximum brightness 2.0 (HDR), not unbounded emission. Prevents bloom overload.
+8.  No shadow casting from particle VFX — VFX particles are excluded from shadow casting and receiving in all rendering contexts.
+
+
+# 4. Material Language
+
+
+Section Intent: Define Mooseville’s complete material vocabulary so that surfaces communicate story, craft, and world identity as clearly as the silhouette and color system do.
+
+## 4.1 Material Vocabulary
+Every material in Mooseville carries a semantic meaning. Artists must internalize what each surface type is saying about the world and ensure their material work reinforces that meaning:
+- Hand-carved wood = Craft + Tradition. The moose community built this with their hooves and care. Tool marks and grain lines tell that story.
+- Mossy stone = Ancient + Alive. The forest was here before the buildings; nature always reclaims.
+- Hammered gold = Abundance + Discovery. Gold is rare and earned; it marks things of importance.
+- Rough bark = Patience + Deep Roots. Trees are ancient. Their bark carries decades of weathering.
+- Woven wool fabric = Warmth + Domesticity. Characters who wear wool live comfortably; wool means home.
+- Water = Movement + Life. Water is never still; it connects all parts of the world.
+- Painted wood = Celebration + Care. Painted surfaces mark landmarks, storefronts, and community spaces.
+## 4.2 Material Specification Table
+
+Material Name
+Base Albedo Range
+Roughness Range
+Metallic Value
+Normal Strength
+Cel Bands
+Special Notes
+MV_Mat_WoodOld
+#5D3A1A → #8D6E63 (warm brown range)
+0.80–0.95
+0.0
+0.70–0.85
+2
+Aged wear map required; grain direction follows mesh UV flow; minimum 3 tiling variants
+MV_Mat_WoodPainted
+Varies by prop color; base must be warm-tinted
+0.65–0.80
+0.0
+0.50–0.70
+2
+Paint chip wear map on edges; chipped areas reveal warm wood beneath; used on storefronts, signage
+MV_Mat_StoneGranite
+#8D8070 → #B0A090 (warm grey-beige)
+0.82–0.92
+0.0
+0.75–0.90
+2
+Never cool grey — all granite uses warm sandstone-family tones; macro variation via tint overlay required
+MV_Mat_StoneMoss
+#4A6340 → #6B8B50 (mossy green-grey)
+0.85–0.95
+0.0
+0.80–0.90
+2
+Translucency hint on moss layer; moss appears in crevices and north-facing surfaces; wear map for moss distribution
+MV_Mat_GoldAccent
+#B8860B → #FFD700 (dark gold to vivid gold)
+0.10–0.35
+0.90–1.0
+0.60–0.80
+1 (PBR-dominant)
+Embossed pattern normals required; gold used only for inlays and accents, never large surfaces; per Gold Accent Rule
+MV_Mat_LeafBroad
+#388E3C → #81C784 (emerald mid to light)
+0.55–0.75
+0.0
+0.40–0.60
+2
+Translucency channel active (backlit glow value 0.35); vertex wind animation required; alpha clip at 0.5
+MV_Mat_Bark
+#3E2723 → #6D4C41 (deep bark to warm mid-brown)
+0.88–0.96
+0.0
+0.70–0.85
+2
+Longitudinal grain normal map; AO packed in texture; subtle green-tinted darkening toward base of trunk
+MV_Mat_WaterShallow
+#6DBFA0 → #B2DFDB (teal-green to pale aqua)
+0.05–0.20
+0.0
+0.40–0.70 (animated)
+None (smooth)
+Depth-based blend with MV_Mat_WaterDeep; foam mask at shoreline; dual normal scroll
+MV_Mat_WaterDeep
+#0D4F3C → #1B6E55 (deep teal-forest)
+0.05–0.15
+0.0
+0.50–0.70 (animated)
+None (smooth)
+Depth fade from shallow; vertex displacement max 0.3m amplitude; no foliage reflections
+MV_Mat_FabricWool
+#FFF8E7 → character-specific warm color
+0.75–0.85
+0.0
+0.45–0.60
+2
+Weave pattern normal map; no specular; used for all character fabric; tint per character color spec
+MV_Mat_RockMoss
+#7D7060 → #9C8B78 (warm sandstone)
+0.78–0.90
+0.0
+0.70–0.88
+2
+Moss overlay blended via AO channel; rounded edges in normal map suggest water erosion
+MV_Mat_FungusGlow
+#8D6E63 base + emissive tint per species
+0.70–0.85
+0.0
+0.60–0.75
+2
+Emissive mask on gill underside; HDR emissive max 2.0; warm amber or soft green tint only; no blue emissive
+
+## 4.3 Surface Storytelling Rules
+- Aged surfaces must show wear maps: Any surface designated as “Weathered” or “Ancient” tier (see below) must include a wear/edge-highlight map that lightens edges and corners, simulating physical wear.
+- Gold accents must have embossed pattern normals: Every instance of MV_Mat_GoldAccent must use a tileable embossed pattern normal map (herringbone, floral, or geometric) at 0.6–0.8 strength. Plain flat gold is prohibited — it reads as a shader error, not intentional design.
+- Foliage must have translucency channel active: All leaf materials use a translucency channel that allows warm light to pass through from behind, creating the characteristic backlit leaf glow. This must be authored at 0.25–0.45 intensity.
+## 4.4 Weathering & Wear Vocabulary — 4 Tiers
+
+Tier
+Name
+Description
+Wear Map
+Roughness Modifier
+Usage Context
+1
+Pristine
+Freshly made, clean, sharp edges. Paint unscuffed, wood unscarred, stone uncracked.
+None
+Base roughness, no modification
+New quest rewards, hero prop items, freshly-built structures in story areas
+2
+Lightly Used
+Shows signs of daily life — minor scuffs, small chips, slight wear at contact points. Still well-maintained.
+Edge highlight map at 20% intensity
++0.05–0.10 roughness on edges
+Main village props, character belongings, regularly-visited areas
+3
+Weathered
+Clearly old and exposed. Paint peeling, wood grain cracked, stone chipped. Still structurally intact — well-worn, not broken.
+Full wear map at 50–70% intensity; edge highlights prominent
++0.10–0.20 roughness overall; +0.25 on worn edges
+Forest outposts, older infrastructure, background architecture, abandoned paths
+4
+Ancient
+Extreme age and exposure. Heavy erosion, deep cracks, significant overgrowth, partial collapse implied. Moss reclaiming surfaces.
+Heavy wear map at 80–100% intensity; moss blend map active
++0.20–0.35 roughness; significant normal intensity boost on cracks
+Ancient Ruins biome exclusively; pre-Mooseville civilization remnants
+
+## 4.5 Material Variation Rules
+
+MATERIAL VARIATION RULE
+No two adjacent large surfaces (greater than approximately 1m² of visible area) may use the same material instance without at least one variation parameter changed. Acceptable variation parameters include: tint color offset (±10% on any channel), roughness offset (±0.05–0.15), UV tiling scale (×1.25 or ×0.8 of base), or rotation offset (45° or 90° tiling rotation). This rule prevents the tiling/repetition artifacts that undermine the hand-crafted feel of Mooseville’s world.
+
+
+# 5. Outline / Silhouette System
+
+
+Section Intent: Define Mooseville’s outline system precisely enough that every element in every scene has a correct, consistent silhouette that reinforces the storybook aesthetic without tipping into cartoon or comic-book territory.
+
+## 5.1 Outline Philosophy
+Outlines in Mooseville exist for one purpose: to serve readability. They are not decorative flourishes or aesthetic statements on their own. Their job is to keep characters, props, and foreground elements legible against complex environmental backgrounds — to make the world scannable as a storybook illustration is scannable. Outlines should feel like a natural part of the visual world; at normal gameplay distances, a player should not consciously register that outlines exist. If outlines are noticeable for their own sake, they are too thick, too dark, or too uniform.
+## 5.2 Outline Rendering Method
+Mooseville uses post-process edge detection based on both depth buffer and normal buffer differentials. This approach (rather than geometry shell / inverse-hull method) is chosen because:
+- It scales correctly to all geometry complexity levels without requiring dedicated outline meshes
+- It responds to camera distance automatically (combined with distance-based falloff — see 5.5)
+- It avoids the z-fighting and backface issues of the geometry shell method on complex meshes
+- It can be cleanly disabled per render layer (VFX, UI, skybox) without geometry modification
+Edge detection parameters: Depth threshold 0.015 (normalized device coordinates); Normal threshold 0.25 (dot product difference); Combined with luminance edge detection at threshold 0.18 for color-transition edges on flat surfaces.
+## 5.3 Outline Width Specification Table
+
+Element Type
+Outline Width (px at 1080p)
+Outline Color
+Opacity
+Notes
+Hero Characters (Moose family)
+1.8px
+Warm near-black #1A0F00
+100%
+Full outline at all faces; never disabled during gameplay
+NPC Characters
+1.4px
+Warm near-black #1A0F00
+85%
+Slightly reduced to subordinate NPCs to hero characters visually
+Interactive Props (interactable)
+1.5px + gold tint overlay when highlighted
+#1A0F00 (idle), #B8860B (highlighted)
+100%
+Gold outline tint activates on hover/proximity interaction trigger
+Environment Props (foreground, <5m)
+1.2px
+Forest black-green #0D2B0A
+80%
+Foreground only; mid-ground reduces per distance falloff
+Environment (mid-ground, 5–15m)
+0.8px
+#0D2B0A
+50%
+Subtle; exists only to separate overlapping geometry planes
+Environment (background, >25m)
+0.0px (disabled)
+N/A
+0%
+Background geometry receives no outline; silhouette defined by color contrast only
+VFX Particles
+0.0px (disabled)
+N/A
+0%
+VFX never receive outlines; outline pass excludes VFX render layer entirely
+UI Elements (interactive)
+2.5px
+Warm gold #FFD700
+100%
+Gold outline on all interactive UI elements; renders on UI layer, no depth test
+UI Elements (decorative/panels)
+0.0px
+N/A
+0%
+Decorative UI panels have no outline; defined by fill color and background contrast
+Water Surfaces
+0.0px (disabled)
+N/A
+0%
+Water receives no outlines; silhouette from vertex displacement and foam mask
+
+## 5.4 Color Rules for Outlines
+
+OUTLINE COLOR RULE — Absolute
+Pure black (#000000) is prohibited as an outline color in all contexts. All outlines must use warm near-black (#1A0F00) or deep forest green-black (#0D2B0A) as their darkest option. This prevents the “comic strip” appearance that makes outlines feel like a design choice imposed on the world rather than a natural quality of it. The warm undertone in #1A0F00 allows outlines to read as “deep shadow,” not as flat ink lines.
+
+## 5.5 Distance-Based Outline Falloff
+
+Camera Distance
+Outline Opacity
+Outline Width Multiplier
+Notes
+< 2m
+100%
+1.2× (slightly wider close-up)
+Cutscene close-up override may disable outlines per Section 5.6
+2–5m
+100%
+1.0× (base width)
+Primary gameplay distance; full outline active
+5–15m
+Lerp 100% → 60%
+0.8× lerp → 0.6×
+Gradual fade; mid-ground outlines becoming subtle
+15–25m
+Lerp 60% → 0%
+0.6× lerp → 0.0×
+Fading to invisible; depth differentials still visible from scene geometry contrast
+> 25m
+0% (disabled)
+0.0×
+No outlines at distance; silhouette via color and LOD geometry only
+
+## 5.6 When Outlines Are Disabled
+- Cutscene hero close-ups (<1m camera distance): Outlines are disabled on hero character face and head geometry during extreme close-up cutscene shots to prevent thick-line visual distraction during emotional moments.
+- Water surfaces: All water geometry is excluded from the outline pass.
+- Skybox: Sky dome and cloud geometry are excluded entirely from the outline pass.
+- Emissive VFX: Any geometry or particle in the MV_VFX_Additive or MV_VFX_Soft layer receives no outlines — emissive surfaces define their own edges via luminance contrast.
+- Foliage beyond LOD1 (>20m): Foliage geometry transitions to impostor billboards at LOD2, and impostors receive no outline rendering. Foliage outlines are also disabled at LOD1 to prevent aliasing on alpha-clipped leaf edges.
+## 5.7 Outline Anti-Flicker — Temporal Smoothing
+Outlines derived from depth+normal edge detection are susceptible to temporal flicker during character animation, as surface normals change frame-to-frame with skinning. Mooseville’s outline pass must include temporal anti-aliasing (TAA) smoothing of the outline buffer: the edge detection result is accumulated over 4 frames with a 0.25 blend weight per frame (exponential moving average). This eliminates single-frame flicker artifacts caused by animation without blurring the outline at stable camera positions. The TAA accumulation buffer for outlines is separate from the main scene TAA buffer and must be cleared on camera cuts.
+
+# 6. Character Rendering
+
+
+Section Intent: Define the complete rendering specification for Mooseville characters so that every character is the emotional center of their scene — readable, warm, expressive, and consistent at all distances and lighting conditions.
+
+## 6.1 Character Rendering Overview
+Mooseville characters are the emotional heart of the experience. Every rendering decision for characters prioritizes three things: readability at all distances, warmth and approachability at all lighting conditions, and expressiveness that works within the cel-shaded aesthetic. Characters must never feel like they belong to a different visual world than the environment — but within that shared world, they must always win the eye.
+## 6.2 Character Shader Layer Stack
+The MV_Character shader evaluates in the following order:
+- Base Albedo — Flat color from the character’s albedo texture (painted, not photographed). All character albedo is authored at ×1.0 in linear space.
+- Cel Diffuse Bands — 3-band cel shading applied via NDotL stepped evaluation. Shadow tint #6B3A1F; midtone = base albedo; highlight = albedo × 1.25, cream-tinted.
+- Rim Light — Warm amber (#FFB347) fresnel rim applied after diffuse. Never overdriven; max rim brightness 0.8.
+- Specular Dot — Single Blinn-Phong specular dot, gold-tinted, at specular power 32–64. Masked by specular mask texture (eyes, accessories, wet nose — not fur or fabric).
+- Emissive (Eyes / Accessories) — Eyes and magical accessories use emissive mask from albedo alpha channel. Emissive color must be warm (no cold emissive on hero characters). Catchlight is baked into eye emissive texture.
+- Outline — Applied in post-process after all scene rendering; width and color per Section 5 specification.
+## 6.3 Skin / Fur Rendering Rules
+- Non-primary characters: No subsurface scattering in any form. Shadow tint is neutral warm (#5A4030). Standard 2-band cel shading.
+- Primary characters (Moose family): A light SSS approximation (not true SSS) is achieved by biasing the shadow band color toward warm amber (#6B3A1F) rather than neutral dark. This is not a separate SSS pass — it is achieved entirely through shadow tint color selection in the MV_Character shader. This creates the quality of light “glowing through” the extremities (ears, muzzle, snout area) without the performance cost of real SSS.
+- Fur normal maps: Character fur uses a specialized fur-direction normal map that follows the hair flow direction across the body. Normal strength 0.35–0.50 only — never higher, as excess normal intensity creates a “bumpy” look inconsistent with soft storybook fur.
+## 6.4 Eye Rendering Specification
+
+EYE RENDERING SPEC — MV_Eye Shader
+•  Shader: Dedicated MV_Eye shader — do not use MV_Character on eye geometry.
+•  Layer 1: Iris flat color — cel-shaded with 3 bands (dark ring, mid iris, bright iris center). Iris cel bands follow the same pattern as character body but with finer gradation (0.01 smoothstep width).
+•  Layer 2: Specular catchlight — always visible, always warm white (#FFFDE7), positioned at the 10 o’clock position (upper-left quadrant of iris). Catchlight is a static texture element baked into the eye emissive, NOT derived from real-time lighting. This ensures characters always look “alive” regardless of scene lighting.
+•  Pupil: Soft-edged ellipse with 5% warm dark (#1A0F00) border ring. No hard edge on pupil boundary.
+•  Wet rim: Subtle specular on lower eyelid rim (lower waterline) — small Blinn-Phong dot at specular power 128, intensity 0.3.
+•  Scale rule: Eyes on Mooseville characters are 15–20% larger than anatomical reference for expressiveness. This is a deliberate design choice and must be preserved through all LOD levels.
+
+## 6.5 Hair / Mane Rendering
+- Shader: MV_Hair_Anisotropic — dedicated shader for all hair, mane, and tail surfaces.
+- Highlight type: Anisotropic specular highlight oriented along the hair flow direction (tangent-space, derived from UV flow direction). Highlight is a band, not a dot.
+- Highlight color: Always warm — within 30° hue of gold (#FFD700). Valid range: #FFB347 (amber) through #FFD700 (gold) through #FFEC8B (light gold). Never use white, silver, or cool-tinted hair highlights.
+- Opacity: Hair strands use alpha clip at 0.5. No semi-transparent hair strands. Hair uses sorted transparent rendering only for extreme-close-up cutscene shots (LOD0 only).
+- Wind: Hair receives light vertex-color wind animation (amplitude 0.01–0.03 world units, frequency higher than foliage) to simulate natural movement in shared wind system.
+## 6.6 Character LOD Specification
+
+LOD Level
+Polygon Count Range
+Shader Complexity
+Outline
+Shadow Casting
+Distance Trigger
+Notes
+LOD0
+8,000–15,000 tris
+Full MV_Character — 3-band, rim, specular, emissive
+Full 1.8px
+Yes (contact shadow)
+0–8m
+Hero quality; used in cutscenes and close-up gameplay
+LOD1
+4,000–6,000 tris
+Full MV_Character — 3-band, rim, no specular
+Full 1.8px
+Yes (contact shadow)
+8–20m
+Primary gameplay distance for most encounters
+LOD2
+1,500–2,500 tris
+MV_Character_NPC — 2-band, no rim, no specular
+1.0px, 70% opacity
+No
+20–45m
+Background characters and distant NPCs
+LOD3
+400–800 tris
+Flat cel — 1-band only
+0.5px, 40% opacity
+No
+45–80m
+Crowd fill; must pass silhouette readability check at 45m
+Impostor
+2 quads (billboard)
+MV_UI_Flat (unlit texture)
+No
+No
+>80m
+8-angle pre-rendered impostor; baked at LOD0 camera setup; used for background crowd only
+
+## 6.7 Cloth & Accessory Rendering
+- Fabric: All character fabric uses MV_Mat_FabricWool — roughness 0.75–0.85, metallic 0.0. Fabric weave pattern baked into normal map. No specular on fabric surfaces.
+- Gold accessories: Character gold accessories (belt buckles, antler rings, crowns) use MV_Mat_GoldAccent — metallic 0.90–1.0, roughness 0.15–0.30. Embossed normal map required.
+- Shadow casting: Accessories cast no real-time shadows. Their contact with the character body is handled by baked AO in the character’s albedo texture and baked ambient occlusion map.
+- LOD simplification: Accessory detail geometry (rivets, buckle details) is removed at LOD2 and beyond. Accessory silhouette must be preserved through LOD2; removed at LOD3 if not visible in silhouette.
+## 6.8 Character Lighting Overrides
+Characters receive a dedicated fill light rig that is baked into the MV_Character shader, not derived from scene light data. This is implemented as a secondary directional light evaluation in the shader, running separately from the scene light rig:
+- Fill light direction: Opposite the key light direction, 15°–25° elevation above horizon.
+- Fill light intensity: 15–25% of key light intensity.
+- Fill light color: Always warm — minimum color temperature equivalent of 4000K.
+- Purpose: Ensures characters never appear silhouetted against bright backgrounds; always retain dimensional form regardless of scene lighting state.
+- Override scenario: In cinematics, the character fill light rig intensity may be reduced to 0% to allow cinematic lighting full control — requires explicit flag in the cinematic sequence data.
+## 6.9 Facial Animation Rendering
+- Blend shape constraint: Blend shape deformation must not distort UV islands. UV coordinates on the face mesh must remain stable within 5% of their rest-pose position at all morph target extremes. Artists must validate UV stability using the UV distortion visualizer before submitting facial blend shapes.
+- Morph target normals: Vertex normals on facial blend shapes must be recalculated per-frame using the deformed mesh geometry. Baked rest-pose normals on morph targets are insufficient — they will cause incorrect shading on extreme expressions (surprise, anger, joy).
+- Expression shape count: Maximum 52 facial blend shapes per character at LOD0; reduced to 12 at LOD1; 0 (texture-swap only) at LOD2 and beyond.
+
+# 7. Environment Rendering
+
+
+Section Intent: Ensure that the Mooseville world breathes, lives, and grows — defining all rendering systems that make the environment feel like a place rather than a backdrop.
+
+## 7.1 Environment Rendering Philosophy
+The world of Mooseville breathes. Foliage sways, water shimmers, light dapples through the canopy in shifting patterns, and every surface carries the memory of weather and time. The environment must never read as a static backdrop — it is an active, living participant in the story. All environmental rendering decisions must serve this sense of aliveness while remaining within the cel-shaded visual language and performance budgets defined in this bible.
+## 7.2 Terrain Rendering
+- Splatmap system: Terrain uses a splatmap-based multi-material blending system. Maximum 4 layers per terrain chunk. Layer blending is linear; height-based blending bias is allowed to simulate material accumulation in crevices.
+- Normal maps: Terrain normal maps are baked at 4096×4096 per terrain chunk. Runtime normal blending between splatmap layers uses per-layer normal weights.
+- Macro variation: Large terrain areas use a distance-based tint overlay — a low-frequency color texture at 1 cycle per 50m world-space to prevent repetitive tiling appearance at aerial camera angles.
+- Terrain cel banding: 2-band cel (shadow/lit). Shadow threshold tied to the scene light direction — terrain must respond to time-of-day light direction changes.
+- Terrain holes: Terrain holes (for caves, tunnels) use dithered alpha masking. No hard-edge holes. Transition must blend to cave interior within 0.5m.
+## 7.3 Foliage Rendering Rules
+- Wind animation: All foliage uses vertex-color wind animation. The red channel of vertex color encodes wind influence weight (0 = no movement, 1 = full movement). Amplitude range: 0.02–0.08 world units. Frequency tied to global wind system parameter (shared across all foliage in scene).
+- Wind phase offset: Each foliage mesh instance receives a phase offset derived from world position to prevent synchronized movement across all plants simultaneously.
+- LOD transition: Foliage beyond 30m uses billboard impostors. Foliage casts no real-time shadows past LOD1 (beyond approximately 8m camera distance).
+- Translucency: All broad-leaf foliage uses translucency channel in MV_Mat_LeafBroad. Backlit translucency value 0.25–0.45. Grass and ground cover does not use translucency.
+- Alpha cutout: All foliage uses alpha clip (threshold 0.5). No semi-transparent foliage leaves (causes sorting issues). Smoothed alpha clip achieved via mipmapping, not alpha-to-coverage (too noisy at distance).
+## 7.4 Tree Rendering Specification
+
+Tree Component
+Material
+LOD0 (0–8m)
+LOD1 (8–20m)
+LOD2 (>20m)
+Special Rules
+Trunk
+MV_Mat_Bark
+Max 800 tris
+300 tris
+Billboard (trunk-only)
+Longitudinal grain UVs; AO baked; no LOD pop on trunk color
+Canopy
+MV_Mat_LeafBroad
+Max 2,400 tris (card-based)
+Max 800 tris
+Billboard impostor only
+Translucency active; opacity dither at LOD transition; no real-time shadow casting past LOD1
+Root structures
+MV_Mat_Bark + MV_Mat_StoneMoss (blend)
+Max 400 tris
+Removed
+Removed
+Roots only visible at LOD0 — hero-distance detail only
+Full Tree Total (LOD0)
+Mixed
+Max 3,600 tris total
+Max 1,100 tris total
+1 billboard quad
+Impostor atlas: 1024×1024 per species, 8 angles × 4 elevation steps
+
+## 7.5 Water Rendering
+All water surfaces use the MV_Water shader with the following specifications:
+- Normal scroll — Layer 1: UV scroll rate 0.02 UV units/second, direction aligned to current flow direction. Normal map: tileable water ripple, scale 4.0.
+- Normal scroll — Layer 2: UV scroll rate 0.013 UV units/second, direction rotated 35° off Layer 1 (diagonal counter-scroll). Normal map: same source, scale 7.0 (different tiling for variety). Opposite direction sign creates interference pattern.
+- Vertex displacement: Maximum 0.3m amplitude sinusoidal displacement. Displacement masked by shoreline proximity (no displacement within 0.5m of shore edge).
+- Foam mask: Shore foam rendered via depth-based shoreline detection (scene depth vs. water surface depth). Foam width 0.4m from shore. Foam texture scrolls in flow direction. Foam color warm white (#FFFDE7).
+- Depth color blend: Shallow color #6DBFA0 (warm aqua-green), deep color #0D4F3C (deep forest teal). Blend driven by water column depth, fully blended at 2.0m depth.
+- Specular/reflection: Planar reflection pass for hero water bodies (rivers, main lake). Cubemap reflection for small puddles and secondary water. No SSAO on water surface.
+## 7.6 Sky Rendering
+- Procedural sky: Sky uses a procedural sky dome with time-of-day parameters controlling gradient, sun disc, and atmospheric scattering simulation. No static sky cubemaps.
+- Color temperature rule: No pure white sky is permitted at any time of day. Minimum sky tint equivalent of 5500K at midday (warmest permissible “neutral” sky). Skies become progressively warmer toward dusk per Section 2.4.
+- Sun disc: Visible sun disc uses soft Gaussian bloom halo. Sun disc diameter 2.5° angular. Never pure white — minimum warm cream (#FFF8E7) at highest point.
+- Cloud rendering: Clouds use planar billboard cards with soft alpha blend. Cloud color follows sky gradient (lit undersides warm cream; shadowed undersides soft lavender-grey). No volumetric clouds on minimum-spec platforms.
+- Stars (night only): Star layer activates below 20% sun elevation. Stars are point sprites, white-warm (#FFF8E7), 50% opacity max to prevent reading as gameplay elements.
+## 7.7 Weather Rendering
+- Rain: Rain particles use MV_VFX_Soft shader — white-warm streaks, alpha blend, particle lifetime 0.3s, oriented along velocity direction. Screen-space wetness shader modifies surface roughness: -0.35 roughness reduction on wet surfaces. Wetness fades out over 30s after rain ends.
+- Fog: Height-based exponential fog. Fog density 0.003–0.008 depending on biome (see table 7.8). Fog color follows ambient temperature — never pure white, never pure grey. Always warm-tinted to biome ambient color.
+- Mist/low fog: Ground-level mist uses MV_VFX_Soft particles in low slow-moving sheets. Mist particles: saturation 0.05–0.10 (near-white), opacity 0.15–0.25 per particle, world-space simulation. Used in Emerald Forest biome at dawn.
+## 7.8 Biome Variation Table
+
+Biome
+Sky Tint (Base)
+Fog Color
+Ambient Color
+Key Light Direction
+Fog Density
+Special Rules
+Emerald Forest
+#B3D4E0 (cool-warm sky)
+#A8C4A0 (warm green haze)
+#3D5E2A (forest green ambient)
+25° elevation, 210° azimuth (SSW)
+0.006
+Heavy canopy occlusion; dappled light particle system active; mist at dawn
+Golden Meadow
+#FFF0B3 (warm pale yellow-sky)
+#F5E6A0 (warm golden haze)
+#C8A850 (golden ambient)
+35° elevation, 250° azimuth (WSW)
+0.003
+Pollen particle system active; grass wind amplitude doubled; no canopy occlusion
+Crystal Lakeshore
+#D0E8F0 (crisp blue-sky with warm tinge)
+#A8D0D8 (cool aqua haze with warm bias)
+#4A7A8A (cool-warm blue-green ambient)
+40° elevation, 200° azimuth (SSW)
+0.004
+Planar water reflection active; reduced fog density near water; subtle haze shimmer over lake
+Ancient Ruins
+#C8B88A (dusty warm ochre-sky)
+#8A7050 (dusty warm brown haze)
+#604030 (deep warm brown ambient)
+20° elevation, 190° azimuth (S-SSW)
+0.008
+Dust mote particles active; maximum fog density; no rain weather; special ancient emissive fungi lighting
+
+## 7.9 Environment LOD Strategy
+
+Asset Class
+LOD0 Budget
+LOD1 Distance
+LOD1 Budget
+LOD2 Distance
+LOD2 Budget
+Impostor Distance
+Large Props (>2m — boulders, carts, buildings)
+2,000–5,000 tris
+20m
+800–1,500 tris
+45m
+200–400 tris
+80m (buildings only)
+Small Props (<2m — barrels, logs, lanterns)
+400–800 tris
+12m
+100–200 tris
+30m
+Remove or 50 tris
+N/A (removed)
+Structural Elements (walls, floors, arches)
+600–2,000 tris per section
+25m
+200–600 tris
+50m
+100–200 tris
+N/A
+Hero Landmark (unique, scripted)
+5,000–12,000 tris
+30m
+2,000–4,000 tris
+60m
+500–1,000 tris
+N/A (always 3D)
+
+
+# 8. VFX Rendering
+
+
+Section Intent: Establish the visual language, shader rules, and budget constraints for all particle and visual effects so that Mooseville’s magic enhances the world without breaking its storybook consistency.
+
+## 8.1 VFX Philosophy
+Effects in Mooseville are magical and organic. They enhance the world without breaking the storybook aesthetic. VFX should feel like natural phenomena elevated to the edge of magic — falling leaves that catch the light a little too perfectly, fireflies that pulse in rhythm with the world’s breath, magical sparkles that feel like concentrated golden-hour light. VFX must never feel hard-edged, techno-industrial, or cold. They must always respect the emerald-and-gold palette and the warm, painterly world they inhabit.
+## 8.2 VFX Shader Types
+
+Shader Name
+Use Case
+Blend Mode
+Depth Test
+Outlines
+Notes
+MV_VFX_Additive
+Magic sparkles, energy glows, firefly light
+Additive
+Yes (depth read, no depth write)
+Never
+Overbright allowed up to 3.0 HDR; bloom will amplify naturally
+MV_VFX_Soft
+Smoke, breath steam, pollen, mist, dust
+Alpha blend (premultiplied)
+Yes (depth read, no write)
+Never
+Soft particle depth fade at 0.5m; must use soft-particle depth fade to prevent hard intersection with geometry
+MV_VFX_Distortion
+Heat shimmer, portal warp, water ripple impact
+Grab pass + offset
+Yes
+Never
+Distortion strength capped at 0.015 UV offset to prevent motion sickness; never on UI layer
+MV_VFX_Decal
+Footprints, splash rings, scorch marks, trail markers
+Multiply or overlay
+No (separate render layer)
+Never
+Decal render layer with no depth test; maximum 32 active decals per scene zone; 8-second lifetime before fade
+
+## 8.3 Particle Budget Table
+
+Effect Category
+Max Particle Count
+Max Emitters Active
+Simulation Space
+Priority
+Notes
+Ambient Atmosphere (pollen, dust, leaves)
+300 total
+4
+World space
+Low — first culled at performance pressure
+Always slow, gentle; saturation 0.05–0.15; culled beyond 30m
+Character Action (footsteps, jumps, ability)
+80 per event
+2 (one per active character)
+World space
+High
+Short lifetime 0.2–0.5s; warm desaturated tones for non-magic; emerald-gold for magic
+Environment Reaction (water splash, leaf rustle)
+120 per event
+6
+World space
+Medium
+Triggered by physics interactions; must pool and recycle emitters
+UI Feedback (reward, unlock, level up)
+200 total
+1 at a time
+Screen space
+High
+Gold sparkle (#FFD700) only on reward events; emerald sparks for progress events
+Gameplay Critical (trail, target indicator)
+50 per indicator
+3 maximum simultaneously
+World space
+Critical — never culled
+Must remain visible through all post-processing; readability over aesthetics
+Cinematic
+800 total
+16
+World or local space
+Cinematic only — gameplay suspended
+Budget lifted during cutscenes only; reverts to standard budget on gameplay resume
+
+## 8.4 Color Rules for VFX
+- Non-magical VFX (smoke, dust, breath, fallen leaves): Use desaturated warm tones. Saturation range 0.05–0.25 (low saturation, warm hue). Examples: warm grey smoke #B0A090, dusty tan #C8B090, pale warm leaf #D4C070.
+- Magical VFX: Must use the emerald-to-gold gradient range exclusively. No cool purples, blues, or pinks in standard magic VFX. Special rare events (Berry Purple biome — see Section 2) may use #7B1FA2 as a secondary accent to gold only.
+- Additive VFX contrast: Additive-blended particles naturally become brighter against dark backgrounds. All additive VFX must be tested against both dark forest and bright sky backgrounds and must remain aesthetically pleasing in both contexts.
+## 8.5 Magic VFX Specification
+
+MAGIC SPARKLE VFX SPEC — MV_VFX_Additive
+•  Blend mode: Additive only. Never alpha-blend for sparkle/glow VFX.
+•  Color range: #B5E853 (bright magic green) → #FFD700 (gold). Gradient shift over particle lifetime from green to gold.
+•  Particle size: 0.02m–0.15m. Size varies with distance from emitter center (smaller at edges, larger at core).
+•  Lifetime: 0.4–1.2 seconds. Longer for sustained ambient magic; shorter for impact/burst events.
+•  Orientation: Always face camera (billboard — camera-aligned). No world-space oriented sparkles.
+•  Texture: Soft star/diamond shape with Gaussian falloff. 4-pointed star preferred over round for legibility at small sizes.
+•  Emission curve: Burst at event start (0–0.1s high density), then trailing off with exponential decay.
+
+## 8.6 VFX and Outlines / Decals
+- VFX particles are excluded from the outline post-process pass via render layer exclusion. No outline edge detection is applied to VFX geometry.
+- MV_VFX_Decal renders on a separate decal render layer with depth test disabled. Decals use multiply or overlay blend against scene color buffer. Decal geometry must be offset 0.001m above the surface it projects onto to prevent z-fighting with surface geometry.
+## 8.7 Performance VFX Rules
+
+VFX PERFORMANCE RULE — Mandatory
+No VFX effect — including all its emitters, particles, and shader evaluation — may exceed 0.4ms GPU time per frame on minimum-specification hardware. Effects that exceed this budget must be optimized via: (1) reduced particle count, (2) simpler particle texture, (3) LOD-based particle culling, or (4) frame-rate-independent update (GPU particle simulation at half-rate for ambient effects). All VFX must be profiled on minimum-spec hardware before integration. VFX that cannot meet the 0.4ms budget at full quality must have a “Low” quality variant that meets the budget.
+
+
+# 9. UI Rendering
+
+
+Section Intent: Define the complete UI rendering standard so that the interface feels like a seamless extension of the Mooseville world — carved wood, gold leaf, and warm legibility — rather than a disconnected overlay.
+
+## 9.1 UI Rendering Philosophy
+Mooseville’s UI is an extension of the world — it should feel carved from wood and inlaid with gold leaf, not like a separate HUD bolted onto the game. Every UI element should feel as though a master craftsperson of Mooseville made it: panels have grain, borders have weight, interactive elements glint with warm gold, and typography is warm, readable, and never harsh. The UI must not feel digital, cold, or generic.
+## 9.2 UI Shader
+- Shader: All UI elements use MV_UI_Flat — an unlit, depth-test-disabled shader that always renders on top of the scene.
+- No lighting: No scene lighting, no shadows, no cel shading on UI elements. UI is self-contained and self-lit.
+- 9-slice scaling: All bordered UI panels (inventory slots, dialog boxes, HUD frames) use 9-slice scaling to preserve corner and border quality at all target resolutions. Non-9-sliced scaling of bordered UI panels is prohibited.
+- Render order: UI renders after all post-processing is applied to the scene. UI does not receive bloom, tone mapping, color grading, or vignette — those effects apply to the scene layer only.
+## 9.3 UI Color System
+
+Color Role
+Hex
+Usage
+Minimum Contrast Against
+UI Gold Primary
+#FFD700
+Interactive element outlines, header text, reward indicators, coin icons
+Must achieve 4.5:1 against UI background (#3E2723 or similar dark)
+UI Emerald Secondary
+#2E7D32
+Health bar fill, progress indicators, secondary button backgrounds
+Must achieve 4.5:1 against light text (#FFF8E7)
+Text Primary (Warm White)
+#FFF8E7
+Body text on dark backgrounds, dialog text, inventory descriptions
+Used on #3E2723 or #1B5E20 backgrounds minimum
+Text Secondary (Bark Brown)
+#5D3A1A
+Secondary labels, metadata text on light backgrounds (parchment, cream panels)
+Must achieve 4.5:1 against #FFF8E7 or #FFFDE7 backgrounds
+Danger / Error Red
+#C62828
+Low health indicator, error messages, danger zone markers
+Must achieve 4.5:1 against white/cream; never used on red background
+Success / Confirm Green
+#43A047
+Positive confirmations, completed quest markers, successful action feedback
+Must achieve 4.5:1 against dark backgrounds; never on pure green background
+Panel Background (Wood Dark)
+#3E2723
+Primary panel and inventory background
+Background — text must achieve minimum 4.5:1 against this
+Panel Background (Parchment)
+#FFF8E7
+Map overlay, readable document panels, dialog light mode
+Background — text must achieve minimum 4.5:1 against this
+
+## 9.4 UI Outline Specification
+- Interactive elements (buttons, slots, selectable items): 2.5px warm gold outline (#FFD700), opacity 100%. This outline pulses at 0.5Hz (alternating 100%→70% opacity) when the element is focused/hovered.
+- Text over dark backgrounds: 1.5px warm white (#FFF8E7) outline at 60% opacity on display text (>20px) appearing over complex backgrounds. Body text (<20px) relies on background panel rather than text outline.
+- Decorative/passive panels: 0px outline. Panel boundaries are defined by background fill contrast, not outlines.
+- Disabled elements: 1.5px outline at 30% opacity, desaturated gold (#D4C080). Never remove the outline from disabled interactive elements — the muted outline communicates disabled state while preserving layout.
+## 9.5 UI Typography Rendering
+- Font: Calibri (body text, labels), Candara (display headers, dialog speaker names). Both fonts from the ClearType Collection — no external fonts.
+- Anti-aliasing mode: Subpixel anti-aliasing for body text (10–16pt); smooth (grey-scale) AA for display text (>18pt) and text rendered at non-native scale.
+- Hinting: Grid-fitted hinting for body text to preserve pixel alignment and legibility at small sizes; auto-hinting for display text.
+- Minimum legible size at 1080p: 14px for body text, 20px for headers and dialog text, 10px absolute minimum for any text element. Text below 14px must use a simplified text style (no outline, maximum contrast background).
+- Line height: 1.4× for body text, 1.2× for headers. No text elements with line-height below 1.2.
+## 9.6 Icon Rendering Specification
+- Art resolution: All icons are authored at 2× their display resolution. A 64×64 display icon is authored at 128×128 and downsampled. This ensures clean sub-pixel details at display size.
+- Drop shadow: All icons use a drop shadow: offset 2px at 45° (down-right), blur radius 2px, opacity 0.35, color warm near-black (#1A0F00). Shadow is baked into the icon texture — not applied as a runtime effect.
+- Color rule: No icon uses pure black (#000000) or pure white (#FFFFFF) as primary colors. Darkest icon color: #1A0F00. Lightest icon color: #FFF8E7 (warm cream).
+- Icon outline: All icons have a 1.5px warm near-black internal outline baked into the art to preserve legibility against varying background panels.
+- Icon atlas: Icons are packed into sprite atlases of 2048×2048. Maximum 64 icons per atlas. Minimum 4px padding between icons in atlas.
+## 9.7 Inventory and Map Rendering
+- Inventory: The inventory grid background uses a tiling wood-panel texture (MV_Mat_WoodOld style, at 1 tile per 80px at 1080p). Individual item slots use a lighter wood tone with embossed border. Item slot size minimum 64×64px at 1080p.
+- Map: Map overlay uses a parchment-shader panel (MV_UI_Flat with parchment albedo #FFF8E7, slight warm vignette at edges simulating page curl and edge burn). Map edge uses an edge-burn effect — darkening to #8D6E63 at the outer 10% of the map panel. Map text uses Cambria italic at 12px minimum.
+- Map icons: All map icons rendered at 2× art resolution. Map uses its own icon atlas separate from gameplay UI icons.
+## 9.8 Screen-Space Effects During Gameplay
+- Vignette: Subtle vignette — opacity 0.12, color warm brown (#5D3A1A), feathered from 70% screen radius to edge. Applied to scene layer only; not to UI layer.
+- No chromatic aberration: Chromatic aberration is prohibited in Mooseville. It conflicts with the clean, storybook aesthetic and causes visual discomfort.
+- No film grain: Film grain is prohibited. Mooseville is a clean, illustrated world — grain reads as technical artifact, not stylistic choice.
+- No motion blur on UI: The UI layer never receives motion blur. Scene layer motion blur is disabled during standard gameplay (enabled only in specific cinematic sequences where approved by rendering director).
+- Damage/impact flash: Damage feedback uses a brief full-screen tint (red #C62828, opacity 0.18, duration 0.25s ease-out). This tint applies to scene layer only — UI remains unaffected.
+## 9.9 Accessibility
+- All UI text must achieve a minimum 4.5:1 contrast ratio (WCAG AA) against its immediate background at all times.
+- Interactive elements must have a minimum 44×44px touch target regardless of visual size. Touch targets may be larger than the visible element.
+- Critical gameplay information (health, timer) must never rely on color alone — always paired with icon, text, or shape indicator to support color-blind players.
+- All interactive elements must be distinguishable by shape and position in addition to color.
+- UI must support a High Contrast Mode that increases all text outlines to 2.5px and reduces decorative texture opacity to 30% on all panels.
+
+# 10. Scene Composition & Camera Rules
+
+
+Section Intent: Define the compositional and camera standards that ensure every gameplay moment and cinematic frame of Mooseville is framed as a painting — intentional, beautiful, and readable.
+
+## 10.1 Compositional Philosophy
+Every scene in Mooseville is framed as a painting. The rule of thirds is always active. Hero subjects are positioned at power points (intersections of the thirds grid). Depth is created through foreground, midground, and background layering. The eye should be led naturally through the frame from a foreground anchor, through a midground subject, to a background point of interest. No scene should feel accidental in its composition — every gameplay camera position, every cinematic angle, every environmental staging should feel curated.
+## 10.2 Camera Parameters for Gameplay
+
+Parameter
+Value / Range
+Platform Notes
+Rationale
+Field of View (FOV)
+65°–75° (horizontal)
+65° on Console/Mobile, 75° on PC; user-adjustable ±5° on PC
+Wider than typical for a storybook game feel without fisheye distortion
+Near Clip Plane
+0.1m
+All platforms
+Tight near clip for close-up prop interaction without clipping
+Far Clip Plane
+800m
+All platforms
+Sufficient for all biome sizes; sky dome renders beyond this
+Camera Smoothing
+Critically damped spring, damping 0.15s
+All platforms
+No snappy or instant camera movements; always smooth transitions
+Fisheye Distortion
+0.0 (prohibited)
+All platforms
+Fisheye distortion conflicts with storybook aesthetic
+Camera Tilt Limit
+±15° roll maximum
+All platforms; cinematic only
+Dutch angle allowed only in specific cinematic shots with director approval
+
+## 10.3 Depth of Field Rules
+- Gameplay: DoF is never active during gameplay. Player control must never be accompanied by bokeh blur — this creates confusion about what is and is not interactable.
+- Cinematics only: DoF is enabled only during cutscenes and cinematic sequences.
+- Bokeh shape: Circular bokeh. No hexagonal or polygonal aperture shapes — they feel mechanical and undermine the organic world.
+- Highlight threshold: Bokeh highlights at HDR value ≥ 1.5 (bright specular and emissive highlights bloom into bokeh circles). Below 1.5, DoF is smooth Gaussian blur without bokeh shape.
+- Focus distance control: Cinematic DoF focus distance animated via spline curve in the cutscene sequence. Never instant focus shifts — minimum 0.5s ease between focus distances.
+## 10.4 Post-Processing Stack
+The following is the mandatory post-processing evaluation order. Steps must not be reordered.
+
+Order
+Effect
+Key Settings
+Platform Notes
+1
+Temporal Anti-Aliasing (TAA)
+Blend weight 0.1; jitter pattern 8-sample Halton; velocity reprojection enabled
+All platforms. FXAA fallback on Mobile.
+2
+SSAO
+Strength 0.35–0.55, radius 0.4–0.8m; warm green tint on AO
+Disabled on Mobile (baked AO only)
+3
+Depth of Field
+Cinematic only; circular bokeh; highlight threshold 1.5
+All platforms in cinematic mode only
+4
+Bloom
+Threshold 0.85, intensity 0.4, scatter 0.7; max 15% frame luminance
+Reduced intensity 0.25 on Mobile
+5
+Tone Mapping (ACES)
+Black point 0.01, white point 1.0; no blacks crushed below 3% luminance
+All platforms — must not be disabled or substituted
+6
+Color Grading (LUT)
+Warm golden grade; 32×32×32 LUT; midtones +5° yellow-orange, shadows +3° deep green
+All platforms
+7
+Vignette
+Opacity 0.12, warm brown #5D3A1A, feathered from 70% screen radius
+All platforms; reduced to 0.07 on Mobile
+8
+UI Composite
+UI layer composited on top of all scene post-processing; UI receives no post-processing effects
+All platforms
+
+## 10.5 Bloom Specification
+- Threshold: 0.85 (HDR luminance). Only surfaces brighter than 0.85 HDR contribute to bloom.
+- Intensity: 0.4 — conservative; bloom should enhance without dominating. Mooseville’s world glows gently, not aggressively.
+- Scatter: 0.7 — wide bloom scatter for soft, painterly glow rather than tight halos.
+- Maximum bloom luminance: Bloom contribution must never exceed 15% of total frame luminance. If exceeded, reduce emissive brightness on offending sources.
+- Bloom color tint: Warm — bloom inherits source color. No white bloom override. No cold-tinted bloom.
+## 10.6 Tone Mapping
+- Method: ACES filmic tone mapping. This is the Mooseville standard and must not be substituted with Reinhard, GT, or custom tone mapping operators without explicit Rendering Director approval.
+- Black point: 0.01 — no absolute blacks. Shadows retain warmth and detail.
+- White point: 1.0 (standard ACES white). Do not push white point below 0.9 (creates grey, washed-out look).
+- Black crush rule: No scene element may be crushed below 3% luminance after tone mapping. If shadows appear too dark, add warm ambient fill rather than adjusting the tone mapping curve.
+## 10.7 Color Grading LUT
+- LUT Resolution: 32×32×32 (industry standard). Higher resolution LUTs are accepted but not required.
+- Midtone grade: +5° hue rotation toward yellow-orange (warm midtones). This is the primary driver of Mooseville’s “golden” feel.
+- Shadow grade: +3° hue rotation toward deep green (shadows have forest green undertone, not grey or blue). This preserves the emerald identity in shadow areas.
+- Highlight grade: Highlights preserved near neutral — minimal grade on highlights to prevent overwarming bright surfaces. Specular highlights should retain their source color accurately.
+- Saturation: +5% overall saturation boost applied in LUT. Do not pre-saturate textures to compensate — LUT saturation handles world-wide saturation enrichment.
+## 10.8 Cinematic Framing Rules
+- Letterbox aspect ratio: 2.35:1 for all cinematic and cutscene sequences. Letterbox bars rendered warm dark brown (#1A0F00), not pure black.
+- Action safe zone: All animated content must remain within the 90% action safe zone.
+- Title safe zone: All text, subtitles, and UI indicators must remain within the 85% title safe zone.
+- Shot composition: All cutscene shots must include a composition review pass. Reference the rule of thirds, leading lines, and Mooseville’s visual pillars when framing each shot.
+## 10.9 Forbidden Composition Elements
+
+FORBIDDEN COMPOSITION PRACTICES
+1.  Perfectly centered symmetrical framing for dramatic moments — Centered symmetry reads as comedy or parody; dramatic and emotional beats must use off-center compositions.
+2.  Floating UI during cutscenes — All HUD UI elements must be hidden during cutscenes. No health bars, quest markers, or icons visible during cinematic sequences.
+3.  Camera clipping through geometry — No camera position may pass through any collision mesh. All camera paths in cutscenes must be validated for geometry intersection.
+4.  Empty sky as primary composition element — The sky should be background, not subject. Frames that are >60% sky without a strong foreground or character subject are considered unframed and must be revised.
+5.  Camera shake during ambient gameplay — Camera shake is restricted to specific high-impact gameplay events (large landing, explosion). Ambient idle camera shake is prohibited.
+6.  Horizon tilt beyond ±5° during gameplay — Dutch angle is a cinematic tool only. Gameplay camera must maintain near-horizontal horizon at all times for spatial clarity.
+
+
+# 11. Performance & LOD Strategy
+
+
+Section Intent: Define the performance targets, budgets, and optimization strategies that ensure Mooseville runs smoothly on all target platforms without compromising the visual quality bar established in this bible.
+
+## 11.1 Performance Targets Table
+
+Platform
+Target FPS
+Render Resolution
+Shadow Quality
+Draw Call Budget/Frame
+Triangle Budget/Frame
+Texture Memory Budget
+PC High
+60 FPS (locked)
+1440p or 4K (user setting)
+3-cascade CSM, 2048 shadowmap, PCF 16-tap
+2,500
+6,000,000
+4,096 MB
+PC Medium
+60 FPS (locked)
+1080p
+2-cascade CSM, 1024 shadowmap, PCF 4-tap
+1,800
+3,500,000
+2,048 MB
+Console / Mobile
+30 FPS (locked)
+720p–1080p (dynamic resolution)
+1-cascade CSM, 512 shadowmap, baked AO only
+900
+1,500,000
+1,024 MB
+
+## 11.2 LOD Transition Rules
+- Transition method: LOD crossfade using dither dissolve — the outgoing LOD dithers out while the incoming LOD dithers in over a 0.5m camera-movement crossfade distance. Hard LOD pop transitions are never acceptable in any shipped content.
+- LOD0 → LOD1: At 8m camera distance.
+- LOD1 → LOD2: At 20m camera distance.
+- LOD2 → LOD3: At 45m camera distance.
+- LOD3 → Impostor: At 80m camera distance (applicable to trees, large props, and background architecture only).
+- LOD bias by platform: Console/Mobile applies a −1 LOD bias (objects transition to lower LODs at shorter distances). PC High applies +0 bias (standard distances).
+## 11.3 Impostor / Billboard Rules
+- All impostors baked from the LOD0 mesh at 8 rotation angles (every 45°) × 4 elevation steps (0°, 15°, 30°, 45°).
+- Impostor atlas resolution: 1024×1024 per tree species. Multiple species may share a 2048×2048 atlas with 4 species per atlas at 512×512 each.
+- Impostor textures include: Albedo, Normal (approximate), and Alpha mask. No roughness or metallic on impostors.
+- Impostor normal is derived from the LOD2 simplified mesh normal bake, not the LOD0 mesh — this prevents excessively sharp normal features on billboards.
+- Impostors must be regenerated whenever the source mesh LOD0 changes shape significantly (more than 10% vertex displacement in any region).
+## 11.4 Occlusion Culling
+- Method: Engine-native occlusion culling (Umbra-based or equivalent). Mandatory for all platforms.
+- Minimum occluder size: 2m³ — objects smaller than this do not participate as occluders (computational cost exceeds benefit). Characters are not occluders.
+- Maximum portal count per scene zone: 32 portals. Each biome zone is treated as one scene zone. Zones are separated by portal planes at transition points.
+- Occlusion latency: 1-frame occlusion latency is acceptable (objects may be visible for 1 frame before occlusion culling activates). 2-frame latency maximum on Mobile.
+## 11.5 Batching Strategy
+- Static batching: Applied to environment props with fewer than 500 triangles that share the same material instance. Maximum 64 meshes per static batch.
+- GPU instancing: Mandatory for all foliage (grass, ferns, flowers) and repeating rocks. Instancing data submitted via compute-buffer per frame. All instanced objects must share the same material instance (variation via per-instance properties: tint, roughness offset).
+- Dynamic batching: Disabled. Mooseville uses SRP Batcher (or equivalent render pipeline batcher) instead. Dynamic batching is incompatible with per-instance material properties needed for variation rules.
+- Draw call count by category (PC Medium target — 1,800 total):
+## 11.6 Draw Call Budget Breakdown
+
+Category
+PC High Budget
+PC Medium Budget
+Console/Mobile Budget
+Notes
+Terrain
+80
+60
+30
+Per terrain chunk; max 4 chunks visible simultaneously
+Foliage (instanced)
+400
+280
+100
+GPU instancing reduces effective draw calls; budget is instance batch count
+Characters (up to 8 NPCs visible)
+320
+240
+120
+Per character ×2 (body + outline pass)
+Environment Props
+900
+700
+400
+Static batched where possible; largest category
+VFX
+300
+200
+100
+Particle systems + decals; pooled and reused
+UI
+150
+120
+80
+Batched sprite atlas draws; atlas packing reduces this significantly
+Shadow Passes
+350
+200
+70
+Per shadow cascade; shadow caster only (simplified geometry)
+
+## 11.7 Memory Streaming Rules
+- Texture streaming: All textures above 256×256 are streamed. Streaming budget per zone: 512MB on PC High, 256MB on PC Medium, 128MB on Console/Mobile.
+- Maximum uncompressed texture memory: No single texture may exceed 64MB uncompressed. Textures approaching this limit require lead review.
+- Mip bias per platform: PC High: 0 (full resolution streaming). PC Medium: +1 mip bias (one mip below max). Console/Mobile: +2 mip bias (two mips below max).
+- Zone streaming: Scene zones stream in 30m ahead of the player’s current zone boundary. Zone-out streaming begins 50m past zone boundary. Streaming pop artifacts must not be visible at 30m streaming distance.
+## 11.8 Shader Variant Rules
+- Maximum 4 shader keyword permutations per shader. Keyword combinations must be evaluated — 4 keywords at 2 states each = 16 variants maximum. All 16 must be acceptable.
+- Unused shader variants are stripped at build time using the shader variant stripping tool. No variant stripping may be skipped in production builds.
+- No runtime shader compilation. All shaders compile at load time for the specific scene or at first-launch shader warm-up. Mid-session shader compilation causes hitches and is prohibited in shipped builds.
+- Shader warm-up list must be maintained by the tech art team and reviewed before each platform submission.
+## 11.9 Profiling Checkpoints — Mandatory Gates
+
+MANDATORY PROFILING GATES
+1.  Pre-Alpha Art Lock: First-pass performance profile on all target platforms. Identify all assets currently over budget. No new content created until over-budget assets are resolved.
+2.  Alpha Content Freeze: Full profiling run on all biomes simultaneously loaded. Validate draw call budgets, LOD transitions, and memory streaming. All assets must meet LOD spec.
+3.  Beta Content Freeze: Complete platform performance test. All post-processing effects enabled. VFX particle budgets validated at maximum simulated density. No regressions from Alpha gate.
+4.  Pre-Final Optimization Pass: Dedicated 2-week optimization sprint. Shader variant stripping. Texture compression verification. Impostor atlas regeneration for any changed meshes.
+5.  Gold Candidate Submission: Final platform certification performance test. Must maintain target FPS for minimum 30 consecutive minutes on a full playthrough sequence per platform. Zero frame-rate drops below target −10% threshold.
+6.  Post-Launch Patch Gate: Any patch that includes new art assets must pass a lightweight profiling gate (5-minute profile run, draw call count check, memory check) before submission.
+
+
+# 12. Texture Standards
+
+
+Section Intent: Establish non-negotiable texture format, compression, resolution, and naming standards so that texture assets are consistent, optimized, and correct across all platforms from first import.
+
+## 12.1 Texture Format Table
+
+Texture Type
+Source Format
+Engine Format (PC)
+Engine Format (Console/Mobile)
+Mip Generation
+Max Resolution
+Notes
+Albedo / Diffuse
+PNG (linear, 8-bit per channel)
+BC3 (DXT5) or BC7
+ASTC 6×6
+Full mip chain, box filter for environment; Kaiser for characters
+2048×2048 (env), 1024×1024 (characters)
+All authored in linear color space; no pure white or black per Section 12.2
+Normal Map
+PNG (OpenGL Y-up, 8-bit per channel)
+BC5 (RG compression, reconstruct B in shader)
+ASTC 4×4
+Full mip chain, Kaiser filter
+2048×2048 (env), 1024×1024 (characters)
+Must be authored at 2× final resolution and downsampled; Green channel = up
+Roughness / Metallic / AO (packed)
+PNG (linear, 8-bit per channel)
+BC7 or BC4 per channel
+ASTC 6×6
+Full mip chain, box filter
+2048×2048 (env), 1024×1024 (characters)
+Channel packing: R=Roughness, G=Metallic, B=AO, A=unused or emissive mask. See 12.4
+Emissive
+PNG (linear, 8-bit; HDR as EXR if >1.0)
+BC6H (for HDR), BC7 (for LDR)
+ASTC 6×6
+Full mip chain
+512×512 (most emissives)
+Maximum HDR brightness authored at 2.0; over-bright emissives must use EXR source
+UI Sprite Sheet
+PNG (8-bit, premultiplied alpha)
+BC7 with alpha
+ASTC 4×4
+No mips (UI renders at native resolution)
+2048×2048 per atlas
+Authored at 2× display resolution; 4px padding between sprites; premultiplied alpha only
+Terrain Splatmap
+PNG (8-bit RGBA, linear)
+BC7
+ASTC 6×6
+Full mip chain, box filter
+4096×4096 per terrain chunk
+RGBA channels = 4 terrain layer blend weights; must sum to 1.0 across channels
+VFX Flipbook
+PNG (8-bit RGBA, linear, premultiplied alpha)
+BC7 with alpha
+ASTC 4×4
+3 mip levels only (VFX rarely viewed at extreme distance)
+2048×2048 (8×8 grid at 256px per frame)
+Maximum 64 frames per flipbook; frame layout must be documented in filename suffix
+Impostor Atlas
+PNG (8-bit RGBA, linear)
+BC7 with alpha
+ASTC 6×6
+Full mip chain, Kaiser filter
+1024×1024 per species (or 2048×2048 for 4-species atlas)
+8 angles × 4 elevations = 32 views per species; regenerate when source mesh changes
+
+## 12.2 Albedo Guidelines
+- No pure white: Maximum albedo channel value is 240/255 (0.94 normalized). Pure white washes out under bloom and tone mapping, losing all surface detail.
+- No pure black: Minimum albedo channel value is 15/255 (0.059 normalized). Pure black prevents any ambient light read-back, creating dead, flat surface areas.
+- Linear color space: All albedo authored in linear color space. sRGB conversion happens on import to the engine. Never author albedo in gamma-corrected color space — this causes double-gamma and washed-out colors.
+- Maximum saturation (environment albedo): Maximum saturation for environment surface albedo is 210/255 on any single channel (roughly 82% HSV saturation). Character albedo may reach up to 240/255 on primary color channels for costume accents.
+## 12.3 Normal Map Convention
+- Convention: OpenGL normal map convention (Y-up). Green channel = up (towards light). Red channel = right.
+- Authoring resolution: All normal maps authored at 2× their final shipped resolution. A 1024×1024 shipped normal is authored and baked at 2048×2048, then downsampled on export.
+- Channel verification: Green channel = up must be visually verified on every normal map before submission. A simple lit sphere preview confirms correct orientation. Inverted green channels are a common error that causes light to appear to come from underground.
+- Downsampling filter: Normal maps must use a tangent-space-aware downsampling filter (normalize after downsampling) to preserve correct normal vector lengths in mip levels.
+## 12.4 Channel Packing Conventions
+
+Packed Texture Type
+Red Channel (R)
+Green Channel (G)
+Blue Channel (B)
+Alpha Channel (A)
+PBR Packed (ORM)
+Roughness
+Metallic
+Ambient Occlusion (baked)
+Emissive mask (0=no emissive, 1=full emissive)
+Foliage Packed
+Translucency weight
+Wind influence weight
+AO baked
+Alpha clip mask
+Terrain Splatmap
+Layer 0 weight
+Layer 1 weight
+Layer 2 weight
+Layer 3 weight
+Character Detail Mask
+Specular mask
+Rim light mask (0=no rim, 1=full rim)
+AO baked
+Emissive mask
+
+## 12.5 Texture Tiling Rules
+- No texture may tile visibly at normal gameplay camera distances (within 15m player view distance).
+- Maximum visible tile frequency: once per 4m in world space. A 2×2m tile pattern on a 10m wall is a violation.
+- Large surfaces (>8m in any dimension) must use macro variation overlays: a secondary low-frequency color/detail texture layered at 1 cycle per 20–50m to break tiling perception.
+- Tiling verification: All environment textures must pass a tiling check in-engine at 15m player distance before submission. The “squint test” (reviewing the scene with eyes slightly unfocused) is an effective tiling detection method.
+## 12.6 UV Mapping Rules
+- Lightmapped objects: No UV overlaps on any object that receives baked lighting. UV island overlap causes incorrect lightmap baking.
+- Unique surface UVs: Hero props and architectural elements use unique (non-tiling) UV layout in 0–1 UV space. Allows unique texture detail and decal projection.
+- Tileable material UVs: Terrain and large repeating surfaces may use tiling UVs. Tiling UVs must respect the 4m-per-tile maximum frequency rule.
+- UV seam placement: UV seams must be placed in areas of low visual prominence — undersides, back faces, crevices. No UV seams on forward-facing principal surfaces.
+- UV density consistency: Maintain consistent texel density across assets of the same category. Reference density: environment props at 512 texels per meter, characters at 1024 texels per meter at LOD0.
+## 12.7 Mip Map Rules
+- Full mip chain: Always generate the complete mip chain down to 1×1 for all textures. Partial mip chains cause rendering artifacts at distance and are never acceptable.
+- No sharpen filter on mips: Sharpening during mip generation creates aliasing halos at distance. Use box filter (smooth surfaces) or Kaiser filter (detail/normal maps) only.
+- Mip level 0 enforcement: When profiling, disable mip streaming and verify that mip level 0 (highest resolution) is never needed at gameplay camera distances beyond 5m for environment surfaces. If LOD0 textures are being streamed at 15m, the mip bias is incorrect.
+## 12.8 Texture Naming Convention
+Format: [Project]_[AssetType]_[AssetName]_[Variant]_[TextureType].[ext]
+Example: MV_Env_TreeOak_A_ALB.png
+
+Suffix Code
+Texture Type
+Example
+_ALB
+Albedo / Diffuse
+MV_Env_BoulderMoss_A_ALB.png
+_NRM
+Normal Map
+MV_Char_MooseMom_A_NRM.png
+_ORM
+Packed: Roughness/Metallic/AO
+MV_Env_WoodOld_A_ORM.png
+_EMI
+Emissive Map
+MV_Env_FungusGlow_A_EMI.png
+_MSK
+Detail / Feature Mask
+MV_Char_MooseDad_A_MSK.png
+_SPL
+Terrain Splatmap
+MV_Ter_ForestZone01_A_SPL.png
+_FLP
+VFX Flipbook
+MV_VFX_Sparkle_A_FLP.png
+_IMP
+Impostor Atlas
+MV_Env_TreeOak_A_IMP.png
+_UI
+UI Sprite Sheet
+MV_UI_Icons_Inventory_A_UI.png
+
+
+# 13. Naming Conventions & Asset Taxonomy
+
+
+Section Intent: Establish a complete, unambiguous naming and taxonomy system so that every asset in the Mooseville project can be uniquely identified, located, and understood without opening it.
+
+## 13.1 Asset Naming Master Table
+
+Asset Category
+Prefix
+Example Name
+Notes
+Characters (hero)
+MV_Char_
+MV_Char_MooseMom_LOD0.fbx
+Character name + LOD suffix
+Characters (NPC)
+MV_NPC_
+MV_NPC_Villager_Blacksmith_A_LOD0.fbx
+Role + variant letter + LOD
+Environment Props
+MV_Env_
+MV_Env_BarrelWood_A_LOD0.fbx
+Prop type + variant + LOD
+Terrain Assets
+MV_Ter_
+MV_Ter_ForestGround_Mossy_A.fbx
+Biome + material descriptor + variant
+Foliage
+MV_Fol_
+MV_Fol_TreeOak_A_LOD0.fbx
+Plant type + species variant + LOD
+VFX Particles
+MV_VFX_
+MV_VFX_MagicSparkle_Burst_A.vfx
+Effect name + behavior descriptor + variant
+Shaders (Master)
+MV_Shd_
+MV_Shd_Character.shader
+Master shaders only; no prefix for derived instances
+Materials (Instances)
+MV_Mat_
+MV_Mat_WoodOld_ForestBrown_A.mat
+Material type + color descriptor + variant
+Textures
+MV_[AssetType]_
+MV_Env_TreeOak_A_ALB.png
+Full naming convention per Section 12.8
+Meshes (raw)
+MV_Msh_
+MV_Msh_BoulderLarge_A_LOD0.fbx
+Source FBX mesh files only
+Rigs / Skeletons
+MV_Rig_
+MV_Rig_MooseHero_v001.fbx
+Character name + version number
+Animations
+MV_Anim_
+MV_Anim_MooseHero_Walk_F_v001.fbx
+Character + action + facing (F/B/L/R) + version
+UI Elements
+MV_UI_
+MV_UI_HUD_HealthBar_A.png
+UI category + element name + variant
+
+## 13.2 Version and Variant Suffixes
+
+Suffix
+Meaning
+Example
+_A / _B / _C
+Design variants (different visual design, same function)
+MV_Env_BarrelWood_A, MV_Env_BarrelWood_B
+_LOD0 / _LOD1 / _LOD2 / _LOD3
+Level of detail mesh levels
+MV_Env_TreeOak_A_LOD0.fbx
+_IMP
+Impostor / billboard version
+MV_Fol_TreeOak_A_IMP.fbx
+_v001 / _v002
+Iteration versioning (source files only)
+MV_Rig_MooseHero_v003.fbx
+_HI / _LO
+High and low poly mesh pair (for baking workflow)
+MV_Env_BarrelWood_A_HI.fbx, _LO.fbx
+
+## 13.3 File Extension Conventions
+
+Asset Type
+Source Format
+Engine Runtime Format
+3D Meshes
+.fbx (source DCC export)
+Engine mesh asset (engine-specific binary)
+Textures
+.png (source, lossless)
+.dds (PC), .astc (Console/Mobile)
+Shaders
+.hlsl (source shader code)
+Engine shader/material asset
+Texture Source (layered)
+.psd (Photoshop), .spp (Substance Painter)
+Source files go in /Source/ only — never in /Art/
+VFX Systems
+Engine-native VFX asset format
+Same (engine-native)
+Animations
+.fbx (source export)
+Engine animation asset (engine-specific)
+
+## 13.4 Recommended Folder Structure
+
+Path
+Contents
+/Art/Characters/Hero/
+Hero character meshes, materials, textures (LOD0–LOD3)
+/Art/Characters/NPC/
+NPC meshes, materials, textures organized by role
+/Art/Environment/Biomes/[BiomeName]/
+Per-biome environment assets
+/Art/Environment/Props/
+Shared prop assets usable across biomes
+/Art/Foliage/
+All foliage — trees, grass, ferns, flowers
+/Art/VFX/
+All VFX systems and particle textures
+/Art/UI/
+All UI sprite atlases, UI material instances, UI icons
+/Shaders/Masters/
+All master shader files (MV_Shd_ prefix)
+/Shaders/Instances/
+All material instances (MV_Mat_ prefix)
+/Source/Characters/
+Character .psd, .spp, .zbr source files — NOT in /Art/
+/Source/Environment/
+Environment source layered files — NOT in /Art/
+/DEV/
+Development-only assets (DEV_ prefix); stripped from shipping build
+
+## 13.5 Reserved Name Prefixes
+
+Prefix
+Meaning
+Shipping?
+MV_
+Mooseville production asset — approved for shipping
+Yes
+DEV_
+Development-only asset (debug meshes, test levels, performance grids)
+No — stripped at build
+TEMP_
+Temporary/in-progress asset — not shippable; must be replaced before content lock
+No — blocked at content lock
+PLACEHOLDER_
+Placeholder blocked-out geometry; no production textures or materials
+No — must be removed or replaced
+TEST_
+Test scenes, shader test assets, QA validation levels
+No — excluded from shipping build
+OLD_
+Deprecated assets retained for reference; do not use in any active scene
+No — quarantined in /Archive/
+DLC_
+Assets reserved for downloadable content — not in base game build
+DLC build only
+PROTO_
+Prototype/concept exploration assets; not production-quality
+No — prototype branch only
+
+## 13.6 Naming Anti-Patterns
+
+NAMING ANTI-PATTERNS — Never Do This
+1.  Spaces in filenames — “Moose Mom Rig.fbx” → Use underscores only: MV_Rig_MooseMom_v001.fbx
+2.  Generic enumerated names — “mesh_001.fbx”, “texture_final.png” → Every asset name must be descriptive and unique.
+3.  Duplicate names across folders — Two different assets named MV_Env_Rock_A.fbx in different directories will cause import conflicts and reference ambiguity.
+4.  Version numbers in base names — “MV_Char_MooseMom_v3_FINAL_v2.fbx” → Version numbers belong only in source files under /Source/. Engine assets use _A/_B/_C variant suffixes only.
+5.  Abbreviations without definition — “MV_Env_TrBig_A.fbx” → All asset names must be unambiguous without a decoder ring. Write out “Tree” in full.
+6.  Mixed case conventions — “mv_Env_treeOak_a.fbx” → All asset names use PascalCase for name segments, underscores as segment separators.
+7.  Texture type embedded in asset name body — “MV_Env_TreeOak_Albedo_A.png” → Texture type goes as a suffix only: MV_Env_TreeOak_A_ALB.png
+8.  Artist initials or personal identifiers — “MV_Env_Rock_JK.fbx” → Assets are not owned by individuals. No initials, no personal suffixes.
+
+
+# 14. Pipeline Rules & Workflow Standards
+
+
+Section Intent: Define the production pipeline from digital content creation through QA and integration, ensuring every asset that enters the engine is correct, optimized, and production-ready.
+
+## 14.1 Art-to-Engine Pipeline Overview
+The Mooseville art pipeline follows a linear validation model: no asset progresses to the next stage until it passes all checks at the current stage. The pipeline stages are:
+- DCC Authoring — Asset created in Blender, Maya, ZBrush, Substance Painter, or approved DCC tool.
+- Pre-Export Validation — Artist validates polygon count, UV layout, naming, pivot, scale, and mesh cleanliness.
+- Export (FBX / PNG) — Asset exported per export standards (Section 14.2). No automated export scripts bypassing validation.
+- Import Validation (Engine) — Automated import validation checklist runs on ingest (Section 14.3). Assets failing validation are flagged and returned to artist.
+- Material Assignment — Tech artist assigns engine material instances from approved master materials. No default materials on any asset.
+- LOD Generation — LOD meshes generated (manual preferred; auto-LOD reviewed and approved by tech art lead before use).
+- QA Review — Rendering QA checklist (Section 14.7) completed by designated QA reviewer.
+- Integration — Asset placed in scene by environment artist or tech artist. Scene profiling validated after integration.
+## 14.2 Export Standards
+
+Export Setting
+Required Value
+Notes
+File format
+FBX 2020 or later
+Binary FBX preferred for file size; ASCII FBX acceptable for debugging only
+Axis convention
+Y-up (Y = world up)
+Maya default. Blender requires Z→Y up export setting. Must verify in-engine after first import.
+Scale
+1 unit = 1 meter
+No scale conversion in export; asset must be authored at correct real-world scale
+Smooth normals
+By angle — 45° threshold
+Do not export hard edges from smoothing groups; use angle-based normal smoothing
+Embedded textures
+Disabled — never embed
+Embedded textures bloat FBX files and bypass texture pipeline. Always reference external files.
+Extra objects
+None — export mesh only
+No cameras, lights, null/empty objects, or construction history included in export
+Pivot location
+World origin (0, 0, 0) unless noted
+All props pivot at world origin. Exceptions (doorknobs, hinged objects) must be documented.
+N-gons
+None permitted
+All faces must be triangles or quads. N-gons deform incorrectly under normal smoothing.
+
+## 14.3 Import Validation Checklist — 12-Point
+
+IMPORT VALIDATION — All 12 Points Must Pass
+1.  Polygon count is within LOD budget for this asset category (Section 7.9 / 6.6)
+2.  UVs are non-overlapping (lightmapped assets) or correctly tiling (tileable assets)
+3.  Naming convention matches MV_ taxonomy (Section 13.1)
+4.  Pivot is at world origin (0,0,0) unless exception documented
+5.  No negative scale on any axis — all scale values positive
+6.  No N-gons — all geometry is tris or quads
+7.  Scale is 1 unit = 1 meter (verified by known reference dimension check)
+8.  Y-up axis convention confirmed (Y is world up)
+9.  No embedded textures in FBX — all texture paths are external references
+10.  No extra null objects, cameras, or lights in export hierarchy
+11.  Smoothing normals generated at 45° threshold (no hard-edge artifacts on continuous surfaces)
+12.  Vertex color channels present on foliage (wind weight) and character (AO/detail) assets where required
+
+## 14.4 Material Assignment Rules
+- No default materials: No asset may be integrated into a scene with a default, engine-generated, or placeholder material applied to any surface. All materials must be engine material instances of an approved master material (MV_Shd_ family).
+- Material instance hierarchy: Material instances must derive from the correct master material. Characters use MV_Shd_Character as their root. Creating material instances that reimplement master shader logic is prohibited.
+- Material assignment review: All material assignments on hero assets (main characters, hero props) must be reviewed by the tech art lead before integration sign-off.
+- One material per LOD level: Each LOD level may use a simplified or different material variant from the higher LOD. The lower-LOD material must visually match the higher-LOD material at the crossfade distance.
+## 14.5 Lighting Bake Standards
+- Lightmap UV resolution: Hero architecture — 1 lightmap texel per 4cm surface area at 1024×1024 lightmap. Background architecture — 1 texel per 8cm. Small props — 1 texel per 6cm.
+- Bake time limits: Single-zone full lightmap bake must complete within 4 hours on the reference bake workstation. Bakes exceeding 4 hours must be optimized (split into sub-zones or reduce lightmap resolution).
+- Lightmap atlas padding: Minimum 4px padding between UV islands at 1024 resolution (8px at 2048, 2px at 512). Insufficient padding causes lightmap bleed artifacts at edges.
+- Bake validation: All lightmap bakes must be reviewed in the engine at full scene scale after baking. Common artifacts to check: lightmap seams, over-darkened crevices (over-baked AO), light bleed at padded edges.
+## 14.6 Version Control Rules
+- All art assets committed to version control (Git with LFS or Perforce) with a descriptive commit message including: asset name, change description, and issue/task reference number.
+- Binary files (.fbx, .png, .dds, .psd) must use LFS (Large File Storage). Binary files not tracked with LFS will be rejected on push.
+- No single file may exceed 50MB without written approval from the tech art lead. Files over 100MB are prohibited without rendering director approval.
+- Texture source files (.psd, .spp, .zpr) are committed to /Source/ only, not to /Art/. The /Art/ folder contains only production-ready flat exports.
+- No art asset may be committed to a shared branch during active lightmap baking. Baking must be done on a dedicated bake branch and merged after completion.
+## 14.7 QA Rendering Checklist — 10-Point Visual QA
+
+QA VISUAL RENDERING CHECKLIST — All 10 Must Pass
+1.  No Z-fighting: No two surfaces produce Z-fighting (flickering) at any camera distance or angle. Verified by moving camera slowly past asset.
+2.  Correct LOD transitions: LOD crossfade is smooth (dither dissolve) with no pop at any transition distance. Verified by walking toward and away from asset at all LOD crossfade distances.
+3.  Outline correct: Outline width, color, and opacity match Section 5 specification for this asset type. No flicker during animation.
+4.  Materials match spec: All materials are correct instances of approved master materials. No default/placeholder materials present. Material visual result matches specification in this bible.
+5.  No visible UV seams at gameplay distance: UV seams are not visible when viewed from 3m to 15m camera distance under standard scene lighting.
+6.  Correct shadow behavior: Characters produce only contact blob shadows. Environment receives correct cascade shadows. No hard ray-traced shadows on characters.
+7.  Correct cel shading band count: Asset uses the correct number of cel bands per its category (3 for hero characters, 2 for environment, 1 for VFX). Verified in standard scene lighting.
+8.  No texture tiling artifacts: No visible tiling patterns on any surface at standard gameplay camera distance (15m). Macro variation overlays active on large surfaces.
+9.  Bloom and emissive within spec: No emissive surface produces bloom exceeding 15% of frame luminance. Emissive maximum HDR 2.0 verified.
+10.  Performance within budget: Asset integration does not push scene above draw call or triangle budget for the target platform. Verified in the in-engine profiler.
+
+## 14.8 Change Management
+
+Change Type
+Required Approval
+Required Testing Before Merge
+Master shader modification (MV_Shd_ files)
+Tech Art Lead sign-off
+Full platform shader test; visual comparison against reference screenshots on all platforms
+New master material creation
+Rendering Director approval
+Integration into test scene; performance profile; visual quality bar review
+Post-processing stack changes
+Rendering Director approval
+Full platform test on all 3 platform tiers; before/after comparison screenshots
+LOD distance / budget changes
+Tech Art Lead sign-off
+Performance profile in most demanding scene zone on all platforms
+Color grading LUT changes
+Art Director + Rendering Director approval
+Side-by-side visual comparison on all biomes; accessibility contrast check
+Standard material instance / texture update
+Artist self-approved (per QA checklist)
+10-point QA checklist completed and documented in commit message
+
+
+# 15. Do & Don’t Visual Guidelines
+
+
+Section Intent: Distill the entire Rendering Bible into a rapid-reference do/don’t guide that any artist can consult in seconds to check whether a decision is aligned with the Mooseville visual standard.
+
+## 15.1 Do / Don’t Reference Table
+
+Category
+DO
+DON’T
+Color Usage
+Use warm emerald greens (95°–130° hue, HSL) with gold accent highlights. Warm cream for all white-substitute uses.
+Use pure white (#FFF), pure black (#000), or cyan-shifted greens. Never use gold as a large fill surface.
+Lighting
+Default all scenes to golden-hour warmth. Key light at 15°–35° above horizon, warm color temperature.
+Use overhead noon-white lighting, cold key lights, or neutral grey ambient fills in any scene.
+Character Rendering
+Apply 3-band cel shading with warm shadow tint (#6B3A1F), amber rim light (#FFB347), and single gold-tinted specular dot.
+Use cold rim colors, blue-tinted shadow bands, multiple specular dots, or ray-traced hard shadows on characters.
+Foliage
+Enable translucency channel on all leaf surfaces (value 0.25–0.45). Use vertex-color wind animation with per-instance phase offset.
+Render foliage without translucency. Use synchronized wind (all plants move in unison). Apply outlines to foliage past LOD1.
+Water
+Use dual-layer counter-scrolling normals. Apply depth-based color blend from shallow aqua (#6DBFA0) to deep teal (#0D4F3C). Foam at shoreline.
+Use static water surfaces. Apply cel shading bands to water. Use screen-space reflections without cubemap fallback.
+Outlines
+Use warm near-black (#1A0F00) or forest black-green (#0D2B0A) for all outlines. Apply distance falloff (100% at <5m, 0% at >25m).
+Use pure black (#000000) outlines. Apply outlines to water, skybox, VFX, or background geometry. Allow outline flicker during animation.
+UI
+Use wood-panel texture on inventory backgrounds. Apply gold outline (#FFD700) on all interactive elements. Minimum 4.5:1 contrast on all text.
+Apply scene post-processing to UI layer. Use pure white or pure black in UI. Allow text below 4.5:1 contrast ratio against its background.
+VFX
+Use additive blend for magic sparkles (color range #B5E853→#FFD700). Keep non-magic VFX desaturated warm (saturation 0.05–0.25).
+Apply outlines to VFX particles. Use cool colors (blue, cyan, purple) as primary magic VFX colors. Exceed 0.4ms GPU time per VFX effect.
+Textures
+Author all albedo in linear color space. Keep albedo values between 15–240 (no pure black or white). Use warm cream as lightest value.
+Use pure black (below 15/255) or pure white (above 240/255) in albedo. Author in gamma-corrected space. Leave textures at default (non-biased) white.
+Shadows
+Use warm-tinted contact blob shadows on characters. Environment shadows tinted deep teal-green (#0A2010). PCF filtering on all cascade shadows.
+Cast hard ray-traced shadows from characters. Use pure black or neutral grey shadow colors. Use raw unfiltered shadow maps in shipped content.
+Bloom
+Set bloom threshold at 0.85, intensity 0.4, scatter 0.7. Cap total bloom contribution at 15% of frame luminance.
+Overbloom scenes (above 15% luminance). Use cold-tinted bloom. Set threshold below 0.7 (causes bloom on non-emissive surfaces).
+Post-Processing
+Apply the mandatory post-processing stack in order (TAA → SSAO → DoF → Bloom → ACES → LUT → Vignette → UI composite).
+Reorder the post-processing stack. Apply chromatic aberration. Apply film grain. Apply motion blur during standard gameplay.
+Materials
+Use approved master materials (MV_Shd_ family) for all surface instances. Include wear maps on Weathered and Ancient tier surfaces.
+Ship assets with default/placeholder materials. Create material instances that bypass the master material hierarchy. Leave flat gold surfaces without embossed normal maps.
+Naming
+Follow the MV_[AssetType]_[Name]_[Variant]_[Suffix] convention. Use underscores as segment separators. Use PascalCase for name segments.
+Use spaces in filenames. Use generic names (mesh_001). Embed artist initials or version numbers in base names for engine assets.
+LODs
+Use dither-dissolve crossfade at all LOD transitions. Set LOD distances per spec (LOD0→1 at 8m, LOD1→2 at 20m, etc.).
+Use hard-pop LOD transitions. Skip LOD levels in the asset. Use automated LOD without tech art lead review and approval.
+Shaders
+Pre-compile all shader variants. Strip unused variants at build time. Keep keyword permutations below 4 per shader.
+Compile shaders at runtime. Leave unused variants unstripped in shipping build. Create more than 4 keyword permutations on a single shader.
+Composition
+Frame all scenes using rule of thirds. Position hero subjects at power points. Create foreground/midground/background depth layers.
+Center-symmetrically frame dramatic moments. Leave >60% sky as primary compositional element. Allow camera clipping through geometry.
+Gold Accents
+Reserve gold for specular highlights, interactive element outlines, hero prop inlays, magic VFX, and UI accents only.
+Use gold (#FFD700) as a large fill surface (>0.25m²). Apply flat unembossed gold surfaces. Use gold on background filler props.
+Green Palette
+Keep all greens in the 95°–130° hue range (HSL) — warm, yellow-leaning. Ensure shadow areas of green surfaces use warm forest green tints.
+Allow greens to shift toward cyan (above 130° HSL). Use cold blue-green in ambient or fog colors. Mix cool and warm greens within the same shot without intent.
+Performance
+Profile on minimum-spec hardware before integration. Respect draw call budgets per category. Use LOD bias on Console/Mobile.
+Integrate unoptimized assets without profiling. Exceed draw call budgets and assume optimization will happen “later.” Disable LOD on any shipping asset.
+
+## 15.2 Visual Anti-Patterns
+The following eight failure modes are the most common ways that Mooseville assets fail to meet the visual quality bar. Each is described with how to spot it in-engine and how to fix it.
+
+Anti-Pattern 1 — “The Cold Forest”
+Description: Environment greens have shifted toward cyan or blue-green, making the forest feel clinical, alien, or cold rather than warm and organic.
+How to Spot: Compare any green surface against the reference swatch #388E3C. If the in-engine result reads as noticeably cooler/more teal than the swatch, it has shifted. Also detectable by adding the LUT color grade — cold greens will look distinctly different from warm greens under the golden grade.
+How to Fix: Apply a +10° hue shift toward yellow in the albedo texture source. Verify the material’s tint parameter has no cool bias applied. Check that the biome ambient color is not overcooling the scene (Section 7.8).
+
+
+Anti-Pattern 2 — “Comic Strip”
+Description: Outlines are too thick, too pure-black, or too uniform, making the world look like a printed comic book rather than a painted storybook.
+How to Spot: If outlines are immediately visible to the eye as a design feature (rather than a subtle clarifying edge), they are too thick or too dark. Check: is the outline color a pure #000000? Is the width above 2.0px for non-UI elements?
+How to Fix: Reduce outline width to spec (Section 5.3). Replace pure black with warm near-black #1A0F00. Verify distance falloff is functioning (outlines at 20m should be nearly invisible).
+
+
+Anti-Pattern 3 — “Dirty World”
+Description: SSAO is too strong, making shadowed crevices read as visually dirty, grimy, or aged beyond the intended weathering tier.
+How to Spot: Surface joints, window edges, and rock crevices appear unnaturally dark — darker than any cast shadow in the scene. The world feels grubby rather than warm and lived-in.
+How to Fix: Reduce SSAO strength to the 0.35–0.55 range. Verify AO tint is warm dark green (#0A1F0A) not neutral black. Check that character surfaces have SSAO disabled on their layer.
+
+
+Anti-Pattern 4 — “Plastic Characters”
+Description: Characters appear shiny, plastic, or overly smooth — typically caused by excessive specular highlight intensity, incorrect specular color (cool-tinted instead of gold-tinted), or missing normal map variation.
+How to Spot: Character surfaces catch hard bright specular highlights visible from multiple camera angles simultaneously. The specular is white or cool-white rather than warm gold.
+How to Fix: Reduce specular power below 64. Tint specular color toward warm gold within 20° hue. Verify specular mask texture is correctly isolating specular to intended surfaces (nose, eyes, accessories — not fur or fabric).
+
+
+Anti-Pattern 5 — “Overblown World”
+Description: Bloom is excessive — emissive surfaces, lanterns, and magic VFX are producing bloom halos so large they obscure surrounding geometry and degrade readability.
+How to Spot: Any emissive source where the bloom radius exceeds 10% of screen height. Look for emissive lanterns where the bloom is larger than the lantern itself.
+How to Fix: Reduce emissive HDR brightness to maximum 2.0. Set bloom intensity to 0.4 per spec. Check bloom threshold is at 0.85 — if below 0.7, non-emissive surfaces will contribute to bloom. Verify no single VFX source is producing unmasked unbounded emission.
+
+
+Anti-Pattern 6 — “Tiling Carpet”
+Description: Environment surface textures are visibly tiling — the eye picks up a repeating grid pattern across terrain, walls, or large floor surfaces.
+How to Spot: Stand 10–15m from any large surface and look for the tell-tale grid of repeating detail. The “squint test” (eyes slightly unfocused) reveals tiling patterns that the eye filters out at sharp focus.
+How to Fix: Add a macro variation overlay texture at 1 cycle per 20–50m. Vary the UV scale between adjacent material instances (×1.25 or ×0.8 variation). If tiling is from a single texture, introduce a second tiling layer at a different scale and blend subtly.
+
+
+Anti-Pattern 7 — “Flat Gold”
+Description: Gold accent surfaces appear flat, plastic, or uniform — lacking the embossed pattern, subtle roughness variation, and depth that makes Mooseville’s gold feel like hammered and crafted metal.
+How to Spot: Gold surfaces that appear uniform in specular response at all viewing angles. No visible surface detail in the normal map. Gold reading as a uniform yellow blob rather than a warm, textured metallic material.
+How to Fix: Apply embossed pattern normal map at 0.6–0.8 strength (herringbone, floral, or geometric pattern). Add subtle roughness variation (0.05–0.10 variation across surface). Verify metallic value is 0.9–1.0 and PBR specular is evaluating correctly.
+
+
+Anti-Pattern 8 — “Disconnected HUD”
+Description: The UI feels like a separate technical overlay bolted onto the game rather than a natural extension of the Mooseville world — typically caused by cold colors, geometric sans-serif UI, or elements that don’t use the warm wood-and-gold material language.
+How to Spot: The UI uses cool blues or neutral whites as primary panel colors. Panel backgrounds are flat grey or pure white. Interactive elements don’t use the gold outline system. Typography uses a non-approved cold font.
+How to Fix: Apply wood-panel texture to all inventory and dialog panel backgrounds. Replace cool colors with UI color system (Section 9.3). Verify gold outline (#FFD700) is applied to all interactive elements. Confirm all fonts are from the ClearType Collection (Calibri, Candara).
+
+## 15.3 Rendering Quality Bar Checklist
+Every frame of Mooseville must answer YES to all 15 of the following questions before it is considered finished. This checklist is used by QA, tech art, and the rendering director for visual sign-off on all content.
+
+#
+Quality Bar Question
+Pass / Fail Marker
+1
+Does the frame feel warm — does light carry a directional golden-hour quality, even if the scene is set at night or midday?
+YES / NO
+2
+Are all green surfaces warm (yellow-leaning), without any cold cyan or blue-green shifts?
+YES / NO
+3
+Are characters clearly readable in silhouette and cel shading against the environment background at the current camera distance?
+YES / NO
+4
+Do outlines feel like a natural part of the world, not a visible design choice imposed on it? (If the player would consciously notice outlines, they are too strong.)
+YES / NO
+5
+Is the bloom subtle and enhancing — lanterns and emissives glow gently without overwhelming surrounding geometry?
+YES / NO
+6
+Does the UI feel like it belongs to the Mooseville world — wood, gold, warm cream — rather than a generic digital overlay?
+YES / NO
+7
+Are VFX effects within the emerald-to-gold palette (for magic) or desaturated warm (for natural effects)? No cold or clinical VFX colors?
+YES / NO
+8
+Is ambient occlusion subtle and warm — adding depth without making any surface appear dirty, grimy, or over-darkened?
+YES / NO
+9
+Are all shadow values warm-tinted (no pure black shadows or neutral grey shadow areas) and legible against their surface?
+YES / NO
+10
+Does the composition feel like a painting — with clear foreground, midground, background, and a subject positioned at a power point?
+YES / NO
+11
+Is the water (if present) alive — scrolling normals visible, shoreline foam present, depth color blend from aqua to deep teal correct?
+YES / NO
+12
+Is foliage (if present) animated — gently swaying with per-instance phase offset, backlit by translucency where sunlit?
+YES / NO
+13
+Are gold accent surfaces textured, embossed, and small — used as highlights and details, never as large fill surfaces?
+YES / NO
+14
+Does the frame meet performance targets for its target platform — draw call budget respected, FPS stable at target, no frame hitches?
+YES / NO
+15
+If you were to describe this frame in one sentence, would that sentence naturally include the words: warm, living, storybook, wonder? Does the frame embody the Mooseville Promise?
+YES / NO
+
+
+THE FINAL STANDARD
+A frame of Mooseville that answers YES to all 15 quality bar questions is a frame we are proud to ship. A frame that answers NO to even one is a frame that needs more work. The quality bar is not optional, not aspirational — it is the minimum standard for every pixel we deliver to players.
+
+
+
+
+Mooseville Rendering Bible — v1.0
+June 2026
+CONFIDENTIAL — Internal Use Only
+Maintained by: Technical Art Department
+Approved by: Rendering Director
+All sections subject to version control. See Change Management (Section 14.8) for amendment process.
+This document contains proprietary and confidential information belonging to the Mooseville development team. Unauthorized distribution, reproduction, or disclosure is strictly prohibited. All artistic specifications, shader parameters, and visual standards defined herein are the intellectual property of the project. © 2026 Mooseville Development Team. All rights reserved.
+
+

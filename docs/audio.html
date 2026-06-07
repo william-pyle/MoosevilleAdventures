@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio Design — Mooseville Adventures</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ── Audio-page specific styles ─────────────────────────────── */
+
+  /* Hero accent override for audio page */
+  .page-hero.hero-audio {
+    background: linear-gradient(135deg, #062D18 0%, #1B3A6B 100%);
+  }
+
+  /* Pillar cards */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .pillar-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 2px solid var(--brown-pale);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pillar-card::before {
+    content: '';
+    display: block;
+    height: 5px;
+  }
+
+  .pillar-card.pillar-1::before { background: linear-gradient(to right, #0F4C2A, #0F7A4C); }
+  .pillar-card.pillar-2::before { background: linear-gradient(to right, #1B3A6B, #3060AA); }
+  .pillar-card.pillar-3::before { background: linear-gradient(to right, #6B3A1B, #A05A28); }
+
+  .pillar-card-body { padding: 1.25rem 1.5rem; }
+
+  .pillar-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: .4rem;
+    opacity: .18;
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+  }
+
+  .pillar-card.pillar-1 .pillar-number { color: var(--emerald); }
+  .pillar-card.pillar-2 .pillar-number { color: #3060AA; }
+  .pillar-card.pillar-3 .pillar-number { color: var(--brown); }
+
+  .pillar-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--emerald-dark);
+    margin-bottom: .6rem;
+    line-height: 1.3;
+  }
+
+  .pillar-card p {
+    font-size: .855rem;
+    color: var(--text-medium);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Music layer visualization */
+  .layer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .layer-card {
+    border-radius: var(--radius-sm);
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--brown-pale);
+  }
+
+  .layer-card.layer-a { background: linear-gradient(135deg, #E8F5EE, #F5FAF7); border-left: 4px solid var(--emerald); }
+  .layer-card.layer-b { background: linear-gradient(135deg, #FFF8E6, #FFFDF5); border-left: 4px solid var(--gold); }
+  .layer-card.layer-c { background: linear-gradient(135deg, #F0EEF8, #F8F7FC); border-left: 4px solid #7B6ABE; }
+
+  .layer-label {
+    font-size: .62rem;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-weight: 800;
+    margin-bottom: .3rem;
+  }
+
+  .layer-card.layer-a .layer-label { color: var(--emerald); }
+  .layer-card.layer-b .layer-label { color: var(--gold-dark); }
+  .layer-card.layer-c .layer-label { color: #5A4AA0; }
+
+  .layer-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: .4rem;
+  }
+
+  .layer-desc { font-size: .82rem; color: var(--text-medium); line-height: 1.55; margin: 0 0 .5rem; }
+
+  .layer-control {
+    font-size: .75rem;
+    color: var(--text-light);
+    font-weight: 600;
+  }
+
+  .layer-control strong { color: var(--text-medium); }
+
+  /* Instrument category */
+  .instrument-section {
+    margin-bottom: 1rem;
+  }
+
+  .instrument-category-label {
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 800;
+    color: var(--text-muted);
+    margin-bottom: .5rem;
+    padding-bottom: .3rem;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .instrument-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+  }
+
+  .instrument-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+    font-size: .855rem;
+    line-height: 1.5;
+    color: var(--text-medium);
+  }
+
+  .instrument-item::before {
+    content: '♪';
+    color: var(--emerald);
+    font-size: .9rem;
+    flex-shrink: 0;
+    margin-top: .05em;
+  }
+
+  .instrument-name { font-weight: 700; color: var(--text-dark); }
+
+  .instrument-never .instrument-item::before { content: '✕'; color: #C00; }
+
+  /* Biome ambient cards */
+  .biome-ambient-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--brown-pale);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+
+  .biome-ambient-header {
+    padding: .85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: white;
+  }
+
+  .biome-ambient-header h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    flex: 1;
+  }
+
+  .bah-town      { background: linear-gradient(to right, #3A2A0A, #6A4A18); }
+  .bah-forest    { background: linear-gradient(to right, #0A2A14, #1A4A28); }
+  .bah-meadow    { background: linear-gradient(to right, #2A3A0A, #4A6A18); }
+  .bah-lake      { background: linear-gradient(to right, #0A2A3A, #18486A); }
+  .bah-marsh     { background: linear-gradient(to right, #1A2A10, #304A22); }
+  .bah-ruins     { background: linear-gradient(to right, #2A2018, #4A3828); }
+  .bah-shelf     { background: linear-gradient(to right, #1A1A2A, #2A2A4A); }
+  .bah-pass      { background: linear-gradient(to right, #181818, #303030); }
+
+  .biome-ambient-body { padding: 1rem 1.5rem; }
+
+  .ambient-layer-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: .5rem .75rem;
+    align-items: start;
+    margin-bottom: .3rem;
+    font-size: .82rem;
+  }
+
+  .ambient-layer-time {
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--text-muted);
+    padding-top: .05em;
+  }
+
+  .ambient-layer-sounds { color: var(--text-medium); line-height: 1.5; }
+
+  .ambient-special {
+    margin-top: .75rem;
+    padding-top: .75rem;
+    border-top: 1px dashed var(--brown-pale);
+  }
+
+  .ambient-special-label {
+    font-size: .65rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 800;
+    color: var(--gold-dark);
+    margin-bottom: .35rem;
+  }
+
+  .ambient-special-desc {
+    font-size: .82rem;
+    color: var(--text-medium);
+    line-height: 1.55;
+  }
+
+  .ambient-special-desc strong { color: var(--text-dark); }
+
+  /* NPC signature row */
+  .npc-sig-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .6rem;
+  }
+
+  .npc-sig-item {
+    background: var(--cream-light);
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius-sm);
+    padding: .7rem .9rem;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+  }
+
+  .npc-sig-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: .92rem;
+    color: var(--emerald-dark);
+  }
+
+  .npc-sig-sound {
+    font-size: .8rem;
+    color: var(--text-medium);
+  }
+
+  .npc-sig-feel {
+    font-size: .73rem;
+    font-style: italic;
+    color: var(--text-light);
+  }
+
+  /* MetaSounds patch table accents */
+  .ms-type-badge {
+    display: inline-block;
+    padding: .15rem .5rem;
+    border-radius: 3px;
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+
+  .ms-source { background: #E8F0FF; color: #3050B0; border: 1px solid #B8CAFF; }
+  .ms-patch  { background: #E8F8EE; color: #1A6A3A; border: 1px solid #99DDB8; }
+
+  /* Season cards */
+  .season-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .season-card {
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.1rem;
+    text-align: center;
+    border: 1px solid var(--brown-pale);
+  }
+
+  .season-spring { background: linear-gradient(160deg, #E8F8E0, #F5FFF0); }
+  .season-summer { background: linear-gradient(160deg, #FFF8DC, #FFFFF0); }
+  .season-autumn { background: linear-gradient(160deg, #FFF0E0, #FFF8F0); }
+  .season-winter { background: linear-gradient(160deg, #E8F0FF, #F0F5FF); }
+
+  .season-icon { font-size: 1.8rem; display: block; margin-bottom: .4rem; }
+  .season-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: .95rem;
+    color: var(--text-dark);
+    margin-bottom: .5rem;
+  }
+  .season-detail { font-size: .78rem; color: var(--text-medium); line-height: 1.55; text-align: left; }
+
+  /* Budget bar visualization */
+  .budget-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 80px 80px;
+    align-items: center;
+    gap: .75rem;
+    padding: .55rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: .82rem;
+  }
+
+  .budget-row:last-child { border-bottom: none; }
+
+  .budget-label { color: var(--text-body); font-weight: 600; }
+
+  .budget-bar-wrap {
+    height: 8px;
+    background: var(--cream-dark);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .budget-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(to right, var(--emerald), var(--emerald-light));
+  }
+
+  .budget-target { color: var(--emerald-dark); font-weight: 700; text-align: right; }
+  .budget-limit  { color: var(--text-muted); text-align: right; }
+
+  /* QA checklist */
+  .qa-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .4rem .75rem;
+  }
+
+  .qa-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .5rem;
+    font-size: .845rem;
+    color: var(--text-medium);
+    line-height: 1.5;
+    padding: .4rem .5rem;
+    border-radius: 4px;
+    background: var(--cream-light);
+    border: 1px solid var(--cream-dark);
+  }
+
+  .qa-item::before {
+    content: '☐';
+    color: var(--emerald);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: -.05em;
+  }
+
+  /* Prohibited practices */
+  .prohibited-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+  }
+
+  .prohibited-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+    font-size: .855rem;
+    color: var(--text-medium);
+    line-height: 1.5;
+    padding: .55rem .75rem;
+    border-radius: var(--radius-sm);
+    background: #FFF5F5;
+    border: 1px solid #FFD8D8;
+  }
+
+  .prohibited-item::before {
+    content: '✕';
+    color: #C00;
+    font-weight: 800;
+    font-size: .9rem;
+    flex-shrink: 0;
+    margin-top: .05em;
+  }
+
+  /* Blueprint parameter block */
+  .bp-param-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    font-size: .82rem;
+  }
+
+  .bp-param {
+    display: grid;
+    grid-template-columns: 200px 80px 1fr;
+    gap: .5rem;
+    align-items: baseline;
+    padding: .3rem .25rem;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .bp-param:last-child { border-bottom: none; }
+
+  .bp-param-type {
+    font-family: 'Courier New', monospace;
+    font-size: .78rem;
+    color: #3060A0;
+    background: #EEF3FF;
+    padding: .1rem .35rem;
+    border-radius: 3px;
+  }
+
+  .bp-param-name {
+    font-family: 'Courier New', monospace;
+    font-size: .8rem;
+    color: var(--emerald-dark);
+    font-weight: 700;
+  }
+
+  .bp-param-desc { color: var(--text-light); font-style: italic; }
+
+  /* Reverb zone chip */
+  .reverb-zone-name { font-weight: 700; color: var(--text-dark); }
+
+  /* Tone reference grid */
+  .tone-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .75rem;
+  }
+
+  .tone-item {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius-sm);
+    padding: .8rem 1rem;
+    border-left: 3px solid var(--emerald);
+  }
+
+  .tone-context {
+    font-weight: 700;
+    font-size: .85rem;
+    color: var(--emerald-dark);
+    margin-bottom: .2rem;
+  }
+
+  .tone-feel {
+    font-size: .78rem;
+    color: var(--text-medium);
+    margin-bottom: .3rem;
+  }
+
+  .tone-quote {
+    font-size: .77rem;
+    font-style: italic;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+
+  /* Leitmotif table special highlight */
+  .leitmotif-primary td:first-child { font-weight: 700; color: var(--emerald-dark); }
+
+  /* Activity state table */
+  .activity-state-idle td { color: var(--text-light); }
+
+  /* Section anchor offset for fixed header */
+  [id] { scroll-margin-top: 1.5rem; }
+
+  /* Divider with label */
+  .labeled-divider {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .labeled-divider::before,
+  .labeled-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cream-dark);
+  }
+
+  .labeled-divider-text {
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--text-muted);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* Pipeline step */
+  .pipeline-steps {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    counter-reset: pipeline-step;
+  }
+
+  .pipeline-step {
+    counter-increment: pipeline-step;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--white);
+    border: 1px solid var(--brown-pale);
+    border-radius: var(--radius-sm);
+    padding: .9rem 1.1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .pipeline-step-num {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--emerald-dark);
+    color: var(--gold-light);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    content: counter(pipeline-step);
+  }
+
+  .pipeline-step-content { flex: 1; }
+
+  .pipeline-step-title {
+    font-weight: 700;
+    font-size: .88rem;
+    color: var(--emerald-dark);
+    margin-bottom: .2rem;
+  }
+
+  .pipeline-step-desc {
+    font-size: .82rem;
+    color: var(--text-medium);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Future section accent */
+  .future-card {
+    background: linear-gradient(135deg, var(--emerald-darkest) 0%, #1B3A6B 100%);
+    color: white;
+    border: none;
+  }
+
+  .future-card .card-header {
+    background: rgba(255,255,255,.06);
+    border-bottom: 1px solid rgba(247,217,138,.15);
+  }
+
+  .future-card .card-header h3 { color: var(--gold-light); }
+  .future-card .card-body p,
+  .future-card .card-body li { color: rgba(255,255,255,.8); }
+  .future-card .card-body strong { color: var(--gold-light); }
+
+  .future-card ul.styled-list {
+    color: rgba(255,255,255,.75);
+  }
+
+  /* Responsive overrides */
+  @media (max-width: 1200px) {
+    .pillar-grid { grid-template-columns: 1fr; }
+    .layer-grid  { grid-template-columns: 1fr; }
+    .season-grid { grid-template-columns: repeat(2, 1fr); }
+    .tone-grid   { grid-template-columns: repeat(2, 1fr); }
+    .qa-list     { grid-template-columns: 1fr; }
+    .npc-sig-grid { grid-template-columns: 1fr; }
+    .budget-row  { grid-template-columns: 130px 1fr 70px 70px; }
+  }
+
+  @media (max-width: 900px) {
+    .season-grid { grid-template-columns: 1fr; }
+    .tone-grid   { grid-template-columns: 1fr; }
+    .bp-param    { grid-template-columns: 1fr; }
+    .budget-row  { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="index.html" class="sidebar-brand">
+    <span class="brand-moose">🦌</span>
+    <h1>Mooseville Adventures</h1>
+    <div class="brand-sub">Design Wiki</div>
+  </a>
+  <div class="nav-group">
+    <div class="nav-group-label">Story</div>
+    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters &amp; NPCs</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">World</div>
+    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes &amp; Maps</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Art Direction</div>
+    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Game Design</div>
+    <a href="design.html" class="nav-link"><span class="nav-icon">⚙️</span> Systems &amp; Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audio</div>
+    <a href="audio.html" class="nav-link active"><span class="nav-icon">🎵</span> Audio Design</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Production</div>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+  </div>
+  <div class="nav-group">
+    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+  </div>
+  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
+</nav>
+
+<main class="main">
+
+  <div class="page-hero hero-audio" style="background: linear-gradient(135deg, #062D18 0%, #1B3A6B 100%);">
+    <div class="hero-label">Audio · Music · Sound Design</div>
+    <h1>Audio Design</h1>
+    <p class="hero-desc">Adaptive music system, biome soundscapes, MetaSounds implementation, and the complete sonic identity of Mooseville Adventures.</p>
+  </div>
+
+  <div class="content">
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 1 — AUDIO VISION & PHILOSOPHY
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="vision">
+      <span class="section-icon">🎵</span>
+      <h2>Audio Vision &amp; Philosophy</h2>
+    </div>
+
+    <!-- 1.1 Sound Promise -->
+    <div class="card" id="sound-promise">
+      <div class="card-header"><span>🔊</span><h3>1.1 — The Mooseville Sound Promise</h3></div>
+      <div class="card-body">
+        <p>Every sound in Mooseville Adventures — from the creak of the Gathering Hall door to the full orchestral swell of a Legacy Moment — should feel like it belongs to the same hand-crafted, living world. Audio is not decoration in Mooseville. It is <em>memory</em>. It is the way the player feels the difference between standing in the Emerald Forest at dawn and standing on the High Shelf in a winter wind. Audio is how NPCs feel present even when off-screen. Audio is how the Green Spring communicates that something here is older and stranger than ordinary water.</p>
+        <div class="pull-quote">
+          In Mooseville Adventures, audio is a primary narrative layer — not a secondary feedback system. Every asset that enters this game must earn its place in the world's acoustic identity.
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.2 Three Pillars -->
+    <div id="pillars">
+      <div class="labeled-divider"><span class="labeled-divider-text">1.2 — Three Audio Pillars</span></div>
+      <div class="pillar-grid">
+        <div class="pillar-card pillar-1">
+          <div class="pillar-number">I</div>
+          <div class="pillar-card-body">
+            <div class="pillar-title">"Acoustic First"</div>
+            <p>Mooseville's world is built by hand with natural materials. Its soundscape must reflect this. The foundation of every biome's ambient layer is acoustic, organic, and real-world recorded. Synthesized elements are layered only where the world requires something beyond nature — the sky-stone, the Green Spring's glow, magical Moose Water interactions.</p>
+          </div>
+        </div>
+        <div class="pillar-card pillar-2">
+          <div class="pillar-number">II</div>
+          <div class="pillar-card-body">
+            <div class="pillar-title">"Music That Breathes"</div>
+            <p>The musical score of Mooseville is adaptive and layered. It responds to time of day, player activity, emotional narrative weight, season, and biome. Music never starts or stops abruptly — it breathes in and out.</p>
+          </div>
+        </div>
+        <div class="pillar-card pillar-3">
+          <div class="pillar-number">III</div>
+          <div class="pillar-card-body">
+            <div class="pillar-title">"Sound Tells the Story"</div>
+            <p>Audio cues in Mooseville carry narrative information. The Enhancement Works makes a specific harmonic hum — and when it begins to degrade, that hum subtly changes in a way the attentive player will notice before any quest reveals it. The eastern pass, when the Act 2 crack first opens, makes a sound that does not exist anywhere else in the valley.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.3 Tone Reference Guide -->
+    <div id="tone-reference">
+      <div class="labeled-divider"><span class="labeled-divider-text">1.3 — Tone Reference Guide</span></div>
+      <div class="tone-grid">
+        <div class="tone-item">
+          <div class="tone-context">Village Morning</div>
+          <div class="tone-feel">Warm, gentle, purposeful</div>
+          <div class="tone-quote">"A quiet kitchen before everyone is awake"</div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-context">Exploration — Forest</div>
+          <div class="tone-feel">Ancient, close, breathing</div>
+          <div class="tone-quote">"Walking into a cathedral made of trees"</div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-context">Exploration — Meadow</div>
+          <div class="tone-feel">Open, free, sunlit</div>
+          <div class="tone-quote">"The first warm day of spring, outside"</div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-context">Crystal Lake</div>
+          <div class="tone-feel">Serene, reflective, sacred</div>
+          <div class="tone-quote">"Still water on a windless morning"</div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-context">Night / Green Spring</div>
+          <div class="tone-feel">Soft mystery, wonder, slightly unearthly</div>
+          <div class="tone-quote">"A light at the end of a hallway you don't remember"</div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-context">Legacy Moments</div>
+          <div class="tone-feel">Full, warm, earned</div>
+          <div class="tone-quote">"Finishing something you thought would take longer"</div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-context">Ancient Ruins</div>
+          <div class="tone-feel">Quiet reverence, archaeological weight</div>
+          <div class="tone-quote">"Touching something older than you can imagine"</div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-context">High Shelf</div>
+          <div class="tone-feel">Vast, humbling, exposed</div>
+          <div class="tone-quote">"Standing on the edge of the known world"</div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-context">Human Remnant Discovery</div>
+          <div class="tone-feel">Wondering unease, reverence</div>
+          <div class="tone-quote">"Finding a note written by someone who cannot answer"</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 2 — MUSIC SYSTEM
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="music-system">
+      <span class="section-icon">🎼</span>
+      <h2>Music System</h2>
+    </div>
+
+    <!-- 2.1 Adaptive Architecture -->
+    <div class="card" id="adaptive-architecture">
+      <div class="card-header"><span>🔀</span><h3>2.1 — Adaptive Music Architecture</h3></div>
+      <div class="card-body">
+        <div class="info-box">
+          <strong>Key design rule:</strong> All three layers share the same root key and tempo at all times. Transitions use pre-written stem transitions — not crossfades. No hard cuts. No jarring handoffs.
+        </div>
+        <div class="layer-grid">
+          <div class="layer-card layer-a">
+            <div class="layer-label">Layer A</div>
+            <div class="layer-name">Foundation</div>
+            <p class="layer-desc">Primary harmonic bed; sets tonal center and emotional register.</p>
+            <div class="layer-control"><strong>Control:</strong> Biome + Time of Day</div>
+          </div>
+          <div class="layer-card layer-b">
+            <div class="layer-label">Layer B</div>
+            <div class="layer-name">Activity</div>
+            <p class="layer-desc">Melodic content; responds to what the player is doing.</p>
+            <div class="layer-control"><strong>Control:</strong> Player Activity State</div>
+          </div>
+          <div class="layer-card layer-c">
+            <div class="layer-label">Layer C</div>
+            <div class="layer-name">Moment</div>
+            <p class="layer-desc">Accent layer; swells and flourishes for story beats, discoveries, NPC moments.</p>
+            <div class="layer-control"><strong>Control:</strong> Narrative Event Trigger</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.2 Instrumentation Palette -->
+    <div class="card" id="instrumentation">
+      <div class="card-header"><span>🎻</span><h3>2.2 — Instrumentation Palette</h3></div>
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <div class="instrument-section">
+              <div class="instrument-category-label">Core Instruments — Always Present in Some Form</div>
+              <ul class="instrument-list">
+                <li class="instrument-item">
+                  <span><span class="instrument-name">Acoustic guitar</span> (fingerpicked, warm mid-register) — the melodic heartbeat of Mooseville; associated with home, community, and the player character</span>
+                </li>
+                <li class="instrument-item">
+                  <span><span class="instrument-name">Cello</span> (solo or small section) — emotional depth; associated with legacy, memory, and Melvin/Martha</span>
+                </li>
+                <li class="instrument-item">
+                  <span><span class="instrument-name">Recorder / wooden flute</span> — lightness, nature, discovery; leads melodic lines in exploration</span>
+                </li>
+                <li class="instrument-item">
+                  <span><span class="instrument-name">Hand percussion</span> (frame drum, hand pan) — rhythm in active moments; natural and organic</span>
+                </li>
+                <li class="instrument-item">
+                  <span><span class="instrument-name">Hammered dulcimer</span> — bright, folk-instrument warmth; associated with festival, market, community events</span>
+                </li>
+                <li class="instrument-item">
+                  <span><span class="instrument-name">String quartet</span> — emotional weight for Legacy Moments and Act climaxes</span>
+                </li>
+              </ul>
+            </div>
+            <div class="instrument-section" style="margin-top:1rem">
+              <div class="instrument-category-label">Textural Elements — Added Contextually</div>
+              <ul class="instrument-list">
+                <li class="instrument-item"><span><span class="instrument-name">Crystal singing bowls</span> — Green Spring presence; sky-stone activation; night ambience</span></li>
+                <li class="instrument-item"><span><span class="instrument-name">Prepared piano</span> (subtle) — human remnant discovery; Ancient Ruins; unsettling-beautiful moments</span></li>
+                <li class="instrument-item"><span><span class="instrument-name">Deep bowed metal</span> (waterphone or similar) — the sealed eastern pass; threshold moments</span></li>
+                <li class="instrument-item"><span><span class="instrument-name">Wordless vocals</span> (single voice, female) — Legacy Moments; Starfall memorial sequences</span></li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="instrument-section instrument-never">
+              <div class="instrument-category-label" style="color:#C00;border-bottom-color:#FFD8D8">Instruments Never Used</div>
+              <ul class="instrument-list">
+                <li class="instrument-item">Electric guitar, bass, or synthesizers with obvious digital character</li>
+                <li class="instrument-item">Orchestral brass (too martial)</li>
+                <li class="instrument-item">Heavy percussion — drums/snare (too aggressive)</li>
+                <li class="instrument-item">Pure electronic / EDM textures</li>
+              </ul>
+            </div>
+            <div class="warn-box" style="margin-top:1.25rem">
+              <strong>Acoustic First:</strong> If an instrument is not something that could physically exist in Mooseville's hand-built world, it requires explicit justification to include.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3 Leitmotifs -->
+    <div class="card" id="leitmotifs">
+      <div class="card-header"><span>🎵</span><h3>2.3 — Named Leitmotifs</h3></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Theme Name</th>
+                <th>Represents</th>
+                <th>Instrumentation</th>
+                <th>Key / Mode</th>
+                <th>Tempo</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="leitmotif-primary">
+                <td>"The Valley"</td>
+                <td>The world itself; main title</td>
+                <td>Full ensemble</td>
+                <td>D major, Mixolydian</td>
+                <td>72 BPM</td>
+                <td>Appears in title screen; reprised in final Legacy Moment</td>
+              </tr>
+              <tr>
+                <td>"Melvin's Hands"</td>
+                <td>Melvin; founding generation; building</td>
+                <td>Acoustic guitar, solo cello</td>
+                <td>G major</td>
+                <td>60 BPM</td>
+                <td>Simple, deliberate; feels like work with purpose</td>
+              </tr>
+              <tr>
+                <td>"Martha's Record"</td>
+                <td>Martha; memory; archive</td>
+                <td>Recorder over string quartet</td>
+                <td>A minor, Dorian</td>
+                <td>68 BPM</td>
+                <td>Bittersweet; forward-looking despite the minor key</td>
+              </tr>
+              <tr>
+                <td>"The First Circle"</td>
+                <td>All 8 founders; community</td>
+                <td>Hammered dulcimer, hand percussion</td>
+                <td>C major</td>
+                <td>80 BPM</td>
+                <td>Ensemble texture; the whole is more than its parts</td>
+              </tr>
+              <tr>
+                <td>"Spring Light"</td>
+                <td>The Green Spring; Moose Water; sky-stone</td>
+                <td>Crystal singing bowls, wordless vocals</td>
+                <td>E major, add9</td>
+                <td>54 BPM</td>
+                <td>Unearthly but warm; the only theme that uses non-acoustic texture</td>
+              </tr>
+              <tr>
+                <td>"Young Hooves"</td>
+                <td>Player character; youth; becoming</td>
+                <td>Acoustic guitar, light percussion</td>
+                <td>G major</td>
+                <td>88 BPM</td>
+                <td>Lighter, more rhythmic version of Melvin's Hands — same DNA</td>
+              </tr>
+              <tr>
+                <td>"The Sealed Door"</td>
+                <td>Eastern Pass; the unknown; tension</td>
+                <td>Bowed metal, low cello</td>
+                <td>B minor</td>
+                <td>48 BPM</td>
+                <td>Sparse; a single sustained note beneath fragments of other themes</td>
+              </tr>
+              <tr>
+                <td>"What Was Left"</td>
+                <td>Human remnants; the campsite; mystery</td>
+                <td>Prepared piano, single guitar note</td>
+                <td>Ambiguous / polytonal</td>
+                <td>Variable</td>
+                <td>Not a traditional melody; a series of incomplete phrases</td>
+              </tr>
+              <tr>
+                <td>"Roots and Routes"</td>
+                <td>Exploration; discovery; the open world</td>
+                <td>Flute, strummed guitar</td>
+                <td>D major</td>
+                <td>96 BPM</td>
+                <td>The most rhythmically active theme; walks with the player</td>
+              </tr>
+              <tr>
+                <td>"Muckmarket Morning"</td>
+                <td>Mooseville commerce and community life</td>
+                <td>Hammered dulcimer, guitar, hand pan</td>
+                <td>F major</td>
+                <td>108 BPM</td>
+                <td>Energetic, warm, slightly syncopated</td>
+              </tr>
+              <tr class="leitmotif-primary">
+                <td>"Legacy"</td>
+                <td>Legacy Moments; Archive wall; endings</td>
+                <td>Full ensemble, ascending</td>
+                <td>D major, resolving</td>
+                <td>58 BPM</td>
+                <td>Every instrument from across the score plays together once</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.4 Time of Day -->
+    <div class="card" id="time-of-day">
+      <div class="card-header"><span>🌅</span><h3>2.4 — Time-of-Day Music States</h3></div>
+      <div class="card-body">
+        <div class="info-box" style="margin-bottom:1rem">
+          Transitions between phases use <strong>30-second stem swaps</strong> — not hard cuts.
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>In-Game Hours</th>
+                <th>Layer A (Foundation)</th>
+                <th>Layer B (Melody)</th>
+                <th>Emotional Character</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Dawn</strong></td>
+                <td>0–2 hrs</td>
+                <td>Sparse — single guitar or cello</td>
+                <td>Quiet; no melody</td>
+                <td>Waking, expectant</td>
+              </tr>
+              <tr>
+                <td><strong>Morning</strong></td>
+                <td>2–8 hrs</td>
+                <td>Full Foundation</td>
+                <td>Active melody (flute or dulcimer)</td>
+                <td>Purposeful, warm</td>
+              </tr>
+              <tr>
+                <td><strong>Afternoon</strong></td>
+                <td>8–14 hrs</td>
+                <td>Foundation + 1 texture layer</td>
+                <td>Melodic with variation</td>
+                <td>Comfortable, productive</td>
+              </tr>
+              <tr>
+                <td><strong>Golden Hour</strong></td>
+                <td>14–17 hrs</td>
+                <td>Full Foundation + warm saturation</td>
+                <td>Richest melodic layer</td>
+                <td>Peak warmth; the world at its most beautiful</td>
+              </tr>
+              <tr>
+                <td><strong>Dusk</strong></td>
+                <td>17–19 hrs</td>
+                <td>Foundation settling</td>
+                <td>Slower melodic — cello led</td>
+                <td>Reflective, winding down</td>
+              </tr>
+              <tr>
+                <td><strong>Night</strong></td>
+                <td>19–24 hrs</td>
+                <td>Sparse Foundation — strings only</td>
+                <td>No active melody</td>
+                <td>Quiet, slightly mysterious</td>
+              </tr>
+              <tr style="background:linear-gradient(to right,#0a1a300a,#0a1a3005)">
+                <td><strong>Green Spring Night</strong></td>
+                <td>Special state</td>
+                <td>Spring Light theme dominant</td>
+                <td>Crystal bowls added</td>
+                <td>Unearthly, sacred</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.5 Seasonal Variation -->
+    <div class="card" id="seasonal-music">
+      <div class="card-header"><span>🍂</span><h3>2.5 — Seasonal Music Variation</h3></div>
+      <div class="card-body">
+        <div class="season-grid">
+          <div class="season-card season-spring">
+            <span class="season-icon">🌱</span>
+            <div class="season-name">Spring</div>
+            <div class="season-detail">
+              <strong>Mode:</strong> Major, bright<br>
+              <strong>Added:</strong> Light flute flourishes<br>
+              <strong>Removed:</strong> Heavy low strings<br>
+              <strong>Feel:</strong> Hopeful, new
+            </div>
+          </div>
+          <div class="season-card season-summer">
+            <span class="season-icon">☀️</span>
+            <div class="season-name">Summer</div>
+            <div class="season-detail">
+              <strong>Mode:</strong> Major, full<br>
+              <strong>Added:</strong> Hammered dulcimer prominent<br>
+              <strong>Removed:</strong> Crystal bowls (daytime)<br>
+              <strong>Feel:</strong> Abundant, warm
+            </div>
+          </div>
+          <div class="season-card season-autumn">
+            <span class="season-icon">🍁</span>
+            <div class="season-name">Autumn</div>
+            <div class="season-detail">
+              <strong>Mode:</strong> Major to minor, warm<br>
+              <strong>Added:</strong> Cello prominence rises<br>
+              <strong>Removed:</strong> Light percussion reduced<br>
+              <strong>Feel:</strong> Nostalgic, rich
+            </div>
+          </div>
+          <div class="season-card season-winter">
+            <span class="season-icon">❄️</span>
+            <div class="season-name">Winter</div>
+            <div class="season-detail">
+              <strong>Mode:</strong> Minor, sparse<br>
+              <strong>Added:</strong> Long sustained notes<br>
+              <strong>Removed:</strong> Most melodic layers<br>
+              <strong>Feel:</strong> Quiet, introspective, beautiful
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.6 Activity States -->
+    <div class="card" id="activity-states">
+      <div class="card-header"><span>🎮</span><h3>2.6 — Activity-Based Music States (Layer B)</h3></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Player State</th>
+                <th>Layer B Response</th>
+                <th>Design Intent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="activity-state-idle">
+                <td>Idle / standing</td>
+                <td>Off or ambient swell</td>
+                <td>Music breathes but does not push</td>
+              </tr>
+              <tr>
+                <td>Walking — town</td>
+                <td>Light melody (dulcimer or guitar)</td>
+                <td>Gentle forward motion</td>
+              </tr>
+              <tr>
+                <td>Running</td>
+                <td>Add rhythmic hand percussion</td>
+                <td>Energy increases; not aggressive</td>
+              </tr>
+              <tr>
+                <td>Farming / crafting</td>
+                <td>Steady mid-tempo melodic layer</td>
+                <td>Purposeful, satisfying</td>
+              </tr>
+              <tr>
+                <td>Fishing</td>
+                <td>Sparse; mostly ambient; occasional single note</td>
+                <td>Patience; stillness</td>
+              </tr>
+              <tr>
+                <td>Exploration — new area</td>
+                <td>"Roots and Routes" theme fragment</td>
+                <td>Discovery; momentum</td>
+              </tr>
+              <tr>
+                <td>NPC conversation</td>
+                <td>Music ducks −8 dB; no new Layer B</td>
+                <td>Voice is prioritized</td>
+              </tr>
+              <tr style="background:var(--gold-pale)">
+                <td><strong>Legacy Moment</strong></td>
+                <td>Layer C: full "Legacy" theme</td>
+                <td>Full swell; emotional peak</td>
+              </tr>
+              <tr>
+                <td>Sky-stone activation</td>
+                <td>Layer C: "Spring Light" fragment</td>
+                <td>Wonder; otherworldly</td>
+              </tr>
+              <tr>
+                <td>Human remnant discovery</td>
+                <td>Layer C: "What Was Left"</td>
+                <td>Quiet revelation</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 3 — BIOME AMBIENT SOUNDSCAPES
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="biome-soundscapes">
+      <span class="section-icon">🌿</span>
+      <h2>Biome Ambient Soundscapes</h2>
+    </div>
+
+    <!-- 3.1 Architecture -->
+    <div class="card" id="ambient-architecture">
+      <div class="card-header"><span>📡</span><h3>3.1 — Ambient Layer Architecture</h3></div>
+      <div class="card-body">
+        <div class="grid-3">
+          <div style="background:var(--emerald-bg);border:1px solid var(--emerald-pale);border-radius:var(--radius-sm);padding:1rem 1.1rem">
+            <div class="biome-section-title" style="color:var(--emerald-dark)">Near Layer — 0 to 10m</div>
+            <p style="font-size:.84rem;color:var(--text-medium);margin:0">Footsteps, immediate foliage rustle, water surface, insect detail.</p>
+            <p style="font-size:.77rem;color:var(--text-light);margin:.4rem 0 0;font-style:italic">High randomization — varies every 5–30 seconds</p>
+          </div>
+          <div style="background:var(--gold-pale);border:1px solid var(--gold-light);border-radius:var(--radius-sm);padding:1rem 1.1rem">
+            <div class="biome-section-title" style="color:var(--gold-dark)">Mid Layer — 10 to 50m</div>
+            <p style="font-size:.84rem;color:var(--text-medium);margin:0">Wildlife calls, wind in canopy, flowing water, NPC ambient activity.</p>
+            <p style="font-size:.77rem;color:var(--text-light);margin:.4rem 0 0;font-style:italic">Medium randomization — varies every 15–60 seconds</p>
+          </div>
+          <div style="background:var(--brown-pale);border:1px solid var(--brown-light);border-radius:var(--radius-sm);padding:1rem 1.1rem">
+            <div class="biome-section-title" style="color:var(--brown-dark)">Far Layer — 50m+</div>
+            <p style="font-size:.84rem;color:var(--text-medium);margin:0">Distant wind, mountain echo, thunder, birds in formation.</p>
+            <p style="font-size:.77rem;color:var(--text-light);margin:.4rem 0 0;font-style:italic">Low, atmospheric — varies every 60–300 seconds</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.2 Per-Biome Specs -->
+    <div id="biome-specs">
+      <div class="labeled-divider"><span class="labeled-divider-text">3.2 — Per-Biome Ambient Specifications</span></div>
+
+      <!-- Mooseville Town -->
+      <div class="biome-ambient-card" id="biome-town">
+        <div class="biome-ambient-header bah-town">
+          <span style="font-size:1.4rem">🏘️</span>
+          <h3>Mooseville Town</h3>
+        </div>
+        <div class="biome-ambient-body">
+          <div class="grid-2">
+            <div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near · Day</span><span class="ambient-layer-sounds">Wood footsteps; tool sounds; ambient NPC murmur</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near · Eve</span><span class="ambient-layer-sounds">Hearthfire crackle; quieter NPC voices</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid · Day</span><span class="ambient-layer-sounds">Central Fire crackle; stall activity; children playing; water channel trickle</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid · Eve</span><span class="ambient-layer-sounds">Bell chime (dusk signal); fewer voices</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Far</span><span class="ambient-layer-sounds">Wind over rooftops; distant mountain; stars (silence); owl; wind</span></div>
+            </div>
+            <div>
+              <div class="ambient-special">
+                <div class="ambient-special-label">Special — Enhancement Works Signature Sound</div>
+                <div class="ambient-special-desc">
+                  Low, harmonic hum (<strong>fundamental 80 Hz + 3rd harmonic</strong>) audible within 30m of the Shard Station. Pitch <strong>descends 2 semitones over 3 in-game days</strong> during Act 1 degradation. This is an audio-design narrative signal — the attentive player will hear the problem before any quest flags it.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emerald Forest -->
+      <div class="biome-ambient-card" id="biome-forest">
+        <div class="biome-ambient-header bah-forest">
+          <span style="font-size:1.4rem">🌲</span>
+          <h3>Emerald Forest</h3>
+        </div>
+        <div class="biome-ambient-body">
+          <div class="grid-2">
+            <div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near · Dawn</span><span class="ambient-layer-sounds">Fern rustle; dew drip from needles</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near · Day</span><span class="ambient-layer-sounds">Footsteps on soft soil; branch snap</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near · Night</span><span class="ambient-layer-sounds">Near silence; rare twig snap</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid · Day</span><span class="ambient-layer-sounds">Woodpecker; multiple bird species; distant bear movement</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Far</span><span class="ambient-layer-sounds">High canopy wind; wind through canopy; rare raptor call</span></div>
+            </div>
+            <div>
+              <div class="ambient-special">
+                <div class="ambient-special-label">Special — Bear Family Audio</div>
+                <div class="ambient-special-desc">
+                  Three distinct audio signatures: <strong>adult male, adult female, cub</strong>. Audible from 40m. Randomized call/snuffle/movement cycle. Each signature is identifiable by ear without visual confirmation.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Golden Meadow -->
+      <div class="biome-ambient-card" id="biome-meadow">
+        <div class="biome-ambient-header bah-meadow">
+          <span style="font-size:1.4rem">🌾</span>
+          <h3>Golden Meadow</h3>
+        </div>
+        <div class="biome-ambient-body">
+          <div class="grid-2">
+            <div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near</span><span class="ambient-layer-sounds">Frost crunch (winter) / dew grass step; grass swish; insect step</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid</span><span class="ambient-layer-sounds">Meadowlark song; deer movement; multiple meadow species; bee ambient</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Far</span><span class="ambient-layer-sounds">Light wind; full open-sky wind; thunderstorm (seasonal)</span></div>
+            </div>
+            <div>
+              <div class="ambient-special">
+                <div class="ambient-special-label">Special — The Lone Oak</div>
+                <div class="ambient-special-desc">
+                  Wind through oak leaves has a <strong>distinct frequency from pine</strong>, creating a landmark audio cue identifiable by ear across the meadow. Players can navigate toward the Lone Oak by sound alone.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crystal Lakeshore -->
+      <div class="biome-ambient-card" id="biome-lake">
+        <div class="biome-ambient-header bah-lake">
+          <span style="font-size:1.4rem">💎</span>
+          <h3>Crystal Lakeshore</h3>
+        </div>
+        <div class="biome-ambient-body">
+          <div class="grid-2">
+            <div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near · Dawn</span><span class="ambient-layer-sounds">Mist sound (water vapor on still morning)</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near · Day</span><span class="ambient-layer-sounds">Small wave lap; pebble shift</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid · Day</span><span class="ambient-layer-sounds">Waterfowl chorus; light wave activity; rowing sound (if player on rowboat)</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Far</span><span class="ambient-layer-sounds">Mountain echo across water; wind across water surface; complete stillness broken by single distant bird</span></div>
+            </div>
+            <div>
+              <div class="ambient-special">
+                <div class="ambient-special-label">Special — Green Shallows</div>
+                <div class="ambient-special-desc">
+                  Very quiet resonant tone (<strong>sky-stone mineral trace, 220 Hz</strong>) felt more than heard. Audible only within 8m. Increases in presence with Spring Knack progression — a tactile reward for advancement.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marsh Shallows -->
+      <div class="biome-ambient-card" id="biome-marsh">
+        <div class="biome-ambient-header bah-marsh">
+          <span style="font-size:1.4rem">🌿</span>
+          <h3>Marsh Shallows</h3>
+        </div>
+        <div class="biome-ambient-body">
+          <div class="grid-2">
+            <div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near</span><span class="ambient-layer-sounds">Soft mud step; water drip; reed rustle; mud bubble; wading water; frog; water drip</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid</span><span class="ambient-layer-sounds">Bittern call; beaver activity; red-winged blackbird; beaver splash; cattail in wind; full frog chorus</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Far</span><span class="ambient-layer-sounds">Mist / fog sound; heron distant; single loon; complete stillness</span></div>
+            </div>
+            <div class="info-box" style="align-self:start;margin-top:.25rem">
+              The Marsh has the highest Near-layer density of any biome — each footstep generates a unique combination of mud, water, and reed sounds, making movement feel tactile and present.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ancient Ruins -->
+      <div class="biome-ambient-card" id="biome-ruins">
+        <div class="biome-ambient-header bah-ruins">
+          <span style="font-size:1.4rem">🗿</span>
+          <h3>Ancient Ruins</h3>
+        </div>
+        <div class="biome-ambient-body">
+          <div class="grid-2">
+            <div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near</span><span class="ambient-layer-sounds">Wind across stone; dry grass; pebble shift; boot on concrete fragment; wind on stone</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid</span><span class="ambient-layer-sounds">Eagle call; distant hawk; eagle pair calls; rock scatter; owl (night only)</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Far</span><span class="ambient-layer-sounds">Valley wind echo; occasional rock fall; silence</span></div>
+            </div>
+            <div>
+              <div class="ambient-special">
+                <div class="ambient-special-label">Special — Survey Station</div>
+                <div class="ambient-special-desc">
+                  A partially intact metal roof fragment resonates in specific wind conditions, producing a <strong>low moan (B-flat, ~117 Hz)</strong>. Environmental storytelling through sound — the player hears evidence of human construction before they fully understand what they are looking at.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- High Shelf -->
+      <div class="biome-ambient-card" id="biome-shelf">
+        <div class="biome-ambient-header bah-shelf">
+          <span style="font-size:1.4rem">🏔️</span>
+          <h3>High Shelf</h3>
+        </div>
+        <div class="biome-ambient-body">
+          <div class="grid-2">
+            <div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near</span><span class="ambient-layer-sounds">Boot on rock; wind-driven grit; snow crunch (winter/spring)</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid</span><span class="ambient-layer-sounds">Constant wind; hawk screech; occasional thunder echo</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Far</span><span class="ambient-layer-sounds">Massive mountain wind; distant valley sounds (barely audible)</span></div>
+            </div>
+            <div>
+              <div class="ambient-special">
+                <div class="ambient-special-label">Special — Impact Crater</div>
+                <div class="ambient-special-desc">
+                  A resonant chord of <strong>stacked perfect 5ths: E – B – F#</strong>, pulsing slowly (once per 4 seconds). During Spring Knack Tier 3 activation, the chord expands through <strong>7 additional harmonics</strong> — a musical revelation that communicates progression through sound alone.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sealed Eastern Pass -->
+      <div class="biome-ambient-card" id="biome-pass">
+        <div class="biome-ambient-header bah-pass">
+          <span style="font-size:1.4rem">🚧</span>
+          <h3>Sealed Eastern Pass</h3>
+        </div>
+        <div class="biome-ambient-body">
+          <div class="grid-2">
+            <div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Near</span><span class="ambient-layer-sounds">Boots on compacted debris; wind through the canyon</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Mid</span><span class="ambient-layer-sounds">Deep stone resonance; canyon wind; dripping ice</span></div>
+              <div class="ambient-layer-row"><span class="ambient-layer-time">Far</span><span class="ambient-layer-sounds">Complete silence beyond the debris wall</span></div>
+            </div>
+            <div>
+              <div class="ambient-special">
+                <div class="ambient-special-label">Special — Echo Chamber</div>
+                <div class="ambient-special-desc">
+                  Voices produce a <strong>0.8-second delay echo</strong>. All active music layers drop entirely. When the pass opens, a <strong>single long drone plays for 12 seconds</strong> — the only time in the game that occurs.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /#biome-specs -->
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 4 — CHARACTER & NPC AUDIO
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="character-audio">
+      <span class="section-icon">🦌</span>
+      <h2>Character &amp; NPC Audio</h2>
+    </div>
+
+    <!-- 4.1 Player Character -->
+    <div class="card" id="player-audio">
+      <div class="card-header"><span>👤</span><h3>4.1 — Player Character Audio</h3></div>
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <h4 class="subsection-header">Footsteps</h4>
+            <p>8-material surface system: <code>wood</code>, <code>soil</code>, <code>stone</code>, <code>grass</code>, <code>water</code>, <code>mud</code>, <code>snow</code>, <code>gravel</code>. Minimum 6 variations per material per pace speed. MetaSounds surface query via UE5 physical material tag.</p>
+
+            <h4 class="subsection-header">Exertion (Stamina)</h4>
+            <p>Breathing rate increases proportionally with stamina drain; peaks near limit.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Stamina Level</th><th>Pitch Shift</th><th>Volume Shift</th></tr></thead>
+                <tbody>
+                  <tr><td>50%</td><td>0.95 rate</td><td>—</td></tr>
+                  <tr><td>90%</td><td>1.1 rate</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4 class="subsection-header">Eating &amp; Drinking</h4>
+            <p>Distinct sounds per food category (crunchy, soft, liquid); Moose Water carries a distinct reverb shimmer. 4 food categories × 3 variations each.</p>
+          </div>
+          <div>
+            <h4 class="subsection-header">Crafting</h4>
+            <p>Material-based: wood, metal, fabric, plant. Layered: tool contact + material response.</p>
+
+            <h4 class="subsection-header">Swimming</h4>
+            <p>Complete ambient swap; muffled world audio; water movement; breath timing.</p>
+            <div class="info-box">
+              <strong>DSP:</strong> Lowpass filter applied over all world audio at <strong>cutoff 800 Hz</strong> when the player is submerged. The world sounds muffled, distant, and pressurized.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4.2 NPC Presence -->
+    <div class="card" id="npc-presence">
+      <div class="card-header"><span>🗣️</span><h3>4.2 — NPC Presence Audio</h3></div>
+      <div class="card-body">
+        <p>All NPCs produce ambient "presence audio" when within <strong>15m</strong> of the player. These sounds make NPCs feel alive even without direct interaction.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>NPC State</th><th>Sound Produced</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Working</strong> (farming, crafting, building)</td>
+                <td>Tool-specific work sounds</td>
+                <td>Chester = hammer/metal; Bram = hoeing/watering</td>
+              </tr>
+              <tr>
+                <td><strong>Walking</strong> (schedule movement)</td>
+                <td>Hoofsteps on appropriate surface</td>
+                <td>Each NPC has a unique gait rhythm</td>
+              </tr>
+              <tr>
+                <td><strong>Thinking / idle</strong></td>
+                <td>Soft hum, breath, occasional word fragment</td>
+                <td>Randomized; 1-in-6 chance per 30-second idle period</td>
+              </tr>
+              <tr>
+                <td><strong>Eating</strong> (meal times)</td>
+                <td>Dish sound; chewing; content exhale</td>
+                <td>Marjorie's station: layered with multiple NPCs simultaneously</td>
+              </tr>
+              <tr>
+                <td><strong>Happy</strong> (high Closeness, good weather, festival)</td>
+                <td>Brighter vocal ambient; occasional quiet laugh</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Subdued</strong> (anniversary, off day, low mood)</td>
+                <td>Quieter; fewer sounds; slower pace audio</td>
+                <td>Narrative signal to player — something is different today</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4.3 NPC Signatures -->
+    <div class="card" id="npc-signatures">
+      <div class="card-header"><span>🎶</span><h3>4.3 — NPC Signature Sounds</h3></div>
+      <div class="card-body">
+        <p style="margin-bottom:1rem;font-size:.875rem;color:var(--text-medium)">Each NPC is identifiable by ear from 10m without visual confirmation. Signatures must not loop at under 5 seconds.</p>
+        <div class="npc-sig-grid">
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Melvin</div>
+            <div class="npc-sig-sound">Steady, slow hoof-step + quiet low hum</div>
+            <div class="npc-sig-feel">Deliberate, grounded</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Martha</div>
+            <div class="npc-sig-sound">Paper rustle + soft pen scratch</div>
+            <div class="npc-sig-feel">Always writing</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Doris Vale</div>
+            <div class="npc-sig-sound">Tool-on-soil rhythm; occasional approving click</div>
+            <div class="npc-sig-feel">Farming soundtrack</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Raymond Harlow</div>
+            <div class="npc-sig-sound">Heavy hoof-step + tool belt jingle</div>
+            <div class="npc-sig-feel">Largest moose; you hear him coming</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Gloria Finch</div>
+            <div class="npc-sig-sound">Page turn + glasses adjustment</div>
+            <div class="npc-sig-feel">Reading is always happening</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Harold Winslow</div>
+            <div class="npc-sig-sound">Weather instrument ping + water pour</div>
+            <div class="npc-sig-feel">Measurement in progress</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Marjorie Bell</div>
+            <div class="npc-sig-sound">Stirring sound + dish clink</div>
+            <div class="npc-sig-feel">Cooking, always</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Chester Lang</div>
+            <div class="npc-sig-sound">Subtle wooden click (prosthetic hooves) + metal ring</div>
+            <div class="npc-sig-feel">Unmistakable</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Evelyn Price</div>
+            <div class="npc-sig-sound">Deliberate slow step on stone; near-silence otherwise</div>
+            <div class="npc-sig-feel">Presence through quiet</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Vincent Reed</div>
+            <div class="npc-sig-sound">Map unrolling + quick hoof shuffle</div>
+            <div class="npc-sig-feel">Always in motion</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Bram Vale</div>
+            <div class="npc-sig-sound">Soil pat + enthusiastic exhale</div>
+            <div class="npc-sig-feel">Farming energy</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Moss Lang</div>
+            <div class="npc-sig-sound">Small metal clink + questioning hum</div>
+            <div class="npc-sig-feel">Tinkering with something</div>
+          </div>
+          <div class="npc-sig-item">
+            <div class="npc-sig-name">Caro Reed</div>
+            <div class="npc-sig-sound">Pack adjustment + confident stride</div>
+            <div class="npc-sig-feel">Ready for anything</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 5 — UI & FEEDBACK AUDIO
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="ui-audio">
+      <span class="section-icon">🖱️</span>
+      <h2>UI &amp; Feedback Audio</h2>
+    </div>
+
+    <div class="pull-quote">
+      UI sounds must feel like they belong to the world — not like a digital interface. Every interaction sound should feel like it could have been made with wood, paper, stone, or water.
+    </div>
+
+    <!-- 5.1 Material Palette -->
+    <div class="card" id="ui-materials">
+      <div class="card-header"><span>🪵</span><h3>5.1 — Material Palette for UI Sounds</h3></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>UI Interaction</th><th>Sound Material</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Button hover / select</td><td>Soft wood tap (like a finger on a carved wooden panel)</td></tr>
+              <tr><td>Confirm / select</td><td>Wooden click with warm resonance (like a well-fitted wooden joint closing)</td></tr>
+              <tr><td>Cancel / back</td><td>Light stone scrape</td></tr>
+              <tr><td>Inventory open</td><td>Leather satchel buckle + paper rustle</td></tr>
+              <tr><td>Map open</td><td>Parchment unroll + light wooden frame</td></tr>
+              <tr><td>Journal write</td><td>Pen on paper + page turn</td></tr>
+              <tr><td>Muck transaction (earn)</td><td>Wooden coin clink (multiple coins)</td></tr>
+              <tr><td>Muck transaction (spend)</td><td>Single heavy coin placed on wood</td></tr>
+              <tr><td>Error / invalid</td><td>Low hollow thud (wood block; no harsh digital beep)</td></tr>
+              <tr><td>Achievement / unlock</td><td>Hammered dulcimer ascending arpeggio (3 notes; warm)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.2 Gameplay Feedback -->
+    <div class="card" id="gameplay-feedback">
+      <div class="card-header"><span>🔔</span><h3>5.2 — Gameplay Feedback Audio</h3></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Event</th><th>Sound Description</th><th>Duration</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Crop watered</td><td>Water pour + soil absorption</td><td>0.8 sec</td></tr>
+              <tr><td>Crop harvested</td><td>Plant material + satisfied exhale</td><td>0.6 sec</td></tr>
+              <tr><td>Fish caught</td><td>Splash + line tension snap</td><td>1.2 sec</td></tr>
+              <tr><td>Item crafted (minor)</td><td>Material + soft click</td><td>0.5 sec</td></tr>
+              <tr><td>Item crafted (major)</td><td>Material + wooden knock + short dulcimer note</td><td>1.0 sec</td></tr>
+              <tr><td>Gift given</td><td>Soft hand-to-hand transfer + NPC response</td><td>0.7 sec + NPC</td></tr>
+              <tr><td>Closeness Level up</td><td>Warm string swell (3 seconds; subtle)</td><td>3.0 sec</td></tr>
+              <tr><td>New arrival found</td><td>Unique 4-note flute phrase (hopeful, uncertain)</td><td>2.0 sec</td></tr>
+              <tr><td>Sky-stone activated</td><td>Crystal bowl resonance + harmonic expansion</td><td>4.0 sec</td></tr>
+              <tr><td>Lore entry written</td><td>Page turn + writing sound + spring glow pulse</td><td>2.5 sec</td></tr>
+              <tr><td>Season change</td><td>Ambient complete swap + 8-second music transition</td><td>8.0 sec</td></tr>
+              <tr><td>Day / Night transition</td><td>Music layer swap + ambient crossfade</td><td>30 sec (gradual)</td></tr>
+              <tr style="background:var(--gold-pale)"><td><strong>Legacy Moment begins</strong></td><td>Music volume fade + then swell (Legacy theme)</td><td>5 sec in + full scene</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.3 Accessibility -->
+    <div class="card" id="accessibility-audio">
+      <div class="card-header"><span>♿</span><h3>5.3 — Accessibility Audio Options</h3></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Range / Values</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Master Volume</td><td>0 – 100</td></tr>
+              <tr><td>Music Volume</td><td>0 – 100</td></tr>
+              <tr><td>Ambience Volume</td><td>0 – 100</td></tr>
+              <tr><td>UI Volume</td><td>0 – 100</td></tr>
+              <tr><td>NPC Volume</td><td>0 – 100</td></tr>
+              <tr><td>Subtitles for audio cues</td><td>On / Off</td></tr>
+              <tr><td>Mono audio</td><td>On / Off</td></tr>
+              <tr><td>Reduce bass</td><td>On / Off</td></tr>
+              <tr><td>Audio narrative cues (Enhancement Works hum visualized)</td><td>On / Off — shows a visual indicator when the hum is active</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box" style="margin-top:1rem">
+          <strong>Design Principle:</strong> No narrative-critical information should ever exist exclusively in audio without a visual fallback option. This applies to the Enhancement Works hum, the eastern pass opening drone, and all progression signals.
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 6 — UE5 METASOUNDS IMPLEMENTATION
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="metasounds">
+      <span class="section-icon">⚙️</span>
+      <h2>UE5 MetaSounds Implementation</h2>
+    </div>
+
+    <!-- 6.1 MetaSounds Architecture -->
+    <div class="card" id="metasounds-patches">
+      <div class="card-header"><span>🔧</span><h3>6.1 — MetaSounds Patch Architecture</h3></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Patch Name</th><th>Type</th><th>Function</th><th>Key Parameters</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>MS_MusicLayer_Foundation</code></td>
+                <td><span class="ms-type-badge ms-source">Source</span></td>
+                <td>Plays/controls Layer A music</td>
+                <td>Biome, TimeOfDay</td>
+              </tr>
+              <tr>
+                <td><code>MS_MusicLayer_Activity</code></td>
+                <td><span class="ms-type-badge ms-source">Source</span></td>
+                <td>Plays Layer B</td>
+                <td>ActivityState <em>(enum)</em></td>
+              </tr>
+              <tr>
+                <td><code>MS_MusicLayer_Moment</code></td>
+                <td><span class="ms-type-badge ms-source">Source</span></td>
+                <td>One-shot Layer C; narrative events</td>
+                <td>Triggered per event</td>
+              </tr>
+              <tr>
+                <td><code>MS_Ambience_Biome</code></td>
+                <td><span class="ms-type-badge ms-patch">Patch</span></td>
+                <td>Master ambient controller; routes to Near/Mid/Far sub-patches</td>
+                <td>Biome, Season, TimeOfDay</td>
+              </tr>
+              <tr>
+                <td><code>MS_SkyStone_Resonance</code></td>
+                <td><span class="ms-type-badge ms-source">Source</span></td>
+                <td>Crystal bowl + harmonic generation</td>
+                <td>SpringKnackTier <em>(int)</em></td>
+              </tr>
+              <tr>
+                <td><code>MS_EnhancementWorks_Hum</code></td>
+                <td><span class="ms-type-badge ms-source">Source</span></td>
+                <td>Civic hum with narrative pitch-shift</td>
+                <td>DegradationLevel <em>(float 0.0–1.0)</em></td>
+              </tr>
+              <tr>
+                <td><code>MS_Footstep_Player</code></td>
+                <td><span class="ms-type-badge ms-patch">Patch</span></td>
+                <td>Surface-material-driven footstep system</td>
+                <td>SurfaceMaterial, Velocity</td>
+              </tr>
+              <tr>
+                <td><code>MS_NPC_Presence</code></td>
+                <td><span class="ms-type-badge ms-patch">Patch</span></td>
+                <td>Per-NPC ambient audio</td>
+                <td>Mood, Activity, NPCID</td>
+              </tr>
+              <tr>
+                <td><code>MS_UI_Interaction</code></td>
+                <td><span class="ms-type-badge ms-source">Source</span></td>
+                <td>All UI sounds</td>
+                <td>EventName <em>(string)</em></td>
+              </tr>
+              <tr>
+                <td><code>MS_Weather_System</code></td>
+                <td><span class="ms-type-badge ms-patch">Patch</span></td>
+                <td>Rain, wind, thunder</td>
+                <td>Intensity <em>(float)</em>, Type <em>(enum)</em></td>
+              </tr>
+              <tr>
+                <td><code>MS_Voice_NPC</code></td>
+                <td><span class="ms-type-badge ms-patch">Patch</span></td>
+                <td>Reserved for post-launch voice acting integration</td>
+                <td><em>Slot reserved; hook in all NPC Blueprints</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6.2 Quartz Clock -->
+    <div class="card" id="quartz-clock">
+      <div class="card-header"><span>🕐</span><h3>6.2 — Quartz Clock System</h3></div>
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                <tbody>
+                  <tr><td>Clock Name</td><td><code>MV_MasterClock</code></td></tr>
+                  <tr><td>Base BPM</td><td>72</td></tr>
+                  <tr><td>Time Signature (default)</td><td>4/4</td></tr>
+                  <tr><td>Time Signature (festival)</td><td>3/4 (available)</td></tr>
+                  <tr><td>Beat Subdivision</td><td>16th note (finest trigger resolution)</td></tr>
+                  <tr><td>Stem Transition Quantization</td><td>4-bar boundary</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <div class="info-box">
+              <strong>4-Bar Boundary Rule:</strong> All music stem transitions fire only at 4-bar boundaries. This is non-negotiable. A state change mid-bar queues the transition and fires at the next boundary — preventing rhythmic artifacts that would break immersion.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6.3 Music Manager Blueprint -->
+    <div class="card" id="music-manager">
+      <div class="card-header"><span>🔵</span><h3>6.3 — Music Manager Blueprint Parameters</h3></div>
+      <div class="card-body">
+        <pre>EBiomeState       CurrentBiome;       // Enum: Town, EmeraldForest, GoldenMeadow, etc.
+ETimeOfDay        CurrentTimePhase;   // Enum: Dawn, Morning, Afternoon, GoldenHour, Dusk, Night
+EPlayerActivity   CurrentActivity;    // Enum: Idle, Walking, Running, Farming, Fishing, etc.
+EActState         CurrentAct;         // Enum: Act1, Act2, Act3
+float             NarrativeIntensity; // 0.0–1.0; drives music saturation
+ESeason           CurrentSeason;      // Enum: Spring, Summer, Autumn, Winter
+bool              bAtGreenSpring;
+bool              bSkyStoneActive;
+float             DegradationLevel;   // 0.0–1.0; Enhancement Works health</pre>
+        <div class="warn-box" style="margin-top:.75rem">
+          <strong>Expansion rule:</strong> Future biome additions must extend <code>EBiomeState</code> in <code>BP_MV_MusicManager</code>. Do not create parallel parameter systems.
+        </div>
+      </div>
+    </div>
+
+    <!-- 6.4 Spatialization -->
+    <div class="card" id="spatialization">
+      <div class="card-header"><span>📐</span><h3>6.4 — Spatialized Audio Settings</h3></div>
+      <div class="card-body">
+        <div class="grid-2">
+          <div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+                <tbody>
+                  <tr><td>Spatialization</td><td>UE5 built-in HRTF (headphone-optimized)</td></tr>
+                  <tr><td>Attenuation Model</td><td>Logarithmic (natural outdoor falloff)</td></tr>
+                  <tr><td>Inner Radius</td><td>1.0m (full volume within 1m)</td></tr>
+                  <tr><td>Doppler Effect</td><td>Enabled at 0.5 scale</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="labeled-divider"><span class="labeled-divider-text">Falloff Distances</span></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Source Type</th><th>Falloff</th></tr></thead>
+                <tbody>
+                  <tr><td>Wildlife</td><td>80m</td></tr>
+                  <tr><td>Water</td><td>60m</td></tr>
+                  <tr><td>NPC</td><td>20m</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <div class="labeled-divider"><span class="labeled-divider-text">Occlusion Values</span></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Occluder</th><th>Attenuation</th></tr></thead>
+                <tbody>
+                  <tr><td>Thin wood</td><td>−6 dB</td></tr>
+                  <tr><td>Stone wall</td><td>−18 dB</td></tr>
+                  <tr><td>Hillside</td><td>−12 dB</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6.5 Reverb Zones -->
+    <div class="card" id="reverb-zones">
+      <div class="card-header"><span>🔁</span><h3>6.5 — Audio Reverb Zone Specifications</h3></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Reverb Preset</th>
+                <th>Pre-Delay</th>
+                <th>Decay</th>
+                <th>Wet/Dry</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="reverb-zone-name">Mooseville Town (outdoors)</span></td>
+                <td>Outdoor Small Village</td>
+                <td>15ms</td>
+                <td>0.6s</td>
+                <td>0.15</td>
+              </tr>
+              <tr>
+                <td><span class="reverb-zone-name">Gathering Hall (interior)</span></td>
+                <td>Large Timber Interior</td>
+                <td>25ms</td>
+                <td>1.2s</td>
+                <td>0.45</td>
+              </tr>
+              <tr>
+                <td><span class="reverb-zone-name">Player Homestead (interior)</span></td>
+                <td>Small Warm Room</td>
+                <td>20ms</td>
+                <td>0.8s</td>
+                <td>0.40</td>
+              </tr>
+              <tr>
+                <td><span class="reverb-zone-name">Archive Hall (interior)</span></td>
+                <td>Medium Stone with Books</td>
+                <td>22ms</td>
+                <td>1.0s</td>
+                <td>0.35</td>
+              </tr>
+              <tr>
+                <td><span class="reverb-zone-name">Emerald Forest</span></td>
+                <td>Dense Forest</td>
+                <td>8ms</td>
+                <td>0.9s</td>
+                <td>0.25</td>
+              </tr>
+              <tr>
+                <td><span class="reverb-zone-name">Crystal Lake</span></td>
+                <td>Open Water</td>
+                <td>18ms</td>
+                <td>1.8s</td>
+                <td>0.20</td>
+              </tr>
+              <tr>
+                <td><span class="reverb-zone-name">Ancient Ruins</span></td>
+                <td>Stone Outdoor Ruins</td>
+                <td>30ms</td>
+                <td>2.2s</td>
+                <td>0.30</td>
+              </tr>
+              <tr>
+                <td><span class="reverb-zone-name">High Shelf</span></td>
+                <td>Open Mountain</td>
+                <td>45ms</td>
+                <td>3.5s</td>
+                <td>0.18</td>
+              </tr>
+              <tr style="background:linear-gradient(to right,#1a1a2a0a,transparent)">
+                <td><span class="reverb-zone-name">Echo Chamber (Eastern Pass)</span></td>
+                <td><strong>Special</strong> — 800ms delay + canyon</td>
+                <td>800ms</td>
+                <td>2.8s</td>
+                <td>0.70</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 7 — ASSET SPECIFICATIONS & BUDGET
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="asset-specs">
+      <span class="section-icon">📦</span>
+      <h2>Sound Asset Specifications &amp; Budget</h2>
+    </div>
+
+    <!-- 7.1 Format Standards -->
+    <div class="card" id="format-standards">
+      <div class="card-header"><span>🗂️</span><h3>7.1 — Audio Format Standards</h3></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Asset Category</th><th>Source Format</th><th>Engine Format</th><th>Sample Rate</th><th>Bit Depth</th><th>Channels</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Music stems</strong></td>
+                <td>WAV</td><td>OGG</td><td>48 kHz</td><td>24-bit</td><td>Stereo</td>
+                <td>Stems delivered pre-mixed per layer</td>
+              </tr>
+              <tr>
+                <td><strong>Ambience loops</strong></td>
+                <td>WAV</td><td>OGG</td><td>48 kHz</td><td>24-bit</td><td>Stereo</td>
+                <td>Minimum 30-sec loop; no audible loop point</td>
+              </tr>
+              <tr>
+                <td><strong>One-shot SFX</strong></td>
+                <td>WAV</td><td>OGG</td><td>48 kHz</td><td>24-bit</td><td>Mono</td>
+                <td>Spatialized by engine</td>
+              </tr>
+              <tr>
+                <td><strong>UI sounds</strong></td>
+                <td>WAV</td><td>OGG</td><td>48 kHz</td><td>16-bit</td><td>Stereo</td>
+                <td>No spatialization; always 2D</td>
+              </tr>
+              <tr>
+                <td><strong>NPC ambient</strong></td>
+                <td>WAV</td><td>OGG</td><td>44.1 kHz</td><td>16-bit</td><td>Mono</td>
+                <td>Spatialized</td>
+              </tr>
+              <tr style="color:var(--text-muted)">
+                <td><strong>Voice lines</strong> (future)</td>
+                <td>WAV</td><td>OGG</td><td>48 kHz</td><td>24-bit</td><td>Mono</td>
+                <td>Reserved; not in v1.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="warn-box" style="margin-top:.75rem">
+          <strong>Prohibited at any stage:</strong> MP3 is never acceptable as a delivery or source format. Use WAV for source and OGG for engine import exclusively.
+        </div>
+      </div>
+    </div>
+
+    <!-- 7.2 Budget -->
+    <div class="card" id="audio-budget">
+      <div class="card-header"><span>📊</span><h3>7.2 — Audio Budget Targets</h3></div>
+      <div class="card-body">
+        <div style="margin-bottom:1rem">
+          <div class="budget-row" style="border-bottom:2px solid var(--cream-dark);padding-bottom:.75rem;margin-bottom:.25rem">
+            <span style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)">Category</span>
+            <span style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)">Utilization</span>
+            <span style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--emerald-dark);text-align:right">Target</span>
+            <span style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);text-align:right">Hard Limit</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-label">Simultaneous voices</span>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:75%"></div></div>
+            <span class="budget-target">48</span>
+            <span class="budget-limit">64 max</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-label">Music voices</span>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:75%"></div></div>
+            <span class="budget-target">6</span>
+            <span class="budget-limit">8 max</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-label">Ambience voices</span>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:75%"></div></div>
+            <span class="budget-target">18</span>
+            <span class="budget-limit">24 max</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-label">SFX voices</span>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:66.7%"></div></div>
+            <span class="budget-target">16</span>
+            <span class="budget-limit">24 max</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-label">UI voices</span>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:100%"></div></div>
+            <span class="budget-target">4</span>
+            <span class="budget-limit">4 max</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-label">NPC ambient voices</span>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:66.7%"></div></div>
+            <span class="budget-target">8</span>
+            <span class="budget-limit">12 max</span>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="info-box">
+            <strong>Streamed audio memory:</strong> 256 MB target / 384 MB hard limit
+          </div>
+          <div class="info-box">
+            <strong>In-memory audio:</strong> 64 MB target / 96 MB hard limit
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7.3 Asset Naming -->
+    <div class="card" id="asset-naming">
+      <div class="card-header"><span>🔤</span><h3>7.3 — Asset Naming Convention</h3></div>
+      <div class="card-body">
+        <div class="info-box" style="margin-bottom:1rem">
+          <strong>Format:</strong> <code>[Project]_[Category]_[Subcategory]_[Name]_[Variant].[ext]</code>
+        </div>
+        <div class="labeled-divider"><span class="labeled-divider-text">Examples</span></div>
+        <pre>MV_Music_Foundation_EmeraldForest_Day_A.wav
+MV_Amb_Near_GoldenMeadow_Summer_01.wav
+MV_SFX_Farming_WaterCrop_01.wav
+MV_UI_Button_Select_01.wav
+MV_NPC_Presence_Melvin_Working_01.wav
+MV_SkyStone_Activate_HighShelf_01.wav</pre>
+        <div class="labeled-divider"><span class="labeled-divider-text">Required Variations per SFX Type</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>SFX Category</th><th>Minimum Variations</th><th>Rationale</th></tr></thead>
+            <tbody>
+              <tr><td>Footsteps per surface</td><td><strong>6 minimum</strong></td><td>Prevents obvious repetition across 8 surface types</td></tr>
+              <tr><td>Crop farming actions</td><td>4 per action type</td><td>water, harvest, plant, weed each need variety</td></tr>
+              <tr><td>Crafting per material</td><td>4</td><td>wood, metal, fabric, plant</td></tr>
+              <tr><td>UI interactions</td><td>3</td><td>hover, select, confirm must each be distinct</td></tr>
+              <tr><td>NPC presence per NPC</td><td>5</td><td>Prevents signature becoming annoying over time</td></tr>
+              <tr><td>Fish catch</td><td>4</td><td>Size / rarity variation</td></tr>
+              <tr><td>Ambience loops per layer/biome</td><td>2 (A and B variant)</td><td>Engine alternates between variants</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 8 — PIPELINE & DELIVERY
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="pipeline">
+      <span class="section-icon">🔄</span>
+      <h2>Audio Pipeline &amp; Delivery Workflow</h2>
+    </div>
+
+    <!-- 8.1 Production Pipeline -->
+    <div class="card" id="production-pipeline">
+      <div class="card-header"><span>📋</span><h3>8.1 — Audio Production Pipeline</h3></div>
+      <div class="card-body">
+        <div class="pipeline-steps">
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">1</div>
+            <div class="pipeline-step-content">
+              <div class="pipeline-step-title">Design Brief</div>
+              <p class="pipeline-step-desc">Audio Designer writes brief per asset category specifying emotional target, material reference, delivery format, and variation count required.</p>
+            </div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">2</div>
+            <div class="pipeline-step-content">
+              <div class="pipeline-step-title">Composition / Recording</div>
+              <p class="pipeline-step-desc">Composer or Sound Designer produces source assets in DAW. All deliveries as 48 kHz / 24-bit WAV stems.</p>
+            </div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">3</div>
+            <div class="pipeline-step-content">
+              <div class="pipeline-step-title">Review</div>
+              <p class="pipeline-step-desc">Audio Lead reviews against the Tone Reference Guide. Any asset conflicting with the acoustic-first philosophy is rejected at this stage.</p>
+            </div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">4</div>
+            <div class="pipeline-step-content">
+              <div class="pipeline-step-title">Integration Prep</div>
+              <p class="pipeline-step-desc">Assets renamed to naming convention. MetaSound patches built. Parameter hooks confirmed in Blueprint.</p>
+            </div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">5</div>
+            <div class="pipeline-step-content">
+              <div class="pipeline-step-title">UE5 Integration</div>
+              <p class="pipeline-step-desc">Assets imported into engine. MetaSound Sources configured. Attenuation profiles assigned. Reverb zones verified.</p>
+            </div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">6</div>
+            <div class="pipeline-step-content">
+              <div class="pipeline-step-title">In-Engine QA</div>
+              <p class="pipeline-step-desc">Full audio QA checklist run in-engine. See checklist below.</p>
+            </div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">7</div>
+            <div class="pipeline-step-content">
+              <div class="pipeline-step-title">Approval</div>
+              <p class="pipeline-step-desc">Audio Lead sign-off required before content freeze. No exceptions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8.2 QA Checklist -->
+    <div class="card" id="qa-checklist">
+      <div class="card-header"><span>✅</span><h3>8.2 — Audio QA Checklist</h3></div>
+      <div class="card-body">
+        <ul class="qa-list">
+          <li class="qa-item">All files match naming convention</li>
+          <li class="qa-item">No audio clips at 0 dBFS (master peaks at −1 dBFS or lower)</li>
+          <li class="qa-item">No audible loop points on any ambient loop</li>
+          <li class="qa-item">Footsteps trigger correctly on all 8 surface types</li>
+          <li class="qa-item">Music layer transitions occur on Quartz 4-bar boundary</li>
+          <li class="qa-item">Enhancement Works hum pitch shifts correctly with DegradationLevel parameter</li>
+          <li class="qa-item">Sky-stone resonance activates and deactivates cleanly with Spring Knack tier</li>
+          <li class="qa-item">NPC audio signatures identifiable from 10m without visual</li>
+          <li class="qa-item">No audio voice budget exceeded during stress test</li>
+          <li class="qa-item">Reverb zone transitions produce no audio pop or abrupt change</li>
+          <li class="qa-item">Echo Chamber delay parameter verified at 800ms</li>
+          <li class="qa-item">UI sounds pass through without spatialization (confirmed 2D)</li>
+          <li class="qa-item">Seasonal music filter applies and removes without audible artifact</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8.3 Prohibited Practices -->
+    <div class="card" id="prohibited">
+      <div class="card-header"><span>🚫</span><h3>8.3 — Prohibited Audio Practices</h3></div>
+      <div class="card-body">
+        <ul class="prohibited-list">
+          <li class="prohibited-item">No audio asset delivered as MP3 at any stage of production</li>
+          <li class="prohibited-item">No single-variation footstep systems (minimum 6 per surface)</li>
+          <li class="prohibited-item">No music that hard-cuts (all transitions must be quantized or faded)</li>
+          <li class="prohibited-item">No synthetic percussion in any biome ambience</li>
+          <li class="prohibited-item">No electric or heavily synthesized instrument in the score</li>
+          <li class="prohibited-item">No UI sound that uses a pure sine wave or harsh digital beep</li>
+          <li class="prohibited-item">No NPC ambient audio that loops at under 5 seconds</li>
+          <li class="prohibited-item">No audio volume settings that allow voices to clip without limiting</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 9 — FUTURE CONSIDERATIONS
+    ════════════════════════════════════════════════════════════ -->
+    <div class="section-header" id="future">
+      <span class="section-icon">🔭</span>
+      <h2>Future Audio Considerations</h2>
+    </div>
+
+    <div class="grid-3">
+
+      <!-- 9.1 Voice Acting -->
+      <div class="card future-card" id="voice-acting">
+        <div class="card-header"><span>🎙️</span><h3>9.1 — Voice Acting (Post-Launch)</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>All Moosian voices: warm, natural, slightly unhurried</li>
+            <li><strong>Melvin:</strong> low-mid range; deliberate; occasional dry warmth</li>
+            <li><strong>Martha:</strong> clear, precise, emotional depth beneath professional tone</li>
+            <li>No cartoony or exaggerated vocal styles</li>
+          </ul>
+          <div style="margin-top:1rem;padding-top:.75rem;border-top:1px solid rgba(247,217,138,.15);font-size:.8rem;color:rgba(255,255,255,.55)">
+            Voice lines will integrate via <code style="background:rgba(255,255,255,.1);color:var(--gold-light)">MS_Voice_NPC</code>. Patch slot is already reserved. All NPC Blueprint components include the voice parameter hook. No architectural rebuild required.
+          </div>
+        </div>
+      </div>
+
+      <!-- 9.2 Music Expansion -->
+      <div class="card future-card" id="music-expansion">
+        <div class="card-header"><span>🗺️</span><h3>9.2 — Dynamic Music Expansion</h3></div>
+        <div class="card-body">
+          <p>Future biome additions must extend the <code style="background:rgba(255,255,255,.1);color:var(--gold-light)">EBiomeState</code> enum in <code style="background:rgba(255,255,255,.1);color:var(--gold-light)">BP_MV_MusicManager</code>.</p>
+          <p>Far Valley music should use the <strong>"Lore of the Valley"</strong> theme as its foundation, harmonized in <strong>F-sharp major</strong> — the same harmonic DNA as the Valley theme but a half-step brighter, signaling a world that is related but not identical.</p>
+        </div>
+      </div>
+
+      <!-- 9.3 Accessibility Pass -->
+      <div class="card future-card" id="accessibility-pass">
+        <div class="card-header"><span>♿</span><h3>9.3 — Accessibility Audio Pass</h3></div>
+        <div class="card-body">
+          <ul class="styled-list">
+            <li>Visual waveform representation of significant audio cues for deaf/hard-of-hearing players</li>
+            <li>Colorblind-compatible audio cue indicator icons in HUD</li>
+            <li>Full mono compatibility test pass</li>
+          </ul>
+          <div style="margin-top:1rem;padding-top:.75rem;border-top:1px solid rgba(247,217,138,.15);font-size:.8rem;color:rgba(255,255,255,.55)">
+            <strong style="color:var(--gold-light)">Design Principle:</strong> No narrative-critical information should ever exist exclusively in audio without a visual fallback option.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- /.content -->
+</main>
+
+<script src="js/site.js"></script>
+</body>
+</html>
