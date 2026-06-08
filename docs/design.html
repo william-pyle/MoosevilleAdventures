@@ -29,34 +29,34 @@
   </a>
   <div class="nav-group">
     <div class="nav-group-label">Story</div>
-    <a href="lore.html" class="nav-link"><span class="nav-icon">📖</span> World Lore</a>
-    <a href="characters.html" class="nav-link"><span class="nav-icon">🦌</span> Characters &amp; NPCs</a>
+    <a href="lore.html" class="nav-link"><span class="nav-icon"><img src="img/book.svg" alt="Open Book"></span> World Lore</a>
+    <a href="characters.html" class="nav-link"><span class="nav-icon"><img src="img/moose.svg" alt="Moose"></span> Characters &amp; NPCs</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">World</div>
-    <a href="world.html" class="nav-link"><span class="nav-icon">🗺️</span> Biomes &amp; Maps</a>
+    <a href="world.html" class="nav-link"><span class="nav-icon"><img src="img/map.svg" alt="Map"></span> Biomes &amp; Maps</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Art Direction</div>
-    <a href="art.html" class="nav-link"><span class="nav-icon">🎨</span> Visual Style Guide</a>
-    <a href="character-art.html" class="nav-link"><span class="nav-icon">✏️</span> Character Art Sheets</a>
+    <a href="art.html" class="nav-link"><span class="nav-icon"><img src="img/palette.svg" alt="Palette"></span> Visual Style Guide</a>
+    <a href="character-art.html" class="nav-link"><span class="nav-icon"><img src="img/pencil.svg" alt="Pencil"></span> Character Art Sheets</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Game Design</div>
-    <a href="design.html" class="nav-link active"><span class="nav-icon">⚙️</span> Systems &amp; Economy</a>
-    <a href="assets.html" class="nav-link"><span class="nav-icon">🏗️</span> Asset Catalog</a>
+    <a href="design.html" class="nav-link active"><span class="nav-icon"><img src="img/gear.svg" alt="Gear"></span> Systems &amp; Economy</a>
+    <a href="assets.html" class="nav-link"><span class="nav-icon"><img src="img/construction.svg" alt="Construction"></span> Asset Catalog</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Audio</div>
-    <a href="audio.html" class="nav-link"><span class="nav-icon">🎵</span> Audio Design</a>
+    <a href="audio.html" class="nav-link"><span class="nav-icon"><img src="img/music.svg" alt="Music"></span> Audio Design</a>
   </div>
   <div class="nav-group">
     <div class="nav-group-label">Production</div>
-    <a href="milestones.html" class="nav-link"><span class="nav-icon">📊</span> Milestone Tracker</a>
-    <a href="technical.html" class="nav-link"><span class="nav-icon">🔧</span> Technical Reference</a>
+    <a href="milestones.html" class="nav-link"><span class="nav-icon"><img src="img/chart.svg" alt="Chart"></span> Milestone Tracker</a>
+    <a href="technical.html" class="nav-link"><span class="nav-icon"><img src="img/wrench.svg" alt="Wrench"></span> Technical Reference</a>
   </div>
   <div class="nav-group">
-    <a href="index.html" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+    <a href="index.html" class="nav-link"><span class="nav-icon"><img src="img/home.svg" alt="Home"></span> Home</a>
   </div>
   <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
 </nav>
@@ -281,7 +281,301 @@
       <div class="knack-tier"><div class="knack-tier-label">Tier 5</div><span class="knack-ability">Dormant Shard Reading (lore fragments)</span><span class="knack-ability">Moose Water Daily +1 Portion (total +5, max 10/day)</span><span class="knack-ability">Far Valley Shard Attunement</span></div>
     </div>
 
-    <!-- PART2_INSERT_HERE -->
+    <!-- SECTION 13: EXPLORATION & QUEST SYSTEMS -->
+    <div class="section-header"><span class="section-icon"><img src="img/map.svg" alt="Map"></span><h2>13. Exploration &amp; Quest Systems</h2></div>
+    <div class="pull-quote">"Every biome must contain at least one thing the player cannot fully understand the first time they find it. The valley earns its depth by rewarding return visits." — Exploration Promise</div>
+    <div class="card"><div class="card-header">Exploration Philosophy</div><div class="card-body">
+      <p>The wilderness is not a danger zone — it is a wonder zone. There are no enemies. Obstacles are environmental: stamina barriers, locked areas requiring tools or relationship keys, and seasonal access gates. The reward for exploration is discovery, lore, materials, and new NPC encounters.</p>
+    </div></div>
+
+    <div class="card"><div class="card-header">Stamina System</div><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.4rem .7rem">Parameter</th><th style="padding:.4rem .7rem">Design Spec</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Trail Stamina Bar</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Visual bar (bottom-left HUD); wood-framed, amber liquid fill; pulses softly when below 20%</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Depletion Actions</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Running, swimming, climbing, prolonged sprinting</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Restoration</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Resting on any bench/log (5 in-game minutes), eating cooked food, drinking Moose Water</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Empty Stamina</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Player reduced to a slow walk — never fully stopped. The player always moves forward.</td></tr>
+          <tr><td style="padding:.4rem .7rem">Trail Knack Effect</td><td style="padding:.4rem .7rem">Tier 1: +20% bar. Tier 3: reduced drain rate. Tier 5: swimming costs no stamina.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="warn-box" style="margin-top:.75rem"><strong>Non-Negotiable:</strong> Stamina reaching zero is never a fail state. Stamina depletion = slowdown only.</div>
+    </div></div>
+
+    <div class="card"><div class="card-header">Quest Types</div><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.4rem .7rem">Type</th><th style="padding:.4rem .7rem">Description</th><th style="padding:.4rem .7rem">Example</th><th style="padding:.4rem .7rem">Time-Sensitive?</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)"><strong>Main Story Quest</strong></td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Advances one of the three mystery threads</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">"Follow the tremor crack toward the eastern pass"</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">No — waits indefinitely</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)"><strong>NPC Story Quest</strong></td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Advances a named NPC's personal arc; tied to Closeness</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">"Reed Harlow needs ancient stone from the ruins"</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">No — waits indefinitely</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)"><strong>Community Quest</strong></td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Town-wide challenge with collective reward</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">"Grow enough Goldenwheat for the Harvest Festival"</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Soft deadline; alternative path if missed</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)"><strong>Discovery Quest</strong></td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Triggered by finding something in the wilderness</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">"Translate the rusted survey stake markings"</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">No — triggered by find, waits thereafter</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)"><strong>Seasonal Quest</strong></td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Festival-tied; time-limited but with fallback paths</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">"Decorate the Heartfire for Starfall Memorial Night"</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Soft; can complete at next occurrence</td></tr>
+          <tr><td style="padding:.4rem .7rem"><strong>Archive Quest</strong></td><td style="padding:.4rem .7rem">Reconstruct a Sacred Document page from wilderness fragments</td><td style="padding:.4rem .7rem">"Find the three torn fragments of the Garden Manual"</td><td style="padding:.4rem .7rem">No — fragments persist until found</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+
+    <div class="card"><div class="card-header">Quest Journal &amp; Wilderness Discovery</div><div class="card-body">
+      <p>The <strong>Personal Journal</strong> is the player's primary quest interface — a hand-drawn, in-character notebook written in the player character's voice. It reads like a diary with purpose, not a task list. Active quests include the player's emotional reaction, not just the objective. Completed quests are marked with a small hand-sketched illustration.</p>
+      <ul class="styled-list">
+        <li>Quest markers are optional — a toggle in settings hides all world-space markers for pure exploration players</li>
+        <li>The world map starts partially blank — filled in through player exploration; each new biome entered auto-generates a journal entry</li>
+        <li><strong>Landmark Naming:</strong> When the player discovers an unnamed landmark, they can name it. Named landmarks appear on the town map permanently. NPCs reference the player's chosen name in dialogue thereafter</li>
+      </ul>
+    </div></div>
+
+    <div class="card"><div class="card-header">New Arrival Encounter Arc</div><div class="card-body">
+      <p>At certain wilderness locations, the player encounters a recently awakened moose — partially regressed, confused, and in need of help. These are among the game's most emotionally resonant moments.</p>
+      <ol class="styled-list">
+        <li><strong>Approach carefully</strong> — the moose is startled; player must move slowly (proximity patience mechanic)</li>
+        <li><strong>Communicate gently</strong> — 3-option choice-based interaction; tone affects encounter but not outcome</li>
+        <li><strong>Provide Moose Water</strong> — costs 1 portion; restores clarity and allows fuller communication</li>
+        <li><strong>Offer a choice</strong> — join Mooseville, or be assisted back to their home territory. The player respects the choice either way.</li>
+      </ol>
+      <div class="info-box">Up to 8 new arrivals can join Mooseville over a full playthrough. The New Arrivals District grows visibly as each arrival settles in.</div>
+    </div></div>
+
+    <!-- SECTION 14: GREEN SPRING & MOOSE WATER -->
+    <div class="section-header"><span class="section-icon"><img src="img/water.svg" alt="Water"></span><h2>14. Green Spring &amp; Moose Water System</h2></div>
+    <div class="pull-quote">"Moose Water must feel special every single time the player uses it." — Design Mandate</div>
+
+    <div class="card"><div class="card-header">Moose Water Resource Parameters</div><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.4rem .7rem">Parameter</th><th style="padding:.4rem .7rem">Detail</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Source</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">The Enhancement Works (civic Shard Station) in the Enhancement Works district</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Daily Collection Limit</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">5 portions/day (free civic resource); +1 per Spring Knack tier (max 10/day at Tier 5)</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Carry Capacity</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">10 portions base; upgraded via crafted carrying vessel (Craft Knack Tier 3)</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Visual Identity</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Gently glowing green liquid; unique shimmer animation in inventory panel</td></tr>
+          <tr><td style="padding:.4rem .7rem">Audio Identity</td><td style="padding:.4rem .7rem">Soft resonant hum + green shimmer tone on collect/use — never used for anything else</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+
+    <div class="card"><div class="card-header">Moose Water Uses</div><div class="card-body">
+      <ul class="styled-list">
+        <li><strong>Enhanced crop irrigation</strong> — 1 portion per crop slot; produces Enhanced Variant crop</li>
+        <li><strong>Stamina restoration</strong> — 1 portion restores 60% Trail Stamina (best restoration in the game)</li>
+        <li><strong>New arrival dosing</strong> — 1 portion per encounter; required for the New Arrival encounter arc</li>
+        <li><strong>Sky-stone deposit activation</strong> — 1–2 portions per dormant deposit; unlocks lore fragment</li>
+        <li><strong>Advanced crafting</strong> — certain Lore Item recipes and master-tier food items require 1–2 portions as ingredient</li>
+        <li><strong>Enhancement Works upgrade fuel</strong> — a portion automatically feeds the civic system; increasing supply benefits all of Mooseville</li>
+      </ul>
+    </div></div>
+
+    <div class="card"><div class="card-header">Sky-Stone Deposits — 14 Total Across All Biomes</div><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.4rem .7rem">Biome</th><th style="padding:.4rem .7rem">Deposit Count</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Emerald Forest</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">3 deposits</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Golden Meadow</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">2 deposits</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Crystal Lakeshore</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">2 deposits</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Ancient Ruins</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">2 deposits</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">High Shelf</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">3 deposits (including the relocation target for Act 2)</td></tr>
+          <tr><td style="padding:.4rem .7rem">Far Valley (Act 3 only)</td><td style="padding:.4rem .7rem">2 deposits</td></tr>
+        </tbody>
+      </table></div>
+      <div class="info-box" style="margin-top:.75rem"><strong>Night Spring:</strong> The original Green Spring glows most intensely at night. Melvin and Martha walk there together each evening — finding them there opens unique quiet dialogue not available anywhere else in the game.</div>
+    </div></div>
+
+    <!-- SECTION 15: ECONOMY & CURRENCY -->
+    <div class="section-header"><span class="section-icon"><img src="img/coin.svg" alt="Coin"></span><h2>15. Economy &amp; Currency</h2></div>
+    <div class="pull-quote">"The economy's purpose is to give meaningful weight to player choices about how to spend surplus — not to create scarcity or pressure." — Economy Philosophy</div>
+
+    <div class="card"><div class="card-header">Mucks — Carved Wooden Coins</div><div class="card-body">
+      <p>Mucks are hand-carved wooden discs with the Green Spring glyph on one face and the founding year on the other. They are exchanged only for non-essential goods and services. Their existence reflects Mooseville's founding values: you trade for the things you want, never the things you need.</p>
+      <div class="table-wrap"><table class="crop-table" style="width:100%">
+        <thead><tr><th>Category</th><th>Examples</th><th>Typical Price Range</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Earning: Crop Sales</strong></td><td>Goldenwheat, Mossberry, Enhanced variants</td><td>5–30 mucks/unit</td></tr>
+          <tr><td><strong>Earning: Fish Sales</strong></td><td>Common fish 3–10 mucks; rare fish 40–80 mucks</td><td>3–80 mucks/fish</td></tr>
+          <tr><td><strong>Earning: Crafted Goods</strong></td><td>Jams, oils, carved tokens, basic tools</td><td>15–60 mucks/item</td></tr>
+          <tr><td><strong>Earning: Community Quests</strong></td><td>Public contribution rewards</td><td>50–200 mucks/completion</td></tr>
+          <tr><td><strong>Spending: Home Decor</strong></td><td>Carved lantern, woven rug, bookshelf</td><td>30–150 mucks</td></tr>
+          <tr><td><strong>Spending: Clothing &amp; Cosmetics</strong></td><td>Festival outfits, antler jewelry, seasonal wraps</td><td>80–300 mucks</td></tr>
+          <tr><td><strong>Spending: Rare Materials</strong></td><td>Alloy ingots, imported seeds, special dyes</td><td>100–500 mucks</td></tr>
+          <tr><td><strong>Spending: Archive Translations</strong></td><td>Clara Finch's advanced lore purchases</td><td>200–400 mucks</td></tr>
+          <tr><td><strong>Spending: Home Expansion</strong></td><td>Purchased components per expansion stage</td><td>500–1,200 mucks total/expansion</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+
+    <div class="card"><div class="card-header">The Two Laws — Mechanical Implementation</div><div class="card-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div style="background:var(--emerald-bg);border-radius:var(--radius-sm);padding:.85rem;border-left:3px solid var(--emerald)">
+          <div style="font-weight:700;color:var(--emerald-dark);margin-bottom:.35rem">Law I — Moose Water is Free</div>
+          <div style="font-size:.82rem">The Enhancement Works dispenses a minimum of 1 free Moose Water portion per day regardless of save state, story progress, or resource level. This floor cannot be set below 1 by any system — including the Act 1 degradation event.</div>
+        </div>
+        <div style="background:var(--gold-pale);border-radius:var(--radius-sm);padding:.85rem;border-left:3px solid var(--gold)">
+          <div style="font-weight:700;color:var(--gold-dark);margin-bottom:.35rem">Law II — Basic Food is Free</div>
+          <div style="font-size:.82rem">Marjorie Bell's public meal station always has at least 3 free basic food items available per day. This supply cannot be depleted by the player taking it. It is an inviolable civic guarantee.</div>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="card"><div class="card-header">Economy Balance Parameters</div><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.4rem .7rem">Parameter</th><th style="padding:.4rem .7rem">Value</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Starting Mucks</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">50 mucks (gift from Melvin at homecoming)</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Typical Daily Earn — Early Game</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">20–40 mucks</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Typical Daily Earn — Mid Game</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">40–80 mucks</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Typical Daily Earn — Late Game</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">80–200 mucks (rare fish, enhanced crops, master crafts)</td></tr>
+          <tr><td style="padding:.4rem .7rem">Balance Philosophy</td><td style="padding:.4rem .7rem">Players should rarely feel broke. Large purchases are aspirational, not gated. The economy feels like abundance, not scarcity.</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+
+    <!-- SECTION 16: NPC ROSTER SUMMARY -->
+    <div class="section-header"><span class="section-icon"><img src="img/moose.svg" alt="Moose"></span><h2>16. NPC Roster Summary</h2></div>
+    <div class="info-box"><strong>Full NPC profiles are documented in the NPC Bible (Characters &amp; NPCs page).</strong> This section provides the GDD-level roster overview and key design principles.</div>
+
+    <div class="card"><div class="card-header">Key Named NPCs — GDD Profiles</div><div class="card-body">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.75rem">
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">Melvin</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 1 Elder · Co-Founder · "As long as the spring glows, we're not done yet."</div></div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">Martha</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 1 Elder · Co-Founder · "A town is only as strong as the people it refuses to leave behind."</div></div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">Fern Vale</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 2 · Primary Farming NPC · "If Grandma Doris could make things grow in rock, I can make them grow in winter."</div></div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">Reed Harlow</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 2 · Primary Building NPC · "Stone doesn't lie. Neither do I."</div></div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">Clara Finch</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 2 · Primary Lore NPC · "The Documents know more than I do. That's why I can't stop reading them."</div></div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">Storm Winslow</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 2 · Water &amp; Weather NPC · "I know the lake better than I know most people."</div></div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">June Price</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 2 · Mediator NPC · "Everyone has a right to feel at home."</div></div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">Chester Lang</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 1 · Master Craftsperson · "If it's worth building, it's worth building right."</div></div>
+        <div style="background:var(--cream-dark);border-radius:var(--radius-sm);padding:.75rem"><div style="font-weight:700;font-size:.9rem;color:var(--emerald-dark)">Atlas Reed</div><div style="font-size:.78rem;color:var(--text-medium)">Tier 2 · Mapper NPC · "I've mapped every inch of this valley. I'm just not showing you yet."</div></div>
+      </div>
+    </div></div>
+
+    <!-- SECTION 17: UI/UX DESIGN -->
+    <div class="section-header"><span class="section-icon"><img src="img/picture-frame.svg" alt="Picture Frame"></span><h2>17. UI/UX Design</h2></div>
+    <div class="pull-quote">"Every interface element should look like it was hand-made by an intelligent, craft-proud civilization working with wood, stone, pressed paper, and hammered metal." — UI Philosophy</div>
+
+    <div class="card"><div class="card-header">HUD Elements — Minimal by Design</div><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.4rem .7rem">Element</th><th style="padding:.4rem .7rem">Position</th><th style="padding:.4rem .7rem">Visual Design</th><th style="padding:.4rem .7rem">Behavior</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Trail Stamina Bar</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Bottom-left</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Wood-framed bar; warm amber liquid fill; carved moose-hoof icon</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Pulses softly below 20%; fades when full and not in motion</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Day/Time Indicator</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Top-right</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Carved wooden sun/moon dial; two hands (day phase, season)</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Always visible; glows slightly at dusk and dawn phases</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Active Quest Reminder</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Bottom-right</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Worn parchment tab; handwritten-style font; quest title only (never objectives)</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Fades during exploration if no active quest</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Interaction Prompt</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Center-bottom</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Gold leaf icon + action text in warm serif font</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Appears only near interactive objects; fades immediately when player moves away</td></tr>
+          <tr><td style="padding:.4rem .7rem"><strong>No Minimap</strong></td><td style="padding:.4rem .7rem">N/A</td><td style="padding:.4rem .7rem">Intentionally absent</td><td style="padding:.4rem .7rem">Map accessed only through the Journal — deliberate friction encouraging world engagement</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+
+    <div class="card"><div class="card-header">Menu System</div><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.4rem .7rem">Menu</th><th style="padding:.4rem .7rem">Access Method</th><th style="padding:.4rem .7rem">Contents</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)"><strong>The Journal</strong></td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Dedicated button (J key / controller button); physical open animation</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Inventory, quests, world map, relationships (Closeness overview), Knack trees, settings — all tabbed by worn leather bookmark</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)"><strong>Community Board</strong></td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">In-world object in Heartfire District; walk up and interact</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Active community quests, upcoming events calendar, Muckmarket Row prices, new arrival announcements</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)"><strong>Pause Menu</strong></td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Escape / Start button</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Resume, Settings, Save &amp; Rest, Exit to Main Menu; warm overlay — world softened not darkened</td></tr>
+          <tr><td style="padding:.4rem .7rem"><strong>Crafting Menu</strong></td><td style="padding:.4rem .7rem">Approach crafting station + interact</td><td style="padding:.4rem .7rem">Open notebook-style on a crafting table surface; ingredient icons hand-illustrated; available recipes by category</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+
+    <div class="card"><div class="card-header">Accessibility Options</div><div class="card-body">
+      <ul class="styled-list">
+        <li><strong>Text Size:</strong> 3 sizes (Standard, Large, Extra Large) — applies to all in-game text</li>
+        <li><strong>Color Blind Modes:</strong> 3 presets (Deuteranopia, Protanopia, Tritanopia) — adjusts UI palette and Moose Water indicator</li>
+        <li><strong>High Contrast Mode:</strong> Increases contrast of all UI elements; bolds all HUD text</li>
+        <li><strong>Stamina Bar Text Readout:</strong> Displays numerical percentage alongside visual bar</li>
+        <li><strong>Fishing Assisted Mode:</strong> Wider timing windows; slower indicator movement; available any time</li>
+        <li><strong>Subtitle Options:</strong> Full subtitles for all voiced dialogue; size, background opacity, speaker name all adjustable</li>
+        <li><strong>Input Remapping:</strong> Full remapping for keyboard/mouse and controller; no locked inputs</li>
+        <li><strong>Quest Marker Toggle:</strong> World-space quest markers individually toggleable; global on/off option</li>
+        <li><strong>Day Cycle Speed:</strong> Adjustable 10–40 real-time minutes per in-game day; accessible in settings at any time</li>
+      </ul>
+    </div></div>
+
+    <!-- SECTION 18: DEVELOPMENT ROADMAP -->
+    <div class="section-header"><span class="section-icon"><img src="img/calendar.svg" alt="Calendar"></span><h2>18. Development Roadmap</h2></div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-bottom:1.5rem">
+      <div class="phase-card"><div class="phase-name">Phase 0 — Pre-Production</div><div class="phase-duration">3 months · Target: Month 3</div><ul style="font-size:.8rem;padding-left:1rem;line-height:1.8"><li>GDD finalized</li><li>Vertical slice: player home + Heartfire + Green Spring</li><li>Core systems proof-of-concept</li><li>Rendering Bible v1.0</li></ul></div>
+      <div class="phase-card"><div class="phase-name">Phase 1 — Alpha</div><div class="phase-duration">8 months · Target: Month 11</div><ul style="font-size:.8rem;padding-left:1rem;line-height:1.8"><li>All biomes blocked out and passable</li><li>Full daily loop functional</li><li>Act 1 complete and playable end-to-end</li><li>All Tier 2 NPC arcs in design</li><li>Audio placeholder complete</li></ul></div>
+      <div class="phase-card"><div class="phase-name">Phase 2 — Beta</div><div class="phase-duration">6 months · Target: Month 17–19</div><ul style="font-size:.8rem;padding-left:1rem;line-height:1.8"><li>Full Act 1–3 content playable</li><li>All Tier 1–2 NPCs implemented</li><li>All biomes art-complete</li><li>Music integrated (final stems)</li><li>All voiced dialogue recorded</li></ul></div>
+      <div class="phase-card"><div class="phase-name">Phase 3 — Polish &amp; QA</div><div class="phase-duration">3 months · Target: Month 20</div><ul style="font-size:.8rem;padding-left:1rem;line-height:1.8"><li>Performance optimization — all three PC tiers</li><li>Accessibility full pass and certification</li><li>Full QA coverage</li><li>Localization strings extracted</li></ul></div>
+      <div class="phase-card"><div class="phase-name">Phase 4 — Launch</div><div class="phase-duration">Month 21</div><ul style="font-size:.8rem;padding-left:1rem;line-height:1.8"><li>PC (Windows) release on Steam</li><li>Day-one patch process established</li><li>Community feedback pipeline active</li></ul></div>
+      <div class="phase-card"><div class="phase-name">Phase 5 — Post-Launch</div><div class="phase-duration">Ongoing</div><ul style="font-size:.8rem;padding-left:1rem;line-height:1.8"><li>New Arrival DLC</li><li>Seasonal content updates</li><li>Mac / console port evaluation</li><li>New Game+ mode</li></ul></div>
+    </div>
+
+    <div class="card"><div class="card-header">Team Requirements — Recommended Minimum (16 roles)</div><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.4rem .7rem">Role</th><th style="padding:.4rem .7rem">Count</th><th style="padding:.4rem .7rem">Notes</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Game Director / Lead Designer</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">GDD owner; final decision authority on all design questions</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Narrative Designer / Writer</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">NPC arcs, quest writing, journal voice, all in-game text</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">UE5 Gameplay Programmer</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">2</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Systems architecture, AI, quest, save, Knack, farming, economy</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Technical Artist</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Shader pipeline, cel-shading, Rendering Bible enforcement, PCG foliage, performance</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Environment Artist</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">2</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Biome art, modular asset kit, world dressing, landscape materials</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Character Artist</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Moose character models, rigging oversight, blend shape library, clothing</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">UI / UX Artist</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Journal design, HUD, menus, notification system, crafting interface</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">VFX Artist</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Green Spring VFX, sky-stone effects, weather particles, community fire</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Composer</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1 (contract)</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Full original soundtrack; MetaSound stem mastering; must be briefed on Section 16 audio philosophy</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Sound Designer</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1 (contract)</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Complete SFX library; MetaSound implementation; Moose Water audio identity; footstep layering</td></tr>
+          <tr><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Producer</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">1</td><td style="padding:.4rem .7rem;border-bottom:1px solid var(--brown-pale)">Milestone tracking, team coordination, risk management, publisher/platform relations</td></tr>
+          <tr><td style="padding:.4rem .7rem">QA Tester</td><td style="padding:.4rem .7rem">2</td><td style="padding:.4rem .7rem">Alpha through Gold; one tester specialized in accessibility validation</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+
+    <!-- SECTION 19: RISK ASSESSMENT -->
+    <div class="section-header"><span class="section-icon"><img src="img/warning.svg" alt="Warning"></span><h2>19. Risk Assessment</h2></div>
+    <div class="table-wrap">
+      <table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.45rem .7rem">Risk</th><th style="padding:.45rem .7rem">Likelihood</th><th style="padding:.45rem .7rem">Impact</th><th style="padding:.45rem .7rem">Mitigation Strategy</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Scope creep on NPC count</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#E65100;color:white">High</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Medium</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Hard cap: 8 Tier 2 NPCs, 4 Tier 1 at ship. Additional NPCs are Post-Launch DLC. New NPC requires Game Director approval + scope trade-off.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Open-world performance on minimum-spec PC</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#F57F17;color:white">Medium</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#E65100;color:white">High</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">World Partition + aggressive LOD; min-spec target locked in Phase 0; pre-baked GI fallback path tested from Alpha onward.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Narrative pacing — cozy vs. adventure balance</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#F57F17;color:white">Medium</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#E65100;color:white">High</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Weekly playtests with target audience (families, ages 8–14) from Alpha onward; results reviewed against Five Pillars at each milestone.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">MetaSound complexity causing audio bugs</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#558B2F;color:white">Low</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Medium</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Audio tech spike in Phase 0; fallback to simpler crossfade stem system documented and ready.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Lumen performance on medium-spec hardware</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#F57F17;color:white">Medium</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Medium</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Lumen off toggle with pre-baked GI fallback; both paths tested from Alpha with performance benchmarks.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Small team burnout over 20-month production</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#F57F17;color:white">Medium</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)"><span class="badge" style="background:#E65100;color:white">High</span></td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">No-crunch policy in team charter; scope cuts preferred to schedule extension; Phase 3 "no new features" protection period; mental health days budgeted per quarter.</td></tr>
+          <tr><td style="padding:.45rem .7rem">Save system version incompatibility post-launch</td><td style="padding:.45rem .7rem"><span class="badge" style="background:#558B2F;color:white">Low</span></td><td style="padding:.45rem .7rem"><span class="badge" style="background:#E65100;color:white">High</span></td><td style="padding:.45rem .7rem">SaveGame objects versioned from Day 1; version migration function required before shipping; post-launch additions require save version bump.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 20: GLOSSARY -->
+    <div class="section-header"><span class="section-icon"><img src="img/books.svg" alt="Books"></span><h2>20. Glossary — Canonical Terminology</h2></div>
+    <div class="info-box" style="margin-bottom:1rem">All writers, designers, and QA must use these terms consistently. Any new term introduced in development must be added here with Game Director and Narrative Designer approval.</div>
+    <div class="card"><div class="card-body">
+      <div class="table-wrap"><table style="width:100%;font-size:.82rem;border-collapse:collapse">
+        <thead><tr style="background:var(--emerald-dark);color:white"><th style="padding:.45rem .7rem;width:180px">Term</th><th style="padding:.45rem .7rem">Definition</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Moosian</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Any moose citizen of Mooseville or awakened by contact with the Green Spring or Moose Water. The preferred self-identifier used by all awakened moose.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">The Starfall</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The meteor event that triggered the awakening, approximately 22 years before game start. The central historical event of Mooseville's founding mythology.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Green Spring</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The original spring where sky-stone shards settled after the Starfall. Still glows green at night. Located near the player's homestead. The physical source of the awakening.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Moose Water</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Water enhanced by sky-stone contact through the Enhancement Works system. A free civic resource that reverses awakening regression. Governed by the First Law.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Mucks</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Carved wooden coins; Mooseville's local currency for non-essential goods. Never required for food or Moose Water.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Sky-Stone</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Physical fragments of the meteor that fell during the Starfall. The source of the awakening's magical substrate. Found scattered in wilderness deposits throughout the valley.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Sacred Documents</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The books, magazines, field guides, and printed manuals found in the old human campsite. Mooseville's founding cultural artifacts. Preserved in the Archive Hall.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">The First Circle</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">Melvin, Martha, and their eight specialist collaborators who founded and shaped Mooseville. Their descendants are the primary Tier 2 NPCs.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Enhancement Works</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The civic system that channels sky-stone influence into the town's water supply, producing Moose Water for public distribution. Critical infrastructure with gameplay significance in Act 1.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">The Fading Years</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The crisis period (Year 4–5 post-Starfall) when the green water stream was diverted, causing regression in some Moosians. Mooseville's defining historical trauma.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Knack</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The player's progression system. Five Knack Trees (Harvest, Craft, Heart, Trail, Spring) advance through gameplay action rather than XP spending. Each tree: 5 tiers × 3 abilities = 75 total abilities.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Trail Stamina</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The player's exploration energy resource. Depletes during running, swimming, and climbing. Never causes a fail state — depleted Stamina reduces the player to a walk, never stops them.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Closeness Level</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The 1–6 relationship depth scale with each named NPC. Never displayed numerically to the player; expressed through NPC dialogue warmth, availability, and quest depth.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Legacy Moment</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The special, unique story beat at Closeness Level 6 with a Tier 2 NPC (or at story completion for Tier 1 NPCs). Permanently recorded in the Archive Hall. Cannot be repeated or undone.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">Archive Hall</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The building in the Archive Quarter where Mooseville's history is preserved in writing. The location where the player character's name is formally inscribed at the end of the game.</td></tr>
+          <tr><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale);font-weight:700">DailyScheduleComponent</td><td style="padding:.45rem .7rem;border-bottom:1px solid var(--brown-pale)">The custom UE5 Actor Component that governs NPC daily routines. Subscribes to the TimeManager's DayPhaseChanged event and moves NPCs to their scheduled locations accordingly.</td></tr>
+          <tr><td style="padding:.45rem .7rem;font-weight:700">The Two Laws</td><td style="padding:.45rem .7rem">The two inviolable civic laws of Mooseville: (1) Moose Water is free, (2) Basic food is free. Mechanically enforced in gameplay — the player cannot be denied either resource.</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+
+    <!-- APPENDIX B: DESIGN INTENTION -->
+    <div class="card" style="background:linear-gradient(135deg,var(--emerald-darkest),var(--emerald-dark));color:white;margin-top:1.5rem">
+      <div class="card-body" style="padding:2rem">
+        <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(247,217,138,.6);margin-bottom:.75rem;font-weight:700">Appendix B — Design Intention: The Final Word on Mooseville Adventures</div>
+        <p style="font-size:.95rem;line-height:1.8;color:rgba(255,255,255,.9)">Mooseville Adventures is not a game about surviving. It is not a game about conquering. It is not a game about winning.</p>
+        <p style="font-size:.95rem;line-height:1.8;color:rgba(255,255,255,.9)">It is a game about remembering that the best things — the fire that stays lit, the water that stays free, the name that gets carved into stone — are built by people who stayed, who helped, and who looked at the world around them and decided it was worth caring for.</p>
+        <p style="font-size:.95rem;line-height:1.8;color:rgba(255,255,255,.9)">The player carries Melvin and Martha's name. They inherit a town that is already extraordinary. The question the game asks — quietly, warmly, and without judgment — is: <em>what will you add to it?</em></p>
+        <div style="margin-top:1rem;font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;font-weight:700;color:var(--gold-light)">By the end of the game, they will have an answer. And it will be theirs alone.</div>
+        <div style="margin-top:1.25rem;font-size:.72rem;color:rgba(255,255,255,.4)">Mooseville Adventures GDD v1.0 · June 2026 · Confidential — Internal Development Use Only</div>
+      </div>
+    </div>
   </div><!-- /.content -->
 </main>
 
