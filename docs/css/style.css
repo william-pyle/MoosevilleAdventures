@@ -130,7 +130,7 @@ body {
   display: flex;
   align-items: center;
   gap: .55rem;
-  padding: .48rem 1.25rem;
+  /* padding: .48rem 1.25rem; */
   color: rgba(247,217,138,.72);
   text-decoration: none;
   font-size: .84rem;
@@ -153,7 +153,12 @@ body {
   font-weight: 700;
 }
 
-.nav-icon { font-size: .95rem; width: 1.2rem; text-align: center; flex-shrink: 0; }
+.nav-icon { 
+  /* font-size: .95rem;  */
+  width: 50px; 
+  text-align: center; 
+  flex-shrink: 0; 
+}
 
 .sidebar-footer {
   margin-top: auto;
