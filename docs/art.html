@@ -5,60 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visual Style Guide — Mooseville Adventures</title>
 <link rel="stylesheet" href="css/style.css">
-<style>
-  .color-swatch { display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px }
-  .shader-card { background:var(--white);border:1px solid var(--brown-pale);border-radius:var(--radius);padding:1rem;margin-bottom:.75rem }
-  .shader-name { font-family:'Playfair Display',Georgia,serif;font-size:.95rem;font-weight:700;color:var(--emerald-dark);margin-bottom:.5rem }
-  .param-table { width:100%;font-size:.8rem;border-collapse:collapse }
-  .param-table th { background:var(--emerald-dark);color:white;padding:.35rem .65rem;text-align:left }
-  .param-table td { padding:.35rem .65rem;border-bottom:1px solid var(--brown-pale);vertical-align:top }
-  .param-table tr:nth-child(even) td { background:var(--cream) }
-  .forbidden-row td { background:rgba(180,30,30,.05) }
-  .outline-width { font-family:monospace;font-weight:700;color:var(--emerald-dark) }
-  .pillar-card { background:var(--white);border:1px solid var(--brown-pale);border-top:3px solid var(--emerald);border-radius:var(--radius);padding:1rem;margin-bottom:.75rem }
-</style>
 </head>
 <body>
 
-<nav class="sidebar">
-  <a href="index.html" class="sidebar-brand">
-    <span class="brand-moose">🦌</span>
-    <h1>Mooseville Adventures</h1>
-    <div class="brand-sub">Design Wiki</div>
-  </a>
-  <div class="nav-group">
-    <div class="nav-group-label">Story</div>
-    <a href="lore.html" class="nav-link"><span class="nav-icon"><img src="img/book.svg" alt="Open Book"></span> World Lore</a>
-    <a href="characters.html" class="nav-link"><span class="nav-icon"><img src="img/moose.svg" alt="Moose"></span> Characters &amp; NPCs</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">World</div>
-    <a href="world.html" class="nav-link"><span class="nav-icon"><img src="img/map.svg" alt="Map"></span> Biomes &amp; Maps</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Art Direction</div>
-    <a href="art.html" class="nav-link active"><span class="nav-icon"><img src="img/palette.svg" alt="Palette"></span> Visual Style Guide</a>
-    <a href="character-art.html" class="nav-link"><span class="nav-icon"><img src="img/pencil.svg" alt="Pencil"></span> Character Art Sheets</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Game Design</div>
-    <a href="design.html" class="nav-link"><span class="nav-icon"><img src="img/gear.svg" alt="Gear"></span> Systems &amp; Economy</a>
-    <a href="assets.html" class="nav-link"><span class="nav-icon"><img src="img/construction.svg" alt="Construction"></span> Asset Catalog</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Audio</div>
-    <a href="audio.html" class="nav-link"><span class="nav-icon"><img src="img/music.svg" alt="Music"></span> Audio Design</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Production</div>
-    <a href="milestones.html" class="nav-link"><span class="nav-icon"><img src="img/date.svg" alt="Date"></span> Milestone Tracker</a>
-    <a href="technical.html" class="nav-link"><span class="nav-icon"><img src="img/wrench.svg" alt="Wrench"></span> Technical Reference</a>
-  </div>
-  <div class="nav-group">
-    <a href="index.html" class="nav-link"><span class="nav-icon"><img src="img/home.svg" alt="Home"></span> Home</a>
-  </div>
-  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
-</nav>
+<nav class="sidebar" id="site-nav"></nav>
+<script src="js/nav.js"></script>
 
 <main class="main">
   <div class="page-hero hero-art">

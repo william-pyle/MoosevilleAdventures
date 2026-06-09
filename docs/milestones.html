@@ -5,100 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Milestone Tracker — Mooseville Adventures</title>
 <link rel="stylesheet" href="css/style.css">
-<style>
-  .filter-bar {
-    display: flex;
-    gap: .6rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-  }
-  .filter-btn {
-    border: 2px solid var(--brown-pale);
-    background: var(--white);
-    color: var(--text-medium);
-    border-radius: 20px;
-    padding: .35rem .9rem;
-    font-family: 'Nunito', sans-serif;
-    font-size: .8rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all .15s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    border-color: var(--emerald);
-    background: var(--emerald);
-    color: white;
-  }
-  .ms-notes-box {
-    margin-top: .75rem;
-    padding: .75rem;
-    background: var(--cream-dark);
-    border-radius: var(--radius-sm);
-  }
-  .ms-notes-box textarea {
-    width: 100%;
-    border: 1px solid var(--brown-pale);
-    border-radius: 4px;
-    padding: .5rem .7rem;
-    font-family: 'Nunito', sans-serif;
-    font-size: .8rem;
-    color: var(--text-body);
-    resize: vertical;
-    min-height: 60px;
-    background: white;
-  }
-  .ms-notes-label {
-    font-size: .68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--text-muted);
-    margin-bottom: .35rem;
-    display: block;
-  }
-</style>
 </head>
 <body>
 
-<nav class="sidebar">
-  <a href="index.html" class="sidebar-brand">
-    <span class="brand-moose">🦌</span>
-    <h1>Mooseville Adventures</h1>
-    <div class="brand-sub">Design Wiki</div>
-  </a>
-  <div class="nav-group">
-    <div class="nav-group-label">Story</div>
-    <a href="lore.html" class="nav-link"><span class="nav-icon"><img src="img/book.svg" alt="Open Book"></span> World Lore</a>
-    <a href="characters.html" class="nav-link"><span class="nav-icon"><img src="img/moose.svg" alt="Moose"></span> Characters & NPCs</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">World</div>
-    <a href="world.html" class="nav-link"><span class="nav-icon"><img src="img/map.svg" alt="Map"></span> Biomes & Maps</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Art Direction</div>
-    <a href="art.html" class="nav-link"><span class="nav-icon"><img src="img/palette.svg" alt="Palette"></span> Visual Style Guide</a>
-    <a href="character-art.html" class="nav-link"><span class="nav-icon"><img src="img/pencil.svg" alt="Pencil"></span> Character Art Sheets</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Game Design</div>
-    <a href="design.html" class="nav-link"><span class="nav-icon"><img src="img/gear.svg" alt="Gear"></span> Systems & Economy</a>
-    <a href="assets.html" class="nav-link"><span class="nav-icon"><img src="img/construction.svg" alt="Construction"></span> Asset Catalog</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Audio</div>
-    <a href="audio.html" class="nav-link"><span class="nav-icon"><img src="img/music.svg" alt="Music"></span> Audio Design</a>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-label">Production</div>
-    <a href="milestones.html" class="nav-link"><span class="nav-icon"><img src="img/chart.svg" alt="Chart"></span> Milestone Tracker</a>
-    <a href="technical.html" class="nav-link"><span class="nav-icon"><img src="img/wrench.svg" alt="Wrench"></span> Technical Reference</a>
-  </div>
-  <div class="nav-group">
-    <a href="index.html" class="nav-link"><span class="nav-icon"><img src="img/home.svg" alt="Home"></span> Home</a>
-  </div>
-  <div class="sidebar-footer">Mooseville Adventures<br>Design Wiki — Internal Use</div>
-</nav>
+<nav class="sidebar" id="site-nav"></nav>
+<script src="js/nav.js"></script>
 
 <main class="main">
 
@@ -218,52 +129,6 @@
 </main>
 
 <script src="js/site.js"></script>
-<script>
-// Extended filtering functionality for the milestone page
-function filterMilestones(type, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  const cards = document.querySelectorAll('.ms-card');
-  cards.forEach(card => {
-    if (type === 'all') {
-      card.style.display = '';
-    } else if (type === 'high-risk') {
-      const riskBadge = card.querySelector('.badge-risk-high');
-      card.style.display = riskBadge ? '' : 'none';
-    } else {
-      card.style.display = card.classList.contains('status-' + type) ? '' : 'none';
-    }
-  });
-}
-
-// Extended status counts
-function updateStatusCounts() {
-  const statuses = {};
-  document.querySelectorAll('.ms-card').forEach(card => {
-    ['planned','in-progress','review','blocked','complete'].forEach(s => {
-      if (card.classList.contains('status-' + s)) {
-        statuses[s] = (statuses[s] || 0) + 1;
-      }
-    });
-  });
-  ['planned','in-progress','review','blocked','complete'].forEach(s => {
-    const el = document.getElementById('count-' + s);
-    if (el) el.textContent = statuses[s] || 0;
-  });
-}
-
-// Run after milestone tracker initializes
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(updateStatusCounts, 100);
-});
-
-// Patch updateMilestoneStatus to also update counts
-const _orig = window.updateMilestoneStatus;
-window.updateMilestoneStatus = function(id, sel) {
-  _orig(id, sel);
-  setTimeout(updateStatusCounts, 50);
-};
-</script>
+<script src="js/milestones.js"></script>
 </body>
 </html>
