@@ -9,7 +9,7 @@
   if (!nav) return;
   nav.innerHTML = `
   <a href="index.html" class="sidebar-brand">
-    <span class="brand-moose">🦌</span>
+    <img width=300 src="img/Mooseville.png" alt="Mooseville Adventures" class="brand-moose">
     <h1>Mooseville Adventures</h1>
     <div class="brand-sub">Design Wiki</div>
   </a>
